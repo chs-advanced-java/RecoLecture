@@ -9,4 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ajlyfe.lectureapp.Main2Activity">
 
+    <Button
+        android:layout_width="3000dp"
+        android:layout_height="75dp"
+        android:textSize="30sp"
+        android:text="Class 1"
+        android:id="@+id/button"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
