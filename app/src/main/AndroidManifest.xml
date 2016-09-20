@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ClassMainScreen" />
+        <activity android:name=".TeacherClassMainScreen" />
         <activity android:name=".TeacherMainScreen1with3Buttons"></activity>
     </application>
 
