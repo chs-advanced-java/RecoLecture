@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:text="Confirm Upload"
         android:fontFamily="sans-serif-thin"
-        android:textSize="28sp"/>
+        android:textSize="27sp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
