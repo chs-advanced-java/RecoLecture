@@ -12,8 +12,14 @@
     <Button
         android:layout_width="3000dp"
         android:layout_height="75dp"
+<<<<<<< Updated upstream
         android:textSize="30sp"
+=======
+        android:background="@drawable/button_round_light_blue"
+        android:textSize="25sp"
+>>>>>>> Stashed changes
         android:text="Class 1"
+        android:textAllCaps="false"
         android:id="@+id/button"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
