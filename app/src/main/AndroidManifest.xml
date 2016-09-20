@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ajlyfe.lectureapp">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TeacherClassMainScreen" />
-        <activity android:name=".TeacherMainScreen1with3Buttons"></activity>
+        <activity android:name=".TeacherMainScreen1with3Buttons" />
+        <activity android:name=".TeacherClassViewScreen"></activity>
     </application>
 
 </manifest>
