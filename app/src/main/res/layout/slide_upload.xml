@@ -25,12 +25,35 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp">
 
-        <TextView
+        <TextView android:id="@+id/confirm_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:textSize="16sp"
             android:text="@string/confirm_upload"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_below="@id/confirm_text"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:text="@string/lecture_placeholder"
+                android:textColor="@color/colorAccent" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
