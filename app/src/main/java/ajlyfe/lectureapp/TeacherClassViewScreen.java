@@ -8,6 +8,6 @@ public class TeacherClassViewScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_class_view_screen);
+        setContentView(R.layout.teacher_class_view_screen);
     }
 }
