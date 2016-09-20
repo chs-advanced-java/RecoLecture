@@ -8,6 +8,6 @@ public class ClassMainScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ClassMainScreen);
+        setContentView(R.layout.class_main_screen);
     }
 }
