@@ -36,7 +36,7 @@
         android:text="My Classes"
         android:textSize = "35sp"
         android:background="@drawable/button_round_green"
-        android:id="@+id/button4"
+        android:id="@+id/buttonClasses"
         android:layout_marginBottom="37dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
