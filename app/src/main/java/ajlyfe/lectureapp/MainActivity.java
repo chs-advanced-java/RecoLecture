@@ -19,14 +19,16 @@ public class MainActivity extends AppIntro {
         Fragment fragmentUpload = new FragmentUpload();
         Fragment fragmentResult = new FragmentResult();
 
-        addSlide(fragmentClass);
         addSlide(fragmentFile);
+        addSlide(fragmentClass);
         addSlide(fragmentUpload);
         addSlide(fragmentResult);
 
         // Hide Skip/Done button.
         showSkipButton(false);
         setProgressButtonEnabled(false);
+
+        setIndicatorColor(R.color.colorPrimary50, R.color.colorPrimary20);
 
         // Turn vibration on and set intensity.
         // NOTE: you will probably need to ask VIBRATE permission in Manifest.

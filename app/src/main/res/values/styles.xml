@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Slide" parent="AppTheme">
+        <item name="android:colorBackground">#EEEEEE</item>
+        <item name="android:background">#EEEEEE</item>
+    </style>
+
 </resources>
