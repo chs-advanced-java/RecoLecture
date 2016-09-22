@@ -8,18 +8,18 @@ import android.widget.Button;
 
 import ajlyfe.lectureapp.R;
 
-public class TeacherMainScreen1with3Buttons extends AppCompatActivity {
+public class TeacherMainScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_main_screen1with3_buttons);
+        setContentView(R.layout.activity_teacher_main_screen);
 
         Button buttonClasses = (Button) findViewById(R.id.buttonClasses);
         buttonClasses.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TeacherMainScreen1with3Buttons.this, TeacherClassMainScreen.class);
+                Intent intent = new Intent(TeacherMainScreen.this, TeacherClassMainScreen.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +28,7 @@ public class TeacherMainScreen1with3Buttons extends AppCompatActivity {
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TeacherMainScreen1with3Buttons.this, UploadActivity.class));
+                startActivity(new Intent(TeacherMainScreen.this, UploadActivity.class));
             }
         });
     }

@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ajlyfe.lectureapp.Activity.TeacherMainScreen1with3Buttons">
+    tools:context=".Activity.TeacherMainScreen">
 
     <Button
         android:layout_width="3000dp"

@@ -13,7 +13,7 @@
         <activity android:name=".Activity.UploadActivity">
         </activity>
         <activity android:name=".Activity.TeacherClassMainScreen" />
-        <activity android:name=".Activity.TeacherMainScreen1with3Buttons">
+        <activity android:name=".Activity.TeacherMainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
