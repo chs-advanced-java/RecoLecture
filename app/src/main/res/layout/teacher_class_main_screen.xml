@@ -16,7 +16,7 @@
         android:textSize="35sp"
         android:text="Class One"
         android:textAllCaps="false"
-        android:id="@+id/button"
+        android:id="@+id/buttonClassesViewTest"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
