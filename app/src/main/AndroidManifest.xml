@@ -10,16 +10,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TeacherClassMainScreen" />
-        <activity android:name=".TeacherMainScreen1with3Buttons" />
-        <activity android:name=".TeacherClassViewScreen"></activity>
+        <activity android:name=".Activity.TeacherClassMainScreen" />
+        <activity android:name=".Activity.TeacherMainScreen1with3Buttons" />
+        <activity android:name=".Activity.TeacherClassViewScreen"></activity>
     </application>
 
 </manifest>
