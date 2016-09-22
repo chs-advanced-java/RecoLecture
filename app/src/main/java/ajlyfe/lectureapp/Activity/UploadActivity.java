@@ -18,12 +18,12 @@ import android.widget.TextView;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
-public class MainActivity extends AppIntro {
+public class UploadActivity extends AppIntro {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // DO NOT WRITE -> setContentView(R.layout.activity_main);
+        // DO NOT WRITE -> setContentView(R.layout.activity_upload);
 
         Fragment fragmentClass = new FragmentClass();
         Fragment fragmentFile = new FragmentFile();

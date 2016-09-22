@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.UploadActivity">
         </activity>
         <activity android:name=".Activity.TeacherClassMainScreen" />
         <activity android:name=".Activity.TeacherMainScreen1with3Buttons">
