@@ -35,10 +35,14 @@
         <RelativeLayout android:id="@+id/confirmBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:layout_marginTop="24dp"
             android:layout_below="@id/confirm_text"
             android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +52,7 @@
                 android:text="@string/lecture_placeholder"
                 android:textColor="@color/colorAccent" />
 
-            <android.support.v7.widget.AppCompatCheckBox
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"/>
@@ -56,14 +60,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <TextView android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Description"
-        android:textSize="16sp"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="64dp"/>
 
 </RelativeLayout>

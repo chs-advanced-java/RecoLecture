@@ -8,16 +8,22 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 public class MainActivity extends AppIntro {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // DO NOT WRITE -> setContentView(R.layout.activity_main);
 
         Fragment fragmentClass = new FragmentClass();
         Fragment fragmentFile = new FragmentFile();
@@ -56,6 +62,6 @@ public class MainActivity extends AppIntro {
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
-        // Do something when the slide changes.
+        int slideNumber = newFragment.getTag().charAt(newFragment.getTag().length() - 1) - 47;
     }
 }
