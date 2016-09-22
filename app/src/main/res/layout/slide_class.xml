@@ -13,31 +13,64 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Title"
+        android:text="@string/class_title"
         android:fontFamily="sans-serif-thin"
         android:textSize="28sp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_above="@+id/description"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
-
-    <TextView android:id="@+id/description"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Description"
-        android:textSize="16sp"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="64dp"/>
+        android:layout_marginTop="16dp"
+        android:id="@+id/description"
+        android:layout_below="@+id/title"
+        android:text="@string/class_description"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:textAlignment="center" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/description"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:id="@+id/scrollView">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sampleClass_0"
+                android:id="@+id/checkBox"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sampleClass_1"
+                android:id="@+id/checkBox1"
+                android:layout_below="@+id/checkBox"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sampleClass_2"
+                android:id="@+id/checkBox2"
+                android:layout_below="@+id/checkBox1"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_Upload"
+        android:id="@+id/button5"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

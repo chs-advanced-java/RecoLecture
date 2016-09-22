@@ -7,4 +7,12 @@
     <string name="confirm_upload">Are you sure you want to upload this file:</string>
 
     <string name="lecture_placeholder">chapter1.1_lecture.mp3</string>
+    <!-- STRINGS FOR SLIDE_CLASS -->
+    <string name="class_title">Select Your Classes</string>
+    <string name="class_description">Check the classes you would like
+        \n to upload your lecture to.</string>
+    <string name="button_Upload">Upload to these classes</string>
+    <string name ="sampleClass_0">Geometry</string>
+    <string name="sampleClass_1">Algebra II</string>
+    <string name="sampleClass_2">Calculus</string>
 </resources>
