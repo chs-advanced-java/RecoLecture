@@ -30,14 +30,19 @@ public class TeacherClassMainScreen extends AppCompatActivity {
         classOneCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TeacherClassMainScreen.this, TeacherClassViewScreen.class));
+                Intent intent = new Intent(TeacherClassMainScreen.this, TeacherClassViewScreen.class);
+                intent.putExtra("CLASS_CLICKED", 1);
+                startActivity(intent);
+
             }
         });
 
         classTwoCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TeacherClassMainScreen.this, TeacherClassViewScreen.class));
+                Intent intent = new Intent(TeacherClassMainScreen.this, TeacherClassViewScreen.class);
+                intent.putExtra("CLASS_CLICKED", 2);
+                startActivity(intent);
             }
         });
     }
