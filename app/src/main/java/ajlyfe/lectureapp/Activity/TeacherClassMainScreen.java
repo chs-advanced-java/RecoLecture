@@ -19,10 +19,26 @@ public class TeacherClassMainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teacher_class_main_screen);
 
+        CardView classOneCard = (CardView) findViewById(R.id.classOne);
         CardView classTwoCard = (CardView) findViewById(R.id.classTwo);
+
         RelativeLayout classTwoLayout = (RelativeLayout) classTwoCard.getChildAt(0);
         TextView classTwoTitle = (TextView) classTwoLayout.getChildAt(0);
 
         classTwoTitle.setText("Class Two");
+
+        classOneCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TeacherClassMainScreen.this, TeacherClassViewScreen.class));
+            }
+        });
+
+        classTwoCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TeacherClassMainScreen.this, TeacherClassViewScreen.class));
+            }
+        });
     }
 }
