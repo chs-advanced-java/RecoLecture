@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Create ripples!!
+    ########
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+    ######## -->
+
     <style name="AppTheme.Slide" parent="AppTheme">
         <item name="android:colorBackground">#EEEEEE</item>
         <item name="android:background">#EEEEEE</item>

@@ -24,7 +24,7 @@ public class TeacherMainScreen extends AppCompatActivity {
             }
         });
 
-        Button buttonUpload = (Button) findViewById(R.id.button2);
+        Button buttonUpload = (Button) findViewById(R.id.buttonUpload);
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

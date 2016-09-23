@@ -6,6 +6,9 @@
     <color name="colorPrimary20">#323F51B5</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorPrimaryLight">#FFFFFF</color>
+
     <color name="uploadYellow">#FFCC00</color>
     <color name="recordRed">#FF0000</color>
     <color name="myClassesGreen">#A4C644</color>
