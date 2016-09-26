@@ -9,32 +9,53 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activity.TeacherMainScreen">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/teacher_home_title"
+        android:id="@+id/title"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="28sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:id="@+id/description"
+        android:layout_below="@+id/title"
+        android:text="@string/teacher_home_description"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:textAlignment="center" />
+
+    <Button android:id="@+id/buttonClasses"
+        android:layout_above="@+id/buttonUpload"
+        android:layout_width="3000dp"
+        android:layout_height="75dp"
+        android:text="My Classes"
+        android:textSize = "35sp"
+        android:background="@android:color/transparent" />
+
     <Button android:id="@+id/buttonUpload"
         android:layout_width="3000dp"
         android:layout_height="75dp"
         android:text="Upload"
         android:textSize = "35sp"
-        android:background="@drawable/button_round_yellow"
-        android:layout_marginTop="33dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:background="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        />
 
     <Button android:id="@+id/buttonRecord"
+        android:layout_below="@+id/buttonUpload"
         android:layout_width="3000dp"
         android:layout_height="75dp"
         android:text="Record"
         android:textSize = "35sp"
-        android:background="@drawable/button_round_red"
+        android:background="@android:color/transparent"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
-
-    <Button android:id="@+id/buttonClasses"
-        android:layout_width="3000dp"
-        android:layout_height="75dp"
-        android:text="My Classes"
-        android:textSize = "35sp"
-        android:background="@drawable/button_round_green"
-        android:layout_marginBottom="37dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
 </RelativeLayout>
