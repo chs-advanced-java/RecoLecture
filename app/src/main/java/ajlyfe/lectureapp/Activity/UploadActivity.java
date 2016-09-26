@@ -3,6 +3,8 @@ package ajlyfe.lectureapp.Activity;
 import ajlyfe.lectureapp.Fragment.*;
 import ajlyfe.lectureapp.R;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,15 +16,20 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 public class UploadActivity extends AppIntro {
 
+    Context context;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
+
         // DO NOT WRITE -> setContentView(R.layout.activity_upload);
 
         Fragment fragmentClass = new FragmentClass();
@@ -37,12 +44,13 @@ public class UploadActivity extends AppIntro {
 
         // Hide Skip/Done button.
         showSkipButton(false);
-        setProgressButtonEnabled(false);
+        setProgressButtonEnabled(true);
+        setColorDoneText(this.getResources().getColor(R.color.colorAccent));
+        setImageNextButton(this.getResources().getDrawable(R.drawable.ic_next));
+        setSeparatorColor(Color.TRANSPARENT);
 
         setIndicatorColor(R.color.colorPrimary50, R.color.colorPrimary20);
 
-        // Turn vibration on and set intensity.
-        // NOTE: you will probably need to ask VIBRATE permission in Manifest.
         setVibrate(true);
         setVibrateIntensity(30);
     }
@@ -50,18 +58,19 @@ public class UploadActivity extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        // Do something when users tap on Skip button.
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        // Do something when users tap on Done button.
+        startActivity(new Intent(this, TeacherMainScreen.class));
     }
 
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
-        int slideNumber = newFragment.getTag().charAt(newFragment.getTag().length() - 1) - 47;
+        if (newFragment != null) {
+            int slideNumber = newFragment.getTag().charAt(newFragment.getTag().length() - 1) - 47;
+        }
     }
 }

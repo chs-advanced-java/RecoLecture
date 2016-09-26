@@ -43,12 +43,16 @@
             android:layout_height="wrap_content" >
 
             <CheckBox
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sampleClass_0"
                 android:id="@+id/checkBox"/>
 
             <CheckBox
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sampleClass_1"
@@ -56,6 +60,8 @@
                 android:layout_below="@+id/checkBox"/>
 
             <CheckBox
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sampleClass_2"

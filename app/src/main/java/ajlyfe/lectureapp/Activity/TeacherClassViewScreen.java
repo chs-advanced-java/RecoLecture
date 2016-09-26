@@ -1,7 +1,12 @@
 package ajlyfe.lectureapp.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -32,5 +37,27 @@ public class TeacherClassViewScreen extends AppCompatActivity {
                 classTitle.setText("Class Two");
                 break;
         }
+
+        Button buttonStudents = (Button) findViewById(R.id.studentButton);
+        buttonStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout students = (RelativeLayout) findViewById(R.id.students);
+                students.setVisibility(View.VISIBLE);
+                RelativeLayout files = (RelativeLayout) findViewById(R.id.files);
+                files.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        Button buttonFiles = (Button) findViewById(R.id.fileButton);
+        buttonFiles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout students = (RelativeLayout) findViewById(R.id.students);
+                students.setVisibility(View.INVISIBLE);
+                RelativeLayout files = (RelativeLayout) findViewById(R.id.files);
+                files.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }
