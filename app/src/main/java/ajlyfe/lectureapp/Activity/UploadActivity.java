@@ -67,10 +67,24 @@ public class UploadActivity extends AppIntro {
     }
 
     @Override
-    public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
+    public void onSlideChanged(@Nullable final Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
         if (newFragment != null) {
             int slideNumber = newFragment.getTag().charAt(newFragment.getTag().length() - 1) - 47;
+
+            if (slideNumber == 4) {
+                setSwipeLock(true);
+                newFragment.getActivity().findViewById(R.id.finishButton).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //TODO: MOVE TO NEXT PAGE
+                    }
+                });
+            }
+
+            if (slideNumber == 3) {
+                setNextPageSwipeLock(true);
+            }
         }
     }
 }
