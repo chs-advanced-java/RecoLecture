@@ -22,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:id="@+id/linearLayout">
 
         <Button
             android:layout_width="175dp"
@@ -36,4 +37,97 @@
             android:text="Files"
             android:id="@+id/fileButton" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/files"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testText1"
+            android:text="Nukes?"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testText2"
+            android:text="Stats Stuff (I guess)"
+            android:layout_below="@+id/testText1"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testText3"
+            android:text="Hola, me llamo es la piscina de la muerte"
+            android:layout_below="@+id/testText2"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/students"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent1"
+            android:text="Phil"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent2"
+            android:layout_below="@+id/testStudent1"
+            android:layout_alignParentStart="true"
+            android:text="Dave" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent3"
+            android:layout_below="@+id/testStudent2"
+            android:layout_alignParentStart="true"
+            android:text="Mike" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent4"
+            android:layout_below="@+id/testStudent3"
+            android:layout_alignParentStart="true"
+            android:text="Tim" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent5"
+            android:layout_below="@+id/testStudent4"
+            android:layout_alignParentStart="true"
+            android:text="SCHMEBULOCK" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent6"
+            android:layout_below="@+id/testStudent5"
+            android:layout_alignParentStart="true"
+            android:text="Allen" />
+
+    </RelativeLayout>
+
 </RelativeLayout>
