@@ -7,6 +7,11 @@
     <string name="confirm_upload">Are you sure you want to upload this file:</string>
 
     <string name="lecture_placeholder">chapter1.1_lecture.mp3</string>
+
+    <!-- STRINGS FOR ACTIVITY_TEACHER_MAIN_SCREEN -->
+    <string name="teacher_home_title">Home</string>
+    <string name="teacher_home_description">[Description of homepage]</string>
+
     <!-- STRINGS FOR SLIDE_CLASS -->
     <string name="class_title">Select Your Classes</string>
     <string name="class_description">Check the classes you would like
