@@ -31,19 +31,15 @@ public class FragmentUpload extends Fragment {
 
     public void doThings() {
         RelativeLayout confirmBox = (RelativeLayout) view.findViewById(R.id.confirmBox);
-        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        checkBox = (CheckBox) view.findViewById(R.id.lectureCheck);
         button = (Button) view.findViewById(R.id.finishButton);
 
         confirmBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkBox.setChecked(!checkBox.isChecked());
-                button.setClickable(true);
+                button.setClickable(button.isClickable());
             }
         });
-    }
-
-    public boolean getChecked() {
-        return checkBox.isChecked();
     }
 }

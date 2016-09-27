@@ -52,7 +52,7 @@
                 android:text="@string/lecture_placeholder"
                 android:textColor="@color/colorAccent" />
 
-            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/checkBox"
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"/>
