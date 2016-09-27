@@ -10,6 +10,8 @@
     <color name="textColorPrimaryLight">#FFFFFF</color>
     <color name="textColorAccent">#7C56B3</color>
 
+    <color name="successGreen">#02e16a</color>
+
     <color name="uploadYellow">#FFCC00</color>
     <color name="recordRed">#FF0000</color>
     <color name="myClassesGreen">#A4C644</color>

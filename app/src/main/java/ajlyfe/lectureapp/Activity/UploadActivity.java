@@ -25,7 +25,6 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 public class UploadActivity extends AppIntro {
 
     Context context;
-    Fragment fragmentUpload;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class UploadActivity extends AppIntro {
 
         Fragment fragmentClass = new FragmentClass();
         Fragment fragmentFile = new FragmentFile();
-        fragmentUpload = new FragmentUpload();
+        Fragment fragmentUpload = new FragmentUpload();
         Fragment fragmentResult = new FragmentResult();
 
         addSlide(fragmentFile);
