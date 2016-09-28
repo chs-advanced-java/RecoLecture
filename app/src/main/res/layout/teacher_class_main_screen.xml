@@ -12,11 +12,25 @@
     <include layout="@layout/class_card" android:id="@+id/classOne"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/class_card_height"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="42dp"
+        android:layout_above="@+id/classTwo"
+        android:layout_alignParentStart="true" />
 
     <include layout="@layout/class_card" android:id="@+id/classTwo"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/class_card_height"
-        android:layout_below="@+id/classOne" />
+        android:layout_marginBottom="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Create A Class"
+        android:layout_marginTop="13dp"
+        android:id="@+id/buttonCreateClass"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:textSize="20sp" />
 
 </RelativeLayout>
