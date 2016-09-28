@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 
@@ -14,6 +15,7 @@ public class FragmentUpload extends Fragment {
 
     private View view;
     private CheckBox checkBox;
+    private Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,12 +31,14 @@ public class FragmentUpload extends Fragment {
 
     public void doThings() {
         RelativeLayout confirmBox = (RelativeLayout) view.findViewById(R.id.confirmBox);
-        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        checkBox = (CheckBox) view.findViewById(R.id.lectureCheck);
+        button = (Button) view.findViewById(R.id.finishButton);
 
         confirmBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkBox.setChecked(!checkBox.isChecked());
+                button.setClickable(button.isClickable());
             }
         });
     }

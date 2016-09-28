@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#63b8e1</color>
+    <color name="colorPrimaryDark">#3490e1</color>
     <color name="colorPrimary50">#803F51B5</color>
     <color name="colorPrimary20">#323F51B5</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#B27BFF</color>
 
     <color name="textColorPrimary">#212121</color>
     <color name="textColorPrimaryLight">#FFFFFF</color>
     <color name="textColorAccent">#7C56B3</color>
+
+    <color name="successGreen">#02e16a</color>
 
     <color name="uploadYellow">#FFCC00</color>
     <color name="recordRed">#FF0000</color>

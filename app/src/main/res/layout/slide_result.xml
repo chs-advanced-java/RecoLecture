@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Title"
+        android:text="Success!"
         android:fontFamily="sans-serif-thin"
         android:textSize="28sp"/>
 
@@ -26,18 +26,11 @@
         android:paddingTop="16dp">
 
         <ImageView
+            android:src="@drawable/success_check"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:padding="64dp"/>
 
     </RelativeLayout>
-
-    <TextView android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Description"
-        android:textSize="16sp"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="64dp"/>
 
 </RelativeLayout>

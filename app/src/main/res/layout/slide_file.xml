@@ -13,31 +13,88 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Title"
+        android:text="Pick a File"
         android:fontFamily="sans-serif-thin"
         android:textSize="28sp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_above="@+id/description"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
-
-    <TextView android:id="@+id/description"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Description"
-        android:textSize="16sp"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="64dp"/>
+        android:layout_marginTop="16dp"
+        android:id="@+id/description"
+        android:layout_below="@+id/title"
+        android:text="Choose the files you would like to upload"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:textAlignment="center" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/description"
+        android:layout_above="@+id/uploadButton"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:id="@+id/scrollView">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="chapter1.1_lecture.mp3"
+                android:id="@+id/checkBox1"/>
+
+            <CheckBox
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="chapter1.2_lecture.mp3"
+                android:id="@+id/checkBox2"
+                android:layout_below="@+id/checkBox1"/>
+
+            <CheckBox
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="chapter1.3_lecture.mp3"
+                android:id="@+id/checkBox3"
+                android:layout_below="@+id/checkBox2"/>
+
+            <CheckBox
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="chapter1.4_lecture.mp3"
+                android:id="@+id/checkBox4"
+                android:layout_below="@+id/checkBox3"/>
+
+            <CheckBox
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="chapter1.5_lecture.mp3"
+                android:id="@+id/checkBox5"
+                android:layout_below="@+id/checkBox4"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <Button android:id="@+id/uploadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload these files"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="64dp"/>
 
 </RelativeLayout>
