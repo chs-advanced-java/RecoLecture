@@ -68,9 +68,8 @@
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_next"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:tint="@color/colorAccent"
-                android:clickable="true"/>
+                android:clickable="false"/>
 
         </RelativeLayout>
 
@@ -125,9 +124,8 @@
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_next"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:tint="@color/colorAccent"
-                android:clickable="true"/>
+                android:clickable="false"/>
 
         </RelativeLayout>
 
@@ -182,8 +180,7 @@
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_next"
                 android:tint="@color/colorAccent"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"/>
+                android:clickable="false"/>
 
         </RelativeLayout>
 
