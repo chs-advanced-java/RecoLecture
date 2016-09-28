@@ -17,7 +17,7 @@
         <activity android:name=".Activity.TeacherClassMainScreen"
             android:label="My Classes" />
 
-        <activity android:name=".Activity.TeacherMainScreen"
+        <activity android:name=".Activity.TeacherMainActivity"
             android:label="RecoLecture">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
