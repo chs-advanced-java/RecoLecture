@@ -15,8 +15,6 @@ public class TeacherMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main_activity);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         CardView myClassesCard = (CardView) findViewById(R.id.buttonClasses);
         myClassesCard.setOnClickListener(new View.OnClickListener(){
