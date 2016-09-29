@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import ajlyfe.lectureapp.R;
-import ajlyfe.lectureapp.SettingsActivity;
 
 public class TeacherClassView extends AppCompatActivity {
 

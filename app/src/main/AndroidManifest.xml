@@ -32,7 +32,7 @@
             android:label="My Classes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Activity.SettingsActivity"
             android:label="Settings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import ajlyfe.lectureapp.R;
-import ajlyfe.lectureapp.SettingsActivity;
 
 public class TeacherMainActivity extends AppCompatActivity {
 
