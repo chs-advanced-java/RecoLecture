@@ -27,4 +27,31 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <io.codetail.widget.RevealLinearLayout
+            android:id="@+id/reveal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/reveal_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+        </io.codetail.widget.RevealLinearLayout>
+
+    </FrameLayout>
+
+
 </RelativeLayout>

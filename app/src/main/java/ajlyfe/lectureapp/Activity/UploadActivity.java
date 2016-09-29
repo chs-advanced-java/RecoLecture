@@ -31,13 +31,15 @@ public class UploadActivity extends AppIntro {
 
         // DO NOT WRITE -> setContentView(R.layout.activity_upload);
 
-        Fragment fragmentClass = new FragmentClass();
         Fragment fragmentFile = new FragmentFile();
+        Fragment fragmentClass = new FragmentClass();
+        Fragment fragmentStudents = new FragmentStudents();
         Fragment fragmentUpload = new FragmentUpload();
         Fragment fragmentResult = new FragmentResult();
 
         addSlide(fragmentFile);
         addSlide(fragmentClass);
+        addSlide(fragmentStudents);
         addSlide(fragmentUpload);
         addSlide(fragmentResult);
 
@@ -71,11 +73,11 @@ public class UploadActivity extends AppIntro {
         if (newFragment != null) {
             int slideNumber = newFragment.getTag().charAt(newFragment.getTag().length() - 1) - 47;
 
-            if (slideNumber == 4) {
+            if (slideNumber == 5) {
                 setSwipeLock(true);
             }
 
-            if (slideNumber == 3) {
+            if (slideNumber == 4) {
                 setNextPageSwipeLock(true);
 
                 final Activity activity = newFragment.getActivity();

@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.github.paolorotolo:appintro:4.0.0'
@@ -30,4 +30,7 @@ dependencies {
         transitive = true
     }
     compile 'com.mikepenz:google-material-typeface:2.2.0.1.original@aar'
+    compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
+        transitive = true;
+    }
 }

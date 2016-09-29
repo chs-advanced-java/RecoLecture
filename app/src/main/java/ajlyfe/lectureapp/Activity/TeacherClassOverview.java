@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.view.View;
 
 import ajlyfe.lectureapp.*;
+import io.codetail.widget.RevealFrameLayout;
+import io.codetail.widget.RevealLinearLayout;
 
 public class TeacherClassOverview extends AppCompatActivity {
 
@@ -25,12 +27,45 @@ public class TeacherClassOverview extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*final RevealFrameLayout mRevealLayout = (RevealFrameLayout) findViewById(R.id.reveal_layout);
+        final View mRevealView = findViewById(R.id.reveal_view);
+        final View mViewToReveal = findViewById(R.id.reveal_view);*/
+
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Creating a Class", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view) {/*
+                fab.setClickable(false); // Avoid clicking FAB again and again...
+                int[] location = new int[2];
+                fab.getLocationOnScreen(location);
+                location[0] += fab.getWidth() / 2;
+                location[1] += fab.getHeight() / 2;
+
+                final Intent intent = new Intent(TeacherClassOverview.this, TeacherCreateClass.class);
+
+                mRevealView.setVisibility(View.VISIBLE);
+                mRevealLayout.setVisibility(View.VISIBLE);
+
+                mRevealLayout.show(location[0], location[1]); // Expand from center of FAB. Actually, it just plays reveal animation.
+                fab.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                        /**
+                         * Without using R.anim.hold, the screen will flash because of transition
+                         * of Activities.
+                         *//*
+                        overridePendingTransition(0, R.anim.hold);
+                    }
+                }, 600); // 600 is default duration of reveal animation in RevealLayout
+                fab.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fab.setClickable(true);
+                        mRevealLayout.setVisibility(View.INVISIBLE);
+                        mViewToReveal.setVisibility(View.INVISIBLE);
+                    }
+                }, 960); // Or some numbers larger than 600.*/
             }
         });
 
