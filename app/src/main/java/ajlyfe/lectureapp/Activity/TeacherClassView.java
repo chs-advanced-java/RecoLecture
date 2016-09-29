@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -49,8 +50,12 @@ public class TeacherClassView extends AppCompatActivity {
             public void onClick(View v) {
                 RelativeLayout students = (RelativeLayout) findViewById(R.id.students);
                 students.setVisibility(View.VISIBLE);
+                ImageView studentArrow = (ImageView) findViewById(R.id.studentArrow);
+                studentArrow.setVisibility(View.VISIBLE);
                 RelativeLayout files = (RelativeLayout) findViewById(R.id.files);
                 files.setVisibility(View.INVISIBLE);
+                ImageView fileArrow = (ImageView) findViewById(R.id.fileArrow);
+                fileArrow.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -60,8 +65,12 @@ public class TeacherClassView extends AppCompatActivity {
             public void onClick(View v) {
                 RelativeLayout students = (RelativeLayout) findViewById(R.id.students);
                 students.setVisibility(View.INVISIBLE);
+                ImageView studentArrow = (ImageView) findViewById(R.id.studentArrow);
+                studentArrow.setVisibility(View.INVISIBLE);
                 RelativeLayout files = (RelativeLayout) findViewById(R.id.files);
                 files.setVisibility(View.VISIBLE);
+                ImageView fileArrow = (ImageView) findViewById(R.id.fileArrow);
+                fileArrow.setVisibility(View.VISIBLE);
             }
         });
     }

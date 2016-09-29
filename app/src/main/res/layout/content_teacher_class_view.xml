@@ -49,7 +49,8 @@
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout">
+        android:layout_below="@+id/linearLayout"
+        android:background="@color/colorPrimaryLight">
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,7 +89,60 @@
         android:layout_height="match_parent"
         android:visibility="visible"
         android:layout_below="@+id/linearLayout"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimaryLight"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent4"
+            android:textSize="30dp"
+            android:textColor="@color/textColorAccent"
+            android:text="Tim"
+            android:layout_below="@+id/testStudent3"
+            android:layout_alignStart="@+id/testStudent5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent6"
+            android:textSize="30dp"
+            android:textColor="@color/textColorAccent"
+            android:text="Jane"
+            android:layout_below="@+id/testStudent5"
+            android:layout_alignStart="@+id/testStudent5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent3"
+            android:textSize="30dp"
+            android:textColor="@color/textColorAccent"
+            android:text="Mike"
+            android:layout_below="@+id/testStudent2"
+            android:layout_alignStart="@+id/testStudent4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent2"
+            android:textSize="30dp"
+            android:textColor="@color/textColorAccent"
+            android:text="Dave"
+            android:layout_below="@+id/testStudent1"
+            android:layout_alignStart="@+id/testStudent3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testStudent5"
+            android:textSize="30dp"
+            android:textColor="@color/textColorAccent"
+            android:text="Allen"
+            android:layout_marginStart="16dp"
+            android:layout_below="@+id/testStudent4"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,59 +151,29 @@
             android:text="Phil"
             android:textSize="30dp"
             android:textColor="@color/textColorAccent"
+            android:layout_marginTop="12dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/testStudent2"
-            android:textSize="30dp"
-            android:textColor="@color/textColorAccent"
-            android:layout_below="@+id/testStudent1"
-            android:layout_alignParentStart="true"
-            android:text="Dave" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/testStudent3"
-            android:textSize="30dp"
-            android:textColor="@color/textColorAccent"
-            android:layout_below="@+id/testStudent2"
-            android:layout_alignParentStart="true"
-            android:text="Mike" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/testStudent4"
-            android:textSize="30dp"
-            android:textColor="@color/textColorAccent"
-            android:layout_below="@+id/testStudent3"
-            android:layout_alignParentStart="true"
-            android:text="Tim" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/testStudent5"
-            android:textSize="30dp"
-            android:textColor="@color/textColorAccent"
-            android:layout_below="@+id/testStudent4"
-            android:layout_alignParentStart="true"
-            android:text="Allen" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/testStudent6"
-            android:textSize="30dp"
-            android:textColor="@color/textColorAccent"
-            android:layout_below="@+id/testStudent5"
-            android:layout_alignParentStart="true"
-            android:text="Jane" />
+            android:layout_alignStart="@+id/testStudent2" />
 
     </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/triangle"
+        android:layout_above="@+id/students"
+        android:layout_marginBottom="-25dp"
+        android:layout_marginLeft="55dp"
+        android:id="@+id/studentArrow"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/triangle"
+        android:layout_above="@+id/students"
+        android:layout_marginBottom="-25dp"
+        android:layout_marginLeft="225dp"
+        android:visibility="invisible"
+        android:id="@+id/fileArrow"/>
 
 </RelativeLayout>
