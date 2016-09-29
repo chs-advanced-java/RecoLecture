@@ -19,4 +19,5 @@
     <string name="sampleClass_0">Geometry</string>
     <string name="sampleClass_1">Algebra II</string>
     <string name="sampleClass_2">Calculus</string>
+    <string name="title_activity_teacher_create_class">TeacherCreateClass</string>
 </resources>

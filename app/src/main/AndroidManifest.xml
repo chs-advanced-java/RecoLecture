@@ -34,6 +34,10 @@
         <activity
             android:name=".Activity.SettingsActivity"
             android:label="Settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.TeacherCreateClass"
+            android:label="@string/title_activity_teacher_create_class"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
