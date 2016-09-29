@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">RecoLecture</string>
 
-    <string name="drawer_open">Menu opened</string>
-    <string name="drawer_close">Menu closed</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -13,14 +10,14 @@
 
     <!-- STRINGS FOR ACTIVITY_TEACHER_MAIN_SCREEN -->
     <string name="teacher_home_title">Home</string>
-    <string name="teacher_home_description">[Description of homepage]</string>
 
     <!-- STRINGS FOR SLIDE_CLASS -->
     <string name="class_title">Select Your Classes</string>
     <string name="class_description">Check the classes you would like
         \n to upload your lecture to.</string>
     <string name="button_Upload">Upload to these classes</string>
-    <string name ="sampleClass_0">Geometry</string>
+    <string name="sampleClass_0">Geometry</string>
     <string name="sampleClass_1">Algebra II</string>
     <string name="sampleClass_2">Calculus</string>
+
 </resources>

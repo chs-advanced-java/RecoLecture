@@ -6,4 +6,5 @@
     <dimen name="class_card_height">156dp</dimen>
     <dimen name="class_card_padding">8dp</dimen>
     <dimen name="class_card_padding_side">8dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

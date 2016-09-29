@@ -10,24 +10,25 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Activity.UploadActivity"
+        <activity
+            android:name=".Activity.UploadActivity"
             android:label="Upload" />
-
-        <activity android:name=".Activity.TeacherClassMainScreen"
+        <activity
+            android:name=".Activity.TeacherClassMainScreen"
             android:label="My Classes" />
-
-        <activity android:name=".Activity.TeacherMainActivity"
-            android:label="RecoLecture">
+        <activity
+            android:name=".Activity.TeacherMainActivity"
+            android:label="RecoLecture"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activity.TeacherClassViewScreen"
+        <activity
+            android:name=".Activity.TeacherClassViewScreen"
             android:label="My Classes" />
-
     </application>
 
 </manifest>
