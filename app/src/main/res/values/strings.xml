@@ -19,5 +19,6 @@
     <string name="sampleClass_0">Geometry</string>
     <string name="sampleClass_1">Algebra II</string>
     <string name="sampleClass_2">Calculus</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
 </resources>

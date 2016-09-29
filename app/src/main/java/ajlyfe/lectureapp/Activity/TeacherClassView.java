@@ -4,25 +4,26 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.SettingsActivity;
 
-public class TeacherClassViewScreen extends AppCompatActivity {
+public class TeacherClassView extends AppCompatActivity {
 
     private int classNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_class_view_screen);
+        setContentView(R.layout.activity_teacher_class_view);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -67,10 +68,20 @@ public class TeacherClassViewScreen extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
-        if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(TeacherClassView.this, SettingsActivity.class));
+                return true;
+
+            case android.R.id.home:
+                finish();
         }
 
         return super.onOptionsItemSelected(item);
