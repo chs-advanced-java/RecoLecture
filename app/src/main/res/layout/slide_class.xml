@@ -8,35 +8,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/AppTheme.Slide">
 
-    <TextView android:id="@+id/title"
+    <Button android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/button_Upload"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/class_title"
-        android:fontFamily="sans-serif-thin"
-        android:textSize="28sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:id="@+id/description"
-        android:layout_below="@+id/title"
-        android:text="@string/class_description"
-        android:fontFamily="sans-serif"
-        android:textSize="14sp"
-        android:textAlignment="center" />
+        android:layout_marginBottom="64dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/description"
-        android:layout_above="@+id/uploadButton"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
-        android:id="@+id/scrollView">
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/description"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -47,8 +34,19 @@
                 android:paddingBottom="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/sampleClass_2"
+                android:id="@+id/checkBox2"
+                android:layout_below="@+id/checkBox1"/>
+
+            <CheckBox
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/sampleClass_0"
-                android:id="@+id/checkBox"/>
+                android:id="@+id/checkBox"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
 
             <CheckBox
                 android:paddingTop="8dp"
@@ -57,26 +55,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sampleClass_1"
                 android:id="@+id/checkBox1"
-                android:layout_below="@+id/checkBox"/>
-
-            <CheckBox
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sampleClass_2"
-                android:id="@+id/checkBox2"
-                android:layout_below="@+id/checkBox1"/>
+                android:layout_below="@+id/checkBox"
+                android:layout_alignParentStart="true" />
         </RelativeLayout>
 
     </ScrollView>
 
-    <Button android:id="@+id/uploadButton"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_Upload"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"/>
+        android:layout_marginTop="16dp"
+        android:id="@+id/description"
+        android:text="@string/class_description"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true" />
+
+    <TextView android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/class_title"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="28sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

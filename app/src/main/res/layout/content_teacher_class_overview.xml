@@ -13,18 +13,18 @@
     tools:context=".Activity.TeacherClassView"
     tools:showIn="@layout/activity_teacher_class_overview">
 
-    <include layout="@layout/class_card" android:id="@+id/classOne"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/class_card_height"
-        android:layout_marginBottom="42dp"
-        android:layout_above="@+id/classTwo"
-        android:layout_alignParentStart="true" />
-
     <include layout="@layout/class_card" android:id="@+id/classTwo"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/class_card_height"
-        android:layout_marginBottom="42dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/classOne"
+        android:layout_alignParentStart="true" />
+
+    <include layout="@layout/class_card" android:id="@+id/classOne"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/class_card_height"
+        android:layout_marginTop="17dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>
