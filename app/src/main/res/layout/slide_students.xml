@@ -21,24 +21,24 @@
         android:text="Tim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox13"
-        android:layout_below="@+id/checkBox12"
+        android:id="@+id/studentBox4"
+        android:layout_below="@+id/studentBox3"
         android:layout_alignParentStart="true" />
 
     <CheckBox
         android:text="Dave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox11"
-        android:layout_below="@+id/checkBox10"
+        android:id="@+id/studentBox2"
+        android:layout_below="@+id/studentBox1"
         android:layout_alignParentStart="true" />
 
     <CheckBox
         android:text="Phil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox10"
-        android:layout_below="@+id/checkBox8"
+        android:id="@+id/studentBox1"
+        android:layout_below="@+id/selectBox"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -69,15 +69,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:id="@+id/checkBox8"
+        android:id="@+id/selectBox"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox12"
-        android:layout_below="@+id/checkBox11"
+        android:id="@+id/studentBox3"
+        android:layout_below="@+id/studentBox2"
         android:layout_alignParentStart="true"
         android:checked="false"
         android:text="Mike" />
@@ -86,25 +86,16 @@
         android:text="Allen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox9"
-        android:layout_below="@+id/checkBox13"
+        android:id="@+id/studentBox5"
+        android:layout_below="@+id/studentBox4"
         android:layout_alignParentStart="true" />
 
     <CheckBox
         android:text="Jane"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox15"
-        android:layout_below="@+id/checkBox9"
+        android:id="@+id/studentBox6"
+        android:layout_below="@+id/studentBox5"
         android:layout_alignParentStart="true" />
-
-    <CheckBox
-        android:text="CheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox14"
-        android:layout_below="@+id/checkBox15"
-        android:layout_alignParentStart="true"
-        tools:text="SHMEBULOCK :P" />
 
 </RelativeLayout>
