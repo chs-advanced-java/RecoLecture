@@ -49,8 +49,8 @@
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout"
-        android:background="@color/colorPrimaryLight">
+        android:background="@color/colorPrimaryLight"
+        android:layout_alignTop="@+id/students">
 
         <TextView
             android:layout_width="wrap_content"
