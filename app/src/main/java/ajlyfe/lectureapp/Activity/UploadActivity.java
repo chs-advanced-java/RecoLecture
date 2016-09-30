@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
 
@@ -43,17 +44,16 @@ public class UploadActivity extends AppIntro {
         addSlide(fragmentUpload);
         addSlide(fragmentResult);
 
-        // Hide Skip/Done button.
-        showSkipButton(false);
-        setProgressButtonEnabled(true);
-        setColorDoneText(this.getResources().getColor(R.color.colorAccent));
-        setImageNextButton(this.getResources().getDrawable(R.drawable.ic_next));
-        setSeparatorColor(Color.TRANSPARENT);
+        setSwipeLock(true);
 
+        showSkipButton(false);
+        setProgressButtonEnabled(false);
+
+        setColorDoneText(this.getResources().getColor(R.color.colorAccent));
+        setSeparatorColor(Color.TRANSPARENT);
         setIndicatorColor(R.color.colorPrimary50, R.color.colorPrimary20);
 
-        setVibrate(true);
-        setVibrateIntensity(30);
+        setVibrate(false);
     }
 
     @Override
@@ -71,27 +71,67 @@ public class UploadActivity extends AppIntro {
     public void onSlideChanged(@Nullable final Fragment oldFragment, @Nullable final Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
         if (newFragment != null) {
-            int slideNumber = newFragment.getTag().charAt(newFragment.getTag().length() - 1) - 47;
+            final int slideNumber = newFragment.getTag().charAt(newFragment.getTag().length() - 1) - 47;
+            Button next;
 
-            if (slideNumber == 5) {
-                setSwipeLock(true);
-            }
+            switch (slideNumber) {
+                case 1:
+                    final Activity activity1 = newFragment.getActivity();
+                    next = (Button) activity1.findViewById(R.id.uploadFileButton);
 
-            if (slideNumber == 4) {
-                setNextPageSwipeLock(true);
-
-                final Activity activity = newFragment.getActivity();
-                Button finishButton = (Button) activity.findViewById(R.id.finishButton);
-
-                finishButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        CheckBox checkBox = (CheckBox) activity.findViewById(R.id.lectureCheck);
-                        if (checkBox.isChecked()) {
-                            pager.setCurrentItem(4);
+                    next.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //TODO: Make sure stupid user checked something
+                            pager.setCurrentItem(1);
                         }
-                    }
-                });
+                    });
+                    break;
+
+                case 2:
+                    final Activity activity2 = newFragment.getActivity();
+                    next = (Button) activity2.findViewById(R.id.uploadClassButton);
+
+                    next.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //TODO: Make sure stupid user checked something
+                            pager.setCurrentItem(2);
+                        }
+                    });
+                    break;
+
+                case 3:
+                    final Activity activity3 = newFragment.getActivity();
+                    next = (Button) activity3.findViewById(R.id.uploadStudentButton);
+
+                    next.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //TODO: Make sure stupid user checked something
+                            pager.setCurrentItem(3);
+                        }
+                    });
+                    break;
+
+                case 4:
+                    final Activity activity4 = newFragment.getActivity();
+                    Button finishButton = (Button) activity4.findViewById(R.id.finishButton);
+
+                    finishButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CheckBox checkBox = (CheckBox) activity4.findViewById(R.id.lectureCheck);
+                            if (checkBox.isChecked()) {
+                                pager.setCurrentItem(slideNumber);
+                            }
+                        }
+                    });
+                    break;
+
+                case 5:
+                    final Activity activity5 = newFragment.getActivity();
+                    break;
             }
         }
     }
