@@ -1,5 +1,7 @@
 package ajlyfe.lectureapp.Activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,11 +11,19 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import ajlyfe.lectureapp.*;
+import io.codetail.animation.SupportAnimator;
+import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 import io.codetail.widget.RevealLinearLayout;
 
@@ -27,48 +37,15 @@ public class TeacherClassOverview extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*final RevealFrameLayout mRevealLayout = (RevealFrameLayout) findViewById(R.id.reveal_layout);
-        final View mRevealView = findViewById(R.id.reveal_view);
-        final View mViewToReveal = findViewById(R.id.reveal_view);*/
-
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {/*
-                fab.setClickable(false); // Avoid clicking FAB again and again...
-                int[] location = new int[2];
-                fab.getLocationOnScreen(location);
-                location[0] += fab.getWidth() / 2;
-                location[1] += fab.getHeight() / 2;
-
-                final Intent intent = new Intent(TeacherClassOverview.this, TeacherCreateClass.class);
-
-                mRevealView.setVisibility(View.VISIBLE);
-                mRevealLayout.setVisibility(View.VISIBLE);
-
-                mRevealLayout.show(location[0], location[1]); // Expand from center of FAB. Actually, it just plays reveal animation.
-                fab.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(intent);
-                        /**
-                         * Without using R.anim.hold, the screen will flash because of transition
-                         * of Activities.
-                         *//*
-                        overridePendingTransition(0, R.anim.hold);
-                    }
-                }, 600); // 600 is default duration of reveal animation in RevealLayout
-                fab.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        fab.setClickable(true);
-                        mRevealLayout.setVisibility(View.INVISIBLE);
-                        mViewToReveal.setVisibility(View.INVISIBLE);
-                    }
-                }, 960); // Or some numbers larger than 600.*/
+            public void onClick(View view) {
+                animateButton(fab, findViewById(R.id.revealLayout));
             }
         });
 
+        /*
         CardView classOneCard = (CardView) findViewById(R.id.classOne);
         CardView classTwoCard = (CardView) findViewById(R.id.classTwo);
 
@@ -94,8 +71,60 @@ public class TeacherClassOverview extends AppCompatActivity {
                 intent.putExtra("CLASS_CLICKED", 2);
                 startActivity(intent);
             }
+        });*/
+    }
+
+    private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
+        mFloatingButton.animate()
+                .translationXBy(0.5f)
+                .translationY(-revealLayout.getHeight()/2)
+                .translationXBy(-0.9f)
+                .translationX(-360)
+                .setDuration(500)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        animateReveal((int) mFloatingButton.getX(), 150, mFloatingButton, revealLayout);
+                    }
         });
     }
+
+    private void animateReveal(int cx, int cy, final ImageButton mFloatingButton, final View revealLayout) {
+        float finalRadius = hypo(revealLayout.getWidth(), revealLayout.getHeight());
+
+        SupportAnimator animator =
+                ViewAnimationUtils.createCircularReveal(revealLayout, revealLayout.getWidth(), revealLayout.getHeight(), 0, finalRadius);
+
+        animator.addListener(new SupportAnimator.AnimatorListener() {
+            @Override
+            public void onAnimationStart() {
+                mFloatingButton.setVisibility(View.INVISIBLE);
+                revealLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd() {
+            }
+
+            @Override
+            public void onAnimationCancel() {
+            }
+
+            @Override
+            public void onAnimationRepeat() {
+            }
+        });
+
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setDuration(250);
+        animator.start();
+    }
+
+    static float hypo(int a, int b) {
+        return (float) Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
