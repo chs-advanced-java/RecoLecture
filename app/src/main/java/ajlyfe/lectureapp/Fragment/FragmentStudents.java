@@ -61,6 +61,60 @@ public class FragmentStudents extends Fragment {
                 }
             }
         });
+
+        studentOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!studentOne.isChecked()) {
+                    selectAll.setChecked(false);
+                }
+            }
+        });
+
+        studentTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!studentTwo.isChecked()) {
+                    selectAll.setChecked(false);
+                }
+            }
+        });
+
+        studentThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!studentThree.isChecked()) {
+                    selectAll.setChecked(false);
+                }
+            }
+        });
+
+        studentFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!studentFour.isChecked()) {
+                    selectAll.setChecked(false);
+                }
+            }
+        });
+
+        studentFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!studentFive.isChecked()) {
+                    selectAll.setChecked(false);
+                }
+            }
+        });
+
+        studentSix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!studentSix.isChecked()) {
+                    selectAll.setChecked(false);
+                }
+            }
+        });
     }
 
 }
