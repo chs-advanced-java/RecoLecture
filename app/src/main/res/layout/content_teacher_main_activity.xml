@@ -24,6 +24,7 @@
         android:textSize="28sp" />
 
     <!-- TODO: Replace this with "include" code -->
+    <!-- TODO: Update hardcoded text-->
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/buttonClasses"
