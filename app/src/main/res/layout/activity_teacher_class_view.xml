@@ -21,6 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_teacher_class_view" />
+    <include layout="@layout/content_teacher_class_view"
+        android:layout_width="414dp" />
 
 </android.support.design.widget.CoordinatorLayout>
