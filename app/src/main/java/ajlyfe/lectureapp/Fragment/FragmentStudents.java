@@ -43,7 +43,6 @@ public class FragmentStudents extends Fragment {
         selectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectAll.setChecked(!selectAll.isChecked());
                 if (selectAll.isChecked()) {
                     studentOne.setChecked(true);
                     studentTwo.setChecked(true);

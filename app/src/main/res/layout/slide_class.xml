@@ -8,13 +8,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/AppTheme.Slide">
 
-    <Button android:id="@+id/uploadClassButton"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_Upload"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"/>
+        android:layout_marginTop="16dp"
+        android:id="@+id/description"
+        android:text="@string/class_description"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true" />
+
+    <TextView android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/class_title"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="28sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +36,7 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:id="@+id/scrollView"
-        android:layout_below="@+id/description"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 
         <RelativeLayout
@@ -61,26 +75,12 @@
 
     </ScrollView>
 
-    <TextView
+    <Button android:id="@+id/uploadClassButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:id="@+id/description"
-        android:text="@string/class_description"
-        android:fontFamily="sans-serif"
-        android:textSize="14sp"
-        android:textAlignment="center"
-        android:layout_below="@+id/title"
-        android:layout_centerHorizontal="true" />
-
-    <TextView android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/class_title"
-        android:fontFamily="sans-serif-thin"
-        android:textSize="28sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:text="@string/button_Upload"
+        android:layout_marginBottom="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/description" />
 
 </RelativeLayout>
