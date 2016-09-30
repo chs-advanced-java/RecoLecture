@@ -13,7 +13,7 @@
     tools:context="ajlyfe.lectureapp.Activity.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
-    <TextView
+    <TextView android:id="@+id/MyAccountTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Account"
@@ -21,5 +21,41 @@
         android:textSize="28sp"
         android:layout_centerHorizontal="true"
         />
+
+    <TextView android:id="@+id/MyAccountDescription"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change your account settings."
+        android:layout_below="@+id/MyAccountTitle"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ScrollView
+        android:layout_below="@+id/MyAccountDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Display Name"
+                android:ems="20"
+                android:id="@+id/NameChange" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Name"
+                android:layout_below="@+id/NameChange"/>
+
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
