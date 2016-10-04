@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Activity.TeacherMainActivity">
+    tools:context="ajlyfe.lectureapp.Activity.StudentActivityMain">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,14 +22,14 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabTeacher"
+        android:id="@+id/fabStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/fab_add" />
 
-    <include layout="@layout/content_teacher_class_overview"
-        android:layout_height="248dp" />
+    <include layout="@layout/content_student_activity_main"
+        android:layout_height="248dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
