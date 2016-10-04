@@ -15,16 +15,6 @@
     tools:showIn="@layout/activity_student_enter_class_code">
 
     <TextView
-        android:text="Enter a Class Code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/EnterCodeInstructions"
-        android:layout_marginTop="87dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="*If You Don't Have a Code Get One*"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,6 +48,16 @@
         android:id="@+id/JoinClassButton"
         android:elevation="0dp"
         android:layout_below="@+id/editText3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="To Join a Class, Enter a Class Code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/EnterCodeInstructions"
+        android:layout_marginTop="102dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
