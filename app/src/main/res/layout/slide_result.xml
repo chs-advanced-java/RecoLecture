@@ -8,15 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/AppTheme.Slide">
 
-    <TextView android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Success!"
-        android:fontFamily="sans-serif-thin"
-        android:textSize="28sp"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,6 +22,27 @@
             android:layout_height="match_parent"
             android:padding="64dp"/>
 
+        <TextView
+            android:text="Done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="21dp"
+            android:layout_marginBottom="19dp"
+            android:id="@+id/Done"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
     </RelativeLayout>
+
+    <TextView android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Success!"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="28sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
@@ -29,6 +30,8 @@ import io.codetail.widget.RevealLinearLayout;
 
 public class TeacherClassOverview extends AppCompatActivity {
 
+    private boolean creatingClass = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +44,20 @@ public class TeacherClassOverview extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RelativeLayout layout = (RelativeLayout) findViewById(R.id.classOverviewLayout);
+                layout.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        // ignore all touch events
+                        return true;
+                    }
+                });
+
+                creatingClass = true;
                 animateButton(fab, findViewById(R.id.revealLayout));
             }
         });
 
-        /*
         CardView classOneCard = (CardView) findViewById(R.id.classOne);
         CardView classTwoCard = (CardView) findViewById(R.id.classTwo);
 
@@ -71,7 +83,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 intent.putExtra("CLASS_CLICKED", 2);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
     private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
@@ -85,16 +97,16 @@ public class TeacherClassOverview extends AppCompatActivity {
                     @Override
                     public void onAnimationStart(Animator animation) {
                         super.onAnimationStart(animation);
-                        animateReveal((int) mFloatingButton.getX(), 150, mFloatingButton, revealLayout);
+                        animateReveal(revealLayout.getWidth(), revealLayout.getHeight(), mFloatingButton, revealLayout);
                     }
         });
     }
 
-    private void animateReveal(int cx, int cy, final ImageButton mFloatingButton, final View revealLayout) {
+    private void animateReveal(int dx, int dy, final ImageButton mFloatingButton, final View revealLayout) {
         float finalRadius = hypo(revealLayout.getWidth(), revealLayout.getHeight());
 
         SupportAnimator animator =
-                ViewAnimationUtils.createCircularReveal(revealLayout, revealLayout.getWidth(), revealLayout.getHeight(), 0, finalRadius);
+                ViewAnimationUtils.createCircularReveal(revealLayout, dx, dy, 0, finalRadius);
 
         animator.addListener(new SupportAnimator.AnimatorListener() {
             @Override

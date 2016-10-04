@@ -9,7 +9,7 @@
     tools:context=".Activity.TeacherClassView"
     tools:showIn="@layout/activity_teacher_class_overview">
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/classOverviewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -19,7 +19,6 @@
 
         <!-- PUT CONTENT IN HERE!!! -->
 
-        <!--
         <include layout="@layout/class_card" android:id="@+id/classTwo"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/class_card_height"
@@ -33,7 +32,6 @@
             android:layout_marginTop="17dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
-        -->
 
     </RelativeLayout>
 
@@ -54,7 +52,11 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin">
 
                     <TextView android:id="@+id/classNameTV"
                         android:layout_width="wrap_content"
@@ -69,6 +71,16 @@
                         android:layout_height="wrap_content"
                         android:textColorHint="#FFF"
                         android:hint="Ex: Geometry"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="DONE"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"/>
 
                 </RelativeLayout>
 

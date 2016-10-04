@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
@@ -131,6 +132,14 @@ public class UploadActivity extends AppIntro {
 
                 case 5:
                     final Activity activity5 = newFragment.getActivity();
+                    TextView done = (TextView) activity5.findViewById(R.id.done);
+
+                        done.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                              startActivity(new Intent(UploadActivity.this, TeacherMainActivity.class));
+                            }
+                        });
                     break;
             }
         }
