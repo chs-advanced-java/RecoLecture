@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/AppTheme.Slide">
 
-    <TextView android:id="@+id/title"
+    <TextView android:id="@+id/uploadTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -17,20 +17,19 @@
         android:fontFamily="sans-serif-thin"
         android:textSize="27sp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploadTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/uploadDescription"
+        android:text="@string/confirm_upload"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_above="@+id/description"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
-
-        <TextView android:id="@+id/confirm_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textSize="16sp"
-            android:text="@string/confirm_upload"/>
+        android:layout_below="@+id/uploadDescription">
 
         <RelativeLayout android:id="@+id/confirmBox"
             android:layout_width="match_parent"
@@ -38,7 +37,6 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:layout_marginTop="24dp"
-            android:layout_below="@id/confirm_text"
             android:baselineAligned="false"
             android:orientation="horizontal"
             android:foreground="?android:attr/selectableItemBackground"

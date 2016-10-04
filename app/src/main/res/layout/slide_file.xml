@@ -42,49 +42,103 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <CheckBox
+            <TextView
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
+                android:id="@+id/checkText1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="chapter1.1_lecture.mp3"
-                android:id="@+id/checkBox1"/>
+                android:textSize="16sp"
+                android:text="@string/lecture_placeholder"
+                android:textColor="@color/colorAccent" />
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck1"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="chapter1.2_lecture.mp3"
-                android:id="@+id/checkBox2"
-                android:layout_below="@+id/checkBox1"/>
+                android:layout_alignParentEnd="true"/>
 
-            <CheckBox
+            <TextView
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
+                android:id="@+id/checkText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="chapter1.3_lecture.mp3"
-                android:id="@+id/checkBox3"
-                android:layout_below="@+id/checkBox2"/>
+                android:textSize="16sp"
+                android:text="@string/lecture_placeholder2"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText1"/>
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck2"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="chapter1.4_lecture.mp3"
-                android:id="@+id/checkBox4"
-                android:layout_below="@+id/checkBox3"/>
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText1"
+                />
 
-            <CheckBox
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_placeholder3"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText2"/>
+
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck3"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="chapter1.5_lecture.mp3"
-                android:id="@+id/checkBox5"
-                android:layout_below="@+id/checkBox4"/>
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText2"
+                />
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_placeholder4"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText3"/>
+
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck4"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText3"
+                />
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_placeholder5"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText4"/>
+
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck5"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText4"
+                />
+
         </RelativeLayout>
 
     </ScrollView>
