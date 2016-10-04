@@ -30,7 +30,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="21dp"
             android:layout_marginBottom="19dp"
-            android:id="@+id/Done"
+            android:id="@+id/DoneNextToPurpleCheck"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </RelativeLayout>

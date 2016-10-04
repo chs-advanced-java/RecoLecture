@@ -132,7 +132,7 @@ public class UploadActivity extends AppIntro {
 
                 case 5:
                     final Activity activity5 = newFragment.getActivity();
-                    TextView done = (TextView) activity5.findViewById(R.id.done);
+                    TextView done = (TextView) activity5.findViewById(R.id.DoneNextToPurpleCheck);
 
                         done.setOnClickListener(new View.OnClickListener(){
                             @Override
