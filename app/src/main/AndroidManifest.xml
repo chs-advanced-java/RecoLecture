@@ -39,7 +39,11 @@
             android:name=".Activity.TeacherCreateClass"
             android:label="@string/title_activity_teacher_create_class"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.StudentClassPage"
+            android:label="@string/title_activity_student_class_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

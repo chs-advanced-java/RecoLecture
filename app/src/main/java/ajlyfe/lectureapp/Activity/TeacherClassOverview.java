@@ -58,6 +58,7 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
         });
 
+        /** HARDCODE! **/
         CardView classOneCard = (CardView) findViewById(R.id.classOne);
         CardView classTwoCard = (CardView) findViewById(R.id.classTwo);
 
@@ -84,6 +85,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /** END HARDCODE! **/
     }
 
     private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {

@@ -20,4 +20,5 @@
     <string name="sampleClass_1">Algebra II</string>
     <string name="sampleClass_2">Calculus</string>
     <string name="title_activity_teacher_create_class">TeacherCreateClass</string>
+    <string name="title_activity_student_class_page">StudentClassPage</string>
 </resources>
