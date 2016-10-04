@@ -33,7 +33,8 @@ public class TeacherMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 clickEgg[0]++;
                 if (clickEgg[0] == 5) {
-                    startActivity(new Intent(TeacherMainActivity.this, StudentClassPage.class));
+                    startActivity(new Intent(TeacherMainActivity.this, StudentActivityMain.class));
+                    clickEgg[0] = 0;
                 }
             }
         });
@@ -52,6 +53,21 @@ public class TeacherMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(TeacherMainActivity.this, UploadActivity.class));
+            }
+        });
+
+        CardView recordCard = (CardView) findViewById(R.id.buttonRecord);
+        recordCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+                clickEgg[0]++;
+                if (clickEgg[0] == 10) {
+                    startActivity(new Intent(TeacherMainActivity.this, StudentActivityMain.class));
+                    clickEgg[0] = 0;
+                }
+
+                //Insert Code to Record Activity Later
+
             }
         });
     }
