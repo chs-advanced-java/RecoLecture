@@ -13,4 +13,21 @@
     tools:context="ajlyfe.lectureapp.Activity.StudentClassPage"
     tools:showIn="@layout/activity_student_class_page">
 
+    <TextView android:id="@+id/lectureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/accent"
+        android:textSize="17sp"
+        android:text="Lectures:"/>
+
+    <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewLectures"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lectureTitle"
+        android:layout_marginTop="16dp">
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>

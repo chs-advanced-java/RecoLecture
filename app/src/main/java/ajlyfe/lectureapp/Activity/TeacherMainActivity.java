@@ -33,7 +33,7 @@ public class TeacherMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 clickEgg[0]++;
                 if (clickEgg[0] == 5) {
-                    startActivity(new Intent(TeacherMainActivity.this, StudentActivityMain.class));
+                    startActivity(new Intent(TeacherMainActivity.this, StudentClassPage.class));
                     clickEgg[0] = 0;
                 }
             }
