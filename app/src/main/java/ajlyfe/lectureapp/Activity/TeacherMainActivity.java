@@ -3,6 +3,7 @@ package ajlyfe.lectureapp.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -10,10 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import ajlyfe.lectureapp.R;
 
 public class TeacherMainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,19 @@ public class TeacherMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final int[] clickEgg = {0};
+
+        TextView teacherHomeTitle = (TextView) findViewById(R.id.teacherHomeTitle);
+        teacherHomeTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickEgg[0]++;
+                if (clickEgg[0] == 5) {
+                    startActivity(new Intent(TeacherMainActivity.this, StudentClassPage.class));
+                }
+            }
+        });
 
         CardView myClassesCard = (CardView) findViewById(R.id.buttonClasses);
         myClassesCard.setOnClickListener(new View.OnClickListener(){

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app2=""
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_student_enter_class_code"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ajlyfe.lectureapp.Activity.StudentEnterClassCode"
+    tools:showIn="@layout/activity_student_enter_class_code">
+
+    <TextView
+        android:text="Enter a Class Code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/EnterCodeInstructions"
+        android:layout_marginTop="87dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="*If You Don't Have a Code Get One*"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/GetACode"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_below="@+id/EnterCodeInstructions"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="25dp"
+        android:id="@+id/editText3"
+        android:text="Class Code:"
+        android:textAllCaps="true"
+        android:fontFamily="sans-serif"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:selectAllOnFocus="false"
+        android:layout_below="@+id/GetACode"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:id="@+id/JoinClassButton"
+        android:elevation="0dp"
+        android:layout_below="@+id/editText3"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
