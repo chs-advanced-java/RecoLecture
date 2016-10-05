@@ -1,15 +1,20 @@
 package ajlyfe.lectureapp.Activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import ajlyfe.lectureapp.R;
 
 public class StudentEnterClassCode extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,14 @@ public class StudentEnterClassCode extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Button JoinClassButton = (Button) findViewById(R.id.JoinClassButton);
+        JoinClassButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+                    public void onClick(View view) {
+                startActivity(new Intent(StudentEnterClassCode.this,StudentClassPage.class ));
+            }
+        });
     }
+
 
 }
