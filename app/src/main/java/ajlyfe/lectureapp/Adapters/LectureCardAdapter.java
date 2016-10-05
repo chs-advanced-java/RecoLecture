@@ -51,10 +51,10 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
 
         // Set item views based on your views and data model
         TextView title = viewHolder.lectureTitle;
-        //title.setText(lecture.getLectureName());
+        title.setText(lecture.getLectureName());
 
         TextView teacher = viewHolder.lectureTeacher;
-        //teacher.setText(lecture.getTeacherName());
+        teacher.setText(lecture.getTeacherName());
     }
 
     // Returns the total count of items in the list
@@ -79,7 +79,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
             super(itemView);
 
 
-            this.lectureTitle = (TextView) itemView.findViewById(R.id.lectureTitle);
+            this.lectureTitle = (TextView) itemView.findViewById(R.id.lectureName);
             this.lectureTeacher = (TextView) itemView.findViewById(R.id.lectureTeacher);
         }
     }

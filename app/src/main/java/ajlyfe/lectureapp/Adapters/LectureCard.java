@@ -33,7 +33,7 @@ public class LectureCard {
         ArrayList<LectureCard> lectureList = new ArrayList<LectureCard>();
 
         for (int i = 1; i <= numLectures; i++) {
-            lectureList.add(new LectureCard("Spanish" + i, "Plumezzzzz"));
+            lectureList.add(new LectureCard("Spanish" + i, "Plumezzzzz " + i));
         }
 
         return lectureList;
