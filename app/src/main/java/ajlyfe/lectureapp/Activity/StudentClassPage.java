@@ -67,7 +67,7 @@ public class StudentClassPage extends AppCompatActivity {
         // Lookup the recyclerview in activity layout
         RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
 
-        // Initialize contacts
+        // Initialize ArrayList
         lectures = LectureCard.createLectureList(100);
         // Create adapter passing in the sample user data
         LectureCardAdapter adapter = new LectureCardAdapter(lectures);

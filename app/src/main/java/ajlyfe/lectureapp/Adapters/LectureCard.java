@@ -30,8 +30,9 @@ public class LectureCard {
     }
 
     public static ArrayList<LectureCard> createLectureList(int numLectures) {
-        ArrayList<LectureCard> lectureList = new ArrayList<LectureCard>();
+        ArrayList<LectureCard> lectureList = new ArrayList<>();
 
+        //TODO: Pull from the database here::::
         for (int i = 1; i <= numLectures; i++) {
             lectureList.add(new LectureCard("Spanish " + i, "Plumezzzzz"));
         }
