@@ -34,15 +34,15 @@ public class StudentActivityMain extends AppCompatActivity {
         });
 
         /** HARDCODE! **/
-        CardView classOneCard = (CardView) findViewById(R.id.classOne);
-        CardView classTwoCard = (CardView) findViewById(R.id.classTwo);
+        CardView classFourCard = (CardView) findViewById(R.id.classFour);
+        CardView classThreeCard = (CardView) findViewById(R.id.classThree);
 
-        RelativeLayout classTwoLayout = (RelativeLayout) classTwoCard.getChildAt(0);
-        TextView classTwoTitle = (TextView) classTwoLayout.getChildAt(0);
+        RelativeLayout classThreeLayout = (RelativeLayout) classThreeCard.getChildAt(0);
+        TextView classThreeTitle = (TextView) classThreeLayout.getChildAt(0);
 
-        classTwoTitle.setText("Class Two");
+        classThreeTitle.setText("Class Two");
 
-        classOneCard.setOnClickListener(new View.OnClickListener() {
+        classFourCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(StudentActivityMain.this, );
@@ -52,7 +52,7 @@ public class StudentActivityMain extends AppCompatActivity {
             }
         });
 
-        classTwoCard.setOnClickListener(new View.OnClickListener() {
+        classThreeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(StudentActivityMain.this, );
