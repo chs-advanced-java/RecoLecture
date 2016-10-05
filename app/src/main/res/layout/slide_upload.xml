@@ -28,12 +28,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/uploadDescription">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/uploadDescription"
+        android:layout_above="@+id/finishButton"
+        >
 
         <RelativeLayout android:id="@+id/confirmBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:layout_marginTop="24dp"
@@ -51,6 +53,7 @@
                 android:textColor="@color/colorAccent" />
 
             <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"/>

@@ -31,47 +31,74 @@
         android:layout_centerHorizontal="true" />
 
     <ScrollView
-        android:layout_below="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/description"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
-        android:id="@+id/scrollView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:id="@+id/scrollView">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <CheckBox
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sampleClass_2"
-                android:id="@+id/checkBox2"
-                android:layout_below="@+id/checkBox1"/>
-
-            <CheckBox
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:text="@string/sampleClass_0"
-                android:id="@+id/checkBox"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:textColor="@color/colorAccent" />
 
-            <CheckBox
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck1"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:text="@string/sampleClass_1"
-                android:id="@+id/checkBox1"
-                android:layout_below="@+id/checkBox"
-                android:layout_alignParentStart="true" />
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText1"/>
+
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck2"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText1"
+                />
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/sampleClass_2"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText2"/>
+
+            <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck3"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText2"
+                />
+
         </RelativeLayout>
 
     </ScrollView>
