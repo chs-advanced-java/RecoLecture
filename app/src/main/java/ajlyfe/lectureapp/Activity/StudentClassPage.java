@@ -51,7 +51,7 @@ public class StudentClassPage extends AppCompatActivity {
         // Initialize contacts
         lectures = LectureCard.createLectureList(4);
         // Create adapter passing in the sample user data
-        LectureCardAdapter adapter = new LectureCardAdapter(this, lectures);
+        LectureCardAdapter adapter = new LectureCardAdapter(lectures);
         // Attach the adapter to the recyclerview to populate items
         recyclerViewLectures.setAdapter(adapter);
         // Set layout manager to position the items

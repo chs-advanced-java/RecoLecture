@@ -59,7 +59,7 @@ public class TeacherMainActivity extends AppCompatActivity {
         CardView recordCard = (CardView) findViewById(R.id.buttonRecord);
         recordCard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View V) {
+            public void onClick(View v) {
                 clickEgg[0]++;
                 if (clickEgg[0] == 10) {
                     startActivity(new Intent(TeacherMainActivity.this, StudentActivityMain.class));
