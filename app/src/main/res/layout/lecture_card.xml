@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:padding="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lectureCardHolder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-        <TextView android:id="@+id/lectureName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chapter 1 Vocabulary"
-            android:textSize="16sp"/>
+    <android.support.v7.widget.CardView android:layout_width="match_parent"
+        android:id="@+id/lectureCard"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp">
 
-        <TextView android:id="@+id/lectureTeacher"
-            android:layout_below="@+id/lectureName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Plumezz"
-            android:textSize="12sp"/>
+        <RelativeLayout android:id="@+id/lectureCardGuts"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+            <TextView android:id="@+id/lectureName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chapter 1 Vocabulary"
+                android:textSize="16sp"/>
 
-</android.support.v7.widget.CardView>
+            <TextView android:id="@+id/lectureTeacher"
+                android:layout_below="@+id/lectureName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plumezz"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

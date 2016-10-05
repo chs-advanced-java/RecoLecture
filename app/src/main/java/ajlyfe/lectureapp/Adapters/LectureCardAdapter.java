@@ -1,6 +1,7 @@
 package ajlyfe.lectureapp.Adapters;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,25 +20,27 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     // Store a member variable for the contacts
     private List<LectureCard> lectureList;
     // Store the context for easy access
-    private Context context;
 
     // Pass in the contact array into the constructor
-    public LectureCardAdapter(Context ctx, List<LectureCard> lectures) {
-        lectureList = lectures;
-        this.context = ctx;
+    public LectureCardAdapter(@Nullable List<LectureCard> lectures) {
+        if (lectures != null) {
+            lectureList = lectures;
+        } else {
+            for (int i = 1; i <= 24; i++) {
+                lectureList.add(new LectureCard("Spanish " + i, "Plumezzzzz"));
+            }
+        }
     }
 
     @Override
     public LectureCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.lecture_card, parent, false);
+        View card = inflater.inflate(R.layout.lecture_card, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+        return new ViewHolder(card);
     }
 
     // Involves populating data into the item through holder
@@ -48,10 +51,10 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
 
         // Set item views based on your views and data model
         TextView title = viewHolder.lectureTitle;
-        title.setText(lecture.getLectureName());
+        //title.setText(lecture.getLectureName());
 
         TextView teacher = viewHolder.lectureTeacher;
-        teacher.setText(lecture.getTeacherName());
+        //teacher.setText(lecture.getTeacherName());
     }
 
     // Returns the total count of items in the list
@@ -60,18 +63,13 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         return lectureList.size();
     }
 
-    // Easy access to the context object in the recyclerview
-    private Context getContext() {
-        return context;
-    }
-
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView lectureTitle;
-        public TextView lectureTeacher;
+        TextView lectureTitle;
+        TextView lectureTeacher;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -80,8 +78,9 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            lectureTitle = (TextView) itemView.findViewById(R.id.lectureTitle);
-            lectureTeacher = (TextView) itemView.findViewById(R.id.lectureTeacher);
+
+            this.lectureTitle = (TextView) itemView.findViewById(R.id.lectureTitle);
+            this.lectureTeacher = (TextView) itemView.findViewById(R.id.lectureTeacher);
         }
     }
 }
