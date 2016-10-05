@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ import ajlyfe.lectureapp.R;
 public class StudentClassPage extends AppCompatActivity {
 
     public ArrayList<LectureCard> lectures;
+    private int classNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,22 @@ public class StudentClassPage extends AppCompatActivity {
         setContentView(R.layout.activity_student_class_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            classNumber = extras.getInt("CLASS_CLICKED");
+        }
+
+        TextView classTitle = (TextView) findViewById(R.id.classTitle);
+        switch (classNumber) {
+            case 1:
+                classTitle.setText("Class One");
+                break;
+
+            case 2:
+                classTitle.setText("Class Two");
+                break;
+        }
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

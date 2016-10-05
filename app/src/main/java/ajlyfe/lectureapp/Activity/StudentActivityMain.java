@@ -45,9 +45,9 @@ public class StudentActivityMain extends AppCompatActivity {
         classFourCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(StudentActivityMain.this, );
-                //intent.putExtra("CLASS_CLICKED", 1);
-                //startActivity(intent);
+                Intent intent = new Intent(StudentActivityMain.this, StudentClassPage.class);
+                intent.putExtra("CLASS_CLICKED", 2);
+                startActivity(intent);
 
             }
         });
@@ -55,9 +55,9 @@ public class StudentActivityMain extends AppCompatActivity {
         classThreeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(StudentActivityMain.this, );
-                //intent.putExtra("CLASS_CLICKED", 2);
-                //startActivity(intent);
+                Intent intent = new Intent(StudentActivityMain.this, StudentClassPage.class);
+                intent.putExtra("CLASS_CLICKED", 1);
+                startActivity(intent);
             }
         });
 
