@@ -20,6 +20,7 @@
 
         <!-- Begin card layout -->
         <TextView
+            android:id="@+id/className"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Spanish I"
@@ -27,6 +28,16 @@
             android:textColor="@color/textColorPrimaryLight"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:id="@+id/classTeacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plumeri"
+            android:textSize="22sp"
+            android:textColor="#eeeeee"
+            android:layout_below="@+id/className"
             android:layout_marginStart="4dp" />
 
         <ImageView android:id="@+id/overflow"

@@ -3,19 +3,24 @@ package ajlyfe.lectureapp.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import ajlyfe.lectureapp.Adapters.ClassCard;
+import ajlyfe.lectureapp.Adapters.ClassCardAdapter;
+import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.R;
 
 public class StudentActivityMain extends AppCompatActivity {
+
+    public ArrayList<ClassCard> classes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +37,19 @@ public class StudentActivityMain extends AppCompatActivity {
             }
         });
 
+        RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
+        // Initialize ArrayList
+        classes = ClassCard.createList(3);
+        // Create adapter passing in the sample user data
+        ClassCardAdapter adapter = new ClassCardAdapter(classes);
+        // Attach the adapter to the recyclerview to populate items
+        recyclerViewStudentMain.setAdapter(adapter);
+        // Set layout manager to position the items
+        recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
+        // That's all!
+
         /** HARDCODE! **/
-        CardView classFourCard = (CardView) findViewById(R.id.classFour);
+        /**CardView classFourCard = (CardView) findViewById(R.id.classFour);
         CardView classThreeCard = (CardView) findViewById(R.id.classThree);
 
         RelativeLayout classThreeLayout = (RelativeLayout) classThreeCard.getChildAt(0);
@@ -58,7 +74,7 @@ public class StudentActivityMain extends AppCompatActivity {
                 intent.putExtra("CLASS_CLICKED", "Spanish II");
                 startActivity(intent);
             }
-        });
+        });**/
 
         /** END HARDCODE! **/
     }
