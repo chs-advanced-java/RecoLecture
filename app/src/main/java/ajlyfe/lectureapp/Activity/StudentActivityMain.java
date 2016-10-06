@@ -23,7 +23,6 @@ public class StudentActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_student_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabStudent);
         fab.setOnClickListener(new View.OnClickListener() {
