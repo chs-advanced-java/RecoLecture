@@ -32,8 +32,12 @@ public class StudentEnterClassCode extends AppCompatActivity {
             @Override
                     public void onClick(View view) {
                 startActivity(new Intent(StudentEnterClassCode.this,StudentClassPage.class ));
+                finish();
             }
         });
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    
+
     }
 
     @Override
