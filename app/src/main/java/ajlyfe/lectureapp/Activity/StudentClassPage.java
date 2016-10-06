@@ -37,7 +37,7 @@ public class StudentClassPage extends AppCompatActivity {
             classNumber = extras.getInt("CLASS_CLICKED");
         }
 
-        TextView classTitle = (TextView) findViewById(R.id.classTitle);
+        TextView classTitle = (TextView) findViewById(R.id.lectureTitle);
         switch (classNumber) {
             case 1:
                 classTitle.setText("Class One");
