@@ -22,8 +22,6 @@ import ajlyfe.lectureapp.R;
 public class StudentClassPage extends AppCompatActivity {
 
     public ArrayList<LectureCard> lectures;
-    private int classNumber;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,25 +32,12 @@ public class StudentClassPage extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            classNumber = extras.getInt("CLASS_CLICKED");
-        }
-
-        TextView classTitle = (TextView) findViewById(R.id.lectureTitle);
-        switch (classNumber) {
-            case 1:
-                classTitle.setText("Class One");
-                break;
-
-            case 2:
-                classTitle.setText("Class Two");
-                break;
+            String className = extras.getString("CLASS_CLICKED");
+            if(getSupportActionBar() != null) getSupportActionBar().setTitle(className);
         }
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            /** HARDCODED! **/
-            getSupportActionBar().setTitle("Class Name!");
-            /** END HARDCODE! **/
         }
 
         // Lookup the recyclerview in activity layout

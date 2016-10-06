@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Class One"
+            android:text="Spanish I"
             android:textSize="30sp"
             android:textColor="@color/textColorPrimaryLight"
             android:layout_alignParentTop="true"
@@ -33,9 +33,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/overflow"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"/>
+            android:src="@drawable/overflow" />
 
     </RelativeLayout>
 

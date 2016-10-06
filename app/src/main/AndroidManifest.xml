@@ -28,7 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.SettingsActivity"
-            android:label="Settings"
+            android:label="Account"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.TeacherCreateClass"

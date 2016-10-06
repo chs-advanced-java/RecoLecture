@@ -39,13 +39,13 @@ public class StudentActivityMain extends AppCompatActivity {
         RelativeLayout classThreeLayout = (RelativeLayout) classThreeCard.getChildAt(0);
         TextView classThreeTitle = (TextView) classThreeLayout.getChildAt(0);
 
-        classThreeTitle.setText("Class Two");
+        classThreeTitle.setText("Spanish II");
 
         classFourCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentActivityMain.this, StudentClassPage.class);
-                intent.putExtra("CLASS_CLICKED", 2);
+                intent.putExtra("CLASS_CLICKED", "Spanish I");
                 startActivity(intent);
 
             }
@@ -55,7 +55,7 @@ public class StudentActivityMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentActivityMain.this, StudentClassPage.class);
-                intent.putExtra("CLASS_CLICKED", 1);
+                intent.putExtra("CLASS_CLICKED", "Spanish II");
                 startActivity(intent);
             }
         });
