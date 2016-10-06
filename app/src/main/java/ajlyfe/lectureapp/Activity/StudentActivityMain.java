@@ -20,8 +20,6 @@ import ajlyfe.lectureapp.R;
 
 public class StudentActivityMain extends AppCompatActivity {
 
-    public ArrayList<ClassCard> classes;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +36,10 @@ public class StudentActivityMain extends AppCompatActivity {
         });
 
         RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
-        // Initialize ArrayList
-        classes = ClassCard.createList(3);
-        // Create adapter passing in the sample user data
+        ArrayList<ClassCard> classes = ClassCard.createList(3);
         ClassCardAdapter adapter = new ClassCardAdapter(classes, this);
-        // Attach the adapter to the recyclerview to populate items
         recyclerViewStudentMain.setAdapter(adapter);
-        // Set layout manager to position the items
         recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
-        // That's all!
     }
 
     @Override

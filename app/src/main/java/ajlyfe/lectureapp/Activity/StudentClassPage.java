@@ -19,8 +19,6 @@ import ajlyfe.lectureapp.R;
 
 public class StudentClassPage extends AppCompatActivity {
 
-    public ArrayList<LectureCard> lectures;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +36,13 @@ public class StudentClassPage extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // Lookup the recyclerview in activity layout
+        // Find and define the RecyclerView in activity's layout
         RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
-
-        // Initialize ArrayList
-        lectures = LectureCard.createLectureList(new Random().nextInt(5) + 1);
-        // Create adapter passing in the sample user data
+        // Initialize the ArrayList
+        ArrayList<LectureCard> lectures = LectureCard.createLectureList(new Random().nextInt(5) + 1);
+        // Create an adapter passing in the ArrayList from above
         LectureCardAdapter adapter = new LectureCardAdapter(lectures);
-        // Attach the adapter to the recyclerview to populate items
+        // Attach the adapter to the RecyclerView
         recyclerViewLectures.setAdapter(adapter);
         // Set layout manager to position the items
         recyclerViewLectures.setLayoutManager(new LinearLayoutManager(this));

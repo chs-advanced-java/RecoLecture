@@ -1,5 +1,6 @@
 package ajlyfe.lectureapp.Adapters;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,22 +13,15 @@ import java.util.List;
 import ajlyfe.lectureapp.R;
 
 // Create the basic adapter extending from RecyclerView.Adapter
-// Note that we specify the custom ViewHolder which gives us access to our views
+// Note that we specify the custom ViewHolder which gives us access to our views from the inflated layout
 public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.ViewHolder> {
 
-    // Store a member variable for the contacts
+    // Store objects to store data
     private List<LectureCard> lectureList;
-    // Store the context for easy access
 
-    // Pass in the contact array into the constructor
-    public LectureCardAdapter(@Nullable List<LectureCard> lectures) {
-        if (lectures != null) {
-            lectureList = lectures;
-        } else {
-            for (int i = 1; i <= 24; i++) {
-                lectureList.add(new LectureCard("Spanish " + i, "Plumezzzzz"));
-            }
-        }
+    // Pass in the predefined Array into the constructor
+    public LectureCardAdapter(@NonNull List<LectureCard> lectures) {
+        lectureList = lectures;
     }
 
     @Override
@@ -44,10 +38,10 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(LectureCardAdapter.ViewHolder viewHolder, int position) {
-        // Get the data model based on position
+        // Get the object and it's data based on position
         LectureCard lecture = lectureList.get(position);
 
-        // Set item views based on your views and data model
+        // Define the views from ViewHolder up here to play with them and do things! yasss
         TextView title = viewHolder.lectureTitle;
         title.setText(lecture.getLectureName());
 
@@ -55,7 +49,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         teacher.setText(lecture.getTeacherName());
     }
 
-    // Returns the total count of items in the list
+    // Returns the total count of items in the list probably won't use this but @Overrides 4 dayz
     @Override
     public int getItemCount() {
         return lectureList.size();
@@ -64,8 +58,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     class ViewHolder extends RecyclerView.ViewHolder {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
+        // These will be referenced every time up in the BindViewHolder
         TextView lectureTitle;
         TextView lectureTeacher;
 
@@ -75,7 +68,6 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
-
 
             this.lectureTitle = (TextView) itemView.findViewById(R.id.lectureName);
             this.lectureTeacher = (TextView) itemView.findViewById(R.id.lectureTeacher);
