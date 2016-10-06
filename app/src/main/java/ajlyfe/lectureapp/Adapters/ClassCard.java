@@ -34,7 +34,7 @@ public class ClassCard {
 
         //TODO: Pull from the database here::::
         for (int i = 1; i <= numClasses; i++) {
-            classList.add(new ClassCard("Spanish " + i, "Plumezzzzz"));
+            classList.add(new ClassCard("Spanish " + i, "Plumieri"));
         }
 
         return classList;

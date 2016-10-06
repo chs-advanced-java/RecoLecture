@@ -1,6 +1,10 @@
 package ajlyfe.lectureapp.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,22 +13,21 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ajlyfe.lectureapp.Activity.StudentActivityMain;
+import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
 
 public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.ViewHolder> {
     // Store a member variable for the contacts
     private List<ClassCard> classList;
-    // Store the context for easy access
+
+    //Store context to switch activities and yeah
+    private Context context;
 
     // Pass in the contact array into the constructor
-    public ClassCardAdapter(@Nullable List<ClassCard> classes) {
-        if (classes != null) {
-            classList = classes;
-        } else {
-            for (int i = 1; i <= 24; i++) {
-                classList.add(new ClassCard("Spanish " + i, "Plumezzzzz"));
-            }
-        }
+    public ClassCardAdapter(@NonNull List<ClassCard> classes, Context ctx) {
+        context = ctx;
+        classList = classes;
     }
 
     @Override
@@ -40,9 +43,9 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ClassCardAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ClassCardAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        ClassCard clss = classList.get(position);
+        final ClassCard clss = classList.get(position);
 
         // Set item views based on your views and data model
         TextView title = viewHolder.classTitle;
@@ -50,6 +53,17 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
         TextView teacher = viewHolder.classTeacher;
         teacher.setText(clss.getTeacherName());
+
+        CardView classCard = viewHolder.card;
+        classCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, StudentClassPage.class);
+                intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     // Returns the total count of items in the list
@@ -65,6 +79,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
         // for any view that will be set as you render a row
         TextView classTitle;
         TextView classTeacher;
+        CardView card;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -73,7 +88,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-
+            this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
             this.classTeacher = (TextView) itemView.findViewById(R.id.classTeacher);
         }

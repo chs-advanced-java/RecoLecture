@@ -41,42 +41,12 @@ public class StudentActivityMain extends AppCompatActivity {
         // Initialize ArrayList
         classes = ClassCard.createList(3);
         // Create adapter passing in the sample user data
-        ClassCardAdapter adapter = new ClassCardAdapter(classes);
+        ClassCardAdapter adapter = new ClassCardAdapter(classes, this);
         // Attach the adapter to the recyclerview to populate items
         recyclerViewStudentMain.setAdapter(adapter);
         // Set layout manager to position the items
         recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
         // That's all!
-
-        /** HARDCODE! **/
-        /**CardView classFourCard = (CardView) findViewById(R.id.classFour);
-        CardView classThreeCard = (CardView) findViewById(R.id.classThree);
-
-        RelativeLayout classThreeLayout = (RelativeLayout) classThreeCard.getChildAt(0);
-        TextView classThreeTitle = (TextView) classThreeLayout.getChildAt(0);
-
-        classThreeTitle.setText("Spanish II");
-
-        classFourCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StudentActivityMain.this, StudentClassPage.class);
-                intent.putExtra("CLASS_CLICKED", "Spanish I");
-                startActivity(intent);
-
-            }
-        });
-
-        classThreeCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StudentActivityMain.this, StudentClassPage.class);
-                intent.putExtra("CLASS_CLICKED", "Spanish II");
-                startActivity(intent);
-            }
-        });**/
-
-        /** END HARDCODE! **/
     }
 
     @Override

@@ -34,7 +34,7 @@ public class LectureCard {
 
         //TODO: Pull from the database here::::
         for (int i = 1; i <= numLectures; i++) {
-            lectureList.add(new LectureCard("Spanish " + i, "Plumezzzzz"));
+            lectureList.add(new LectureCard("Chapter " + i, "Plumieri"));
         }
 
         return lectureList;

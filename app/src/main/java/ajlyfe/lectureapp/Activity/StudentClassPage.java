@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.Adapters.LectureCardAdapter;
@@ -41,7 +42,7 @@ public class StudentClassPage extends AppCompatActivity {
         RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
 
         // Initialize ArrayList
-        lectures = LectureCard.createLectureList(100);
+        lectures = LectureCard.createLectureList(new Random().nextInt(5) + 1);
         // Create adapter passing in the sample user data
         LectureCardAdapter adapter = new LectureCardAdapter(lectures);
         // Attach the adapter to the recyclerview to populate items
