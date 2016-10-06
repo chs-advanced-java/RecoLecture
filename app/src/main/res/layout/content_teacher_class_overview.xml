@@ -38,7 +38,9 @@
     <!-- DO NOT TOUCH THIS -->
     <RelativeLayout android:id="@+id/createClassLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <io.codetail.widget.RevealLinearLayout
             android:layout_width="match_parent"

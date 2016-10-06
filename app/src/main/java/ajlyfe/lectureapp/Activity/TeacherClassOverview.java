@@ -54,7 +54,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                 });
 
                 creatingClass = true;
-                animateButton(fab, findViewById(R.id.revealLayout));
+                animateButton(fab,
+                        findViewById(R.id.revealLayout));
             }
         });
 
