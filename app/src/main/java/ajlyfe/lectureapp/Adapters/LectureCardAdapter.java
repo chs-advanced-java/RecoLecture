@@ -1,7 +1,6 @@
 package ajlyfe.lectureapp.Adapters;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,9 +50,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
 
     // Returns the total count of items in the list probably won't use this but @Overrides 4 dayz
     @Override
-    public int getItemCount() {
-        return lectureList.size();
-    }
+    public int getItemCount() { return lectureList.size(); }
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access

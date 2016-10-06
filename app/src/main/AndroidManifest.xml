@@ -20,8 +20,7 @@
         <activity
             android:name=".Activity.TeacherMainActivity"
             android:label="RecoLecture"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activity.TeacherClassView"
             android:label="My Classes"
@@ -36,14 +35,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.StudentActivityMain"
-            android:label="My Classes"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="RecoLecture"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activity.StudentEnterClassCode"
             android:label="Join New Class"
@@ -51,7 +44,17 @@
         <activity
             android:name=".Activity.StudentClassPage"
             android:label="@string/title_activity_student_class_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
