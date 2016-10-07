@@ -16,7 +16,8 @@
         <activity
             android:name=".Activity.TeacherClassOverview"
             android:label="My Classes"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".Activity.TeacherMainActivity"
             android:label="RecoLecture"

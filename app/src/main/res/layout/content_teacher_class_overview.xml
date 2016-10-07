@@ -60,27 +60,40 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin">
 
-                    <TextView android:id="@+id/classNameTV"
-                        android:layout_width="wrap_content"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/inputLayoutClassName"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#FFF"
-                        android:text="Class Name:"/>
+                        android:theme="@style/AppTheme.Accented">
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/classNameET"
-                        android:layout_below="@+id/classNameTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="#FFF"
-                        android:hint="Ex: Geometry"/>
+                        <EditText android:id="@+id/className"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/AppTheme.Accented"
+                            android:hint="Class Name"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/inputLayoutClassDescription"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:text="DONE"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-condensed"
+                        android:layout_below="@id/inputLayoutClassName"
+                        android:theme="@style/AppTheme.Accented">
+
+                        <EditText android:id="@+id/classDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Class Description"
+                            android:theme="@style/AppTheme.Accented"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Create Class"
+                        android:backgroundTint="#FFF"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"/>
 

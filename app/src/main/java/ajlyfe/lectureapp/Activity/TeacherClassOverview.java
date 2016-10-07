@@ -45,17 +45,13 @@ public class TeacherClassOverview extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RelativeLayout layout = (RelativeLayout) findViewById(R.id.classOverviewLayout);
-                layout.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        // ignore all touch events
-                        return true;
-                    }
-                });
 
                 creatingClass = true;
-                animateButton(fab,
-                        findViewById(R.id.revealLayout));
+                animateButton(fab, findViewById(R.id.revealLayout));
+
+                layout.setEnabled(false);
+                layout.setClickable(false);
+                layout.setVisibility(View.GONE);
             }
         });
 

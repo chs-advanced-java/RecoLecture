@@ -16,6 +16,7 @@
     <TextView android:id="@+id/MyAccountTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="My Account"
         android:fontFamily="sans-serif-thin"
         android:textSize="28sp"
@@ -36,9 +37,10 @@
         android:layout_below="@+id/MyAccountDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:layout_width="wrap_content"

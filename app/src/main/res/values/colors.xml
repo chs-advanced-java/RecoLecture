@@ -6,6 +6,7 @@
     <color name="colorPrimary50">#803F51B5</color>
     <color name="colorPrimary20">#323F51B5</color>
     <color name="colorAccent">#B27BFF</color>
+    <color name="colorAccent20">#32B27BFF</color>
 
     <color name="textColorPrimary">#212121</color>
     <color name="textColorPrimaryLight">#FFFFFF</color>
@@ -16,4 +17,5 @@
     <color name="uploadYellow">#FFCC00</color>
     <color name="recordRed">#FF0000</color>
     <color name="myClassesGreen">#A4C644</color>
+    <color name="colorAccentLight">#d1c4e9</color>
 </resources>
