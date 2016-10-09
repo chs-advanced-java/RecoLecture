@@ -29,7 +29,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/fab_add" />
 
-    <include layout="@layout/content_teacher_class_overview"
-        android:layout_height="248dp" />
+    <include layout="@layout/content_teacher_class_overview" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.TeacherClassView"
-    tools:showIn="@layout/activity_teacher_class_overview">
+    tools:showIn="@layout/activity_teacher_class_overview"
+    android:animateLayoutChanges="true">
 
     <RelativeLayout android:id="@+id/classOverviewLayout"
         android:layout_width="match_parent"

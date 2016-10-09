@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -31,6 +32,7 @@ import io.codetail.widget.RevealLinearLayout;
 public class TeacherClassOverview extends AppCompatActivity {
 
     private boolean creatingClass = false;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,11 @@ public class TeacherClassOverview extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabTeacher);
+        fab = (FloatingActionButton) findViewById(R.id.fabTeacher);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                findViewById(R.id.createClassLayout).setVisibility(View.VISIBLE);
                 RelativeLayout layout = (RelativeLayout) findViewById(R.id.classOverviewLayout);
 
                 creatingClass = true;
@@ -88,18 +91,18 @@ public class TeacherClassOverview extends AppCompatActivity {
 
     private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
         mFloatingButton.animate()
-                .translationXBy(0.5f)
-                .translationY(-revealLayout.getHeight()/2)
-                .translationXBy(-0.9f)
-                .translationX(-360)
-                .setDuration(500)
+                .translationXBy(0)
+                .translationY(0)
+                .translationXBy(0)
+                .translationX(0)
+                .setDuration(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationStart(Animator animation) {
                         super.onAnimationStart(animation);
                         animateReveal(revealLayout.getWidth(), revealLayout.getHeight(), mFloatingButton, revealLayout);
                     }
-        });
+                });
     }
 
     private void animateReveal(int dx, int dy, final ImageButton mFloatingButton, final View revealLayout) {
@@ -116,16 +119,13 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
 
             @Override
-            public void onAnimationEnd() {
-            }
+            public void onAnimationEnd() {}
 
             @Override
-            public void onAnimationCancel() {
-            }
+            public void onAnimationCancel() {}
 
             @Override
-            public void onAnimationRepeat() {
-            }
+            public void onAnimationRepeat() {}
         });
 
         animator.setInterpolator(new DecelerateInterpolator());
@@ -137,6 +137,30 @@ public class TeacherClassOverview extends AppCompatActivity {
         return (float) Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     }
 
+    @Override
+    public void onBackPressed() {
+        if (creatingClass) {
+            //TODO: ANIMATE ME!
+            Log.d("Animations", "Closing create class view.");
+
+            View createClassView = findViewById(R.id.createClassLayout);
+            View overviewView = findViewById(R.id.classOverviewLayout);
+
+            createClassView.setEnabled(false);
+            createClassView.setClickable(false);
+            createClassView.setVisibility(View.GONE);
+
+            overviewView.setEnabled(true);
+            overviewView.setClickable(true);
+            overviewView.setVisibility(View.VISIBLE);
+
+            fab.setVisibility(View.VISIBLE);
+
+            creatingClass = false;
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

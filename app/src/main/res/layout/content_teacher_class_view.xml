@@ -42,14 +42,13 @@
             android:id="@+id/fileButton" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/files"
+    <RelativeLayout android:id="@+id/files"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryLight"
+        android:background="@drawable/rounded_layout"
         android:layout_alignTop="@+id/students">
 
         <TextView
@@ -83,14 +82,13 @@
             android:layout_alignParentStart="true" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/students"
+    <RelativeLayout android:id="@+id/students"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryLight"
+        android:background="@drawable/rounded_layout"
         android:layout_marginTop="20dp">
 
         <TextView
@@ -163,7 +161,7 @@
         android:src="@drawable/triangle"
         android:layout_above="@+id/students"
         android:layout_marginBottom="-25dp"
-        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp"
         android:id="@+id/studentArrow"/>
 
     <android.support.v7.widget.AppCompatImageView
@@ -172,7 +170,7 @@
         android:src="@drawable/triangle"
         android:layout_above="@+id/students"
         android:layout_marginBottom="-25dp"
-        android:layout_marginLeft="225dp"
+        android:layout_marginEnd="225dp"
         android:visibility="invisible"
         android:id="@+id/fileArrow"/>
 
