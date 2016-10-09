@@ -17,27 +17,12 @@ import ajlyfe.lectureapp.R;
 
 public class TeacherMainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        final int[] clickEgg = {0};
-
-        TextView teacherHomeTitle = (TextView) findViewById(R.id.teacherHomeTitle);
-        teacherHomeTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickEgg[0]++;
-                if (clickEgg[0] == 5) {
-                    startActivity(new Intent(TeacherMainActivity.this, StudentClassPage.class));
-                    clickEgg[0] = 0;
-                }
-            }
-        });
 
         CardView myClassesCard = (CardView) findViewById(R.id.buttonClasses);
         myClassesCard.setOnClickListener(new View.OnClickListener(){
@@ -60,13 +45,7 @@ public class TeacherMainActivity extends AppCompatActivity {
         recordCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickEgg[0]++;
-                if (clickEgg[0] == 10) {
-                    startActivity(new Intent(TeacherMainActivity.this, StudentActivityMain.class));
-                    clickEgg[0] = 0;
-                }
-
-                //Insert Code to Record Activity Later
+                //TODO: Record Activity implementation
 
             }
         });

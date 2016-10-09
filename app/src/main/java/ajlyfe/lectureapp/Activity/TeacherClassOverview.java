@@ -71,7 +71,7 @@ public class TeacherClassOverview extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TeacherClassOverview.this, TeacherClassView.class);
-                intent.putExtra("CLASS_CLICKED", 1);
+                intent.putExtra("CLASS_CLICKED", "Spanish I");
                 startActivity(intent);
 
             }
@@ -81,7 +81,7 @@ public class TeacherClassOverview extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TeacherClassOverview.this, TeacherClassView.class);
-                intent.putExtra("CLASS_CLICKED", 2);
+                intent.putExtra("CLASS_CLICKED", "Spanish II");
                 startActivity(intent);
             }
         });

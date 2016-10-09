@@ -1,6 +1,12 @@
 package ajlyfe.lectureapp.Activity;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,11 +18,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ajlyfe.lectureapp.Fragment.FragmentClass;
+import ajlyfe.lectureapp.Fragment.FragmentFile;
+import ajlyfe.lectureapp.Fragment.FragmentStudents;
+import ajlyfe.lectureapp.Fragment.FragmentTabFiles;
+import ajlyfe.lectureapp.Fragment.FragmentTabStudents;
 import ajlyfe.lectureapp.R;
 
 public class TeacherClassView extends AppCompatActivity {
-
-    private int classNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,54 +37,56 @@ public class TeacherClassView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            classNumber = extras.getInt("CLASS_CLICKED");
+            String className = extras.getString("CLASS_CLICKED");
+            actionBar.setTitle(className);
         }
 
-        TextView classTitle = (TextView) findViewById(R.id.classTitle);
-        switch (classNumber) {
-            case 1:
-                classTitle.setText("Class One");
-                break;
+        ViewPager viewPager = (ViewPager) findViewById(R.id.classViewViewPager);
+        setupViewPager(viewPager);
 
-            case 2:
-                classTitle.setText("Class Two");
-                break;
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.classViewTab);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new FragmentTabStudents(), "STUDENTS");
+        adapter.addFragment(new FragmentTabFiles(), "FILES");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
         }
 
-        Button buttonStudents = (Button) findViewById(R.id.studentButton);
-        buttonStudents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RelativeLayout students = (RelativeLayout) findViewById(R.id.students);
-                students.setVisibility(View.VISIBLE);
-                ImageView studentArrow = (ImageView) findViewById(R.id.studentArrow);
-                studentArrow.setVisibility(View.VISIBLE);
-                RelativeLayout files = (RelativeLayout) findViewById(R.id.files);
-                files.setVisibility(View.INVISIBLE);
-                ImageView fileArrow = (ImageView) findViewById(R.id.fileArrow);
-                fileArrow.setVisibility(View.INVISIBLE);
-            }
-        });
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
 
-        Button buttonFiles = (Button) findViewById(R.id.fileButton);
-        buttonFiles.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RelativeLayout students = (RelativeLayout) findViewById(R.id.students);
-                students.setVisibility(View.INVISIBLE);
-                ImageView studentArrow = (ImageView) findViewById(R.id.studentArrow);
-                studentArrow.setVisibility(View.INVISIBLE);
-                RelativeLayout files = (RelativeLayout) findViewById(R.id.files);
-                files.setVisibility(View.VISIBLE);
-                ImageView fileArrow = (ImageView) findViewById(R.id.fileArrow);
-                fileArrow.setVisibility(View.VISIBLE);
-            }
-        });
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
     @Override

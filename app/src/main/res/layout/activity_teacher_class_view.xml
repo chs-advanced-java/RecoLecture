@@ -19,9 +19,18 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    </android.support.design.widget.AppBarLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/classViewTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            app:tabGravity="fill"/>
+        </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_teacher_class_view"
-        android:layout_width="414dp" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/classViewViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
 </android.support.design.widget.CoordinatorLayout>
