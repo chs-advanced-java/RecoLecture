@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/lectureCardHolder"
     android:layout_width="match_parent"
@@ -30,6 +29,24 @@
                 android:layout_height="wrap_content"
                 android:text="Plumezz"
                 android:textSize="12sp"/>
+
+            <ImageView android:id="@+id/downloadLecture"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_download"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_toStartOf="@+id/deleteLecture" />
+
+            <ImageView android:id="@+id/deleteLecture"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_delete"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
 

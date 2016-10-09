@@ -18,14 +18,19 @@
         android:textSize="17sp"
         android:text="Lectures:"/>
 
-    <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewLectures"
+    <RelativeLayout android:id="@+id/recyclerViewLecturesHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/lectureTitle"
-        android:layout_marginTop="16dp"
-        android:paddingBottom="72dp"
-        android:clipToPadding="false">
+        android:animateLayoutChanges="true">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewLectures"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="72dp"
+            android:clipToPadding="false"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

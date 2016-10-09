@@ -41,7 +41,7 @@ public class StudentClassPage extends AppCompatActivity {
         // Initialize the ArrayList
         ArrayList<LectureCard> lectures = LectureCard.createLectureList(new Random().nextInt(5) + 1);
         // Create an adapter passing in the ArrayList from above
-        LectureCardAdapter adapter = new LectureCardAdapter(lectures);
+        LectureCardAdapter adapter = new LectureCardAdapter(lectures, this);
         // Attach the adapter to the RecyclerView
         recyclerViewLectures.setAdapter(adapter);
         // Set layout manager to position the items

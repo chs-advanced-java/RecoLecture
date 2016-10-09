@@ -65,7 +65,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         RelativeLayout classTwoLayout = (RelativeLayout) classTwoCard.getChildAt(0);
         TextView classTwoTitle = (TextView) classTwoLayout.getChildAt(0);
 
-        classTwoTitle.setText("Class Two");
+        classTwoTitle.setText("Spanish II");
 
         classOneCard.setOnClickListener(new View.OnClickListener() {
             @Override
