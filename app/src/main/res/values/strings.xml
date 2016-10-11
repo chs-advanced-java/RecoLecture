@@ -26,4 +26,5 @@
     <string name="title_activity_teacher_create_class">TeacherCreateClass</string>
     <string name="title_activity_student_class_page">StudentClassPage</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_registration_screen">RegistrationScreen</string>
 </resources>
