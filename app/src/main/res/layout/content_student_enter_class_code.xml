@@ -14,29 +14,29 @@
     tools:showIn="@layout/activity_student_enter_class_code">
 
     <TextView
-        android:text="*If You Don't Have a Code Get One*"
+        android:text="Join a Class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/GetACode"
+        android:fontFamily="sans-serif-thin"
+        android:layout_marginTop="16dp"
+        android:textSize="28sp"
+        android:id="@+id/joinTitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:layout_below="@+id/EnterCodeInstructions"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:text="Enter the class code given to you by your teacher."
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_marginTop="25dp"
-        android:id="@+id/editText3"
-        android:textAllCaps="true"
-        android:fontFamily="sans-serif"
-        android:textSize="18sp"
-        android:maxLines = "1"
-        android:selectAllOnFocus="false"
-        android:layout_below="@+id/GetACode"
-        android:layout_alignParentStart="true" />
+        android:fontFamily="sans-serif-thin"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:id="@+id/joinDescription"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/joinTitle"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Join"
@@ -44,18 +44,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:id="@+id/JoinClassButton"
-        android:elevation="0dp"
-        android:layout_below="@+id/editText3"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="To Join a Class, Enter a Class Code"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/EnterCodeInstructions"
-        android:layout_marginTop="102dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:layout_alignParentTop="true"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:textAllCaps="true"
+        android:fontFamily="sans-serif"
+        android:textSize="18sp"
+        android:maxLines = "1"
+        android:selectAllOnFocus="false"
+        android:textAlignment="center"
+        android:hint="Your Class Code"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

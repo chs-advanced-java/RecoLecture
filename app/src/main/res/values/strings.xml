@@ -17,8 +17,7 @@
 
     <!-- STRINGS FOR SLIDE_CLASS -->
     <string name="class_title">Select Your Classes</string>
-    <string name="class_description">Check the classes you would like
-        \n to upload your lecture to.</string>
+    <string name="class_description">Check the classes you would like to upload your lecture to.</string>
     <string name="button_Upload">Upload to these classes</string>
     <string name="sampleClass_0">Geometry</string>
     <string name="sampleClass_1">Algebra II</string>
