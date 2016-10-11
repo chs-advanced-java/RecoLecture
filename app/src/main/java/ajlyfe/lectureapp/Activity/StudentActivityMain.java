@@ -37,7 +37,7 @@ public class StudentActivityMain extends AppCompatActivity {
 
         RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
         ArrayList<ClassCard> classes = ClassCard.createList(3);
-        ClassCardAdapter adapter = new ClassCardAdapter(classes, this);
+        ClassCardAdapter adapter = new ClassCardAdapter(classes, this, this);
         recyclerViewStudentMain.setAdapter(adapter);
         recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
     }

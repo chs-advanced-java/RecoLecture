@@ -19,6 +19,11 @@
         <item name="android:background">#EEEEEE</item>
     </style>
 
+    <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">#333333</item>
+        <item name="android:textColorPrimary">#333333</item>
+    </style>
+
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
