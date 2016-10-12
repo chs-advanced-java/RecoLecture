@@ -63,7 +63,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         CardView classTwoCard = (CardView) findViewById(R.id.classTwo);
 
         RelativeLayout classTwoLayout = (RelativeLayout) classTwoCard.getChildAt(0);
-        TextView classTwoTitle = (TextView) classTwoLayout.getChildAt(0);
+        TextView classTwoTitle = (TextView) classTwoLayout.getChildAt(1);
 
         classTwoTitle.setText("Spanish II");
 
@@ -176,7 +176,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 return true;
 
             case android.R.id.home:
-                finish();
+                onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);

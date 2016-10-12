@@ -18,17 +18,25 @@
         android:paddingEnd="@dimen/class_card_padding_side"
         android:background="@drawable/chalkboard">
 
-        <!-- Begin card layout -->
-        <TextView
-            android:id="@+id/className"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.Toolbar android:id="@+id/classCardToolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Spanish I"
-            android:textSize="30sp"
-            android:textColor="@color/textColorPrimaryLight"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="4dp" />
+            android:padding="0dp"
+            theme="@style/AppTheme.Toolbar">
+
+            <TextView
+                android:id="@+id/className"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spanish I"
+                android:textSize="30sp"
+                android:textColor="@color/textColorPrimaryLight"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+        </android.support.v7.widget.Toolbar>
+        <!-- Begin card layout -->
+
 
         <TextView
             android:id="@+id/classTeacher"
@@ -37,14 +45,8 @@
             android:text="Plumeri"
             android:textSize="22sp"
             android:textColor="#eeeeee"
-            android:layout_below="@+id/className"
+            android:layout_below="@+id/classCardToolbar"
             android:layout_marginStart="4dp" />
-
-        <ImageView android:id="@+id/overflow"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/overflow" />
 
     </RelativeLayout>
 

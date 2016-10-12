@@ -17,11 +17,11 @@
             android:name=".Activity.TeacherClassOverview"
             android:label="My Classes"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.TeacherMainActivity"
             android:label="RecoLecture"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.TeacherClassView"
             android:label="My Classes"
@@ -37,7 +37,7 @@
         <activity
             android:name=".Activity.StudentActivityMain"
             android:label="RecoLecture"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.StudentEnterClassCode"
             android:label="Join New Class"
@@ -56,6 +56,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity.RegistrationScreen"
+            android:label="@string/title_activity_registration_screen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

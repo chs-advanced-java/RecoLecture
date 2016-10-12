@@ -20,19 +20,12 @@
 
         <!-- PUT CONTENT IN HERE!!! -->
 
-        <include layout="@layout/class_card" android:id="@+id/classTwo"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/class_card_height"
-            android:layout_marginTop="34dp"
-            android:layout_below="@+id/classOne"
-            android:layout_alignParentStart="true" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerViewMainTeacher">
+        </android.support.v7.widget.RecyclerView>
 
-        <include layout="@layout/class_card" android:id="@+id/classOne"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/class_card_height"
-            android:layout_marginTop="17dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
