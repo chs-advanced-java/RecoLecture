@@ -8,6 +8,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -23,7 +25,13 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.ArrayList;
+
 import ajlyfe.lectureapp.*;
+import ajlyfe.lectureapp.Adapters.ClassCard;
+import ajlyfe.lectureapp.Adapters.ClassCardAdapter;
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
+import ajlyfe.lectureapp.Adapters.TeacherClassCardAdapter;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
@@ -58,35 +66,11 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
         });
 
-        /** HARDCODE! **/
-        CardView classOneCard = (CardView) findViewById(R.id.classOne);
-        CardView classTwoCard = (CardView) findViewById(R.id.classTwo);
-
-        RelativeLayout classTwoLayout = (RelativeLayout) classTwoCard.getChildAt(0);
-        TextView classTwoTitle = (TextView) classTwoLayout.getChildAt(1);
-
-        classTwoTitle.setText("Spanish II");
-
-        classOneCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TeacherClassOverview.this, TeacherClassView.class);
-                intent.putExtra("CLASS_CLICKED", "Spanish I");
-                startActivity(intent);
-
-            }
-        });
-
-        classTwoCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TeacherClassOverview.this, TeacherClassView.class);
-                intent.putExtra("CLASS_CLICKED", "Spanish II");
-                startActivity(intent);
-            }
-        });
-
-        /** END HARDCODE! **/
+        RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
+        ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(3);
+        TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this);
+        recyclerViewMainTeacher.setAdapter(adapter);
+        recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
