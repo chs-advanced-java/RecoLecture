@@ -38,9 +38,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
     @Override
     public ClassCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
         View card = inflater.inflate(R.layout.class_card, parent, false);
-
         return new ClassCardAdapter.ViewHolder(card);
     }
 
@@ -68,13 +66,14 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
         Toolbar mToolbar = viewHolder.toolbar;
         mToolbar.inflateMenu(R.menu.class_card_menu);
+        mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
         final int finalPosition = position;
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                 dialog.setTitle("Warning!")
-                        .setMessage("You are about to delete a class. Are you sure you" +
+                        .setMessage("You are about to unenroll from a class. Are you sure you " +
                                 "want to do this? This action cannot be undone.")
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int i) {
@@ -85,7 +84,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                             public void onClick(DialogInterface dialoginterface, int idk) {
                                 removeAt(finalPosition);
                                 Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                            "Class '" + clss.getClassName() + "' deleted",
+                                            "Unenrolled from '" + clss.getClassName() + "'",
                                             Snackbar.LENGTH_LONG)
                                         .setAction("Dandy!", new View.OnClickListener() {
                                             @Override
