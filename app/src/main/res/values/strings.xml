@@ -15,6 +15,13 @@
     <!-- STRINGS FOR ACTIVITY_TEACHER_MAIN_SCREEN -->
     <string name="teacher_home_title">Home</string>
 
+    <!-- LECTURE HARDCODES -->
+    <string name="lecture_sample_name_1">Intro to the present tense</string>
+    <string name="lecture_sample_name_2">Chapter 1 vocabulary part 1</string>
+    <string name="lecture_sample_name_3">Chapter 1 vocabulary part 2</string>
+    <string name="lecture_sample_name_4">Irregular present tense</string>
+    <string name="lecture_sample_name_5">Stem changing verbs</string>
+
     <!-- STRINGS FOR SLIDE_CLASS -->
     <string name="class_title">Select Your Classes</string>
     <string name="class_description">Check the classes you would like to upload your lecture to.</string>

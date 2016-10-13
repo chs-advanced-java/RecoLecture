@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/checkboxHolder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true">
+
+    <TextView android:id="@+id/checkboxTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="16sp"
+        android:text="@string/lecture_sample_name_1"
+        android:textColor="@color/colorAccent" />
+
+    <android.support.v7.widget.AppCompatCheckBox android:id="@+id/lectureCheck"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

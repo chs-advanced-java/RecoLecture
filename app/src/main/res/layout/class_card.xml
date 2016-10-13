@@ -38,7 +38,6 @@
         </android.support.v7.widget.Toolbar>
         <!-- Begin card layout -->
 
-
         <TextView
             android:id="@+id/classTeacher"
             android:layout_width="wrap_content"
