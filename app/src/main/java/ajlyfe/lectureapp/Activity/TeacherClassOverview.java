@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -66,11 +68,24 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
         });
 
+
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
-        ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(3);
+        final ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(3);
         TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
+
+        final EditText newClassName =  (EditText) findViewById(R.id.className);
+        Button teacherCreateClassButton = (Button) findViewById(R.id.teacherCreateClassButton);
+        teacherCreateClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                String newClassCardLabel =  (String) newClassName.getText().toString();
+                TeacherClassCard newClass = new TeacherClassCard(newClassCardLabel);
+                classes.add(newClass);
+                
+            }
+        });
     }
 
     private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
