@@ -32,6 +32,11 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     }
 
     @Override
+    public void setClassList(List<TeacherClassCard> l){
+        classList = l;
+    }
+
+    @Override
     public void onBindViewHolder(final TeacherClassCardAdapter.ViewHolder viewHolder, int position) {
         final TeacherClassCard clss = classList.get(position);
 
