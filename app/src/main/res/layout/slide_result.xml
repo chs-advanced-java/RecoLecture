@@ -22,17 +22,6 @@
             android:layout_height="match_parent"
             android:padding="64dp"/>
 
-        <TextView
-            android:text="Done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="19dp"
-            android:id="@+id/DoneNextToPurpleCheck"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
     </RelativeLayout>
 
     <TextView android:id="@+id/title"

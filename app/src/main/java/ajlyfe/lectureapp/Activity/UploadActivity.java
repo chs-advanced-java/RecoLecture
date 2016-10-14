@@ -52,7 +52,10 @@ public class UploadActivity extends AppIntro {
         setSwipeLock(true);
 
         showSkipButton(false);
-        setProgressButtonEnabled(false);
+        setProgressButtonEnabled(true);     // Reveal the done button and next arrow
+        setImageNextButton(null);           // Purge next button
+        nextButton.setClickable(false);     // Banish next button
+                                            // Done button still stays and works
 
         setColorDoneText(this.getResources().getColor(R.color.colorAccent));
         setSeparatorColor(Color.TRANSPARENT);
@@ -85,36 +88,42 @@ public class UploadActivity extends AppIntro {
                     next = (Button) activity1.findViewById(R.id.uploadFileButton);
 
                     final ArrayList<String> lectureCheckboxes = new ArrayList<>();
+                    final CheckBox[] checkBoxes = new CheckBox[5];
+                    final TextView[] lectureTitles = new TextView[5];
 
-                    final CheckBox lectureOne = (CheckBox) activity1.findViewById(R.id.lectureCheck1);
-                    final TextView lectureOneTitle = (TextView) activity1.findViewById(R.id.checkText1);
+                    checkBoxes[0] = (CheckBox) activity1.findViewById(R.id.lectureCheck1);
+                    checkBoxes[1] = (CheckBox) activity1.findViewById(R.id.lectureCheck2);
+                    checkBoxes[2] = (CheckBox) activity1.findViewById(R.id.lectureCheck3);
+                    checkBoxes[3] = (CheckBox) activity1.findViewById(R.id.lectureCheck4);
+                    checkBoxes[4] = (CheckBox) activity1.findViewById(R.id.lectureCheck5);
 
-                    final CheckBox lectureTwo = (CheckBox) activity1.findViewById(R.id.lectureCheck2);
-                    final TextView lectureTwoTitle = (TextView) activity1.findViewById(R.id.checkText2);
-
-                    final CheckBox lectureThree = (CheckBox) activity1.findViewById(R.id.lectureCheck3);
-                    final TextView lectureThreeTitle = (TextView) activity1.findViewById(R.id.checkText3);
-
-                    final CheckBox lectureFour = (CheckBox) activity1.findViewById(R.id.lectureCheck4);
-                    final TextView lectureFourTitle = (TextView) activity1.findViewById(R.id.checkText4);
-
-                    final CheckBox lectureFive = (CheckBox) activity1.findViewById(R.id.lectureCheck5);
-                    final TextView lectureFiveTitle = (TextView) activity1.findViewById(R.id.checkText5);
+                    lectureTitles[0] = (TextView) activity1.findViewById(R.id.checkText1);
+                    lectureTitles[1] = (TextView) activity1.findViewById(R.id.checkText2);
+                    lectureTitles[2] = (TextView) activity1.findViewById(R.id.checkText3);
+                    lectureTitles[3] = (TextView) activity1.findViewById(R.id.checkText4);
+                    lectureTitles[4] = (TextView) activity1.findViewById(R.id.checkText5);
 
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (lectureOne.isChecked()) lectureCheckboxes.add(lectureOneTitle.getText().toString());
-                            if (lectureTwo.isChecked()) lectureCheckboxes.add(lectureTwoTitle.getText().toString());
-                            if (lectureThree.isChecked()) lectureCheckboxes.add(lectureThreeTitle.getText().toString());
-                            if (lectureFour.isChecked()) lectureCheckboxes.add(lectureFourTitle.getText().toString());
-                            if (lectureFive.isChecked()) lectureCheckboxes.add(lectureFiveTitle.getText().toString());
+                            boolean checkedSomething = false;
+
+                            for (int i = 0; i < checkBoxes.length; i++) {
+                                if (checkBoxes[i].isChecked()) {
+                                    checkedSomething = true;
+                                    lectureCheckboxes.add(lectureTitles[i].getText().toString());
+                                }
+                            }
 
                             Bundle args = new Bundle();
                             args.putStringArrayList("lecturesCheckedOff", lectureCheckboxes);
                             fragmentUpload.setArguments(args);
 
-                            pager.setCurrentItem(1);
+                            if (checkedSomething) {
+                                pager.setCurrentItem(1);
+                            } else {
+                                Toast.makeText(activity1, "Please select a lecture", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                     break;
@@ -126,8 +135,15 @@ public class UploadActivity extends AppIntro {
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //TODO: Make sure stupid user checked something
-                            pager.setCurrentItem(2);
+                            CheckBox spanishOne = (CheckBox) findViewById(R.id.spanishOneCheck);
+                            CheckBox spanishTwo = (CheckBox) findViewById(R.id.spanishTwoCheck);
+                            CheckBox spanishThree = (CheckBox) findViewById(R.id.spanishThreeCheck);
+
+                            if (spanishOne.isChecked() || spanishTwo.isChecked() || spanishThree.isChecked()) {
+                                pager.setCurrentItem(2);
+                            } else {
+                                Toast.makeText(activity2, "Please select a class", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                     break;
@@ -139,7 +155,6 @@ public class UploadActivity extends AppIntro {
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //TODO: Make sure stupid user checked something
                             pager.setCurrentItem(3);
                         }
                     });
@@ -152,10 +167,13 @@ public class UploadActivity extends AppIntro {
                     finishButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //Define any of the checkboxes
+                            //Define any/all of the checkboxes
                             CheckBox checkBox = (CheckBox) activity4.findViewById(R.id.lectureCheckboxCheckbox);
+
                             if (checkBox.isChecked()) {
                                 pager.setCurrentItem(slideNumber);
+                            } else {
+                                Toast.makeText(activity4, "Please confirm all of the above", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -163,14 +181,8 @@ public class UploadActivity extends AppIntro {
 
                 case 5:
                     final Activity activity5 = newFragment.getActivity();
-                    TextView done = (TextView) activity5.findViewById(R.id.DoneNextToPurpleCheck);
+                    // NOTHING!!!!
 
-                        done.setOnClickListener(new View.OnClickListener(){
-                            @Override
-                            public void onClick(View v) {
-                              startActivity(new Intent(UploadActivity.this, TeacherMainActivity.class));
-                            }
-                        });
                     break;
             }
         }

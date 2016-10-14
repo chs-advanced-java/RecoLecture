@@ -52,7 +52,7 @@
                 android:text="@string/sampleClass_0"
                 android:textColor="@color/colorAccent" />
 
-            <CheckBox android:id="@+id/lectureCheck1"
+            <CheckBox android:id="@+id/spanishOneCheck"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:textColor="@color/colorAccent"
                 android:layout_below="@+id/checkText1"/>
 
-            <CheckBox android:id="@+id/lectureCheck2"
+            <CheckBox android:id="@+id/spanishTwoCheck"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                 android:textColor="@color/colorAccent"
                 android:layout_below="@+id/checkText2"/>
 
-            <CheckBox android:id="@+id/lectureCheck3"
+            <CheckBox android:id="@+id/spanishThreeCheck"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"

@@ -31,7 +31,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         return new TeacherClassCardAdapter.ViewHolder(card);
     }
 
-    @Override
     public void setClassList(List<TeacherClassCard> l){
         classList = l;
     }

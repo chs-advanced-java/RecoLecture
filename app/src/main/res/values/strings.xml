@@ -21,14 +21,14 @@
     <string name="lecture_sample_name_3">Chapter 1 vocabulary part 2</string>
     <string name="lecture_sample_name_4">Irregular present tense</string>
     <string name="lecture_sample_name_5">Stem changing verbs</string>
+    <string name="sampleClass_0">Spanish I</string>
+    <string name="sampleClass_1">Spanish II</string>
+    <string name="sampleClass_2">Spanish III</string>
 
     <!-- STRINGS FOR SLIDE_CLASS -->
     <string name="class_title">Select Your Classes</string>
     <string name="class_description">Check the classes you would like to upload your lecture to.</string>
     <string name="button_Upload">Upload to these classes</string>
-    <string name="sampleClass_0">Geometry</string>
-    <string name="sampleClass_1">Algebra II</string>
-    <string name="sampleClass_2">Calculus</string>
     <string name="title_activity_teacher_create_class">TeacherCreateClass</string>
     <string name="title_activity_student_class_page">StudentClassPage</string>
     <string name="title_activity_login">LoginActivity</string>
