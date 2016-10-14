@@ -3,6 +3,7 @@ package ajlyfe.lectureapp.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,8 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import ajlyfe.lectureapp.*;
 import ajlyfe.lectureapp.Adapters.ClassCard;
@@ -43,6 +46,10 @@ public class TeacherClassOverview extends AppCompatActivity {
 
     private boolean creatingClass = false;
     FloatingActionButton fab;
+
+    private static final int PREFERENCE_MODE_PRIVATE = 0;
+    private SharedPreferences preferenceSettings;
+    private SharedPreferences.Editor preferenceEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +75,18 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
         });
 
-
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
-        final ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(3);
+        preferenceSettings = getPreferences(PREFERENCE_MODE_PRIVATE);
+        preferenceEditor = preferenceSettings.edit();
+        Set<String> errorSet = new HashSet<String>();
+        Set<String> tempClassList;
+        tempClassList = preferenceSettings.getStringSet("Key", errorSet);
+        int listSize = tempClassList.size();
+        String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
+        final ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(tempClassList.size());
+        for(int y = 0; y < listSize; y++) {
+            classes.get(y).setClassName(tempClassArray[y]);
+        }
         final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
@@ -84,7 +100,13 @@ public class TeacherClassOverview extends AppCompatActivity {
                 TeacherClassCard newClass = new TeacherClassCard(newClassCardLabel);
                 classes.add(newClass);
                 adapter.setClassList(classes);
-                
+
+                Set<String> set = new HashSet<String>();
+                for(int x = 0; x < classes.size(); x++) {
+                    set.add(classes.get(x).getClassName());
+                }
+                preferenceEditor.putStringSet("Key", set);
+                preferenceEditor.commit();
             }
         });
     }
