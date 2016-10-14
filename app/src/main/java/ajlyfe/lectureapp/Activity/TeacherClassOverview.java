@@ -71,7 +71,7 @@ public class TeacherClassOverview extends AppCompatActivity {
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
         final ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(3);
-        TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this);
+        final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
 
@@ -83,6 +83,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 String newClassCardLabel =  (String) newClassName.getText().toString();
                 TeacherClassCard newClass = new TeacherClassCard(newClassCardLabel);
                 classes.add(newClass);
+                adapter.setClassList(classes);
                 
             }
         });
