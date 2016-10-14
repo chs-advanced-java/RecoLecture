@@ -39,27 +39,12 @@ public class FragmentUpload extends Fragment {
     }
 
     public void doThings() {
-        ArrayList<LectureCheckbox> lecturesChecked = parseTemporaryArray(
-                getArguments().getStringArrayList("lecturesCheckedOff"));
+        ArrayList<LectureCheckbox> lecturesChecked = parseTemporaryArray(getArguments().getStringArrayList("lecturesCheckedOff"));
 
         RecyclerView recyclerViewLectures = (RecyclerView) view.findViewById(R.id.checkboxRecycler);
         LectureCheckboxAdapter adapter = new LectureCheckboxAdapter(lecturesChecked, view.getContext());
         recyclerViewLectures.setAdapter(adapter);
         recyclerViewLectures.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-        /*
-        RelativeLayout confirmBox = (RelativeLayout) view.findViewById(R.id.confirmBox);
-        checkBox = (CheckBox) view.findViewById(R.id.lectureCheck);
-        button = (Button) view.findViewById(R.id.finishButton);
-
-        confirmBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkBox.setChecked(!checkBox.isChecked());
-                button.setClickable(button.isClickable());
-            }
-        });
-        */
     }
 
     private ArrayList<LectureCheckbox> parseTemporaryArray(ArrayList<String> tArray) {

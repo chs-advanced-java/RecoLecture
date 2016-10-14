@@ -21,7 +21,7 @@ public class FragmentFile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.slide_upload, container, false);
+        view = inflater.inflate(R.layout.slide_file, container, false);
 
         // Edit the layout
         doThings();

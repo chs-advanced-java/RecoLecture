@@ -51,7 +51,7 @@
                 android:text="@string/lecture_sample_name_1"
                 android:textColor="@color/colorAccent" />
 
-            <android.support.v7.widget.AppCompat android:id="@+id/lectureCheck1"
+            <CheckBox android:id="@+id/lectureCheck1"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
                 android:textColor="@color/colorAccent"
                 android:layout_below="@+id/checkText1"/>
 
-            <android.support.v7.widget.AppCompat android:id="@+id/lectureCheck2"
+            <CheckBox android:id="@+id/lectureCheck2"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                 android:textColor="@color/colorAccent"
                 android:layout_below="@+id/checkText2"/>
 
-            <android.support.v7.widget.AppCompat android:id="@+id/lectureCheck3"
+            <CheckBox android:id="@+id/lectureCheck3"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                 android:textColor="@color/colorAccent"
                 android:layout_below="@+id/checkText3"/>
 
-            <android.support.v7.widget.AppCompat android:id="@+id/lectureCheck4"
+            <CheckBox android:id="@+id/lectureCheck4"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
@@ -129,7 +129,7 @@
                 android:textColor="@color/colorAccent"
                 android:layout_below="@+id/checkText4"/>
 
-            <android.support.v7.widget.AppCompat android:id="@+id/lectureCheck5"
+            <CheckBox android:id="@+id/lectureCheck5"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_width="wrap_content"

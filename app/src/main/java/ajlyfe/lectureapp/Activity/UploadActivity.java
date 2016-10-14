@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class UploadActivity extends AppIntro {
 
     private Context context;
-    private Fragment fragmentFile, fragmentUpload;
+    private Fragment fragmentUpload;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class UploadActivity extends AppIntro {
 
         // DO NOT WRITE -> setContentView(R.layout.activity_upload);
 
-        fragmentFile = new FragmentFile();
+        Fragment fragmentFile = new FragmentFile();
         Fragment fragmentClass = new FragmentClass();
         Fragment fragmentStudents = new FragmentStudents();
         fragmentUpload = new FragmentUpload();
@@ -86,74 +86,34 @@ public class UploadActivity extends AppIntro {
 
                     final ArrayList<String> lectureCheckboxes = new ArrayList<>();
 
-                    CheckBox lectureOne = (CheckBox) activity1.findViewById(R.id.lectureCheck1);
+                    final CheckBox lectureOne = (CheckBox) activity1.findViewById(R.id.lectureCheck1);
                     final TextView lectureOneTitle = (TextView) activity1.findViewById(R.id.checkText1);
 
-                    CheckBox lectureTwo = (CheckBox) activity1.findViewById(R.id.lectureCheck2);
+                    final CheckBox lectureTwo = (CheckBox) activity1.findViewById(R.id.lectureCheck2);
                     final TextView lectureTwoTitle = (TextView) activity1.findViewById(R.id.checkText2);
 
-                    CheckBox lectureThree = (CheckBox) activity1.findViewById(R.id.lectureCheck3);
+                    final CheckBox lectureThree = (CheckBox) activity1.findViewById(R.id.lectureCheck3);
                     final TextView lectureThreeTitle = (TextView) activity1.findViewById(R.id.checkText3);
 
-                    CheckBox lectureFour = (CheckBox) activity1.findViewById(R.id.lectureCheck4);
+                    final CheckBox lectureFour = (CheckBox) activity1.findViewById(R.id.lectureCheck4);
                     final TextView lectureFourTitle = (TextView) activity1.findViewById(R.id.checkText4);
 
-                    CheckBox lectureFive = (CheckBox) activity1.findViewById(R.id.lectureCheck5);
+                    final CheckBox lectureFive = (CheckBox) activity1.findViewById(R.id.lectureCheck5);
                     final TextView lectureFiveTitle = (TextView) activity1.findViewById(R.id.checkText5);
-
-                    lectureOne.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                lectureCheckboxes.add(0, lectureOneTitle.getText().toString());
-                            }
-                        }
-                    });
-
-                    lectureTwo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                lectureCheckboxes.add(1, lectureTwoTitle.getText().toString());
-                            }
-                        }
-                    });
-
-                    lectureThree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                lectureCheckboxes.add(2, lectureThreeTitle.getText().toString());
-                            }
-                        }
-                    });
-
-                    lectureFour.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                lectureCheckboxes.add(3, lectureFourTitle.getText().toString());
-                            }
-                        }
-                    });
-
-                    lectureFive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                lectureCheckboxes.add(4, lectureFiveTitle.getText().toString());
-                            }
-                        }
-                    });
-
-                    Bundle args = new Bundle();
-                    args.putStringArrayList("lecturesCheckedOff", lectureCheckboxes);
-                    fragmentUpload.setArguments(args);
 
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //TODO: Make sure stupid user checked something
+                            if (lectureOne.isChecked()) lectureCheckboxes.add(lectureOneTitle.getText().toString());
+                            if (lectureTwo.isChecked()) lectureCheckboxes.add(lectureTwoTitle.getText().toString());
+                            if (lectureThree.isChecked()) lectureCheckboxes.add(lectureThreeTitle.getText().toString());
+                            if (lectureFour.isChecked()) lectureCheckboxes.add(lectureFourTitle.getText().toString());
+                            if (lectureFive.isChecked()) lectureCheckboxes.add(lectureFiveTitle.getText().toString());
+
+                            Bundle args = new Bundle();
+                            args.putStringArrayList("lecturesCheckedOff", lectureCheckboxes);
+                            fragmentUpload.setArguments(args);
+
                             pager.setCurrentItem(1);
                         }
                     });
@@ -192,7 +152,8 @@ public class UploadActivity extends AppIntro {
                     finishButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            CheckBox checkBox = (CheckBox) activity4.findViewById(R.id.lectureCheck);
+                            //Define any of the checkboxes
+                            CheckBox checkBox = (CheckBox) activity4.findViewById(R.id.lectureCheckboxCheckbox);
                             if (checkBox.isChecked()) {
                                 pager.setCurrentItem(slideNumber);
                             }

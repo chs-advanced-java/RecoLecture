@@ -15,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -41,8 +44,19 @@ public class LectureCheckboxAdapter extends RecyclerView.Adapter<LectureCheckbox
     @Override
     public void onBindViewHolder(final LectureCheckboxAdapter.ViewHolder viewHolder, int position) {
         position = viewHolder.getAdapterPosition();
-    }
+        RelativeLayout lectureCheckboxHolder = viewHolder.lectureCheckboxHolder;
+        final TextView lectureName = viewHolder.lectureName;
+        final CheckBox lectureCheckbox = viewHolder.lectureCheckbox;
 
+        lectureCheckboxHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lectureCheckbox.setChecked(!lectureCheckbox.isChecked());
+            }
+        });
+
+        lectureName.setText(lecturesChecked.get(position).getLectureTitle());
+    }
     @Override
     public int getItemCount() {
         return lecturesChecked.size();
@@ -50,8 +64,16 @@ public class LectureCheckboxAdapter extends RecyclerView.Adapter<LectureCheckbox
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        RelativeLayout lectureCheckboxHolder;
+        TextView lectureName;
+        CheckBox lectureCheckbox;
+
         public ViewHolder(View itemView) {
             super(itemView);
+
+            this.lectureCheckboxHolder = (RelativeLayout) itemView.findViewById(R.id.lectureCheckboxHolder);
+            this.lectureName = (TextView) itemView.findViewById(R.id.lectureCheckboxTitle);
+            this.lectureCheckbox = (CheckBox) itemView.findViewById(R.id.lectureCheckboxCheckbox);
         }
     }
 }
