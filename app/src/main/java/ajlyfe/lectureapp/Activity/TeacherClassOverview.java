@@ -69,6 +69,21 @@ public class TeacherClassOverview extends AppCompatActivity {
                 creatingClass = true;
                 animateButton(fab, findViewById(R.id.revealLayout));
 
+                /* new animation
+                ActSwitchAnimTool mFirstDemoActSwitchAnimTool;
+                Intent intent = new Intent(TeacherClassOverview.this, SettingsActivity.class);
+
+                mFirstDemoActSwitchAnimTool = new ActSwitchAnimTool(TeacherClassOverview.this).setAnimType(ActSwitchAnimTool.MODE_SPREAD)
+                        .target(fab)
+                        .setShrinkBack(true)
+                        .setmColorStart(getResources().getColor(R.color.colorAccent))
+                        .setmColorEnd(getResources().getColor(R.color.colorAccent))
+                        .startActivity(intent, false);
+
+                mFirstDemoActSwitchAnimTool.setAnimType(ActSwitchAnimTool.MODE_SPREAD)
+                        .build();
+                 */
+
                 layout.setEnabled(false);
                 layout.setClickable(false);
                 layout.setVisibility(View.GONE);
@@ -108,7 +123,6 @@ public class TeacherClassOverview extends AppCompatActivity {
                 preferenceEditor.putStringSet("Key", set);
                 preferenceEditor.commit();
                 onBackPressed();
-                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
             }
         });
     }
@@ -164,7 +178,7 @@ public class TeacherClassOverview extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (creatingClass) {
-            //TODO: ANIMATE ME!
+            //TODO: ANIMATE ME! no thx
             Log.d("Animations", "Closing create class view.");
 
             View createClassView = findViewById(R.id.createClassLayout);

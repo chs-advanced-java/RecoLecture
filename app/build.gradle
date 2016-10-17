@@ -34,4 +34,5 @@ dependencies {
         transitive = true;
     }
     compile 'com.afollestad.material-dialogs:core:0.9.0.2'
+    compile 'com.github.Yellow5A5:ActSwitchAnimTool:1.0.1'
 }

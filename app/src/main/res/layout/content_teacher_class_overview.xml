@@ -64,6 +64,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:theme="@style/AppTheme.Accented"
+                            android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
                             android:hint="Class Name"/>
 
                     </android.support.design.widget.TextInputLayout>
@@ -78,6 +79,7 @@
                         <EditText android:id="@+id/classDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="textCapWords"
                             android:hint="Class Description"
                             android:theme="@style/AppTheme.Accented"/>
 

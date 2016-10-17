@@ -13,7 +13,7 @@
     tools:context="ajlyfe.lectureapp.Activity.LoginActivity"
     tools:showIn="@layout/activity_login">
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
@@ -24,8 +24,7 @@
             android:text="Welcome."
             android:fontFamily="sans-serif-thin"
             android:textSize="28sp"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_centerHorizontal="true" />
 
         <TextView android:id="@+id/welcomeGreeting"
             android:layout_marginTop="6dp"
@@ -35,10 +34,17 @@
             android:textAlignment="center"
             android:text="This is the developer preview.\nThe login screen does not exist for this version."
             android:layout_below="@+id/welcomeTitle"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
+
+    <ImageView android:id="@+id/logo"
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -67,6 +73,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
         android:text="No account yet? Create one"
         android:textSize="16dip"/>
 
