@@ -2,6 +2,7 @@ package ajlyfe.lectureapp.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
@@ -16,12 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 
 import static android.R.id.edit;
 
 public class StudentEnterClassCode extends AppCompatActivity {
-
+    private SharedPreferences preferenceSettings;
+    private SharedPreferences.Editor preferenceEditor;
+    private static final int PREFERENCE_MODE_PRIVATE = 0;
 
 
 
@@ -37,10 +45,19 @@ public class StudentEnterClassCode extends AppCompatActivity {
         Button joinClassButton = (Button) findViewById(R.id.JoinClassButton);
         joinClassButton.setOnClickListener(new View.OnClickListener(){
             @Override
-                    public void onClick(View view) {
+            public void onClick(View view) {
                 final EditText enterClassCode =  (EditText) findViewById(R.id.editText3);
                 String classCodeStudent = (String) enterClassCode.getText().toString();
                 if (classCodeStudent.equals("3zb8c27n")) {
+                    preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
+                    preferenceEditor = preferenceSettings.edit();
+                    Set<String> tempClassList;
+                    tempClassList = preferenceSettings.getStringSet("KeyTeacher", null);
+                    /**Reminder to change class name later!!!**/
+                    tempClassList.add("AP Calculus")
+                    preferenceEditor.putStringSet("KeyTeacher", tempClassList);
+                    preferenceEditor.commit();
+
                     startActivity(new Intent(StudentEnterClassCode.this, StudentClassPage.class));
                     finish();
 

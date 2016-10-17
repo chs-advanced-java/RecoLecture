@@ -1,6 +1,7 @@
 package ajlyfe.lectureapp.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +11,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.ClassCardAdapter;
 import ajlyfe.lectureapp.Adapters.LectureCard;
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 
 public class StudentActivityMain extends AppCompatActivity {
+    private SharedPreferences preferenceSettings;
+    private static final int PREFERENCE_MODE_PRIVATE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +44,19 @@ public class StudentActivityMain extends AppCompatActivity {
         });
 
         RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
-        ArrayList<ClassCard> classes = ClassCard.createList(3);
+        preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
+        Set<String> errorSet = new HashSet<>();
+        errorSet.add("Spanish 1");
+        errorSet.add("Spanish 2");
+        errorSet.add("Spanish 3");
+        Set<String> tempClassList;
+        tempClassList = preferenceSettings.getStringSet("KeyStudent", errorSet);
+        int listSize = tempClassList.size();
+        String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
+        final ArrayList<ClassCard> classes = ClassCard.createList(listSize);
+        for(int y = 0; y < listSize; y++) {
+            classes.get(y).setClassName(tempClassArray[y]);
+        }
         ClassCardAdapter adapter = new ClassCardAdapter(classes, this, this);
         recyclerViewStudentMain.setAdapter(adapter);
         recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));

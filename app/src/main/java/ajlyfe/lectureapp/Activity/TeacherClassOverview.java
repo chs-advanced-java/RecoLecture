@@ -95,10 +95,10 @@ public class TeacherClassOverview extends AppCompatActivity {
         preferenceEditor = preferenceSettings.edit();
         Set<String> errorSet = new HashSet<>();
         Set<String> tempClassList;
-        tempClassList = preferenceSettings.getStringSet("Key", errorSet);
+        tempClassList = preferenceSettings.getStringSet("KeyTeacher", errorSet);
         int listSize = tempClassList.size();
         String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
-        final ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(tempClassList.size());
+        final ArrayList<TeacherClassCard> classes = TeacherClassCard.createList(listSize);
         for(int y = 0; y < listSize; y++) {
             classes.get(y).setClassName(tempClassArray[y]);
         }
@@ -120,7 +120,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 for(int x = 0; x < classes.size(); x++) {
                     set.add(classes.get(x).getClassName());
                 }
-                preferenceEditor.putStringSet("Key", set);
+                preferenceEditor.putStringSet("KeyTeacher", set);
                 preferenceEditor.commit();
                 onBackPressed();
             }
