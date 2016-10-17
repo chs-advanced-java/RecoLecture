@@ -18,9 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ajlyfe.lectureapp.Activity.TeacherClassOverview;
 import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
 
@@ -102,8 +104,12 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
                                 preferenceSettings = context.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
                                 preferenceEditor = preferenceSettings.edit();
-                                classList.remove(finalPosition);
-
+                                Set<String> set = new HashSet<>();
+                                for(int x = 0; x < classList.size(); x++) {
+                                    set.add(classList.get(x).getClassName());
+                                }
+                                preferenceEditor.putStringSet("Key", set);
+                                preferenceEditor.commit();
 
                                 Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
                                         "Deleted '" + clss.getClassName() + "' successfully",

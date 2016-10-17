@@ -63,5 +63,11 @@
 
     </RelativeLayout>
 
+    <TextView android:id="@+id/signupPrompt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="No account yet? Create one"
+        android:textSize="16dip"/>
 
 </RelativeLayout>
