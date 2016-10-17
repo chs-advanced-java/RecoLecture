@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Set;
 
 import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
@@ -26,6 +28,10 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     private List<TeacherClassCard> classList;
     private Context context;
     private Activity parentActivity;
+    private SharedPreferences preferenceSettings;
+    private SharedPreferences.Editor preferenceEditor;
+    private static final int PREFERENCE_MODE_PRIVATE = 0;
+
 
     public TeacherClassCardAdapter(@NonNull List<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
@@ -94,9 +100,10 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                             public void onClick(DialogInterface dialoginterface, int idk) {
                                 removeAt(finalPosition);
 
-                                /**
-                                 * @Aragolt REMOVE FROM SHARED PREFS
-                                 **/
+                                preferenceSettings = context.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
+                                preferenceEditor = preferenceSettings.edit();
+                                classList.remove(finalPosition);
+
 
                                 Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
                                         "Deleted '" + clss.getClassName() + "' successfully",

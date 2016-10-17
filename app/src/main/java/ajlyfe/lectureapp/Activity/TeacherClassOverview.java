@@ -76,7 +76,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         });
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
-        preferenceSettings = getPreferences(PREFERENCE_MODE_PRIVATE);
+        preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
         Set<String> errorSet = new HashSet<>();
         Set<String> tempClassList;
