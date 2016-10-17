@@ -167,7 +167,7 @@ public class UploadActivity extends AppIntro {
                     finishButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //Define any/all of the checkboxes
+                            //TODO: Only checks if one of the shits is checked
                             CheckBox checkBox = (CheckBox) activity4.findViewById(R.id.lectureCheckboxCheckbox);
 
                             if (checkBox.isChecked()) {
@@ -181,8 +181,7 @@ public class UploadActivity extends AppIntro {
 
                 case 5:
                     final Activity activity5 = newFragment.getActivity();
-                    // NOTHING!!!!
-
+                    // Nothing :)
                     break;
             }
         }

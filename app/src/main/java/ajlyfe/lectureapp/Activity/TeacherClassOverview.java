@@ -78,7 +78,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
         preferenceSettings = getPreferences(PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
-        Set<String> errorSet = new HashSet<String>();
+        Set<String> errorSet = new HashSet<>();
         Set<String> tempClassList;
         tempClassList = preferenceSettings.getStringSet("Key", errorSet);
         int listSize = tempClassList.size();
@@ -87,7 +87,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         for(int y = 0; y < listSize; y++) {
             classes.get(y).setClassName(tempClassArray[y]);
         }
-        final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this);
+        final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
 
@@ -96,17 +96,19 @@ public class TeacherClassOverview extends AppCompatActivity {
         teacherCreateClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                String newClassCardLabel =  (String) newClassName.getText().toString();
+                String newClassCardLabel =  newClassName.getText().toString();
                 TeacherClassCard newClass = new TeacherClassCard(newClassCardLabel);
                 classes.add(newClass);
                 adapter.setClassList(classes);
 
-                Set<String> set = new HashSet<String>();
+                Set<String> set = new HashSet<>();
                 for(int x = 0; x < classes.size(); x++) {
                     set.add(classes.get(x).getClassName());
                 }
                 preferenceEditor.putStringSet("Key", set);
                 preferenceEditor.commit();
+                onBackPressed();
+                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
             }
         });
     }
