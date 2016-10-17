@@ -104,14 +104,12 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
                                 preferenceSettings = context.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
                                 preferenceEditor = preferenceSettings.edit();
-                                classList.remove(finalPosition);
                                 Set<String> set = new HashSet<>();
                                 for(int x = 0; x < classList.size(); x++) {
                                     set.add(classList.get(x).getClassName());
                                 }
                                 preferenceEditor.putStringSet("Key", set);
                                 preferenceEditor.commit();
-                                context.startActivity(new Intent(parentActivity, TeacherClassOverview.class));
 
                                 Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
                                         "Deleted '" + clss.getClassName() + "' successfully",
