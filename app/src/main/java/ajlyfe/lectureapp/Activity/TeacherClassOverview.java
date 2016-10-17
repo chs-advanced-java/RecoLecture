@@ -87,7 +87,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         for(int y = 0; y < listSize; y++) {
             classes.get(y).setClassName(tempClassArray[y]);
         }
-        final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this);
+        final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
 

@@ -1,11 +1,18 @@
 package ajlyfe.lectureapp.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,10 +25,12 @@ import ajlyfe.lectureapp.R;
 public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCardAdapter.ViewHolder> {
     private List<TeacherClassCard> classList;
     private Context context;
+    private Activity parentActivity;
 
-    public TeacherClassCardAdapter(@NonNull List<TeacherClassCard> classes, Context ctx) {
+    public TeacherClassCardAdapter(@NonNull List<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
         classList = classes;
+        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -55,6 +64,60 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
             }
         });
 
+        Toolbar mToolbar = viewHolder.toolbar;
+        mToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, TeacherClassView.class);
+                intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                context.startActivity(intent);
+            }
+        });
+
+        // Add overflow menu
+        mToolbar.inflateMenu(R.menu.teacher_class_card_menu);
+        mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
+        final int finalPosition = position;
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setTitle("Warning!")
+                        .setMessage("You are about to permanently delete a class. Are you sure you " +
+                                "want to do this? This action can NOT be undone.")
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialoginterface, int i) {
+                                dialoginterface.cancel();
+                            }
+                        })
+                        .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialoginterface, int idk) {
+                                removeAt(finalPosition);
+
+                                /**
+                                 * @Aragolt REMOVE FROM SHARED PREFS
+                                 **/
+
+                                Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
+                                        "Deleted '" + clss.getClassName() + "' successfully",
+                                        Snackbar.LENGTH_LONG)
+                                        .setAction("Dandy!", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) { /*ihateusers*/ }
+                                        })
+                                        .setActionTextColor(Color.parseColor("#FFFFC107"))
+                                        .show();
+                            }
+                        }).show();
+                return true;
+            }
+        });
+    }
+
+    public void removeAt(int position) {
+        classList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, classList.size());
     }
 
     @Override
@@ -66,6 +129,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         TextView classTitle;
         TextView classTeacher;
         CardView card;
+        Toolbar toolbar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +137,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
             this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
             this.classTeacher = (TextView) itemView.findViewById(R.id.classTeacher);
+            this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
         }
     }
 }
