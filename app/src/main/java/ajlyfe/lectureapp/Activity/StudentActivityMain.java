@@ -26,6 +26,8 @@ import ajlyfe.lectureapp.R;
 
 public class StudentActivityMain extends AppCompatActivity {
     private SharedPreferences preferenceSettings;
+    private SharedPreferences.Editor preferenceEditor;
+
     private static final int PREFERENCE_MODE_PRIVATE = 0;
 
     @Override
@@ -45,12 +47,18 @@ public class StudentActivityMain extends AppCompatActivity {
 
         RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
         preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-        Set<String> errorSet = new HashSet<>();
-        errorSet.add("Spanish 1");
-        errorSet.add("Spanish 2");
-        errorSet.add("Spanish 3");
+        preferenceEditor = preferenceSettings.edit();
         Set<String> tempClassList;
-        tempClassList = preferenceSettings.getStringSet("KeyStudent", errorSet);
+        tempClassList = preferenceSettings.getStringSet("KeyStudent", null);
+        if (tempClassList == null) {
+            Set<String> errorSet = new HashSet<>();
+            errorSet.add("Spanish 1");
+            errorSet.add("Spanish 2");
+            errorSet.add("Spanish 3");
+            tempClassList = errorSet;
+            preferenceEditor.putStringSet("KeyStudent", tempClassList);
+            preferenceEditor.commit();
+        }
         int listSize = tempClassList.size();
         String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
         final ArrayList<ClassCard> classes = ClassCard.createList(listSize);

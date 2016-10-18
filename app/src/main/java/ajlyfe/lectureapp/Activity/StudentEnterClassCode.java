@@ -52,18 +52,19 @@ public class StudentEnterClassCode extends AppCompatActivity {
                     preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
                     preferenceEditor = preferenceSettings.edit();
                     Set<String> tempClassList;
-                    tempClassList = preferenceSettings.getStringSet("KeyTeacher", null);
+                    tempClassList = preferenceSettings.getStringSet("KeyStudent", null);
                     /**Reminder to change class name later!!!**/
-                    tempClassList.add("AP Calculus");
-                    preferenceEditor.putStringSet("KeyTeacher", tempClassList);
+                    tempClassList.add("Spanish 4");
+                    preferenceEditor.putStringSet("KeyStudent", tempClassList);
                     preferenceEditor.commit();
 
+                    startActivity(new Intent(StudentEnterClassCode.this, StudentActivityMain.class));
                     startActivity(new Intent(StudentEnterClassCode.this, StudentClassPage.class));
                     finish();
 
                 }
                 else {
-                    Toast.makeText(StudentEnterClassCode.this, "Your code does not appear to be valid. Please check it and try again.a", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentEnterClassCode.this, "Your code does not appear to be valid. Please check it and try again.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

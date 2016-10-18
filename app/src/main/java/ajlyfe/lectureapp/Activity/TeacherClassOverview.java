@@ -123,6 +123,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                 preferenceEditor.putStringSet("KeyTeacher", set);
                 preferenceEditor.commit();
                 onBackPressed();
+                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
+
             }
         });
     }
