@@ -127,8 +127,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                 preferenceEditor.commit();
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
-                dialog.setTitle("Warning!")
-                        .setMessage("Your class code is: 3zb8c27n." +
+                dialog.setTitle("Attention!")
+                        .setMessage("Your class code is: 3zb8c27n." + "\n" +
                                 "Distribute this to your students.")
                         .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int idk) {
