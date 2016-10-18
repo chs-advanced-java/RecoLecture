@@ -1,20 +1,19 @@
 package ajlyfe.lectureapp.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ajlyfe.lectureapp.R;
-import yellow5a5.actswitchanimtool.ActSwitchAnimTool;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,19 +24,30 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button student = (Button) findViewById(R.id.studentButton);
-        student.setOnClickListener(new View.OnClickListener() {
+        final EditText username = (EditText) findViewById(R.id.username);
+        final EditText password = (EditText) findViewById(R.id.password);
+        final ViewGroup passwordCrouton = (ViewGroup) findViewById(R.id.passwordCrouton);
+        final ViewGroup usernameCrouton = (ViewGroup) findViewById(R.id.usernameCrouton);
+
+        Button login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
-            }
-        });
+                if (password.getText().toString().equalsIgnoreCase("")) {
+                    Crouton.makeText(LoginActivity.this, "Invalid password", Style.ALERT, passwordCrouton).show();
+                }
 
-        Button teacher = (Button) findViewById(R.id.teacherButton);
-        teacher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
+                if (username.getText().toString().equalsIgnoreCase("student")) {
+                    startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
+                    finish();
+                }
+                else if (username.getText().toString().equalsIgnoreCase("teacher")) {
+                    startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
+                    finish();
+                }
+                else {
+                    Crouton.makeText(LoginActivity.this, "Invalid username", Style.ALERT, usernameCrouton).show();
+                }
             }
         });
 
