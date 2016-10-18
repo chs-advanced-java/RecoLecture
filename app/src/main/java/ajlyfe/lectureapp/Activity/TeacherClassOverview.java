@@ -2,10 +2,13 @@ package ajlyfe.lectureapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -122,9 +125,17 @@ public class TeacherClassOverview extends AppCompatActivity {
                 }
                 preferenceEditor.putStringSet("KeyTeacher", set);
                 preferenceEditor.commit();
-                onBackPressed();
-                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
 
+                AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
+                dialog.setTitle("Warning!")
+                        .setMessage("Your class code is: 3zb8c27n." +
+                                "Distribute this to your students.")
+                        .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialoginterface, int idk) {
+                                onBackPressed();
+                                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
+                            }
+                        }).show();
             }
         });
     }
