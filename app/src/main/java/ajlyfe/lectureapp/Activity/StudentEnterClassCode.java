@@ -54,7 +54,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
                     Set<String> tempClassList;
                     tempClassList = preferenceSettings.getStringSet("KeyTeacher", null);
                     /**Reminder to change class name later!!!**/
-                    tempClassList.add("AP Calculus")
+                    tempClassList.add("AP Calculus");
                     preferenceEditor.putStringSet("KeyTeacher", tempClassList);
                     preferenceEditor.commit();
 
