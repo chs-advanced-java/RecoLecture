@@ -63,7 +63,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
 
                 }
                 else {
-                    Toast.makeText(StudentEnterClassCode.this, "Your code does not appear to be valid. Please check it and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentEnterClassCode.this, "Your code does not appear to be valid. Please check it and try again.a", Toast.LENGTH_SHORT).show();
                 }
             }
         });
