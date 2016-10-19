@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 else if (username.getText().toString().equalsIgnoreCase("teacher")) {
-                    startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
+                    startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();
                 }
                 else {
