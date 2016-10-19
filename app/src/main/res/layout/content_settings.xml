@@ -138,6 +138,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Sign Out"
-        />
+        android:id="@+id/signOut" />
 
 </RelativeLayout>
