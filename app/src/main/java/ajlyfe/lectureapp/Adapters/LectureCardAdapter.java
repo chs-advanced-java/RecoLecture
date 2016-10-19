@@ -2,8 +2,10 @@ package ajlyfe.lectureapp.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 
@@ -97,7 +102,21 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     }
 
     public void playLecture(String fileName) {
-        //TODO: UM ACTUALLY PLAY THE LECTURE!
+        final MediaPlayer mPlayer = MediaPlayer.create(parentActivity, R.raw.never);
+
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(parentActivity)
+                .title(fileName)
+                .content("content here")
+                .positiveText("Play")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mPlayer.start();
+                    }
+                });
+
+        MaterialDialog dialog = builder.build();
+        dialog.show();
     }
 
     // Returns the total count of items in the list probably won't use this but we gotta @Override
