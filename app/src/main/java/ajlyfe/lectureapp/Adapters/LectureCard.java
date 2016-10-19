@@ -1,6 +1,10 @@
 package ajlyfe.lectureapp.Adapters;
 
+import android.content.Context;
+
 import java.util.ArrayList;
+
+import ajlyfe.lectureapp.R;
 
 public class LectureCard {
     private String lectureName;
@@ -29,13 +33,11 @@ public class LectureCard {
         return this;
     }
 
-    public static ArrayList<LectureCard> createLectureList(int numLectures) {
+    public static ArrayList<LectureCard> createLectureList(Context context) {
         ArrayList<LectureCard> lectureList = new ArrayList<>();
 
         //TODO: Pull from the database here::::
-        for (int i = 1; i <= numLectures; i++) {
-            lectureList.add(new LectureCard("Chapter " + i, "Plumieri"));
-        }
+        lectureList.add(0, new LectureCard(context.getString(R.string.lecture_sample_name_1), "Plumieri"));
 
         return lectureList;
     }

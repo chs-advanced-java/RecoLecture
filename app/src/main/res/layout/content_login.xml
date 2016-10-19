@@ -13,18 +13,38 @@
     tools:context="ajlyfe.lectureapp.Activity.LoginActivity"
     tools:showIn="@layout/activity_login">
 
+    <TextView android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Welcome."
+        android:fontFamily="sans-serif-thin"
+        android:textSize="28sp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView android:id="@+id/welcomeDescription"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please sign in or sign up to continue."
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true"
+        />
+
     <ImageView android:id="@+id/logo"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/welcomeDescription"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="@dimen/logo_size"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo"
+        android:layout_margin="16dp"/>
 
     <RelativeLayout android:id="@+id/form"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
-        android:layout_marginTop="16dp">
+        android:layout_below="@id/logo">
 
         <android.support.design.widget.TextInputLayout android:id="@+id/usernameHolder"
             android:layout_width="match_parent"

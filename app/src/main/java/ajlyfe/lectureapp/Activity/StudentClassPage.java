@@ -39,7 +39,7 @@ public class StudentClassPage extends AppCompatActivity {
         // Find and define the RecyclerView in activity's layout
         RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
         // Initialize the ArrayList
-        ArrayList<LectureCard> lectures = LectureCard.createLectureList(new Random().nextInt(5) + 1);
+        ArrayList<LectureCard> lectures = LectureCard.createLectureList(this);
         // Create an adapter passing in the ArrayList from above
         LectureCardAdapter adapter = new LectureCardAdapter(lectures, this);
         // Attach the adapter to the RecyclerView
