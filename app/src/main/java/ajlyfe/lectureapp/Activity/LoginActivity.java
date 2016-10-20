@@ -38,75 +38,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Display splash screen
         setContentView(R.layout.splashscreen);
-        /*
-        final ImageView logoRight = (ImageView) findViewById(R.id.splashLogoRight);
-        final ImageView logoLeft = (ImageView) findViewById(R.id.splashLogoLeft);
 
-        final Animation[] animations = new Animation[4];
+        final ImageView logo = (ImageView) findViewById(R.id.splashLogo);
 
-        animations[0] = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse_right);
-        animations[1] = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse_right_inverse);
-        animations[2] = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse_left);
-        animations[3] = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse_left_inverse);
-
-        animations[0].setInterpolator(new DecelerateInterpolator(5.0f));
-        animations[1].setInterpolator(new LinearInterpolator());
-        animations[2].setInterpolator(new DecelerateInterpolator(5.0f));
-        animations[3].setInterpolator(new LinearInterpolator());
-
-        animations[0].setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) { }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                animations[1].setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) { }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        logoRight.startAnimation(animations[0]);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) { }
-                });
-                logoRight.startAnimation(animations[1]);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) { }
-        });
-
-        animations[2].setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) { }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                animations[3].setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) { }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        logoRight.startAnimation(animations[2]);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) { }
-                });
-                logoRight.startAnimation(animations[3]);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) { }
-        });
-
-        //logoRight.startAnimation(animations[0]);
-        logoLeft.startAnimation(animations[2]);
-        */ startLogin();
+        //startLogin();
 
         super.onCreate(savedInstanceState);
     }
@@ -124,9 +59,10 @@ public class LoginActivity extends AppCompatActivity {
         preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
 
-        if (preferenceSettings.getBoolean("loggedIn", false) == true) {
-            if (preferenceSettings.getBoolean("isTeacher", false) == true) {
+        if (preferenceSettings.getBoolean("loggedIn", false)) {
+            if (preferenceSettings.getBoolean("isTeacher", false)) {
                 startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
+                finish();
             }
             else {
                 startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
