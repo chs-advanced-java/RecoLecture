@@ -11,7 +11,7 @@
         android:text="Class Overview"
         android:fontFamily="sans-serif-thin"
         android:textSize="28sp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="@dimen/header_margin_top" />
 
     <TextView android:id="@+id/headerDescription"
         android:layout_below="@id/headerTitle"

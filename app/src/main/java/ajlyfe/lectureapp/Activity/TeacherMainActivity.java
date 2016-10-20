@@ -58,6 +58,7 @@ public class TeacherMainActivity extends AppCompatActivity {
 
     private void fadeCircle() {
         final ImageView colorBlock = (ImageView) findViewById(R.id.colorBlock);
+        colorBlock.setVisibility(View.VISIBLE);
         Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         fadeOut.setAnimationListener(new Animation.AnimationListener() {
             @Override
