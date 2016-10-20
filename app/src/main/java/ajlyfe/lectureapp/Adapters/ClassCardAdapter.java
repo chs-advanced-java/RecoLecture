@@ -27,6 +27,9 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
     private Context context;
     private Activity parentActivity;
 
+    private static final int HEADER = 2048;
+    private static final int NORMAL_ITEM = 4096;
+
     public ClassCardAdapter(@NonNull List<ClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
         classList = classes;
@@ -34,77 +37,95 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return HEADER;
+        } else {
+            return NORMAL_ITEM;
+        }
+    }
+
+    @Override
     public ClassCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View card = inflater.inflate(R.layout.class_card, parent, false);
-        return new ClassCardAdapter.ViewHolder(card);
+        View view;
+
+        if (viewType == HEADER) {
+            view = inflater.inflate(R.layout.student_main_header, parent, false);
+        } else {
+            view = inflater.inflate(R.layout.class_card, parent, false);
+        }
+
+        return new ClassCardAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ClassCardAdapter.ViewHolder viewHolder, int position) {
-        position = viewHolder.getAdapterPosition();
+        if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
+            position = viewHolder.getAdapterPosition();
 
-        final ClassCard clss = classList.get(position);
+            final ClassCard clss = classList.get(position);
 
-        TextView title = viewHolder.classTitle;
-        title.setText(clss.getClassName());
+            TextView title = viewHolder.classTitle;
+            title.setText(clss.getClassName());
 
-        TextView teacher = viewHolder.classTeacher;
-        teacher.setText(clss.getTeacherName());
+            TextView teacher = viewHolder.classTeacher;
+            teacher.setText(clss.getTeacherName());
 
-        CardView classCard = viewHolder.card;
-        classCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, StudentClassPage.class);
-                intent.putExtra("CLASS_CLICKED", clss.getClassName());
-                context.startActivity(intent);
-            }
-        });
+            CardView classCard = viewHolder.card;
+            classCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, StudentClassPage.class);
+                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    context.startActivity(intent);
+                }
+            });
 
-        Toolbar mToolbar = viewHolder.toolbar;
-        mToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, StudentClassPage.class);
-                intent.putExtra("CLASS_CLICKED", clss.getClassName());
-                context.startActivity(intent);
-            }
-        });
+            Toolbar mToolbar = viewHolder.toolbar;
+            mToolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, StudentClassPage.class);
+                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    context.startActivity(intent);
+                }
+            });
 
-        // Add overflow menu
-        mToolbar.inflateMenu(R.menu.student_class_card_menu);
-        mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
-        final int finalPosition = position;
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                dialog.setTitle("Warning!")
-                        .setMessage("You are about to unenroll from a class. Are you sure you " +
-                                "want to do this? This action cannot be undone.")
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialoginterface, int i) {
-                                dialoginterface.cancel();
-                            }
-                        })
-                        .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialoginterface, int idk) {
-                                removeAt(finalPosition);
-                                Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
+            // Add overflow menu
+            mToolbar.inflateMenu(R.menu.student_class_card_menu);
+            mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
+            final int finalPosition = position;
+            mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                    dialog.setTitle("Warning!")
+                            .setMessage("You are about to unenroll from a class. Are you sure you " +
+                                    "want to do this? This action cannot be undone.")
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialoginterface, int i) {
+                                    dialoginterface.cancel();
+                                }
+                            })
+                            .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialoginterface, int idk) {
+                                    removeAt(finalPosition);
+                                    Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
                                             "Unenrolled from '" + clss.getClassName() + "'",
                                             Snackbar.LENGTH_LONG)
-                                        .setAction("Dandy!", new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) { /*ihateusers*/ }
-                                        })
-                                        .setActionTextColor(Color.parseColor("#FFFFC107"))
-                                        .show();
-                            }
-                        }).show();
-                return true;
-            }
-        });
+                                            .setAction("Dandy!", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) { /*ihateusers*/ }
+                                            })
+                                            .setActionTextColor(Color.parseColor("#FFFFC107"))
+                                            .show();
+                                }
+                            }).show();
+                    return true;
+                }
+            });
+        }
     }
 
     public void removeAt(int position) {

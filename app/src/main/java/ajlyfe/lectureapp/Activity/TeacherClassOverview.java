@@ -45,6 +45,7 @@ import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 import io.codetail.widget.RevealLinearLayout;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class TeacherClassOverview extends AppCompatActivity {
 
@@ -80,6 +81,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         });
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
+
         preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
         Set<String> errorSet = new HashSet<>();
@@ -91,9 +93,11 @@ public class TeacherClassOverview extends AppCompatActivity {
         for(int y = 0; y < listSize; y++) {
             classes.get(y).setClassName(tempClassArray[y]);
         }
+
         final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerViewMainTeacher, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
         final EditText newClassName =  (EditText) findViewById(R.id.className);
         Button teacherCreateClassButton = (Button) findViewById(R.id.teacherCreateClassButton);

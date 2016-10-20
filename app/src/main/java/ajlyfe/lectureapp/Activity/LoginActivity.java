@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.mikepenz.fastadapter.IAdapter;
 
+import java.util.Random;
+
 import ajlyfe.lectureapp.R;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -73,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }, 1000);
             }
-        }, 3000);
+        }, new Random().nextInt(2500) + 500);
 
         super.onCreate(savedInstanceState);
     }

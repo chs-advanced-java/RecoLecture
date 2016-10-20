@@ -16,6 +16,7 @@ import java.util.Random;
 import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.Adapters.LectureCardAdapter;
 import ajlyfe.lectureapp.R;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class StudentClassPage extends AppCompatActivity {
 
@@ -46,7 +47,9 @@ public class StudentClassPage extends AppCompatActivity {
         recyclerViewLectures.setAdapter(adapter);
         // Set layout manager to position the items
         recyclerViewLectures.setLayoutManager(new LinearLayoutManager(this));
-        // That's all!
+        // Set overscroll effect
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerViewLectures, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+        // That's it!
     }
 
     @Override

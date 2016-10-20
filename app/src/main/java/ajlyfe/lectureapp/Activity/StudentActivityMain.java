@@ -26,6 +26,7 @@ import ajlyfe.lectureapp.Adapters.ClassCardAdapter;
 import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class StudentActivityMain extends AppCompatActivity {
     private SharedPreferences preferenceSettings;
@@ -51,6 +52,7 @@ public class StudentActivityMain extends AppCompatActivity {
         });
 
         RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
+
         preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
         Set<String> tempClassList;
@@ -70,9 +72,11 @@ public class StudentActivityMain extends AppCompatActivity {
         for(int y = 0; y < listSize; y++) {
             classes.get(y).setClassName(tempClassArray[y]);
         }
+
         ClassCardAdapter adapter = new ClassCardAdapter(classes, this, this);
         recyclerViewStudentMain.setAdapter(adapter);
         recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerViewStudentMain, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
     }
 
     private void fadeCircle() {

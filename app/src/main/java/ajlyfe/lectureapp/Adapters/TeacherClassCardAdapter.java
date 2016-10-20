@@ -16,7 +16,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +37,8 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     private SharedPreferences.Editor preferenceEditor;
     private static final int PREFERENCE_MODE_PRIVATE = 0;
 
+    private static final int HEADER = 2048;
+    private static final int NORMAL_ITEM = 4096;
 
     public TeacherClassCardAdapter(@NonNull List<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
@@ -42,10 +47,25 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return HEADER;
+        } else {
+            return NORMAL_ITEM;
+        }
+    }
+
+    @Override
     public TeacherClassCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View card = inflater.inflate(R.layout.class_card, parent, false);
-        return new TeacherClassCardAdapter.ViewHolder(card);
+        View view;
+
+        if (viewType == HEADER) {
+            view = inflater.inflate(R.layout.overview_header, parent, false);
+        } else {
+            view = inflater.inflate(R.layout.class_card, parent, false);
+        }
+        return new TeacherClassCardAdapter.ViewHolder(view);
     }
 
     public void setClassList(List<TeacherClassCard> l){
@@ -54,77 +74,79 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
     @Override
     public void onBindViewHolder(final TeacherClassCardAdapter.ViewHolder viewHolder, int position) {
-        final TeacherClassCard clss = classList.get(position);
+        if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
+            final TeacherClassCard clss = classList.get(position);
 
-        TextView title = viewHolder.classTitle;
-        title.setText(clss.getClassName());
+            TextView title = viewHolder.classTitle;
+            title.setText(clss.getClassName());
 
-        TextView teacher = viewHolder.classTeacher;
-        teacher.setText(null);
+            TextView teacher = viewHolder.classTeacher;
+            teacher.setText(null);
 
-        CardView classCard = viewHolder.card;
-        classCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TeacherClassView.class);
-                intent.putExtra("CLASS_CLICKED", clss.getClassName());
-                context.startActivity(intent);
-            }
-        });
+            CardView classCard = viewHolder.card;
+            classCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, TeacherClassView.class);
+                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    context.startActivity(intent);
+                }
+            });
 
-        Toolbar mToolbar = viewHolder.toolbar;
-        mToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TeacherClassView.class);
-                intent.putExtra("CLASS_CLICKED", clss.getClassName());
-                context.startActivity(intent);
-            }
-        });
+            Toolbar mToolbar = viewHolder.toolbar;
+            mToolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, TeacherClassView.class);
+                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    context.startActivity(intent);
+                }
+            });
 
-        // Add overflow menu
-        mToolbar.inflateMenu(R.menu.teacher_class_card_menu);
-        mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
-        final int finalPosition = position;
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                dialog.setTitle("Warning!")
-                        .setMessage("You are about to permanently delete a class. Are you sure you " +
-                                "want to do this? This action can NOT be undone.")
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialoginterface, int i) {
-                                dialoginterface.cancel();
-                            }
-                        })
-                        .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialoginterface, int idk) {
-                                removeAt(finalPosition);
-
-                                preferenceSettings = context.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-                                preferenceEditor = preferenceSettings.edit();
-                                Set<String> set = new HashSet<>();
-                                for(int x = 0; x < classList.size(); x++) {
-                                    set.add(classList.get(x).getClassName());
+            // Add overflow menu
+            mToolbar.inflateMenu(R.menu.teacher_class_card_menu);
+            mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
+            final int finalPosition = position;
+            mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                    dialog.setTitle("Warning!")
+                            .setMessage("You are about to permanently delete a class. Are you sure you " +
+                                    "want to do this? This action can NOT be undone.")
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialoginterface, int i) {
+                                    dialoginterface.cancel();
                                 }
-                                preferenceEditor.putStringSet("Key", set);
-                                preferenceEditor.commit();
+                            })
+                            .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialoginterface, int idk) {
+                                    removeAt(finalPosition);
 
-                                Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                        "Deleted '" + clss.getClassName() + "' successfully",
-                                        Snackbar.LENGTH_LONG)
-                                        .setAction("Dandy!", new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) { /*ihateusers*/ }
-                                        })
-                                        .setActionTextColor(Color.parseColor("#FFFFC107"))
-                                        .show();
-                            }
-                        }).show();
-                return true;
-            }
-        });
+                                    preferenceSettings = context.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
+                                    preferenceEditor = preferenceSettings.edit();
+                                    Set<String> set = new HashSet<>();
+                                    for (int x = 0; x < classList.size(); x++) {
+                                        set.add(classList.get(x).getClassName());
+                                    }
+                                    preferenceEditor.putStringSet("Key", set);
+                                    preferenceEditor.commit();
+
+                                    Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
+                                            "Deleted '" + clss.getClassName() + "' successfully",
+                                            Snackbar.LENGTH_LONG)
+                                            .setAction("Dandy!", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) { /*ihateusers*/ }
+                                            })
+                                            .setActionTextColor(Color.parseColor("#FFFFC107"))
+                                            .show();
+                                }
+                            }).show();
+                    return true;
+                }
+            });
+        }
     }
 
     public void removeAt(int position) {
@@ -147,6 +169,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         public ViewHolder(View itemView) {
             super(itemView);
 
+            //NORMAL
             this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
             this.classTeacher = (TextView) itemView.findViewById(R.id.classTeacher);

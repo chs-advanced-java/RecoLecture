@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         app:pulse_count="1"
         app:pulse_duration="1000"
-        app:pulse_repeat="3"
+        app:pulse_repeat="0"
         app:pulse_color="@color/colorPrimary20"
         app:pulse_startFromScratch="false"
         app:pulse_interpolator="Decelerate">

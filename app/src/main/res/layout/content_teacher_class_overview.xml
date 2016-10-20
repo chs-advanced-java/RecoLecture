@@ -10,9 +10,6 @@
     tools:showIn="@layout/activity_teacher_class_overview"
     android:animateLayoutChanges="true">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
     <RelativeLayout android:id="@+id/classOverviewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,41 +18,17 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/classOverviewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Class Overview"
-        android:fontFamily="sans-serif-thin"
-        android:textSize="28sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
-
-    <TextView
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="14sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select the class you would like to manage."
-        android:id="@+id/classOverviewDescription"
-        android:layout_below="@+id/classOverviewTitle"
-        android:layout_centerHorizontal="true"
-        />
-
         <!-- PUT CONTENT IN HERE!!! -->
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/classOverviewDescription"
             android:id="@+id/recyclerViewMainTeacher">
+
         </android.support.v7.widget.RecyclerView>
 
 
     </RelativeLayout>
-    </ScrollView>
 
     <!-- DO NOT TOUCH THIS -->
     <RelativeLayout android:id="@+id/createClassLayout"

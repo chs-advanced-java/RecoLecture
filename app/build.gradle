@@ -40,4 +40,6 @@ dependencies {
         exclude group: 'com.google.android', module: 'support-v4'
     }
     compile 'pl.bclogic:pulsator4droid:1.0.3'
+    compile 'me.everything:overscroll-decor-android:1.0.3'
+
 }
