@@ -123,10 +123,6 @@ public class LoginActivity extends AppCompatActivity {
         preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
 
-        preferenceEditor.putBoolean("LoggedIn", false);
-        preferenceEditor.putBoolean("isTeacher", false);
-        preferenceEditor.commit();
-
         if (preferenceSettings.getBoolean("loggedIn", false) == true) {
             if (preferenceSettings.getBoolean("isTeacher", false) == true) {
                 startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
@@ -145,14 +141,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (username.getText().toString().equalsIgnoreCase("student")) {
-                    preferenceEditor.putBoolean("LoggedIn", true);
+                    preferenceEditor.putBoolean("loggedIn", true);
                     preferenceEditor.putBoolean("isTeacher", false);
                     preferenceEditor.commit();
                     startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
                     finish();
                 }
                 else if (username.getText().toString().equalsIgnoreCase("teacher")) {
-                    preferenceEditor.putBoolean("LoggedIn", true);
+                    preferenceEditor.putBoolean("loggedIn", true);
                     preferenceEditor.putBoolean("isTeacher", true);
                     preferenceEditor.commit();
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));

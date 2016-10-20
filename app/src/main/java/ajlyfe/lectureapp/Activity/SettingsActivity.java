@@ -28,11 +28,14 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
+        preferenceEditor = preferenceSettings.edit();
+
         Button signOut = (Button) findViewById(R.id.signOut);
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preferenceEditor.putBoolean("LoggedIn", false);
+                preferenceEditor.putBoolean("loggedIn", false);
                 preferenceEditor.commit();
                 startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
             }
