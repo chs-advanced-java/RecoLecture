@@ -86,6 +86,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         preferenceEditor = preferenceSettings.edit();
         Set<String> errorSet = new HashSet<>();
         Set<String> tempClassList;
+
         tempClassList = preferenceSettings.getStringSet("KeyTeacher", errorSet);
         int listSize = tempClassList.size();
         String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
