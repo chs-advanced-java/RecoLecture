@@ -16,9 +16,9 @@
     <TextView android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Welcome."
         android:fontFamily="sans-serif-thin"
+        android:layout_marginTop="16dp"
         android:textSize="28sp"
         android:layout_centerHorizontal="true"
         />
