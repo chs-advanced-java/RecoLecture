@@ -34,6 +34,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.zip.Inflater;
 
 import ajlyfe.lectureapp.*;
 import ajlyfe.lectureapp.Adapters.ClassCard;
@@ -72,21 +73,6 @@ public class TeacherClassOverview extends AppCompatActivity {
                 creatingClass = true;
                 animateButton(fab, findViewById(R.id.revealLayout));
 
-                /* new animation
-                ActSwitchAnimTool mFirstDemoActSwitchAnimTool;
-                Intent intent = new Intent(TeacherClassOverview.this, SettingsActivity.class);
-
-                mFirstDemoActSwitchAnimTool = new ActSwitchAnimTool(TeacherClassOverview.this).setAnimType(ActSwitchAnimTool.MODE_SPREAD)
-                        .target(fab)
-                        .setShrinkBack(true)
-                        .setmColorStart(getResources().getColor(R.color.colorAccent))
-                        .setmColorEnd(getResources().getColor(R.color.colorAccent))
-                        .startActivity(intent, false);
-
-                mFirstDemoActSwitchAnimTool.setAnimType(ActSwitchAnimTool.MODE_SPREAD)
-                        .build();
-                 */
-
                 layout.setEnabled(false);
                 layout.setClickable(false);
                 layout.setVisibility(View.GONE);
@@ -114,7 +100,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         teacherCreateClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                String newClassCardLabel =  newClassName.getText().toString();
+                final String newClassCardLabel =  newClassName.getText().toString();
                 TeacherClassCard newClass = new TeacherClassCard(newClassCardLabel);
                 classes.add(newClass);
                 adapter.setClassList(classes);
@@ -127,9 +113,25 @@ public class TeacherClassOverview extends AppCompatActivity {
                 preferenceEditor.commit();
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
+                View dialogView = View.inflate(getApplicationContext(), R.layout.create_class_dialog, null);
+                RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
+                actionMessage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(Intent.ACTION_SEND);
+                        i.setType("message/rfc822");
+                        i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture");
+                        i.putExtra(Intent.EXTRA_TEXT   , "Use the code 3zb8c27n to join my class \""
+                                + newClassCardLabel + ".\"");
+                        try {
+                            startActivity(Intent.createChooser(i, "Send mail..."));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Snackbar.make(view, "There are no email clients installed", Snackbar.LENGTH_SHORT);
+                        }
+                    }
+                });
                 dialog.setTitle("Attention!")
-                        .setMessage("Your class code is: 3zb8c27n." + "\n" +
-                                "Distribute this to your students.")
+                        .setView(dialogView)
                         .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int idk) {
                                 onBackPressed();
