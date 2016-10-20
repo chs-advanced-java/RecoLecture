@@ -23,7 +23,8 @@ public class TeacherClassCard {
 
         //TODO: Pull from the database here::::
         for (int i = 1; i <= numClasses; i++) {
-            classList.add(i, new TeacherClassCard("Spanish " + i));
+            TeacherClassCard tempCard = new TeacherClassCard("Spanish" + i);
+            classList.add(tempCard);
         }
 
         return classList;
