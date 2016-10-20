@@ -11,8 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,6 +39,8 @@ public class StudentActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_student_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fadeCircle();
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabStudent);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +73,25 @@ public class StudentActivityMain extends AppCompatActivity {
         ClassCardAdapter adapter = new ClassCardAdapter(classes, this, this);
         recyclerViewStudentMain.setAdapter(adapter);
         recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void fadeCircle() {
+        final ImageView colorBlock = (ImageView) findViewById(R.id.colorBlock);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                colorBlock.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+
+        colorBlock.startAnimation(fadeOut);
     }
 
     @Override

@@ -11,6 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import ajlyfe.lectureapp.R;
@@ -23,6 +26,8 @@ public class TeacherMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fadeCircle();
 
         CardView myClassesCard = (CardView) findViewById(R.id.buttonClasses);
         myClassesCard.setOnClickListener(new View.OnClickListener(){
@@ -49,6 +54,25 @@ public class TeacherMainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void fadeCircle() {
+        final ImageView colorBlock = (ImageView) findViewById(R.id.colorBlock);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                colorBlock.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+
+        colorBlock.startAnimation(fadeOut);
     }
 
     @Override

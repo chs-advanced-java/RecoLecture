@@ -23,4 +23,9 @@
 
     <include layout="@layout/content_teacher_main_activity" />
 
+    <ImageView android:id="@+id/colorBlock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/color_block"/>
+
 </android.support.design.widget.CoordinatorLayout>
