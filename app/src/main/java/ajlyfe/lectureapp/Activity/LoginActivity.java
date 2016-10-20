@@ -36,8 +36,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /* Display splash screen
+        // Display splash screen
         setContentView(R.layout.splashscreen);
+        /*
         final ImageView logoRight = (ImageView) findViewById(R.id.splashLogoRight);
         final ImageView logoLeft = (ImageView) findViewById(R.id.splashLogoLeft);
 
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
         animations[0].setInterpolator(new DecelerateInterpolator(5.0f));
         animations[1].setInterpolator(new LinearInterpolator());
-        animations[2].setInterpolator(new LinearInterpolator());
+        animations[2].setInterpolator(new DecelerateInterpolator(5.0f));
         animations[3].setInterpolator(new LinearInterpolator());
 
         animations[0].setAnimationListener(new Animation.AnimationListener() {
