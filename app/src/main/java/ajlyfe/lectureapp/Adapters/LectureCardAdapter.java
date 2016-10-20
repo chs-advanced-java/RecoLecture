@@ -101,7 +101,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         notifyItemRangeChanged(position, lectureList.size());
     }
 
-    public void playLecture(String fileName) {
+    public void playLecture(String fileName) {/*
         final MediaPlayer mPlayer = MediaPlayer.create(parentActivity, R.raw.never);
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(parentActivity)
@@ -116,7 +116,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
                 });
 
         MaterialDialog dialog = builder.build();
-        dialog.show();
+        dialog.show();*/
     }
 
     // Returns the total count of items in the list probably won't use this but we gotta @Override
