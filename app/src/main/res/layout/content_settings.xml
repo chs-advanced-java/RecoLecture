@@ -128,16 +128,16 @@
             <Button
                 android:text="Change Password"
                 android:layout_width="wrap_content" />
+
+            <Button
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signOut"
+                android:text="Sign Out"
+                />
         </TableLayout>
 
     </ScrollView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Sign Out"
-        android:id="@+id/signOut" />
 
 </RelativeLayout>

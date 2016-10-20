@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:text="Confirm Upload"
         android:fontFamily="sans-serif-thin"
-        android:textSize="27sp"/>
+        android:textSize="28sp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,6 +23,7 @@
         android:layout_below="@+id/uploadTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
+        android:textSize="14sp"
         android:id="@+id/uploadDescription"
         android:text="@string/confirm_upload"/>
 
