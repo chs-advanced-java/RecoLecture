@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.TeacherClassView"
-    tools:showIn="@layout/activity_teacher_class_overview">
+    tools:showIn="@layout/activity_student_main">
 
     <RelativeLayout android:id="@+id/classOverviewLayout"
         android:layout_width="match_parent"
@@ -17,11 +17,35 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
+        <TextView
+            android:id="@+id/studentHomeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:fontFamily="sans-serif-thin"
+            android:textSize="28sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select the class you would like to\ndownload or view lectures from."
+            android:id="@+id/studentMainDescription"
+            android:layout_below="@+id/studentHomeTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            />
+
         <!-- PUT CONTENT IN HERE!!! -->
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/studentMainDescription"
             android:id="@+id/recyclerViewMainStudent">
 
 
