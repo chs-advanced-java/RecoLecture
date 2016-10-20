@@ -10,6 +10,9 @@
     tools:showIn="@layout/activity_teacher_class_overview"
     android:animateLayoutChanges="true">
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <RelativeLayout android:id="@+id/classOverviewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,6 +55,7 @@
 
 
     </RelativeLayout>
+    </ScrollView>
 
     <!-- DO NOT TOUCH THIS -->
     <RelativeLayout android:id="@+id/createClassLayout"
