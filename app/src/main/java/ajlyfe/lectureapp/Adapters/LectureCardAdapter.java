@@ -2,6 +2,7 @@ package ajlyfe.lectureapp.Adapters;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
@@ -15,13 +16,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ajlyfe.lectureapp.R;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views from the inflated layout
 public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.ViewHolder> {
+
+    private static final int PREFERENCE_MODE_PRIVATE = 0;
+    private SharedPreferences preferenceSettings;
+    private SharedPreferences.Editor preferenceEditor;
 
     // Store objects to store data
     private List<LectureCard> lectureList;
@@ -49,6 +56,15 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(final LectureCardAdapter.ViewHolder viewHolder, int position) {
+
+        preferenceSettings = parentActivity.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
+        preferenceEditor = preferenceSettings.edit();
+        Set<String> errorSet = new HashSet<>();
+        for (int x = 0; x < lectureList.size(); x++) {
+            errorSet.add("0");
+        }
+        Set<String> downloadedSet = preferenceSettings.getStringSet("isDownloaded", errorSet);
+
         // Get the object and it's data based on position
         final LectureCard lecture = lectureList.get(position);
 
@@ -59,11 +75,12 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         TextView teacher = viewHolder.lectureTeacher;
         teacher.setText(lecture.getTeacherName());
 
-        ImageView download = viewHolder.lectureDownload;
+        final ImageView download = viewHolder.lectureDownload;
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO: RETRIEVE FROM THE SERVER
+
                 Snackbar comeGetYourSnacks = Snackbar.make(parentActivity.findViewById(R.id.recyclerViewLecturesHolder),
                         "Lecture '" + lecture.getLectureName() + "' downloaded!",
                         Snackbar.LENGTH_LONG);
