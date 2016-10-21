@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:text="@string/version"
         android:textColor="#FFF"
-        android:textSize="8sp"
+        android:textSize="@dimen/version_text_size"
+        android:padding="6dp"
         android:layout_gravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>

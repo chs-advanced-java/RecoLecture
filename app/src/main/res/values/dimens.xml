@@ -16,4 +16,6 @@
     <dimen name="logo_size">160dp</dimen>
 
     <dimen name="header_margin_top">0dp</dimen>
+
+    <dimen name="version_text_size">10sp</dimen>
 </resources>
