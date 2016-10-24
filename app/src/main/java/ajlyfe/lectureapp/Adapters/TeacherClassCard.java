@@ -21,13 +21,9 @@ public class TeacherClassCard {
     public static ArrayList<TeacherClassCard> createList(int numClasses) {
         ArrayList<TeacherClassCard> classList = new ArrayList<>();
 
-        if (numClasses == 1) {
-            classList.add(new TeacherClassCard("No Classes!"));
-        }
-
         //TODO: Pull from the database here::::
         for (int i = 1; i <= numClasses; i++) {
-            TeacherClassCard tempCard = new TeacherClassCard("No Classes!");
+            TeacherClassCard tempCard = new TeacherClassCard("Spanish " + i);
             classList.add(tempCard);
         }
 
