@@ -37,7 +37,7 @@ public class LectureCard {
         ArrayList<LectureCard> lectureList = new ArrayList<>();
 
         //TODO: Pull from the database here::::
-        lectureList.add(0, new LectureCard(context.getString(R.string.lecture_sample_name_1), "Plumieri"));
+        lectureList.add(0, new LectureCard(context.getString(R.string.lecture_sample_name_1), "Plumeri"));
 
         return lectureList;
     }
