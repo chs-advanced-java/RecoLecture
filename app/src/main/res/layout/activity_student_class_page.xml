@@ -21,6 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_student_class_page" />
+    <include layout="@layout/content_student_class_page"
+        android:layout_height="471dp" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -18,7 +18,7 @@
         android:layout_marginBottom="64dp"/>
 
     <CheckBox
-        android:text="Tim"
+        android:text="Tim Wells"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/studentBox4"
@@ -26,7 +26,7 @@
         android:layout_alignParentStart="true" />
 
     <CheckBox
-        android:text="Dave"
+        android:text="David Jobek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/studentBox2"
@@ -34,7 +34,7 @@
         android:layout_alignParentStart="true" />
 
     <CheckBox
-        android:text="Phil"
+        android:text="Phil Jones"
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,10 +72,10 @@
         android:layout_below="@+id/studentBox2"
         android:layout_alignParentStart="true"
         android:checked="false"
-        android:text="Mike" />
+        android:text="Mike Haynes" />
 
     <CheckBox
-        android:text="Allen"
+        android:text="Allen Ramsay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/studentBox5"
@@ -83,7 +83,7 @@
         android:layout_alignParentStart="true" />
 
     <CheckBox
-        android:text="Jane"
+        android:text="Jane Holland"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/studentBox6"
