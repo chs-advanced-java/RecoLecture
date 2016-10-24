@@ -137,7 +137,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 });
                 dialog.setTitle("Attention!")
                         .setView(dialogView)
-                        .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int idk) {
                                 onBackPressed();
                                 startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));

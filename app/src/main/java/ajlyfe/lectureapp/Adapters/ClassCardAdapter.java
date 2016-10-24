@@ -108,7 +108,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                                     dialoginterface.cancel();
                                 }
                             })
-                            .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialoginterface, int idk) {
                                     removeAt(finalPosition);
                                     Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),

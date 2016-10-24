@@ -119,7 +119,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                     dialoginterface.cancel();
                                 }
                             })
-                            .setPositiveButton("OK, M8!", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialoginterface, int idk) {
                                     removeAt(finalPosition);
 
