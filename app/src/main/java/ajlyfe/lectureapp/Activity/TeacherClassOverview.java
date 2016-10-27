@@ -143,10 +143,9 @@ public class TeacherClassOverview extends AppCompatActivity {
                         .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int idk) {
                                 onBackPressed();
-                                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
+
                             }
                         }).show();
-                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
             }
         });
     }

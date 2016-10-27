@@ -70,6 +70,8 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
     public void setClassList(List<TeacherClassCard> l){
         classList = l;
+        notifyItemInserted(classList.size() - 1);
+        notifyDataSetChanged();
     }
 
     @Override
