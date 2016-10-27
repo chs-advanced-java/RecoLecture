@@ -146,7 +146,6 @@ public class TeacherClassOverview extends AppCompatActivity {
                                 startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
                             }
                         }).show();
-                startActivity(new Intent(TeacherClassOverview.this, TeacherClassOverview.class));
             }
         });
     }
