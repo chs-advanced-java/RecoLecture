@@ -85,17 +85,17 @@ public class TeacherClassOverview extends AppCompatActivity {
         preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
         Set<String> errorSet = new HashSet<>();
-        errorSet.add("emptyHolder");
         errorSet.add("Spanish 3");
         errorSet.add("Spanish 2");
         errorSet.add("Spanish 1");
+        errorSet.add(null);
         Set<String> tempClassList;
 
         tempClassList = preferenceSettings.getStringSet("KeyTeacher", errorSet);
-        int listSize = tempClassList.size();
+        String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
         final ArrayList<TeacherClassCard> classes = new ArrayList<>();
-        for(int y = 0; y < listSize; y++) {
-            classes.add(new TeacherClassCard("Spanish " + y));
+        for(int y = 0; y < tempClassArray.length; y++) {
+            classes.add(new TeacherClassCard(tempClassArray[y]));
         }
 
         final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
