@@ -85,6 +85,9 @@ public class TeacherClassOverview extends AppCompatActivity {
         preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
         preferenceEditor = preferenceSettings.edit();
         Set<String> errorSet = new HashSet<>();
+        errorSet.add("Spanish 1");
+        errorSet.add("Spanish 2");
+        errorSet.add("Spanish 3");
         Set<String> tempClassList;
 
         tempClassList = preferenceSettings.getStringSet("KeyTeacher", errorSet);
