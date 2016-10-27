@@ -22,7 +22,7 @@ public class TeacherClassCard {
         ArrayList<TeacherClassCard> classList = new ArrayList<>();
 
         //TODO: Pull from the database here::::
-        for (int i = 1; i <= numClasses; i++) {
+        for (int i = 1; i <= 3; i++) {
             TeacherClassCard tempCard = new TeacherClassCard("Spanish " + i);
             classList.add(tempCard);
         }

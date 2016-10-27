@@ -76,6 +76,8 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
     @Override
     public void onBindViewHolder(final TeacherClassCardAdapter.ViewHolder viewHolder, int position) {
+        position = viewHolder.getAdapterPosition();
+
         if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
             final TeacherClassCard clss = classList.get(position);
 
