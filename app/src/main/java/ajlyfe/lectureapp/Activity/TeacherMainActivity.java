@@ -50,8 +50,7 @@ public class TeacherMainActivity extends AppCompatActivity {
         recordCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Record Activity implementation
-
+                startActivity(new Intent(TeacherMainActivity.this, RecordActivity.class));
             }
         });
     }
