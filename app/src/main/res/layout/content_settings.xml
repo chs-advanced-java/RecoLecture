@@ -43,22 +43,29 @@
             android:layout_height="wrap_content">
 
             <TableRow android:layout_width="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Display Name:"
-                    android:textSize="20sp"
-                    android:textColor="@color/textColorPrimary"
-                    />
-
-                <EditText
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Jane Doe"
-                    android:textSize="20sp"
-                    android:ems="20"
-                    />
+                    android:layout_height="wrap_content">
+
+                    <EditText android:id="@+id/firstNameHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                        android:hint="First Name"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText android:id="@+id/lastNameHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                        android:hint="Last Name"/>
+
+                </android.support.design.widget.TextInputLayout>
             </TableRow>
 
             <Button
@@ -68,46 +75,41 @@
                 android:layout_marginBottom="32dp"
                 />
 
+            <EditText android:id="@+id/oldPasswordHolder"
+                android:textSize="17sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Old Password"
+                />
+
             <TableRow android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Old Password: "
-                    android:textSize="20sp"
-                    android:textColor="@color/textColorPrimary"
-                    />
 
-                <EditText
-                    android:layout_width="wrap_content"
+                <EditText android:id="@+id/newPasswordHolder"
+                    android:textSize="17sp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:ems="20"
-                    android:hint="Password"
+                    android:hint="New Password"
+                    />
+
+                <EditText android:id="@+id/confirmPasswordHolder"
+                    android:textSize="17sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Confirm Password"
                     />
             </TableRow>
 
-            <TableRow android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Password: "
-                    android:textSize="20sp"
-                    android:textColor="@color/textColorPrimary"
-                    />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="20"
-                    android:hint="Password"
-                    />
-            </TableRow>
+            <Button
+                android:text="Change Password"
+                android:layout_width="wrap_content" />
 
             <TableRow android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="invisible">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,19 +117,7 @@
                     android:textSize="20sp"
                     android:textColor="@color/textColorPrimary"
                     />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="20"
-                    android:hint="Password"
-                    />
             </TableRow>
-
-            <Button
-                android:text="Change Password"
-                android:layout_width="wrap_content" />
 
             <Button
                 android:layout_marginTop="8dp"

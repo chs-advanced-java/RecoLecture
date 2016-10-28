@@ -35,134 +35,99 @@
         android:layout_marginTop="8dp"
         />
 
-    <TableLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/registrationDescription">
 
-        <TableRow android:layout_width="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email: "
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary"
-                />
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="-16dp"
+            android:id="@+id/emailRegistrationHolder">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords|textAutoComplete|textAutoCorrect|textEmailAddress"
+            android:hint="E-mail"/>
+        </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/emailRegistrationHolder"
+            android:id="@+id/firstNameRegistrationHolder">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email"
-                android:textSize="18sp"
-                android:ems="20"
-                />
-        </TableRow>
+                android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                android:hint="First Name"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <TableRow android:layout_width="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First Name: "
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary"
-                />
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/firstNameRegistrationHolder"
+            android:id="@+id/lastNameRegistrationHolder">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="First Name"
-                android:textSize="18sp"
-                android:ems="20"
-                />
-        </TableRow>
+                android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                android:hint="Last Name"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <TableRow android:layout_width="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Last Name: "
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary"
-                />
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/usernameRegistrationHolder"
+            android:layout_below="@+id/lastNameRegistrationHolder">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Last Name"
-                android:textSize="18sp"
-                android:ems="20"
-                />
-        </TableRow>
+                android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                android:hint="Username"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <TableRow android:layout_width="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_height="wrap_content"
-                android:text="Username: "
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary"
-                />
-
-            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Username"
-                android:textSize="18sp"
-                android:ems="20"
-                />
-        </TableRow>
-
-        <TableRow android:layout_width="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password: "
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary"
-                />
+                android:layout_below="@+id/usernameRegistrationHolder"
+                android:id="@+id/passwordRegistrationHolder"
+                >
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password"
-                android:textSize="18sp"
-                android:ems="20"
-                />
-        </TableRow>
+                android:hint="Password"/>
+            </android.support.design.widget.TextInputLayout>
 
-        <TableRow android:layout_width="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.design.widget.TextInputLayout
                 android:layout_height="wrap_content"
-                android:text="Confirm Password: "
-                android:textSize="18sp"
-                android:textColor="@color/textColorPrimary"
-                />
-
-            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Confirm Password"
-                android:textSize="18sp"
-                android:ems="20"
-                />
-        </TableRow>
+                android:layout_below="@id/passwordRegistrationHolder"
+                android:id="@+id/passwordConfirmationRegistrationHolder">
 
-    </TableLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Confirm Password"
+                    android:textSize="18sp"
+                    android:ems="20"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
-    <CheckBox
-        android:text="I am a Teacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/buttonRegister"
-        android:id="@+id/checkBoxIAmATeacher" />
+        <CheckBox
+            android:text="I am a Teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/passwordConfirmationRegistrationHolder"
+            android:id="@+id/checkBoxIAmATeacher" />
+
+    </RelativeLayout>
 
     <Button
         android:text="Register"
