@@ -26,6 +26,7 @@ import com.mikepenz.fastadapter.IAdapter;
 
 import java.util.Random;
 
+import ajlyfe.lectureapp.Adapters.TestActivity;
 import ajlyfe.lectureapp.R;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -133,6 +134,17 @@ public class LoginActivity extends AppCompatActivity {
         final EditText password = (EditText) findViewById(R.id.password);
         final ViewGroup passwordCrouton = (ViewGroup) findViewById(R.id.passwordCrouton);
         final ViewGroup usernameCrouton = (ViewGroup) findViewById(R.id.usernameCrouton);
+
+        //Backdoor, solely for testing
+        Button testButton = (Button) findViewById(R.id.testButton);
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, TestActivity.class));
+            }
+        });
+        //End backdoor
+
         preferenceEditor = preferenceSettings.edit();
 
         Button login = (Button) findViewById(R.id.login);

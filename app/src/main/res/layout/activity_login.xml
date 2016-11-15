@@ -24,11 +24,6 @@
 
     <include layout="@layout/content_login" />
 
-    <ImageView android:id="@+id/colorBlock"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/color_block"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,5 +32,10 @@
         android:textSize="@dimen/version_text_size"
         android:padding="6dp"
         android:layout_gravity="bottom|end"/>
+
+    <ImageView android:id="@+id/colorBlock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/color_block"/>
 
 </android.support.design.widget.CoordinatorLayout>
