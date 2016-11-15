@@ -8,7 +8,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Class Overview"
+        android:text="@string/teacher_class_overviewTitle"
         android:fontFamily="sans-serif-thin"
         android:textSize="28sp"
         android:layout_marginTop="@dimen/header_margin_top" />
@@ -21,7 +21,7 @@
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select the class you would like to manage."
+        android:text="@string/teacher_class_overviewDescription"
         android:paddingBottom="16dp"
         />
 

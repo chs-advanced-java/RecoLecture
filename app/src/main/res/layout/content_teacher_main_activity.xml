@@ -33,7 +33,7 @@
         android:layout_below="@+id/teacherHomeTitle"
         />
 
-    <!-- TODO: Update hardcoded text-->
+    <!-- TODO: Fix Cardviews-->
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/buttonClasses"
@@ -61,7 +61,7 @@
                 android:id="@+id/cardButton1Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Classes"
+                android:text="@string/teacher_home_myClassesTitle"
                 android:textSize="30sp"
                 android:textColor="@color/textColorPrimary"
                 android:layout_alignParentTop="true"
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Manage your classes, students,\nand files."
+                android:text="@string/teacher_home_myClassesDescription"
                 />
 
             <ImageView android:id="@+id/overflow"
@@ -118,7 +118,7 @@
                 android:id="@+id/cardButton2Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload"
+                android:text="@string/teacher_home_uploadTitle"
                 android:textSize="30sp"
                 android:textColor="@color/textColorPrimary"
                 android:layout_alignParentTop="true"
@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Upload a lecture you have\npreviously recorded."
+                android:text="@string/teacher_home_uploadDescription"
                 />
 
             <ImageView android:id="@+id/overflow2"
@@ -175,7 +175,7 @@
                 android:id="@+id/cardButton3Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Record"
+                android:text="@string/teacher_home_recordTitle"
                 android:textSize="30sp"
                 android:textColor="@color/textColorPrimary"
                 android:layout_alignParentTop="true"
@@ -189,7 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Record a new lecture."
+                android:text="@string/teacher_home_recordDescription"
                 />
 
             <ImageView android:id="@+id/overflow3"
