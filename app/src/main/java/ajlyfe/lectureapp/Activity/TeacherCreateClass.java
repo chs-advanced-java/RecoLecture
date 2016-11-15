@@ -8,11 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class TeacherCreateClass extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_create_class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

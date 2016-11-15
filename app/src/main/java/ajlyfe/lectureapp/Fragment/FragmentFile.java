@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import ajlyfe.lectureapp.Adapters.LectureCheckbox;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class FragmentFile extends Fragment {
     private View view;
@@ -20,17 +21,6 @@ public class FragmentFile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.slide_file, container, false);
-
-        // Edit the layout
-        doThings();
-
-        // Inflate the layout
-        return view;
-    }
-
-    public void doThings() {  // Wildly ineffecient but i don't want to make another RecyclerView :/
-
+        return Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_file, container, false);
     }
 }

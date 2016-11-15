@@ -16,12 +16,14 @@ import java.util.Random;
 import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.Adapters.LectureCardAdapter;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class StudentClassPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_class_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

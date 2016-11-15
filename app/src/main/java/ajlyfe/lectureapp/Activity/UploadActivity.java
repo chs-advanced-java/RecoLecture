@@ -2,6 +2,7 @@ package ajlyfe.lectureapp.Activity;
 
 import ajlyfe.lectureapp.Fragment.*;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,6 +31,7 @@ public class UploadActivity extends AppIntro {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         context = this;
 

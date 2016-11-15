@@ -1,11 +1,19 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base light theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="cardTitleTextPrimary">@color/textColorPrimary</item>
+    </style>
+
+    <!-- Base dark theme -->
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="cardTitleTextPrimary">@color/textColorPrimaryLight</item>
     </style>
 
     <!-- Create ripples!!

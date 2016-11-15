@@ -23,6 +23,7 @@ import java.util.Set;
 
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 import static android.R.id.edit;
 
@@ -31,10 +32,9 @@ public class StudentEnterClassCode extends AppCompatActivity {
     private SharedPreferences.Editor preferenceEditor;
     private static final int PREFERENCE_MODE_PRIVATE = 0;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_enter_class_code);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

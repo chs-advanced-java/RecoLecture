@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class FragmentStudents extends Fragment {
 
@@ -25,8 +26,8 @@ public class FragmentStudents extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.slide_students, container, false);
+
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_class, container, false);
 
         method();
 
@@ -54,7 +55,8 @@ public class FragmentStudents extends Fragment {
                     studentSix.setChecked(true);
                     selectAllSelection = true;
                 }
-                else{
+
+                else {
                     studentOne.setChecked(false);
                     studentTwo.setChecked(false);
                     studentThree.setChecked(false);
@@ -66,5 +68,4 @@ public class FragmentStudents extends Fragment {
             }
         });
     }
-
 }

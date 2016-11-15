@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class RegistrationScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

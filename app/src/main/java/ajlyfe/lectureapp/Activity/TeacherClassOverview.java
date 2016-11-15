@@ -58,6 +58,7 @@ public class TeacherClassOverview extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_class_overview);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

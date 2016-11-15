@@ -28,6 +28,7 @@ import java.util.Random;
 
 import ajlyfe.lectureapp.Adapters.TestActivity;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
@@ -78,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }, new Random().nextInt(2500) + 500);
 
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
     }
 

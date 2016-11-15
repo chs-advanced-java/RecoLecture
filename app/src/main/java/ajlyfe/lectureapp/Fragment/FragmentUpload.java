@@ -19,6 +19,7 @@ import ajlyfe.lectureapp.Adapters.LectureCardAdapter;
 import ajlyfe.lectureapp.Adapters.LectureCheckbox;
 import ajlyfe.lectureapp.Adapters.LectureCheckboxAdapter;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class FragmentUpload extends Fragment {
 
@@ -29,7 +30,8 @@ public class FragmentUpload extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.slide_upload, container, false);
+
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_class, container, false);
 
         // Edit the layout
         doThings();

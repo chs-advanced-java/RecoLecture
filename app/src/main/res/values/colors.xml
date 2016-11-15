@@ -19,4 +19,6 @@
     <color name="myClassesGreen">#A4C644</color>
     <color name="colorAccentLight">#d1c4e9</color>
 
+    <color name="divider_color">#20212121</color>
+
 </resources>

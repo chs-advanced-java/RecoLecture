@@ -13,25 +13,124 @@
     tools:context="ajlyfe.lectureapp.Activity.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
-    <TextView android:id="@+id/MyAccountTitle"
+    <TextView android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/header_margin_top"
-        android:text="My Account"
+        android:text="Settings"
         android:fontFamily="sans-serif-thin"
         android:textSize="28sp"
         android:layout_centerHorizontal="true"
         />
 
-    <TextView android:id="@+id/MyAccountDescription"
+    <TextView android:id="@+id/settingsDescription"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change your account settings."
-        android:layout_below="@+id/MyAccountTitle"
+        android:text="Change various settings."
+        android:layout_below="@+id/settingsTitle"
         android:layout_centerHorizontal="true"
         />
+
+    <RelativeLayout android:id="@+id/changeUsername"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@id/settingsDescription"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_alignParentTop="true"
+            android:background="@color/divider_color"/>
+
+        <ImageView android:id="@+id/changeUsernameIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_account_box_black_24dp"
+            android:tint="@color/accent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change username"
+            android:layout_toEndOf="@+id/changeUsernameIcon"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/divider_color"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/changePassword"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@id/changeUsername"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+
+        <ImageView android:id="@+id/changePasswordIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_lock_black_24dp"
+            android:tint="@color/accent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change password"
+            android:layout_toEndOf="@+id/changePasswordIcon"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/divider_color"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/darkTheme"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@id/changePassword"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dark theme"
+            android:layout_centerVertical="true"/>
+
+        <Switch android:id="@+id/darkThemeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/divider_color"/>
+
+    </RelativeLayout>
+
+
+    <!--
+
 
     <ScrollView
         android:layout_below="@+id/MyAccountDescription"
@@ -129,5 +228,7 @@
         </TableLayout>
 
     </ScrollView>
+
+    -->
 
 </RelativeLayout>

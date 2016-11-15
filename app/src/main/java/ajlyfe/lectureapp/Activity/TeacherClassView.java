@@ -27,11 +27,13 @@ import ajlyfe.lectureapp.Fragment.FragmentStudents;
 import ajlyfe.lectureapp.Fragment.FragmentTabFiles;
 import ajlyfe.lectureapp.Fragment.FragmentTabStudents;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class TeacherClassView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_class_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
