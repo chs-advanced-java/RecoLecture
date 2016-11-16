@@ -64,7 +64,7 @@
             android:label="Register"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.RecordActivity" />
-        <activity android:name=".Adapters.TestActivity"></activity>
+        <activity android:name=".Activity.TestActivity"></activity>
     </application>
 
 </manifest>
