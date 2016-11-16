@@ -33,6 +33,8 @@ public class TestActivity extends AppCompatActivity implements OnPreparedListene
 
         String fileName = "victory.mp3";
 
+        File testFile = new File("/sdcard/Recolecture/" + fileName);
+
         audioFile = "/sdcard/Recolecture/" + fileName;
 
         mediaPlayer = new MediaPlayer();
