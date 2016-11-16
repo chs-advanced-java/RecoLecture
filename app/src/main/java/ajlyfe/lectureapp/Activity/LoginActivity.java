@@ -6,15 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,18 +17,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mikepenz.fastadapter.IAdapter;
-
 import java.util.Random;
 
-import ajlyfe.lectureapp.Adapters.TestActivity;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
-
-import static android.R.attr.animation;
 
 public class LoginActivity extends AppCompatActivity {
 

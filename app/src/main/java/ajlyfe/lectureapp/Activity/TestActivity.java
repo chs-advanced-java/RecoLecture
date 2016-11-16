@@ -1,5 +1,6 @@
-package ajlyfe.lectureapp.Adapters;
+package ajlyfe.lectureapp.Activity;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import ajlyfe.lectureapp.R;
@@ -11,6 +12,8 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.view.MotionEvent;
 import android.widget.MediaController;
 import android.widget.TextView;
+
+import java.io.File;
 
 public class TestActivity extends AppCompatActivity implements OnPreparedListener, MediaController.MediaPlayerControl{
     private static final String TAG = "AudioPlayer";
@@ -28,15 +31,16 @@ public class TestActivity extends AppCompatActivity implements OnPreparedListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        audioFile = this.getIntent().getStringExtra(AUDIO_FILE_NAME);
-        ((TextView)findViewById(R.id.now_playing_text)).setText(audioFile);
+        String fileName = "victory.mp3";
+
+        audioFile = "/sdcard/Recolecture/" + fileName;
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnPreparedListener(this);
 
         mediaController = new MediaController(this);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), getResources().getIdentifier("victory","raw",getPackageName()));
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.fromFile(new File(audioFile)));
 
         mediaController.setMediaPlayer(this);
         mediaController.setAnchorView(findViewById(R.id.videoView));
