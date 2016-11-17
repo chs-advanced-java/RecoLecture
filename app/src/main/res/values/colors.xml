@@ -20,5 +20,6 @@
     <color name="colorAccentLight">#d1c4e9</color>
 
     <color name="dividerColor">#20212121</color>
+    <color name="dividerColorLight">#20FFFFFF</color>
 
 </resources>

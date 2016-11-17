@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_alignParentTop="true"
-            android:background="@color/divider_color"/>
+            android:background="?dividerColor"/>
 
         <ImageView android:id="@+id/changeUsernameIcon"
             android:layout_width="30dp"
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_alignParentBottom="true"
-            android:background="@color/divider_color"/>
+            android:background="?dividerColor"/>
 
     </RelativeLayout>
 
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_alignParentBottom="true"
-            android:background="@color/divider_color"/>
+            android:background="?dividerColor"/>
 
     </RelativeLayout>
 
@@ -122,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_alignParentBottom="true"
-            android:background="@color/divider_color"/>
+            android:background="?dividerColor"/>
 
     </RelativeLayout>
 
@@ -143,7 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
             android:layout_alignParentBottom="true"
-            android:background="@color/divider_color"/>
+            android:background="?dividerColor"/>
 
     </RelativeLayout>
 
