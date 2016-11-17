@@ -21,8 +21,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Utils {
 
-    private static final String PREF_DARK_THEME = "useDarkTheme";
-    private static final String PREF_NAME = "settings";
+    public static final String PREFS_SETTINGS = "settings";
+    public static final String PREFS_CLASSES = "classes";
+    public static final String PREF_DARK_THEME = "useDarkTheme";
+    public static SharedPreferences prefsSettings;
+    public static SharedPreferences prefsClasses;
 
     // Storage Permissions variables
     private static final int PERMISSIONS_REQUEST_CODE = 1;
@@ -32,8 +35,12 @@ public class Utils {
             Manifest.permission.RECORD_AUDIO
     };
 
+    public static SharedPreferences getPrefs(String prefsFile, Activity activity) {
+        return activity.getSharedPreferences(prefsFile, MODE_PRIVATE);
+    }
+
     public static void setCustomTheme(Activity activity) {
-        SharedPreferences preferences = activity.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences preferences = activity.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
         if (useDarkTheme) {
@@ -43,7 +50,7 @@ public class Utils {
 
     public static View setCustomAdapterTheme(Activity activity, LayoutInflater inflater,
                                              @LayoutRes int resource, ViewGroup container, boolean attachToRoot) {
-        SharedPreferences preferences = activity.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences preferences = activity.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
         Context contextThemeWrapper;
 

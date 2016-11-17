@@ -28,14 +28,14 @@ import java.util.Set;
 import ajlyfe.lectureapp.Activity.TeacherClassOverview;
 import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCardAdapter.ViewHolder> {
     private List<TeacherClassCard> classList;
     private Context context;
     private Activity parentActivity;
-    private SharedPreferences preferenceSettings;
-    private SharedPreferences.Editor preferenceEditor;
-    private static final int PREFERENCE_MODE_PRIVATE = 0;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
@@ -44,6 +44,8 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;
+        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, parentActivity);
+        editor = preferences.edit();
     }
 
     @Override
@@ -127,14 +129,12 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                 public void onClick(DialogInterface dialoginterface, int idk) {
                                     removeAt(finalPosition);
 
-                                    preferenceSettings = context.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-                                    preferenceEditor = preferenceSettings.edit();
                                     Set<String> set = new HashSet<>();
                                     for (int x = 0; x < classList.size(); x++) {
                                         set.add(classList.get(x).getClassName());
                                     }
-                                    preferenceEditor.putStringSet("Key", set);
-                                    preferenceEditor.commit();
+                                    editor.putStringSet("Key", set);
+                                    editor.apply();
 
                                     Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
                                             "Deleted '" + clss.getClassName() + "' successfully",

@@ -21,25 +21,27 @@ import java.util.List;
 import java.util.Set;
 
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views from the inflated layout
 public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.ViewHolder> {
 
-    private static final int PREFERENCE_MODE_PRIVATE = 0;
-    private SharedPreferences preferenceSettings;
-    private SharedPreferences.Editor preferenceEditor;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     // Store objects to store data
     private List<LectureCard> lectureList;
 
     // Store parent activity
-    Activity parentActivity;
+    private Activity parentActivity;
 
     // Pass in the predefined Array into the constructor
     public LectureCardAdapter(@NonNull List<LectureCard> lectures, Activity parentActivity) {
         lectureList = lectures;
         this.parentActivity = parentActivity;
+        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, parentActivity);
+        editor = preferences.edit();
     }
 
     @Override
@@ -56,15 +58,6 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(final LectureCardAdapter.ViewHolder viewHolder, int position) {
-
-        preferenceSettings = parentActivity.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-        preferenceEditor = preferenceSettings.edit();
-        Set<String> errorSet = new HashSet<>();
-        for (int x = 0; x < lectureList.size(); x++) {
-            errorSet.add("0");
-        }
-        Set<String> downloadedSet = preferenceSettings.getStringSet("isDownloaded", errorSet);
-
         // Get the object and it's data based on position
         final LectureCard lecture = lectureList.get(position);
 

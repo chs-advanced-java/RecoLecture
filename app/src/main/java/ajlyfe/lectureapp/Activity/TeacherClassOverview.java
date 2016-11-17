@@ -52,9 +52,8 @@ public class TeacherClassOverview extends AppCompatActivity {
     private boolean creatingClass = false;
     FloatingActionButton fab;
 
-    private static final int PREFERENCE_MODE_PRIVATE = 0;
-    private SharedPreferences preferenceSettings;
-    private SharedPreferences.Editor preferenceEditor;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +63,9 @@ public class TeacherClassOverview extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        editor = preferences.edit();
 
         fab = (FloatingActionButton) findViewById(R.id.fabTeacher);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +85,6 @@ public class TeacherClassOverview extends AppCompatActivity {
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
 
-        preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-        preferenceEditor = preferenceSettings.edit();
         Set<String> errorSet = new HashSet<>();
         errorSet.add("Spanish 3");
         errorSet.add("Spanish 2");
@@ -92,7 +92,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         errorSet.add(null);
         Set<String> tempClassList;
 
-        tempClassList = preferenceSettings.getStringSet("KeyTeacher", errorSet);
+        tempClassList = preferences.getStringSet("KeyTeacher", errorSet);
         String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
         final ArrayList<TeacherClassCard> classes = new ArrayList<>();
         for(int y = 0; y < tempClassArray.length; y++) {
@@ -118,8 +118,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                 for(int x = 0; x < classes.size(); x++) {
                     set.add(classes.get(x).getClassName());}
 
-                preferenceEditor.putStringSet("KeyTeacher", set);
-                preferenceEditor.commit();
+                editor.putStringSet("KeyTeacher", set);
+                editor.apply();
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
                 View dialogView = View.inflate(getApplicationContext(), R.layout.create_class_dialog, null);

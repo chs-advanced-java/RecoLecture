@@ -35,21 +35,6 @@ public class RecordActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(ROOT_ACTIVITY, recordFragment)
                 .commit();
-
-        /*
-        recordFragment.getSaveButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SaveFragment saveFragment = new SaveFragment();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(ROOT_ACTIVITY, saveFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-           */
-
     }
 
     @Override

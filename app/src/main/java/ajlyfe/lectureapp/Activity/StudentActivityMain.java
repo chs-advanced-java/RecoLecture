@@ -30,10 +30,8 @@ import ajlyfe.lectureapp.Utils;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class StudentActivityMain extends AppCompatActivity {
-    private SharedPreferences preferenceSettings;
-    private SharedPreferences.Editor preferenceEditor;
-
-    private static final int PREFERENCE_MODE_PRIVATE = 0;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +43,9 @@ public class StudentActivityMain extends AppCompatActivity {
 
         fadeCircle();
 
+        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        editor = preferences.edit();
+
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabStudent);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,19 +55,23 @@ public class StudentActivityMain extends AppCompatActivity {
         });
 
         RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
+        ClassCardAdapter adapter = new ClassCardAdapter(getClasses(), this, this);
+        recyclerViewStudentMain.setAdapter(adapter);
+        recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerViewStudentMain, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+    }
 
-        preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-        preferenceEditor = preferenceSettings.edit();
+    public ArrayList<ClassCard> getClasses() {
         Set<String> tempClassList;
-        tempClassList = preferenceSettings.getStringSet("KeyStudent", null);
+        tempClassList = preferences.getStringSet("KeyStudent", null);
         if (tempClassList == null) {
             Set<String> errorSet = new HashSet<>();
             errorSet.add("Spanish 1");
             errorSet.add("Spanish 2");
             errorSet.add("Spanish 3");
             tempClassList = errorSet;
-            preferenceEditor.putStringSet("KeyStudent", tempClassList);
-            preferenceEditor.commit();
+            editor.putStringSet("KeyStudent", tempClassList);
+            editor.commit();
         }
         int listSize = tempClassList.size();
         String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
@@ -75,12 +80,8 @@ public class StudentActivityMain extends AppCompatActivity {
             classes.get(y).setClassName(tempClassArray[y]);
         }
 
-        ClassCardAdapter adapter = new ClassCardAdapter(classes, this, this);
-        recyclerViewStudentMain.setAdapter(adapter);
-        recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
-        OverScrollDecoratorHelper.setUpOverScroll(recyclerViewStudentMain, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+        return classes;
     }
-
     private void fadeCircle() {
         final ImageView colorBlock = (ImageView) findViewById(R.id.colorBlock);
         colorBlock.setVisibility(View.VISIBLE);
