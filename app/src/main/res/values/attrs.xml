@@ -2,5 +2,6 @@
 <resources>
 
     <attr name="cardTitleTextPrimary" format="reference|color" />
+    <attr name="dividerColor" format="reference|color" />
 
 </resources>

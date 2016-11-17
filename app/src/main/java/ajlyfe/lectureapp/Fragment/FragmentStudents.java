@@ -27,7 +27,7 @@ public class FragmentStudents extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_class, container, false);
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_students, container, false);
 
         method();
 

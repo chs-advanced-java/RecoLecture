@@ -16,6 +16,6 @@ public class FragmentTabFiles extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_class, container, false);
+        return Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.fragment_tab_files, container, false);
     }
 }
