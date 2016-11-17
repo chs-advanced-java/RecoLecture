@@ -63,8 +63,10 @@
             android:name=".Activity.RegistrationScreen"
             android:label="Register"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.RecordActivity" />
-        <activity android:name=".Activity.TestActivity"></activity>
+        <activity android:name=".Activity.RecordActivity"
+            android:label="Record"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.TestActivity"/>
     </application>
 
 </manifest>

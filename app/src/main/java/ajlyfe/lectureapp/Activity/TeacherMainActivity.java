@@ -31,35 +31,6 @@ import ajlyfe.lectureapp.Utils;
 
 public class TeacherMainActivity extends AppCompatActivity {
 
-    // Storage Permissions variables
-    private static final int PERMISSIONS_REQUEST_CODE = 1;
-    private static String[] PERMISSIONS = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.RECORD_AUDIO
-    };
-
-    public static void verifyStoragePermissions(Activity activity) {
-        ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSIONS_REQUEST_CODE: {
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Granted
-                } else {
-                    //Denied
-                }
-                break;
-            }
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Utils.setCustomTheme(this);
@@ -69,8 +40,6 @@ public class TeacherMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         fadeCircle();
-
-        verifyStoragePermissions(this);
 
         File lectureDirectory = new File("/sdcard/RecoLecture/");
         lectureDirectory.mkdirs();

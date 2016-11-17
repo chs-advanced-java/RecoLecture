@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         }, new Random().nextInt(2500) + 500);
 
         Utils.setCustomTheme(this);
+        Utils.verifyStoragePermissions(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -95,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }, 5000);
             }
-        } else { // stupid user is new, and i hate them.
+        } else {
             startLogin();
         }
     }
@@ -127,15 +128,6 @@ public class LoginActivity extends AppCompatActivity {
         final ViewGroup passwordCrouton = (ViewGroup) findViewById(R.id.passwordCrouton);
         final ViewGroup usernameCrouton = (ViewGroup) findViewById(R.id.usernameCrouton);
 
-        //Backdoor, solely for testing
-        Button testButton = (Button) findViewById(R.id.testButton);
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, TestActivity.class));
-            }
-        });
-        //End backdoor
 
         preferenceEditor = preferenceSettings.edit();
 

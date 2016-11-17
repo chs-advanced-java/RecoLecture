@@ -1,114 +1,74 @@
 package ajlyfe.lectureapp.Activity;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.content.Intent;
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
-import java.io.IOException;
-
+import ajlyfe.lectureapp.Fragment.RecordFragment;
+import ajlyfe.lectureapp.Fragment.SaveFragment;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
 public class RecordActivity extends AppCompatActivity {
 
-    Button play,stop,record;
-    private MediaRecorder myAudioRecorder;
-    private String outputFile = null;
+    @IdRes public static final int ROOT_ACTIVITY = R.id.activity_record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Utils.setCustomTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        play = (Button)findViewById(R.id.play);
-        stop = (Button)findViewById(R.id.stop);
-        record = (Button)findViewById(R.id.record);
+        RecordFragment recordFragment = new RecordFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(ROOT_ACTIVITY, recordFragment)
+                .commit();
 
-        stop.setEnabled(false);
-        play.setEnabled(false);
-
-        outputFile = "/sdcard/RecoLecture/recording.3gp";
-
-        myAudioRecorder = new MediaRecorder();
-        myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-        myAudioRecorder.setOutputFile(outputFile);
-
-        record.setOnClickListener(new View.OnClickListener() {
+        /*
+        recordFragment.getSaveButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    myAudioRecorder.prepare();
-                    myAudioRecorder.start();
-                }
-
-                catch (IllegalStateException e) {
-                    e.printStackTrace();
-                }
-
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                record.setEnabled(false);
-                stop.setEnabled(true);
+                SaveFragment saveFragment = new SaveFragment();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(ROOT_ACTIVITY, saveFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
+           */
 
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
+    }
 
-                    myAudioRecorder.stop();
-                    myAudioRecorder.release();
-                    myAudioRecorder = null;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-                    stop.setEnabled(false);
-                    play.setEnabled(true);
-                }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(RecordActivity.this, SettingsActivity.class));
+                return true;
 
-                catch (IllegalStateException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        });
+            case android.R.id.home:
+                finish();
+        }
 
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) throws IllegalArgumentException,SecurityException,IllegalStateException {
-                MediaPlayer m = new MediaPlayer();
-
-                try {
-                    m.setDataSource(outputFile);
-                }
-
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    m.prepare();
-                }
-
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                m.start();
-            }
-        });
+        return super.onOptionsItemSelected(item);
     }
 }
