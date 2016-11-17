@@ -21,11 +21,12 @@ import ajlyfe.lectureapp.Utils;
 public class SettingsActivity extends AppCompatActivity {
 
     private static final String PREF_DARK_THEME = "useDarkTheme";
-    private static final String PREF_NAME = "settings";
+    private static final String PREF_NAME_SETTINGS = "settings";
+    private static final String PREF_NAME_GENERAL = "Classes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME_SETTINGS, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
         if (useDarkTheme) {
@@ -40,6 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         RelativeLayout username = (RelativeLayout) findViewById(R.id.changeUsername);
         RelativeLayout password = (RelativeLayout) findViewById(R.id.changePassword);
+        RelativeLayout signOut = (RelativeLayout) findViewById(R.id.signOut);
         final RelativeLayout darkTheme = (RelativeLayout) findViewById(R.id.darkTheme);
         final Switch darkThemeSwitch = (Switch) findViewById(R.id.darkThemeSwitch);
         darkThemeSwitch.setChecked(useDarkTheme);
@@ -60,6 +62,17 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Destroy user
+                getSharedPreferences(PREF_NAME_GENERAL, MODE_PRIVATE).edit().clear().apply();
+                getSharedPreferences(PREF_NAME_SETTINGS, MODE_PRIVATE).edit().clear().apply();
+
+                startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
+            }
+        });
+
         darkTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,23 +87,10 @@ public class SettingsActivity extends AppCompatActivity {
                 toggleTheme(isChecked);
             }
         });
-
-        /*
-
-
-        Button signOut = (Button) findViewById(R.id.signOut);
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                preferenceEditor.putBoolean("loggedIn", false);
-                preferenceEditor.commit();
-                startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
-            }
-        });*/
     }
 
     private void toggleTheme(boolean darkTheme) {
-        SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME_SETTINGS, MODE_PRIVATE).edit();
         editor.putBoolean(PREF_DARK_THEME, darkTheme);
         editor.apply();
 

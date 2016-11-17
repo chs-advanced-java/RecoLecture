@@ -126,6 +126,27 @@
 
     </RelativeLayout>
 
+    <RelativeLayout android:id="@+id/signOut"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@id/darkTheme"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign out"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/divider_color"/>
+
+    </RelativeLayout>
+
 
     <!--
 
