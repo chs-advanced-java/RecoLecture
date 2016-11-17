@@ -116,8 +116,8 @@ public class TeacherClassOverview extends AppCompatActivity {
 
                 Set<String> set = new HashSet<>();
                 for(int x = 0; x < classes.size(); x++) {
-                    set.add(classes.get(x).getClassName());
-                }
+                    set.add(classes.get(x).getClassName());}
+
                 preferenceEditor.putStringSet("KeyTeacher", set);
                 preferenceEditor.commit();
 
