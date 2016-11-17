@@ -54,4 +54,13 @@ public class CodeGenerator {
             }
         }
     }
+
+    public ArrayList<String> getClassCodes(){
+        return classCodes;
+    }
+
+    public void setClassCodes(ArrayList<String> codes){
+        classCodes = codes;
+    }
+
 }
