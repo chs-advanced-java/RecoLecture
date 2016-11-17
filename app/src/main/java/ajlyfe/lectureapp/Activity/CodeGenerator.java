@@ -15,10 +15,11 @@ public class CodeGenerator {
             "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-    public String generate(){
+    public void generate(){
         String code = "";
         boolean generating = true;
         Random r = new Random();
+        boolean exc = false;
         while (generating){
             String char1 = character[r.nextInt(61)];
             String char2 = character[r.nextInt(61)];
@@ -29,8 +30,13 @@ public class CodeGenerator {
             String char7 = character[r.nextInt(61)];
             String char8 = character[r.nextInt(61)];
             code = char1 + char2 + char3 + char4 + char5 + char6 + char7 + char8;
-
-            if (classCodes.equals(null)){
+            try{
+                classCodes.get(0);
+            }
+            catch (IndexOutOfBoundsException e){
+                exc = true;
+            }
+            if (exc){
                 classCodes.add(code);
                 generating = false;
             }
@@ -47,7 +53,5 @@ public class CodeGenerator {
                 }
             }
         }
-        return code;
     }
-
 }
