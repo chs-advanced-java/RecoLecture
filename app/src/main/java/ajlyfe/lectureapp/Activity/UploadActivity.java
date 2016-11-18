@@ -90,7 +90,6 @@ public class UploadActivity extends AppIntro {
                     next = (Button) activity1.findViewById(R.id.uploadFileButton);
 
                     final ArrayList<String> lectureCheckboxes = new ArrayList<>();
-                    final int numbChecks = 0;
                     final CheckBox[] checkBoxes = new CheckBox[5];
                     final TextView[] lectureTitles = new TextView[5];
 

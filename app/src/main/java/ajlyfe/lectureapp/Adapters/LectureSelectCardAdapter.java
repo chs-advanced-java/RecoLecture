@@ -18,19 +18,20 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
 
 public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelectCardAdapter.ViewHolder> {
-    private List<LectureSelectCard> lectureSelectList;
+    private ArrayList<LectureSelectCard> lectureSelectList;
     private Context context;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public LectureSelectCardAdapter(@NonNull List<LectureSelectCard> lectures, Context ctx) {
+    public LectureSelectCardAdapter(@NonNull ArrayList<LectureSelectCard> lectures, Context ctx) {
         context = ctx;
         lectureSelectList = lectures;
     }
@@ -108,5 +109,9 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
             this.check = (CheckBox) itemView.findViewById(R.id.fileCheckBox);
 
         }
+    }
+
+    public ArrayList<LectureSelectCard> getArrayList(){
+        return lectureSelectList;
     }
 }

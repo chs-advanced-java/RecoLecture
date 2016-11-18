@@ -24,6 +24,7 @@ import ajlyfe.lectureapp.Utils;
 
 public class FragmentFile extends Fragment {
     private View view;
+    private LectureSelectCardAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,9 +51,14 @@ public class FragmentFile extends Fragment {
         }
 
         RecyclerView recyclerViewFiles = (RecyclerView) view.findViewById(R.id.recyclerViewFileSelect);
-        LectureSelectCardAdapter adapter = new LectureSelectCardAdapter(fileList, view.getContext());
+        adapter = new LectureSelectCardAdapter(fileList, view.getContext());
         recyclerViewFiles.setAdapter(adapter);
         recyclerViewFiles.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+    }
+
+    public ArrayList<LectureSelectCard> getAdapterArrayList(){
+        return adapter.getArrayList();
     }
 
     private ArrayList<LectureCheckbox> parseTemporaryArray(ArrayList<String> tArray) {
