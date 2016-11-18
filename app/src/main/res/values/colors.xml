@@ -22,4 +22,10 @@
     <color name="dividerColor">#20212121</color>
     <color name="dividerColorLight">#20FFFFFF</color>
 
+    <color name="a">#ffaa46</color>
+    <color name="b">#0091a6</color>
+    <color name="c">#00a05f</color>
+    <color name="d">#ff3366</color>
+    <color name="e">#914d99</color>
+    <color name="f">#00301C</color>
 </resources>

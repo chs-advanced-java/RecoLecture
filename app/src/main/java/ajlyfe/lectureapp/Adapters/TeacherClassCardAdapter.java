@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -85,9 +86,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
             TextView title = viewHolder.classTitle;
             title.setText(clss.getClassName());
-
-            TextView teacher = viewHolder.classTeacher;
-            teacher.setText(null);
 
             CardView classCard = viewHolder.card;
             classCard.setOnClickListener(new View.OnClickListener() {
@@ -166,18 +164,19 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView classTitle;
-        TextView classTeacher;
+        TextView classCount;
+        ImageView classCardColor;
         CardView card;
         Toolbar toolbar;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            //NORMAL
+            this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
             this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
-            this.classTeacher = (TextView) itemView.findViewById(R.id.classTeacher);
-            this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
+            this.classCount = (TextView) itemView.findViewById(R.id.classCardStudentCount);
+            this.classCardColor = (ImageView) itemView.findViewById(R.id.classCardColor);
         }
     }
 }

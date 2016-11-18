@@ -10,6 +10,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.app.ActivityCompat;
+import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import java.util.zip.Inflater;
 
 import static android.content.Context.MODE_PRIVATE;
+import static java.security.AccessController.getContext;
 
 public class Utils {
 
@@ -37,6 +39,11 @@ public class Utils {
 
     public static SharedPreferences getPrefs(String prefsFile, Activity activity) {
         return activity.getSharedPreferences(prefsFile, MODE_PRIVATE);
+    }
+    public static int dpToPx(int dp, Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
     }
 
     public static void setCustomTheme(Activity activity) {
