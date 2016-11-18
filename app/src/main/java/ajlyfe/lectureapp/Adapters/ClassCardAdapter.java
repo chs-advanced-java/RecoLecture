@@ -19,9 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.ViewHolder> {
     private List<ClassCard> classList;
@@ -69,6 +71,9 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
             TextView title = viewHolder.classTitle;
             title.setText(clss.getClassName());
+
+            ImageView classColor = viewHolder.classCardColor;
+            classColor.setBackgroundColor(Utils.generateColor());
 
             CardView classCard = viewHolder.card;
             classCard.setOnClickListener(new View.OnClickListener() {

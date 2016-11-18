@@ -31,7 +31,7 @@
         <TextView android:id="@+id/classCardStudentCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Click here to create a class"
+            android:text="Class description will go here but i just need to\ntake up some space right now"
             android:gravity="center"
             android:layout_gravity="center"
             android:textSize="12sp"

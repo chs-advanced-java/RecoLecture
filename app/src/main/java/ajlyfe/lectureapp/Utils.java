@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Random;
 import java.util.zip.Inflater;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -41,11 +43,6 @@ public class Utils {
 
     public static SharedPreferences getPrefs(String prefsFile, Activity activity) {
         return activity.getSharedPreferences(prefsFile, MODE_PRIVATE);
-    }
-    public static int dpToPx(int dp, Context context) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return px;
     }
 
     public static void setCustomTheme(Activity activity) {
@@ -74,7 +71,13 @@ public class Utils {
         return localInflater.inflate(resource, container, attachToRoot);
     }
 
-
+    public static int generateColor() {
+        Random rand = new Random();
+        return Color.argb(255,              //Opacity
+                rand.nextInt(156) + 100,    //R
+                rand.nextInt(156) + 100,    //G
+                rand.nextInt(156) + 100);   //B
+    }
 
     public static void verifyStoragePermissions(Activity activity) {
         ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_CODE);

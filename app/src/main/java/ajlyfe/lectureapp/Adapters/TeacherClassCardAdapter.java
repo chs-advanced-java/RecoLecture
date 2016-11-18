@@ -87,6 +87,9 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
             TextView title = viewHolder.classTitle;
             title.setText(clss.getClassName());
 
+            ImageView classColor = viewHolder.classCardColor;
+            classColor.setBackgroundColor(Utils.generateColor());
+
             CardView classCard = viewHolder.card;
             classCard.setOnClickListener(new View.OnClickListener() {
                 @Override
