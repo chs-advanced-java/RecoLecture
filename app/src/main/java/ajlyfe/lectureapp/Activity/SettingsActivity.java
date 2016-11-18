@@ -23,11 +23,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     private static final String PREF_DARK_THEME = "useDarkTheme";
     private static final String PREF_NAME_SETTINGS = "settings";
-    private static final String PREF_NAME_GENERAL = "Classes";
+    private static final String PREF_NAME_GENERAL = "classes";
+
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences preferences = getSharedPreferences(PREF_NAME_SETTINGS, MODE_PRIVATE);
+        preferences = getSharedPreferences(PREF_NAME_SETTINGS, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
         if (useDarkTheme) {
@@ -104,7 +106,14 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            if (getSharedPreferences(PREF_NAME_GENERAL, MODE_PRIVATE).getBoolean(Utils.PREF_IS_TEACHER, false)) {
+                //User is teacher
+                startActivity(new Intent(SettingsActivity.this, TeacherMainActivity.class));
+            } else {
+                //User is a student
+                startActivity(new Intent(SettingsActivity.this, StudentActivityMain.class));
+            }
+            finishAffinity();
         }
 
         return super.onOptionsItemSelected(item);

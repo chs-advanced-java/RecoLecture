@@ -137,15 +137,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (username.getText().toString().equalsIgnoreCase("student")) {
-                    editor.putBoolean("loggedIn", true);
-                    editor.putBoolean("isTeacher", false);
+                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
+                    editor.putBoolean(Utils.PREF_IS_TEACHER, false);
                     editor.commit();
                     startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
                     finish();
                 }
                 else if (username.getText().toString().equalsIgnoreCase("teacher")) {
-                    editor.putBoolean("loggedIn", true);
-                    editor.putBoolean("isTeacher", true);
+                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
+                    editor.putBoolean(Utils.PREF_IS_TEACHER, true);
                     editor.commit();
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();
