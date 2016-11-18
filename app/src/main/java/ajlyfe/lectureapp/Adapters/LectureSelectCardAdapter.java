@@ -26,16 +26,13 @@ import ajlyfe.lectureapp.R;
 public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelectCardAdapter.ViewHolder> {
     private List<LectureSelectCard> lectureSelectList;
     private Context context;
-    private Activity parentActivity;
-    private boolean checked;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public LectureSelectCardAdapter(@NonNull List<LectureSelectCard> lectures, Context ctx, Activity parentActivity) {
+    public LectureSelectCardAdapter(@NonNull List<LectureSelectCard> lectures, Context ctx) {
         context = ctx;
         lectureSelectList = lectures;
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -66,10 +63,10 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
         if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
             position = viewHolder.getAdapterPosition();
 
-            final LectureSelectCard clss = lectureSelectList.get(position);
+            final LectureSelectCard lecture = lectureSelectList.get(position);
 
             TextView title = viewHolder.lectureSelectTitle;
-            title.setText(clss.getClassName());
+            title.setText(lecture.getFileName());
 
             final CheckBox box = viewHolder.check;
 
@@ -77,13 +74,13 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
             classCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!checked){
+                    if(!lecture.getChecked()){
                         box.setChecked(true);
-                        checked = true;
+                        lecture.setChecked(true);
                     }
                     else{
                         box.setChecked(false);
-                        checked = false;
+                        lecture.setChecked(false);
                     }
                 }
             });
