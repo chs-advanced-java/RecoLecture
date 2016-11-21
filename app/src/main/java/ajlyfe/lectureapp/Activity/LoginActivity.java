@@ -27,9 +27,8 @@ import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int PREFERENCE_MODE_PRIVATE = 0;
-    private SharedPreferences preferenceSettings;
-    private SharedPreferences.Editor preferenceEditor;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +69,15 @@ public class LoginActivity extends AppCompatActivity {
         }, new Random().nextInt(2500) + 500);
 
         Utils.setCustomTheme(this);
-        Utils.verifyStoragePermissions(this);
         super.onCreate(savedInstanceState);
     }
 
     public void checkLoginIn() {
-        preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
+        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        editor = preferences.edit();
 
-        if (preferenceSettings.getBoolean("loggedIn", false)) {
-            if (preferenceSettings.getBoolean("isTeacher", false)) {
+        if (preferences.getBoolean("loggedIn", false)) {
+            if (preferences.getBoolean("isTeacher", false)) {
                 startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -97,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                 }, 5000);
             }
         } else {
+            Utils.verifyStoragePermissions(this);
             startLogin();
         }
     }
@@ -128,9 +128,6 @@ public class LoginActivity extends AppCompatActivity {
         final ViewGroup passwordCrouton = (ViewGroup) findViewById(R.id.passwordCrouton);
         final ViewGroup usernameCrouton = (ViewGroup) findViewById(R.id.usernameCrouton);
 
-
-        preferenceEditor = preferenceSettings.edit();
-
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,16 +137,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (username.getText().toString().equalsIgnoreCase("student")) {
-                    preferenceEditor.putBoolean("loggedIn", true);
-                    preferenceEditor.putBoolean("isTeacher", false);
-                    preferenceEditor.commit();
+                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
+                    editor.putBoolean(Utils.PREF_IS_TEACHER, false);
+                    editor.commit();
                     startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
                     finish();
                 }
                 else if (username.getText().toString().equalsIgnoreCase("teacher")) {
-                    preferenceEditor.putBoolean("loggedIn", true);
-                    preferenceEditor.putBoolean("isTeacher", true);
-                    preferenceEditor.commit();
+                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
+                    editor.putBoolean(Utils.PREF_IS_TEACHER, true);
+                    editor.commit();
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();
                 }

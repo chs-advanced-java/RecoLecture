@@ -98,6 +98,17 @@
                 android:layout_below="@+id/checkText2"
                 />
 
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_sample_name_4"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText3"/>
+
             <CheckBox android:id="@+id/lectureCheck4"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
@@ -126,18 +137,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/checkText4"
                 />
-
-            <TextView
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:id="@+id/checkText4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/lecture_sample_name_4"
-                android:textColor="@color/colorAccent"
-                android:layout_below="@+id/checkText3"
-                android:layout_alignParentStart="true" />
 
         </RelativeLayout>
 

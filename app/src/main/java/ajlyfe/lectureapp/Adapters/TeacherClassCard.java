@@ -3,18 +3,29 @@ package ajlyfe.lectureapp.Adapters;
 import java.util.ArrayList;
 
 public class TeacherClassCard {
-    private String className;
+    private String name;
+    private String description;
 
-    public TeacherClassCard(String cName) {
-        className = cName;
+    public TeacherClassCard(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
-    public String getClassName() {
-        return className;
+    public String getName() {
+        return name;
     }
 
-    public TeacherClassCard setClassName(String cName) {
-        this.className = cName;
+    public TeacherClassCard setName(String cName) {
+        this.name = cName;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public TeacherClassCard setClassDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -23,7 +34,7 @@ public class TeacherClassCard {
 
         //TODO: Pull from the database here::::
         for (int i = 1; i <= 3; i++) {
-            TeacherClassCard tempCard = new TeacherClassCard("Spanish " + i);
+            TeacherClassCard tempCard = new TeacherClassCard("Spanish " + i, "Dummy description from a auto-generated class for testing purposes");
             classList.add(tempCard);
         }
 

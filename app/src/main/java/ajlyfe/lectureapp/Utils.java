@@ -6,23 +6,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.app.ActivityCompat;
+import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Random;
 import java.util.zip.Inflater;
 
 import static android.content.Context.MODE_PRIVATE;
+import static java.security.AccessController.getContext;
 
 public class Utils {
 
-    private static final String PREF_DARK_THEME = "useDarkTheme";
-    private static final String PREF_NAME = "settings";
+    public static final String PREFS_SETTINGS = "settings";
+    public static final String PREFS_CLASSES = "classes";
+    public static final String PREF_DARK_THEME = "useDarkTheme";
+    public static final String PREF_DUMMY_CLASSES = "useDummyClasses";
+    public static final String PREF_LOGGED_IN = "loggedIn";
+    public static final String PREF_IS_TEACHER = "isTeacher";
+    public static final String PREF_CLASS_SET = "classSet";
 
     // Storage Permissions variables
     private static final int PERMISSIONS_REQUEST_CODE = 1;
@@ -32,8 +41,12 @@ public class Utils {
             Manifest.permission.RECORD_AUDIO
     };
 
+    public static SharedPreferences getPrefs(String prefsFile, Activity activity) {
+        return activity.getSharedPreferences(prefsFile, MODE_PRIVATE);
+    }
+
     public static void setCustomTheme(Activity activity) {
-        SharedPreferences preferences = activity.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences preferences = activity.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
         if (useDarkTheme) {
@@ -43,7 +56,7 @@ public class Utils {
 
     public static View setCustomAdapterTheme(Activity activity, LayoutInflater inflater,
                                              @LayoutRes int resource, ViewGroup container, boolean attachToRoot) {
-        SharedPreferences preferences = activity.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences preferences = activity.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
         Context contextThemeWrapper;
 
@@ -58,7 +71,13 @@ public class Utils {
         return localInflater.inflate(resource, container, attachToRoot);
     }
 
-
+    public static int generateColor() {
+        Random rand = new Random();
+        return Color.argb(255,              //Opacity
+                rand.nextInt(156) + 100,    //R
+                rand.nextInt(156) + 100,    //G
+                rand.nextInt(156) + 100);   //B
+    }
 
     public static void verifyStoragePermissions(Activity activity) {
         ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_CODE);

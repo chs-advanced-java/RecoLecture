@@ -4,10 +4,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by adv_java on 11/15/16.
- */
-
 public class CodeGenerator {
 
     ArrayList<String> classCodes = new ArrayList<>();
@@ -54,4 +50,13 @@ public class CodeGenerator {
             }
         }
     }
+
+    public ArrayList<String> getClassCodes(){
+        return classCodes;
+    }
+
+    public void setClassCodes(ArrayList<String> codes){
+        classCodes = codes;
+    }
+
 }

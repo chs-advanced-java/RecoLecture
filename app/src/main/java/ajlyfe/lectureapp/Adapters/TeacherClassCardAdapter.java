@@ -16,35 +16,42 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ajlyfe.lectureapp.Activity.TeacherClassOverview;
 import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCardAdapter.ViewHolder> {
     private List<TeacherClassCard> classList;
     private Context context;
     private Activity parentActivity;
-    private SharedPreferences preferenceSettings;
-    private SharedPreferences.Editor preferenceEditor;
-    private static final int PREFERENCE_MODE_PRIVATE = 0;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public TeacherClassCardAdapter(@NonNull List<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
+    public TeacherClassCardAdapter(List<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;
+        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, parentActivity);
+        editor = preferences.edit();
     }
+
+    /** Since the header is at position 0 in the RecyclerView, we must accommodate for it.
+     *
+     *  TLDR; Just use this method or the code WILL break.
+     *
+     *  onBindViewHolder loops through based on the size of our ArrayList.
+     *  If we don't make our size, one more bigger than it needs to be, we will lose a class.
+     */
 
     @Override
     public int getItemViewType(int position) {
@@ -70,7 +77,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
     public void setClassList(List<TeacherClassCard> l){
         classList = l;
-        notifyItemInserted(classList.size() - 1);
         notifyDataSetChanged();
     }
 
@@ -79,20 +85,23 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         position = viewHolder.getAdapterPosition();
 
         if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
-            final TeacherClassCard clss = classList.get(position);
+            final TeacherClassCard mClass = classList.get(position);
 
             TextView title = viewHolder.classTitle;
-            title.setText(clss.getClassName());
+            title.setText(mClass.getName());
 
-            TextView teacher = viewHolder.classTeacher;
-            teacher.setText(null);
+            TextView classCount = viewHolder.classCount;
+            classCount.setText(mClass.getDescription());
+
+            ImageView classColor = viewHolder.classCardColor;
+            classColor.setBackgroundColor(Utils.generateColor());
 
             CardView classCard = viewHolder.card;
             classCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, TeacherClassView.class);
-                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    intent.putExtra("CLASS_CLICKED", mClass.getName());
                     context.startActivity(intent);
                 }
             });
@@ -102,7 +111,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, TeacherClassView.class);
-                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    intent.putExtra("CLASS_CLICKED", mClass.getName());
                     context.startActivity(intent);
                 }
             });
@@ -127,17 +136,15 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                 public void onClick(DialogInterface dialoginterface, int idk) {
                                     removeAt(finalPosition);
 
-                                    preferenceSettings = context.getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-                                    preferenceEditor = preferenceSettings.edit();
                                     Set<String> set = new HashSet<>();
                                     for (int x = 0; x < classList.size(); x++) {
-                                        set.add(classList.get(x).getClassName());
+                                        set.add(classList.get(x).getName());
                                     }
-                                    preferenceEditor.putStringSet("Key", set);
-                                    preferenceEditor.commit();
+                                    editor.putStringSet("Key", set);
+                                    editor.apply();
 
                                     Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                            "Deleted '" + clss.getClassName() + "' successfully",
+                                            "Deleted '" + mClass.getName() + "' successfully",
                                             Snackbar.LENGTH_LONG)
                                             .setAction("Dandy!", new View.OnClickListener() {
                                                 @Override
@@ -166,18 +173,19 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView classTitle;
-        TextView classTeacher;
+        TextView classCount;
+        ImageView classCardColor;
         CardView card;
         Toolbar toolbar;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            //NORMAL
+            this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
             this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
-            this.classTeacher = (TextView) itemView.findViewById(R.id.classTeacher);
-            this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
+            this.classCount = (TextView) itemView.findViewById(R.id.classCardStudentCount);
+            this.classCardColor = (ImageView) itemView.findViewById(R.id.classCardColor);
         }
     }
 }

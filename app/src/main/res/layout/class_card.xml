@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/classCard"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/class_card_layout"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/class_card_height"
-    app:cardCornerRadius="4dp"
-    android:layout_marginBottom="16dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:gravity="center">
 
-    <RelativeLayout android:id="@+id/classCardLayout"
+    <android.support.v7.widget.CardView android:id="@+id/classCard"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/class_card_padding"
-        android:paddingBottom="@dimen/class_card_padding"
-        android:paddingStart="@dimen/class_card_padding_side"
-        android:paddingEnd="@dimen/class_card_padding_side"
-        android:background="@drawable/chalkboard">
+        android:layout_height="@dimen/class_card_height"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardPreventCornerOverlap="false"
+        card_view:cardCornerRadius="1dp"
+        card_view:cardElevation="2dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
 
-        <android.support.v7.widget.Toolbar android:id="@+id/classCardToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            app:contentInsetLeft="2dp"
-            app:contentInsetStart="2dp"
-            theme="@style/AppTheme.Toolbar">
-
-            <TextView
-                android:id="@+id/className"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Spanish I"
-                android:textSize="30sp"
-                android:textColor="@color/textColorPrimaryLight"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
-
-        </android.support.v7.widget.Toolbar>
-        <!-- Begin card layout -->
-
-        <TextView
-            android:id="@+id/classTeacher"
+        <TextView android:id="@+id/className"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Plumeri"
-            android:textSize="22sp"
-            android:textColor="#eeeeee"
-            android:layout_below="@+id/classCardToolbar"
-            android:layout_marginStart="4dp" />
+            android:text="No Classes!"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="38dp"
+            android:textSize="28sp"
+            />
 
-    </RelativeLayout>
+        <TextView android:id="@+id/classCardStudentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class description will go here but i just need to\ntake up some space right now"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            />
 
-</android.support.v7.widget.CardView>
+        <ImageView android:id="@+id/classCardColor"
+            android:layout_width="40dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@color/a"
+            />
+
+        <android.support.v7.widget.Toolbar android:id="@+id/classCardToolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            />
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -15,12 +15,15 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.ViewHolder> {
     private List<ClassCard> classList;
@@ -69,8 +72,8 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
             TextView title = viewHolder.classTitle;
             title.setText(clss.getClassName());
 
-            TextView teacher = viewHolder.classTeacher;
-            teacher.setText(clss.getTeacherName());
+            ImageView classColor = viewHolder.classCardColor;
+            classColor.setBackgroundColor(Utils.generateColor());
 
             CardView classCard = viewHolder.card;
             classCard.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +144,8 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView classTitle;
-        TextView classTeacher;
+        TextView classCount;
+        ImageView classCardColor;
         CardView card;
         Toolbar toolbar;
 
@@ -151,7 +155,8 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
             this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
             this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
-            this.classTeacher = (TextView) itemView.findViewById(R.id.classTeacher);
+            this.classCount = (TextView) itemView.findViewById(R.id.classCardStudentCount);
+            this.classCardColor = (ImageView) itemView.findViewById(R.id.classCardColor);
         }
     }
 }

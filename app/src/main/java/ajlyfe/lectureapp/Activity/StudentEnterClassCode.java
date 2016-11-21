@@ -28,9 +28,8 @@ import ajlyfe.lectureapp.Utils;
 import static android.R.id.edit;
 
 public class StudentEnterClassCode extends AppCompatActivity {
-    private SharedPreferences preferenceSettings;
-    private SharedPreferences.Editor preferenceEditor;
-    private static final int PREFERENCE_MODE_PRIVATE = 0;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +38,10 @@ public class StudentEnterClassCode extends AppCompatActivity {
         setContentView(R.layout.activity_student_enter_class_code);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        editor = preferences.edit();
 
         Button joinClassButton = (Button) findViewById(R.id.JoinClassButton);
         joinClassButton.setOnClickListener(new View.OnClickListener(){
@@ -49,14 +50,12 @@ public class StudentEnterClassCode extends AppCompatActivity {
                 final EditText enterClassCode =  (EditText) findViewById(R.id.editText3);
                 String classCodeStudent = (String) enterClassCode.getText().toString();
                 if (classCodeStudent.equals("3zb8c27n")) {
-                    preferenceSettings = getSharedPreferences("Classes", PREFERENCE_MODE_PRIVATE);
-                    preferenceEditor = preferenceSettings.edit();
                     Set<String> tempClassList;
-                    tempClassList = preferenceSettings.getStringSet("KeyStudent", null);
+                    tempClassList = preferences.getStringSet("KeyStudent", null);
                     /**Reminder to change class name later!!!**/
                     tempClassList.add("Spanish 4");
-                    preferenceEditor.putStringSet("KeyStudent", tempClassList);
-                    preferenceEditor.commit();
+                    editor.putStringSet("KeyStudent", tempClassList);
+                    editor.apply();
 
                     startActivity(new Intent(StudentEnterClassCode.this, StudentActivityMain.class));
                     startActivity(new Intent(StudentEnterClassCode.this, StudentClassPage.class));
@@ -69,8 +68,6 @@ public class StudentEnterClassCode extends AppCompatActivity {
             }
         });
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    
-
     }
 
     @Override

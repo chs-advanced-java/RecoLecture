@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -61,6 +62,11 @@ public class SaveFragment extends Fragment {
     public void renameFile(String newName) {
         File oldFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + RecordFragment.PLACEHOLDER + ".3gp");
         File newFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + newName + ".3gp");
+
+        /*
+        File parentDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/");
+        File[] files = parentDir.listFiles();
+        */
 
         oldFile.renameTo(newFile);
     }
