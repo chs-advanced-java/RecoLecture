@@ -77,8 +77,6 @@ public class TeacherClassOverview extends AppCompatActivity {
         });
 
         Set<String> errorSet = new HashSet<>();
-        errorSet.add(NULL_CLASS);
-
         if (preferences.getBoolean(Utils.PREF_DUMMY_CLASSES, false)) {
             //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
             errorSet.add("Spanish   3");
@@ -86,6 +84,8 @@ public class TeacherClassOverview extends AppCompatActivity {
             errorSet.add("Spanish   1");
             //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
         }
+
+        errorSet.add(NULL_CLASS);
 
         Set<String> tempClassList = preferences.getStringSet(Utils.PREF_CLASS_SET, errorSet);
 
