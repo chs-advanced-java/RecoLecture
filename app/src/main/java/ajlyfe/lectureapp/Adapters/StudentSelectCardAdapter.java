@@ -23,8 +23,8 @@ import java.util.List;
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
 
-public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelectCardAdapter.ViewHolder> {
-    private List<LectureSelectCard> lectureSelectList;
+public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelectCardAdapter.ViewHolder> {
+    private List<StudentSelectCard> studentSelectList;
     private Context context;
     private Activity parentActivity;
     private boolean checked;
@@ -32,9 +32,9 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public LectureSelectCardAdapter(@NonNull List<LectureSelectCard> lectures, Context ctx, Activity parentActivity) {
+    public StudentSelectCardAdapter(@NonNull List<StudentSelectCard> students, Context ctx, Activity parentActivity) {
         context = ctx;
-        lectureSelectList = lectures;
+        studentSelectList = students;
         this.parentActivity = parentActivity;
     }
 
@@ -48,27 +48,27 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
     }
 
     @Override
-    public LectureSelectCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StudentSelectCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view;
 
         if (viewType == HEADER) {
             view = inflater.inflate(R.layout.student_main_header, parent, false);
         } else {
-            view = inflater.inflate(R.layout.lecture_select_card, parent, false);
+            view = inflater.inflate(R.layout.student_select_card, parent, false);
         }
 
-        return new LectureSelectCardAdapter.ViewHolder(view);
+        return new StudentSelectCardAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final LectureSelectCardAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final StudentSelectCardAdapter.ViewHolder viewHolder, int position) {
         if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
             position = viewHolder.getAdapterPosition();
 
-            final LectureSelectCard clss = lectureSelectList.get(position);
+            final StudentSelectCard clss = studentSelectList.get(position);
 
-            TextView title = viewHolder.lectureSelectTitle;
+            TextView title = viewHolder.studentSelectTitle;
             title.setText(clss.getClassName());
 
             final CheckBox box = viewHolder.check;
@@ -92,23 +92,23 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
 
 
         }
-
     }
+
     @Override
     public int getItemCount() {
-        return lectureSelectList.size();
+        return studentSelectList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView lectureSelectTitle;
+        TextView studentSelectTitle;
         CardView card;
         CheckBox check;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.card = (CardView) itemView.findViewById(R.id.lectureSelectCard);
-            this.lectureSelectTitle = (TextView) itemView.findViewById(R.id.fileName);
-            this.check = (CheckBox) itemView.findViewById(R.id.fileCheckBox);
+            this.card = (CardView) itemView.findViewById(R.id.studentSelectCard);
+            this.studentSelectTitle = (TextView) itemView.findViewById(R.id.studentName);
+            this.check = (CheckBox) itemView.findViewById(R.id.studentCheckBox);
 
         }
     }
