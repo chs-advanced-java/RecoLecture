@@ -17,23 +17,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="64dp"/>
 
-    <CheckBox
-        android:text="David Jobek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/studentBox2"
-        android:layout_below="@+id/studentBox1"
-        android:layout_alignParentStart="true" />
-
-    <CheckBox
-        android:text="Phil Jones"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/studentBox1"
-        android:layout_below="@+id/selectAllButton"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:id="@+id/textViewStudentSelection"
         android:layout_width="wrap_content"
@@ -57,30 +40,6 @@
         android:layout_below="@+id/textViewStudentSelection"
         android:layout_centerHorizontal="true" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/studentBox3"
-        android:layout_below="@+id/studentBox2"
-        android:layout_alignParentStart="true"
-        android:checked="false"
-        android:text="Mike Haynes" />
-
-    <CheckBox
-        android:text="Allen Ramsay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/studentBox5"
-        android:layout_below="@+id/studentBox4"
-        android:layout_alignParentStart="true" />
-
-    <CheckBox
-        android:text="Jane Holland"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/studentBox6"
-        android:layout_below="@+id/studentBox5"
-        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Select All"
@@ -91,12 +50,12 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/selectAllButton" />
 
-    <CheckBox
-        android:text="Tim Wells"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/studentBox4"
-        android:layout_below="@+id/studentBox3"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/recyclerViewStudentSelect"
+        android:layout_above="@+id/uploadStudentButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="21dp"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
