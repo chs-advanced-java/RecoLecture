@@ -51,7 +51,7 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
         View view;
 
         if (viewType == HEADER) {
-            view = inflater.inflate(R.layout.student_main_header, parent, false);
+            view = inflater.inflate(R.layout.lecture_select_main_header, parent, false);
         } else {
             view = inflater.inflate(R.layout.lecture_select_card, parent, false);
         }
@@ -85,10 +85,6 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
                     }
                 }
             });
-
-
-
-
         }
     }
 

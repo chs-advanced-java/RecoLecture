@@ -1,5 +1,6 @@
 package ajlyfe.lectureapp.Activity;
 
+import ajlyfe.lectureapp.Adapters.LectureSelectCard;
 import ajlyfe.lectureapp.Fragment.*;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -28,6 +29,8 @@ public class UploadActivity extends AppIntro {
 
     private Context context;
     private Fragment fragmentUpload;
+    FragmentFile file;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,8 +41,8 @@ public class UploadActivity extends AppIntro {
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // DO NOT WRITE -> setContentView(R.layout.activity_upload);
-
-        Fragment fragmentFile = new FragmentFile();
+        file = new FragmentFile();
+        Fragment fragmentFile = file;
         Fragment fragmentClass = new FragmentClass();
         Fragment fragmentStudents = new FragmentStudents();
         fragmentUpload = new FragmentUpload();
@@ -86,40 +89,28 @@ public class UploadActivity extends AppIntro {
 
             switch (slideNumber) {
                 case 1:
-                    /*
+
                     final Activity activity1 = newFragment.getActivity();
                     next = (Button) activity1.findViewById(R.id.uploadFileButton);
 
-                    final ArrayList<String> lectureCheckboxes = new ArrayList<>();
-                    final CheckBox[] checkBoxes = new CheckBox[5];
-                    final TextView[] lectureTitles = new TextView[5];
+                    final ArrayList<LectureSelectCard> lectureCheckboxes = file.getAdapterArrayList();
+                    final ArrayList<String> lecturesChecked = new ArrayList<>();
 
-                    checkBoxes[0] = (CheckBox) activity1.findViewById(R.id.lectureCheck1);
-                    checkBoxes[1] = (CheckBox) activity1.findViewById(R.id.lectureCheck2);
-                    checkBoxes[2] = (CheckBox) activity1.findViewById(R.id.lectureCheck3);
-                    checkBoxes[3] = (CheckBox) activity1.findViewById(R.id.lectureCheck4);
-                    checkBoxes[4] = (CheckBox) activity1.findViewById(R.id.lectureCheck5);
-
-                    lectureTitles[0] = (TextView) activity1.findViewById(R.id.checkText1);
-                    lectureTitles[1] = (TextView) activity1.findViewById(R.id.checkText2);
-                    lectureTitles[2] = (TextView) activity1.findViewById(R.id.checkText3);
-                    lectureTitles[3] = (TextView) activity1.findViewById(R.id.checkText4);
-                    lectureTitles[4] = (TextView) activity1.findViewById(R.id.checkText5);
 
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             boolean checkedSomething = false;
 
-                            for (int i = 0; i < checkBoxes.length; i++) {
-                                if (checkBoxes[i].isChecked()) {
+                            for (int i = 0; i < lectureCheckboxes.size(); i++) {
+                                if (lectureCheckboxes.get(i).getChecked()) {
                                     checkedSomething = true;
-                                    lectureCheckboxes.add(lectureTitles[i].getText().toString());
+                                    lecturesChecked.add(lectureCheckboxes.get(i).getFileName());
                                 }
                             }
 
                             Bundle args = new Bundle();
-                            args.putStringArrayList("lecturesCheckedOff", lectureCheckboxes);
+                            args.putStringArrayList("lecturesCheckedOff", lecturesChecked);
                             fragmentUpload.setArguments(args);
 
                             if (checkedSomething) {
@@ -130,7 +121,7 @@ public class UploadActivity extends AppIntro {
                         }
                     });
                     break;
-                    */
+
 
                 case 2:
                     final Activity activity2 = newFragment.getActivity();
