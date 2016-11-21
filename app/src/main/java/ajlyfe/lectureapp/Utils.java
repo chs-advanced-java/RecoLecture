@@ -26,12 +26,12 @@ import static java.security.AccessController.getContext;
 public class Utils {
 
     public static final String PREFS_SETTINGS = "settings";
-    public static final String PREFS_CLASSES = "classes";
+    public static final String PREFS_CLASSES = "settings";
     public static final String PREF_DARK_THEME = "useDarkTheme";
     public static final String PREF_DUMMY_CLASSES = "useDummyClasses";
     public static final String PREF_LOGGED_IN = "loggedIn";
     public static final String PREF_IS_TEACHER = "isTeacher";
-    public static final String PREF_CLASS_SET = "classSet";
+    public static final String PREF_CLASS_LIST = "classList";
 
     // Storage Permissions variables
     private static final int PERMISSIONS_REQUEST_CODE = 1;

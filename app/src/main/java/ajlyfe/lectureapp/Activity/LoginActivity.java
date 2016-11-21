@@ -17,13 +17,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Random;
 
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
+
+import static ajlyfe.lectureapp.Activity.TeacherClassOverview.AUTO_DESCRIPTION;
+import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -97,6 +106,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         } else {
             Utils.verifyStoragePermissions(this);
+            SharedPreferences.Editor editor = getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit();
+            editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+
+            ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
+            mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+            mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
+            mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
+            mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
+            mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
+            mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
+
+            Gson gson = new Gson();
+            String json = gson.toJson(mClasses);
+            editor.putString(Utils.PREF_CLASS_LIST, json);
+            editor.apply();
+
             startLogin();
         }
     }

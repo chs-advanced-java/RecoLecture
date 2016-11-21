@@ -2,6 +2,8 @@ package ajlyfe.lectureapp.Adapters;
 
 import java.util.ArrayList;
 
+import ajlyfe.lectureapp.Activity.TeacherClassOverview;
+
 public class TeacherClassCard {
     private String name;
     private String description;
@@ -27,6 +29,10 @@ public class TeacherClassCard {
     public TeacherClassCard setClassDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public boolean isDummy() {
+        return description.equals(TeacherClassOverview.AUTO_DESCRIPTION);
     }
 
     public static ArrayList<TeacherClassCard> createList(int numClasses) {

@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,14 +17,22 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+
+import static ajlyfe.lectureapp.Activity.TeacherClassOverview.AUTO_DESCRIPTION;
+import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -130,6 +139,45 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putBoolean(Utils.PREF_DUMMY_CLASSES, dummyClassesEnabled);
         editor.apply();
 
+        editor = getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit();
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
+        String json = preferences.getString(Utils.PREF_CLASS_LIST, null);
+        ArrayList<TeacherClassCard> mClasses = gson.fromJson(json, type);
+
+        if (mClasses.size() > 0) {
+            mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+        } else {
+            mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+        }
+
+        if (dummyClassesEnabled) {
+            mClasses.clear();
+            mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+            mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
+            mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
+            mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
+            mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
+            mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
+
+            json = gson.toJson(mClasses);
+            editor.putString(Utils.PREF_CLASS_LIST, json);
+        } else {
+            for (int i = 0; i < mClasses.size(); i++) {
+                if (mClasses.get(i).isDummy()) {
+                    mClasses.remove(i);
+                }
+            }
+
+            json = gson.toJson(mClasses);
+            editor.putString(Utils.PREF_CLASS_LIST, json);
+        }
+
+        editor.apply();
+
+        /*
+
         if (dummyClassesEnabled) {
             editor = getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit();
 
@@ -160,6 +208,8 @@ public class SettingsActivity extends AppCompatActivity {
             editor.putStringSet(Utils.PREF_CLASS_SET, newSet);
             editor.apply();
         }
+
+        */
     }
 
     @Override
