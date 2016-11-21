@@ -5,52 +5,44 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.view.View;
-import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.zip.Inflater;
 
 import ajlyfe.lectureapp.*;
-import ajlyfe.lectureapp.Adapters.ClassCard;
-import ajlyfe.lectureapp.Adapters.ClassCardAdapter;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCardAdapter;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
-import io.codetail.widget.RevealFrameLayout;
-import io.codetail.widget.RevealLinearLayout;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class TeacherClassOverview extends AppCompatActivity {
 
     private boolean creatingClass = false;
-    FloatingActionButton fab;
+    private FloatingActionButton fab;
+    private ArrayList<TeacherClassCard> classes = new ArrayList<>();
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -83,70 +75,85 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
         });
 
-        RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
-
         Set<String> errorSet = new HashSet<>();
         errorSet.add("Spanish 3");
         errorSet.add("Spanish 2");
         errorSet.add("Spanish 1");
-        errorSet.add(null);
         Set<String> tempClassList;
 
         tempClassList = preferences.getStringSet("KeyTeacher", errorSet);
         String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
-        final ArrayList<TeacherClassCard> classes = new ArrayList<>();
-        for(int y = 0; y < tempClassArray.length; y++) {
-            classes.add(new TeacherClassCard(tempClassArray[y]));
+        for (String i : tempClassArray) {
+            classes.add(new TeacherClassCard(i, "Dummy description from a auto-generated\nclass for testing purposes"));
         }
 
+        RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
         final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
         OverScrollDecoratorHelper.setUpOverScroll(recyclerViewMainTeacher, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
-        final EditText newClassName =  (EditText) findViewById(R.id.className);
-        Button teacherCreateClassButton = (Button) findViewById(R.id.teacherCreateClassButton);
-        teacherCreateClassButton.setOnClickListener(new View.OnClickListener() {
+        final EditText classNameET =  (EditText) findViewById(R.id.className);
+        final EditText classDescriptionET = (EditText) findViewById(R.id.classDescription);
+
+        findViewById(R.id.teacherCreateClassButton).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                final String newClassCardLabel =  newClassName.getText().toString();
-                TeacherClassCard newClass = new TeacherClassCard(newClassCardLabel);
-                classes.add(newClass);
-                adapter.setClassList(classes);
+            public void onClick(View view) {
+                final String className =  classNameET.getText().toString();
+                final String classDescription = classDescriptionET.getText().toString();
 
-                Set<String> set = new HashSet<>();
-                for(int x = 0; x < classes.size(); x++) {
-                    set.add(classes.get(x).getClassName());}
+                if (!className.equals("") || !classDescription.equals("")) { // Proceed
+                    classes.add(new TeacherClassCard(className, classDescription));
+                    adapter.setClassList(classes);
 
-                editor.putStringSet("KeyTeacher", set);
-                editor.apply();
-
-                AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
-                View dialogView = View.inflate(getApplicationContext(), R.layout.create_class_dialog, null);
-                RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
-                actionMessage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i = new Intent(Intent.ACTION_SEND);
-                        i.setType("message/rfc822");
-                        i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture");
-                        i.putExtra(Intent.EXTRA_TEXT   , "Use the code 3zb8c27n to join my class \""
-                                + newClassCardLabel + ".\"");
-                        try {
-                            startActivity(Intent.createChooser(i, "Send mail..."));
-                        } catch (android.content.ActivityNotFoundException ex) {
-                            Snackbar.make(view, "There are no email clients installed", Snackbar.LENGTH_SHORT);
-                        }
+                    Set<String> set = new HashSet<>();
+                    for (int x = 0; x < classes.size(); x++) {
+                        set.add(classes.get(x).getName());
                     }
-                });
-                dialog.setTitle("Attention!")
-                        .setView(dialogView)
-                        .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialoginterface, int idk) {
-                                onBackPressed();
 
+                    editor.putStringSet("KeyTeacher", set);
+                    editor.apply();
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
+                    View dialogView = View.inflate(getApplicationContext(), R.layout.create_class_dialog, null);
+                    RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
+                    actionMessage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent i = new Intent(Intent.ACTION_SEND);
+                            i.setType("message/rfc822");
+                            i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture");
+                            i.putExtra(Intent.EXTRA_TEXT, "Use the code 3zb8c27n to join my class \""
+                                    + className + ".\"");
+                            try {
+                                startActivity(Intent.createChooser(i, "Send mail..."));
+                            } catch (android.content.ActivityNotFoundException ex) {
+                                Snackbar.make(view, "There are no email clients installed", Snackbar.LENGTH_SHORT);
                             }
-                        }).show();
+                        }
+                    });
+                    dialog.setTitle("Attention!")
+                            .setView(dialogView)
+                            .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialoginterface, int idk) {
+                                    onBackPressed();
+
+                                }
+                            }).show();
+                }
+                else { // One of the fields is empty
+                    if (className.equals("")) {
+                        TextInputLayout classNameTIL = (TextInputLayout) findViewById(R.id.inputLayoutClassName);
+                        classNameTIL.setErrorEnabled(true);
+                        classNameTIL.setError("This field cannot be empty");
+                    }
+
+                    if (classDescription.equals("")) {
+                        TextInputLayout classDescriptionTIL = (TextInputLayout) findViewById(R.id.inputLayoutClassDescription);
+                        classDescriptionTIL.setErrorEnabled(true);
+                        classDescriptionTIL.setError("This field cannot be empty");
+                    }
+                }
             }
         });
     }

@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
         }, new Random().nextInt(2500) + 500);
 
         Utils.setCustomTheme(this);
-        Utils.verifyStoragePermissions(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -97,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                 }, 5000);
             }
         } else {
+            Utils.verifyStoragePermissions(this);
             startLogin();
         }
     }
