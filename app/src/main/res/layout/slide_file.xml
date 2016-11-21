@@ -16,13 +16,126 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="64dp"/>
 
-    <android.support.v7.widget.RecyclerView
+    <ScrollView
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:layout_above="@+id/uploadFileButton"
         android:id="@+id/recyclerViewFileSelect"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
     </android.support.v7.widget.RecyclerView>
+=======
+        android:layout_height="match_parent"
+        android:layout_below="@+id/description"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:id="@+id/scrollView">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_sample_name_1"
+                android:textColor="@color/colorAccent" />
+
+            <CheckBox android:id="@+id/lectureCheck1"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_sample_name_2"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText1"/>
+
+            <CheckBox android:id="@+id/lectureCheck2"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText1"
+                />
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_sample_name_3"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText2"/>
+
+            <CheckBox android:id="@+id/lectureCheck3"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText2"
+                />
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_sample_name_4"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText3"/>
+
+            <CheckBox android:id="@+id/lectureCheck4"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText3"
+                />
+
+            <TextView
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/checkText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/lecture_sample_name_5"
+                android:textColor="@color/colorAccent"
+                android:layout_below="@+id/checkText4"/>
+
+            <CheckBox android:id="@+id/lectureCheck5"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/checkText4"
+                />
+
+        </RelativeLayout>
+
+    </ScrollView>
+>>>>>>> origin/master
 
 </RelativeLayout>
