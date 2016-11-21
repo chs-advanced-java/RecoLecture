@@ -40,7 +40,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     public TeacherClassCardAdapter(List<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
         classList = classes;
-        accommodateHeader();
         this.parentActivity = parentActivity;
         preferences = Utils.getPrefs(Utils.PREFS_CLASSES, parentActivity);
         editor = preferences.edit();
@@ -53,9 +52,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
      *  onBindViewHolder loops through based on the size of our ArrayList.
      *  If we don't make our size, one more bigger than it needs to be, we will lose a class.
      */
-    private void accommodateHeader() {
-        classList.add(0, null);
-    }
 
     @Override
     public int getItemViewType(int position) {

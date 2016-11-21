@@ -130,10 +130,39 @@
 
     </RelativeLayout>
 
-    <RelativeLayout android:id="@+id/signOut"
+    <RelativeLayout android:id="@+id/dummyClasses"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_below="@id/darkTheme"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable dummy classes (developer)"
+            android:layout_marginStart="16dp"
+            android:layout_centerVertical="true"/>
+
+        <Switch android:id="@+id/dummyClassesSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_alignParentBottom="true"
+            android:background="?dividerColor"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/signOut"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@id/dummyClasses"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true">
 

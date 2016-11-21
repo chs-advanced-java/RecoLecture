@@ -43,6 +43,7 @@ public class TeacherClassOverview extends AppCompatActivity {
     private boolean creatingClass = false;
     private FloatingActionButton fab;
     private ArrayList<TeacherClassCard> classes = new ArrayList<>();
+    public static final String NULL_CLASS = "Header (NOT a class), could be null but i don't want it to";
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -76,15 +77,21 @@ public class TeacherClassOverview extends AppCompatActivity {
         });
 
         Set<String> errorSet = new HashSet<>();
-        errorSet.add("Spanish 3");
-        errorSet.add("Spanish 2");
-        errorSet.add("Spanish 1");
-        Set<String> tempClassList;
+        errorSet.add(NULL_CLASS);
 
-        tempClassList = preferences.getStringSet("KeyTeacher", errorSet);
+        if (preferences.getBoolean(Utils.PREF_DUMMY_CLASSES, false)) {
+            //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
+            errorSet.add("Spanish   3");
+            errorSet.add("Spanish   2");
+            errorSet.add("Spanish   1");
+            //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
+        }
+
+        Set<String> tempClassList = preferences.getStringSet(Utils.PREF_CLASS_SET, errorSet);
+
         String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
         for (String i : tempClassArray) {
-            classes.add(new TeacherClassCard(i, "Dummy description from a auto-generated\nclass for testing purposes"));
+            classes.add(new TeacherClassCard(i, "Dummy description for an auto-generated\nclass for testing purposes"));
         }
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
@@ -111,7 +118,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                         set.add(classes.get(x).getName());
                     }
 
-                    editor.putStringSet("KeyTeacher", set);
+                    editor.putStringSet(Utils.PREF_CLASS_SET, set);
                     editor.apply();
 
                     AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
