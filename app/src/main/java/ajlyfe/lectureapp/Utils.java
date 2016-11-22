@@ -17,8 +17,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.zip.Inflater;
+
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 
 import static android.content.Context.MODE_PRIVATE;
 import static java.security.AccessController.getContext;
@@ -42,6 +49,22 @@ public class Utils {
 
     public static SharedPreferences getPrefs(String prefsFile, Activity activity) {
         return activity.getSharedPreferences(prefsFile, MODE_PRIVATE);
+    }
+
+    public static void setClassList(ArrayList<TeacherClassCard> mClasses, Activity activity) {
+        SharedPreferences.Editor editor = getPrefs(SHARED_PREFERENCES, activity).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mClasses);
+        editor.putString(Utils.PREF_CLASS_LIST, json);
+        editor.apply();
+    }
+
+    public static ArrayList<TeacherClassCard> getClassList(Activity activity) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
+        String json = getPrefs(SHARED_PREFERENCES, activity).getString(Utils.PREF_CLASS_LIST, null);
+
+        return gson.fromJson(json, type);
     }
 
     public static void setCustomTheme(Activity activity) {

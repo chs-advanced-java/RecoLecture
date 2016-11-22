@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +29,7 @@ import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
 public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCardAdapter.ViewHolder> {
-    private List<TeacherClassCard> classList;
+    private ArrayList<TeacherClassCard> classList;
     private Context context;
     private Activity parentActivity;
     private SharedPreferences preferences;
@@ -37,7 +38,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public TeacherClassCardAdapter(List<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
+    public TeacherClassCardAdapter(ArrayList<TeacherClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;
@@ -46,9 +47,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     }
 
     /** Since the header is at position 0 in the RecyclerView, we must accommodate for it.
-     *
-     *  TLDR; Just use this method or the code WILL break.
-     *
      *  onBindViewHolder loops through based on the size of our ArrayList.
      *  If we don't make our size, one more bigger than it needs to be, we will lose a class.
      */
@@ -75,7 +73,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         return new TeacherClassCardAdapter.ViewHolder(view);
     }
 
-    public void setClassList(List<TeacherClassCard> l){
+    public void setClassList(ArrayList<TeacherClassCard> l){
         classList = l;
         notifyDataSetChanged();
     }
@@ -116,9 +114,9 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                 }
             });
 
-            // Add overflow menu
+            // Add overflow_light menu
             mToolbar.inflateMenu(R.menu.teacher_class_card_menu);
-            mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
+            mToolbar.setOverflowIcon(getOverflowIcon());
             final int finalPosition = position;
             mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
@@ -136,12 +134,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                 public void onClick(DialogInterface dialoginterface, int idk) {
                                     removeAt(finalPosition);
 
-                                    Set<String> set = new HashSet<>();
-                                    for (int x = 0; x < classList.size(); x++) {
-                                        set.add(classList.get(x).getName());
-                                    }
-                                    editor.putStringSet("Key", set);
-                                    editor.apply();
+                                    Utils.setClassList(classList, parentActivity);
 
                                     Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
                                             "Deleted '" + mClass.getName() + "' successfully",
@@ -157,6 +150,17 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                     return true;
                 }
             });
+        }
+    }
+
+    private Drawable getOverflowIcon() {
+        boolean darkTheme = context.getSharedPreferences(Utils.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+                .getBoolean(Utils.PREF_DARK_THEME, false);
+
+        if (darkTheme) {
+            return context.getResources().getDrawable(R.drawable.overflow_light);
+        } else {
+            return context.getResources().getDrawable(R.drawable.overflow_dark);
         }
     }
 

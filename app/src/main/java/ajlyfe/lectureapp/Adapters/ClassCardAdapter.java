@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -19,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Random;
 
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
@@ -97,7 +97,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
             // Add overflow menu
             mToolbar.inflateMenu(R.menu.student_class_card_menu);
-            mToolbar.setOverflowIcon(context.getResources().getDrawable(R.drawable.overflow));
+            mToolbar.setOverflowIcon(getOverflowIcon());
             final int finalPosition = position;
             mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
@@ -128,6 +128,17 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                     return true;
                 }
             });
+        }
+    }
+
+    private Drawable getOverflowIcon() {
+        boolean darkTheme = context.getSharedPreferences(Utils.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+                .getBoolean(Utils.PREF_DARK_THEME, false);
+
+        if (darkTheme) {
+            return context.getResources().getDrawable(R.drawable.overflow_light);
+        } else {
+            return context.getResources().getDrawable(R.drawable.overflow_dark);
         }
     }
 

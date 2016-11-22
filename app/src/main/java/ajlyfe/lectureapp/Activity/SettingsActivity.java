@@ -111,7 +111,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dummyClassesSwitch.setChecked(!dummyClassesSwitch.isChecked());
-                toggleDummyClasses(dummyClassesSwitch.isChecked());
             }
         });
 
@@ -149,13 +148,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         if (dummyClassesEnabled) {
-            mClasses.clear();
-            mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
-            mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
-            mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
-            mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
-            mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
-            mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
+            //mClasses.clear();
+            mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+            mClasses.add(new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
+            mClasses.add(new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
+            mClasses.add(new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
+            mClasses.add(new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
+            mClasses.add(new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
 
             json = gson.toJson(mClasses);
             editor.putString(Utils.PREF_CLASS_LIST, json);
