@@ -80,7 +80,7 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
         });
 
-        classes = initializeClassList(preferences.getBoolean(Utils.PREF_DUMMY_CLASSES, false));
+        classes = initializeClassList();
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
         final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
@@ -97,17 +97,14 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final String className =  classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
 
-                if (!className.equals("") || !classDescription.equals("")) { /* Proceed
+                if (!className.equals("") || !classDescription.equals("")) { // Proceed
                     classes.add(new TeacherClassCard(className, classDescription));
                     adapter.setClassList(classes);
 
-                    Set<String> set = new HashSet<>();
-                    for (int x = 0; x < classes.size(); x++) {
-                        set.add(classes.get(x).getName());
-                    }
-
-                    editor.putStringSet(Utils.PREF_CLASS_SET, set);
-                    editor.apply();*/
+                    Gson gson = new Gson();
+                    String json = gson.toJson(classes);
+                    editor.putString(Utils.PREF_CLASS_LIST, json);
+                    editor.apply();
 
                     AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
                     View dialogView = View.inflate(getApplicationContext(), R.layout.create_class_dialog, null);
@@ -153,7 +150,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         });
     }
 
-    private ArrayList<TeacherClassCard> initializeClassList(boolean useDummyClasses) {
+    private ArrayList<TeacherClassCard> initializeClassList() {
         ArrayList<TeacherClassCard> mClasses;
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
 

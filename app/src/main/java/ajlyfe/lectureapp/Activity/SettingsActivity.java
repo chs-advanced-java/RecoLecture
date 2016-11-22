@@ -175,41 +175,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         editor.apply();
-
-        /*
-
-        if (dummyClassesEnabled) {
-            editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
-
-            Set<String> newSet = new HashSet<>();
-
-            //MUST BE FIRST
-            newSet.add(TeacherClassOverview.NULL_CLASS);
-
-            //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
-            newSet.add("Spanish   3");
-            newSet.add("Spanish   2");
-            newSet.add("Spanish   1");
-            //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
-
-            editor.putStringSet(Utils.PREF_CLASS_SET, newSet);
-            editor.apply();
-        } else {
-            SharedPreferences sharedPreferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
-            editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
-
-            Object[] newArray = sharedPreferences.getStringSet(Utils.PREF_CLASS_SET, null).toArray();
-            Set<String> newSet = new HashSet<>();
-            for (int i = 0; i < newArray.length; i++) {
-                if (!newArray[i].toString().contains("Spanish   ")) {
-                    newSet.add(newArray[i].toString());
-                }
-            }
-            editor.putStringSet(Utils.PREF_CLASS_SET, newSet);
-            editor.apply();
-        }
-
-        */
     }
 
     @Override
