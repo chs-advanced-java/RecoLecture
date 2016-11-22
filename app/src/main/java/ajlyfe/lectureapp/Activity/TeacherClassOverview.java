@@ -26,7 +26,10 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +46,8 @@ public class TeacherClassOverview extends AppCompatActivity {
     private boolean creatingClass = false;
     private FloatingActionButton fab;
     private ArrayList<TeacherClassCard> classes = new ArrayList<>();
-    public static final String NULL_CLASS = "Header (NOT a class), could be null but i don't want it to";
+    public static final String NULL_CLASS = "Header Name (NULL)";
+    public static final String AUTO_DESCRIPTION = "Dummy description for an auto-generated\nclass for testing purposes";
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -76,23 +80,7 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
         });
 
-        Set<String> errorSet = new HashSet<>();
-        if (preferences.getBoolean(Utils.PREF_DUMMY_CLASSES, false)) {
-            //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
-            errorSet.add("Spanish   3");
-            errorSet.add("Spanish   2");
-            errorSet.add("Spanish   1");
-            //KEEP SPACES FOR UNIQUE IDENTIFICATION!!!!!!!
-        }
-
-        errorSet.add(NULL_CLASS);
-
-        Set<String> tempClassList = preferences.getStringSet(Utils.PREF_CLASS_SET, errorSet);
-
-        String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
-        for (String i : tempClassArray) {
-            classes.add(new TeacherClassCard(i, "Dummy description for an auto-generated\nclass for testing purposes"));
-        }
+        classes = initializeClassList(preferences.getBoolean(Utils.PREF_DUMMY_CLASSES, false));
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
         final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
@@ -109,7 +97,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final String className =  classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
 
-                if (!className.equals("") || !classDescription.equals("")) { // Proceed
+                if (!className.equals("") || !classDescription.equals("")) { /* Proceed
                     classes.add(new TeacherClassCard(className, classDescription));
                     adapter.setClassList(classes);
 
@@ -119,7 +107,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                     }
 
                     editor.putStringSet(Utils.PREF_CLASS_SET, set);
-                    editor.apply();
+                    editor.apply();*/
 
                     AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
                     View dialogView = View.inflate(getApplicationContext(), R.layout.create_class_dialog, null);
@@ -163,6 +151,18 @@ public class TeacherClassOverview extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private ArrayList<TeacherClassCard> initializeClassList(boolean useDummyClasses) {
+        ArrayList<TeacherClassCard> mClasses;
+        preferences = Utils.getPrefs(Utils.PREFS_SETTINGS, this);
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
+        String json = preferences.getString(Utils.PREF_CLASS_LIST, null);
+        mClasses = gson.fromJson(json, type);
+
+        return mClasses;
     }
 
     private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
