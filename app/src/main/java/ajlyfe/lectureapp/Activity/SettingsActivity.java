@@ -40,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        preferences = getSharedPreferences(Utils.PREFS_SETTINGS, MODE_PRIVATE);
+        preferences = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(Utils.PREF_DARK_THEME, false);
         boolean useDummyClasses = preferences.getBoolean(Utils.PREF_DUMMY_CLASSES, false);
 
@@ -85,8 +85,8 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Destroy user
-                getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit().clear().apply();
-                getSharedPreferences(Utils.PREFS_SETTINGS, MODE_PRIVATE).edit().clear().apply();
+                getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit().clear().apply();
+                getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit().clear().apply();
 
                 startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
             }
@@ -124,7 +124,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void toggleTheme(boolean darkTheme) {
-        SharedPreferences.Editor editor = getSharedPreferences(Utils.PREFS_SETTINGS, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
         editor.putBoolean(Utils.PREF_DARK_THEME, darkTheme);
         editor.apply();
 
@@ -135,21 +135,17 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void toggleDummyClasses(boolean dummyClassesEnabled) {
-        SharedPreferences.Editor editor = getSharedPreferences(Utils.PREFS_SETTINGS, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
         editor.putBoolean(Utils.PREF_DUMMY_CLASSES, dummyClassesEnabled);
-        editor.apply();
-
-        editor = getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit();
 
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
         String json = preferences.getString(Utils.PREF_CLASS_LIST, null);
         ArrayList<TeacherClassCard> mClasses = gson.fromJson(json, type);
 
+        assert mClasses != null;
         if (mClasses.size() > 0) {
             mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
-        } else {
-            mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
         }
 
         if (dummyClassesEnabled) {
@@ -164,11 +160,15 @@ public class SettingsActivity extends AppCompatActivity {
             json = gson.toJson(mClasses);
             editor.putString(Utils.PREF_CLASS_LIST, json);
         } else {
+            ArrayList<TeacherClassCard> keepMe = new ArrayList<>();
+
             for (int i = 0; i < mClasses.size(); i++) {
-                if (mClasses.get(i).isDummy()) {
-                    mClasses.remove(i);
+                if (!mClasses.get(i).isDummy()) {
+                    keepMe.add(mClasses.get(i));
                 }
             }
+
+            mClasses = keepMe;
 
             json = gson.toJson(mClasses);
             editor.putString(Utils.PREF_CLASS_LIST, json);
@@ -179,7 +179,7 @@ public class SettingsActivity extends AppCompatActivity {
         /*
 
         if (dummyClassesEnabled) {
-            editor = getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit();
+            editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
 
             Set<String> newSet = new HashSet<>();
 
@@ -195,8 +195,8 @@ public class SettingsActivity extends AppCompatActivity {
             editor.putStringSet(Utils.PREF_CLASS_SET, newSet);
             editor.apply();
         } else {
-            SharedPreferences sharedPreferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
-            editor = getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit();
+            SharedPreferences sharedPreferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
+            editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
 
             Object[] newArray = sharedPreferences.getStringSet(Utils.PREF_CLASS_SET, null).toArray();
             Set<String> newSet = new HashSet<>();
@@ -215,7 +215,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if (getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).getBoolean(Utils.PREF_IS_TEACHER, false)) {
+            if (getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).getBoolean(Utils.PREF_IS_TEACHER, false)) {
                 //User is teacher
                 startActivity(new Intent(SettingsActivity.this, TeacherMainActivity.class));
             } else {

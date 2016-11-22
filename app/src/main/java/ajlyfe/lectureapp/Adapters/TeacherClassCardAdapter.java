@@ -41,7 +41,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;
-        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, parentActivity);
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
         editor = preferences.edit();
     }
 

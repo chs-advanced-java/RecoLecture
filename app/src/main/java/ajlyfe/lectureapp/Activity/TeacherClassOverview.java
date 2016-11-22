@@ -61,7 +61,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
         editor = preferences.edit();
 
         fab = (FloatingActionButton) findViewById(R.id.fabTeacher);
@@ -155,7 +155,7 @@ public class TeacherClassOverview extends AppCompatActivity {
 
     private ArrayList<TeacherClassCard> initializeClassList(boolean useDummyClasses) {
         ArrayList<TeacherClassCard> mClasses;
-        preferences = Utils.getPrefs(Utils.PREFS_SETTINGS, this);
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
 
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();

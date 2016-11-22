@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void checkLoginIn() {
-        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
         editor = preferences.edit();
 
         if (preferences.getBoolean("loggedIn", false)) {
@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         } else {
             Utils.verifyStoragePermissions(this);
-            SharedPreferences.Editor editor = getSharedPreferences(Utils.PREFS_CLASSES, MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
             editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
 
             ArrayList<TeacherClassCard> mClasses = new ArrayList<>();

@@ -43,7 +43,7 @@ public class StudentActivityMain extends AppCompatActivity {
 
         fadeCircle();
 
-        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
         editor = preferences.edit();
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabStudent);

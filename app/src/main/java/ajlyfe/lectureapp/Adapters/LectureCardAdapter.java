@@ -40,7 +40,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     public LectureCardAdapter(@NonNull List<LectureCard> lectures, Activity parentActivity) {
         lectureList = lectures;
         this.parentActivity = parentActivity;
-        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, parentActivity);
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
         editor = preferences.edit();
     }
 

@@ -25,8 +25,7 @@ import static java.security.AccessController.getContext;
 
 public class Utils {
 
-    public static final String PREFS_SETTINGS = "settings";
-    public static final String PREFS_CLASSES = "settings";
+    public static final String SHARED_PREFERENCES = "shared_preferences";
     public static final String PREF_DARK_THEME = "useDarkTheme";
     public static final String PREF_DUMMY_CLASSES = "useDummyClasses";
     public static final String PREF_LOGGED_IN = "loggedIn";
@@ -46,7 +45,7 @@ public class Utils {
     }
 
     public static void setCustomTheme(Activity activity) {
-        SharedPreferences preferences = activity.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE);
+        SharedPreferences preferences = activity.getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
         if (useDarkTheme) {
@@ -56,7 +55,7 @@ public class Utils {
 
     public static View setCustomAdapterTheme(Activity activity, LayoutInflater inflater,
                                              @LayoutRes int resource, ViewGroup container, boolean attachToRoot) {
-        SharedPreferences preferences = activity.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE);
+        SharedPreferences preferences = activity.getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
         Context contextThemeWrapper;
 

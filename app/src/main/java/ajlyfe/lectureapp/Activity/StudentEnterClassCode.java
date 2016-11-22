@@ -40,7 +40,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        preferences = Utils.getPrefs(Utils.PREFS_CLASSES, this);
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
         editor = preferences.edit();
 
         Button joinClassButton = (Button) findViewById(R.id.JoinClassButton);
