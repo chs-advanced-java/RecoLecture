@@ -44,10 +44,14 @@ public class FragmentFile extends Fragment {
             numbFiles++;
         }
 
-        ArrayList<LectureSelectCard> fileList = new ArrayList<>(numbFiles);
+        ArrayList<LectureSelectCard> fileList = new ArrayList<>();
+        try {
+            for (int y = 0; y < files.length; y++) {
+                fileList.add(new LectureSelectCard(files[y].getName()));
+            }
+        }
+        catch (IndexOutOfBoundsException exc) {
 
-        for(int y = 0; y < files.length; y++){
-            fileList.get(y).setFileName(files[y].getName());
         }
 
         RecyclerView recyclerViewFiles = (RecyclerView) view.findViewById(R.id.recyclerViewFileSelect);
@@ -58,7 +62,12 @@ public class FragmentFile extends Fragment {
     }
 
     public ArrayList<LectureSelectCard> getAdapterArrayList(){
-        return adapter.getArrayList();
+        try {
+            return adapter.getArrayList();
+        }
+        catch(NullPointerException exc) {
+            return new ArrayList<LectureSelectCard>();
+        }
     }
 
     private ArrayList<LectureCheckbox> parseTemporaryArray(ArrayList<String> tArray) {
