@@ -30,79 +30,6 @@
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:id="@+id/scrollView"
-        android:layout_below="@+id/description">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:id="@+id/checkText1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/sampleClass_0"
-                android:textColor="@color/colorAccent" />
-
-            <CheckBox android:id="@+id/spanishOneCheck"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"/>
-
-            <TextView
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:id="@+id/checkText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/sampleClass_1"
-                android:textColor="@color/colorAccent"
-                android:layout_below="@+id/checkText1"/>
-
-            <CheckBox android:id="@+id/spanishTwoCheck"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/checkText1"
-                />
-
-            <TextView
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:id="@+id/checkText3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/sampleClass_2"
-                android:textColor="@color/colorAccent"
-                android:layout_below="@+id/checkText2"/>
-
-            <CheckBox android:id="@+id/spanishThreeCheck"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/checkText2"
-                />
-
-        </RelativeLayout>
-
-    </ScrollView>
-
     <Button android:id="@+id/uploadClassButton"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
@@ -110,5 +37,13 @@
         android:text="@string/button_Upload"
         android:layout_marginBottom="64dp"
         android:layout_alignParentBottom="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerViewClassSelect"
+        android:layout_below="@+id/description"
+        android:layout_marginTop="23dp"
+        android:layout_alignParentStart="true"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
