@@ -18,20 +18,21 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
 
 public class ClassSelectCardAdapter extends RecyclerView.Adapter<ClassSelectCardAdapter.ViewHolder> {
-    private List<ClassSelectCard> classSelectList;
+    private ArrayList<ClassSelectCard> classSelectList;
     private Context context;
     private boolean checked;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public ClassSelectCardAdapter(@NonNull List<ClassSelectCard> classes, Context ctx) {
+    public ClassSelectCardAdapter(@NonNull ArrayList<ClassSelectCard> classes, Context ctx) {
         context = ctx;
         classSelectList = classes;
     }
@@ -99,7 +100,11 @@ public class ClassSelectCardAdapter extends RecyclerView.Adapter<ClassSelectCard
             this.card = (CardView) itemView.findViewById(R.id.classSelectCard);
             this.classSelectTitle = (TextView) itemView.findViewById(R.id.className);
             this.check = (CheckBox) itemView.findViewById(R.id.classCheckBox);
-
         }
     }
+
+    public ArrayList<ClassSelectCard> getArrayList(){
+        return classSelectList;
+    }
+
 }

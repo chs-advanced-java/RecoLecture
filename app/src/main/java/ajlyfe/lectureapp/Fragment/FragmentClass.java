@@ -55,4 +55,13 @@ public class FragmentClass extends Fragment {
         recyclerViewStudents.setAdapter(adapter);
         recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
+
+    public ArrayList<ClassSelectCard> getAdapterArrayList(){
+        try {
+            return adapter.getArrayList();
+        }
+        catch(NullPointerException exc) {
+            return new ArrayList<ClassSelectCard>();
+        }
+    }
 }

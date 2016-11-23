@@ -1,5 +1,6 @@
 package ajlyfe.lectureapp.Activity;
 
+import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.LectureSelectCard;
 import ajlyfe.lectureapp.Fragment.*;
 import ajlyfe.lectureapp.R;
@@ -30,6 +31,7 @@ public class UploadActivity extends AppIntro {
     private Context context;
     private Fragment fragmentUpload;
     FragmentFile file;
+    FragmentClass classes;
 
 
     @Override
@@ -42,6 +44,7 @@ public class UploadActivity extends AppIntro {
 
         // DO NOT WRITE -> setContentView(R.layout.activity_upload);
         file = new FragmentFile();
+        classes = new FragmentClass();
         Fragment fragmentFile = file;
         Fragment fragmentClass = new FragmentClass();
         Fragment fragmentStudents = new FragmentStudents();
@@ -127,17 +130,29 @@ public class UploadActivity extends AppIntro {
                     final Activity activity2 = newFragment.getActivity();
                     next = (Button) activity2.findViewById(R.id.uploadClassButton);
 
+                    final ArrayList<ClassSelectCard> classCheckboxes = classes.getAdapterArrayList();
+                    final ArrayList<String> classesChecked = new ArrayList<>();
+
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            CheckBox spanishOne = (CheckBox) findViewById(R.id.spanishOneCheck);
-                            CheckBox spanishTwo = (CheckBox) findViewById(R.id.spanishTwoCheck);
-                            CheckBox spanishThree = (CheckBox) findViewById(R.id.spanishThreeCheck);
+                            boolean checkedSomething = false;
 
-                            if (spanishOne.isChecked() || spanishTwo.isChecked() || spanishThree.isChecked()) {
-                                pager.setCurrentItem(2);
+                            for (int i = 0; i < classCheckboxes.size(); i++) {
+                                if (classCheckboxes.get(i).getChecked()) {
+                                    checkedSomething = true;
+                                    classesChecked.add(classCheckboxes.get(i).getClassName());
+                                }
+                            }
+
+                            Bundle args = new Bundle();
+                            args.putStringArrayList("classesCheckedOff", classesChecked);
+                            fragmentUpload.setArguments(args);
+
+                            if (checkedSomething) {
+                                pager.setCurrentItem(1);
                             } else {
-                                Toast.makeText(activity2, "Please select a class", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity2, "Please select a class.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
