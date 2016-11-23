@@ -26,16 +26,14 @@ import ajlyfe.lectureapp.R;
 public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelectCardAdapter.ViewHolder> {
     private List<StudentSelectCard> studentSelectList;
     private Context context;
-    private Activity parentActivity;
     private boolean checked;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public StudentSelectCardAdapter(@NonNull List<StudentSelectCard> students, Context ctx, Activity parentActivity) {
+    public StudentSelectCardAdapter(@NonNull List<StudentSelectCard> students, Context ctx) {
         context = ctx;
         studentSelectList = students;
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -87,10 +85,6 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
                     }
                 }
             });
-
-
-
-
         }
     }
 
@@ -111,5 +105,26 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
             this.check = (CheckBox) itemView.findViewById(R.id.studentCheckBox);
 
         }
+    }
+
+    public void toggleAllChecked() {
+        boolean allChecked = true;
+        for(int x = 0; x < studentSelectList.size(); x++){
+            if (studentSelectList.get(x).getChecked()){
+                allChecked = false;
+            }
+        }
+
+        if (allChecked){
+            for (int y = 0; y < studentSelectList.size(); y++){
+                studentSelectList.get(y).setChecked(false);
+            }
+        }
+        else{
+            for (int y = 0; y < studentSelectList.size(); y++){
+                studentSelectList.get(y).setChecked(true);
+            }
+        }
+        notifyDataSetChanged();
     }
 }

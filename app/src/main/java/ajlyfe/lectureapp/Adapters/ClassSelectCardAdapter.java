@@ -26,16 +26,14 @@ import ajlyfe.lectureapp.R;
 public class ClassSelectCardAdapter extends RecyclerView.Adapter<ClassSelectCardAdapter.ViewHolder> {
     private List<ClassSelectCard> classSelectList;
     private Context context;
-    private Activity parentActivity;
     private boolean checked;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public ClassSelectCardAdapter(@NonNull List<ClassSelectCard> classes, Context ctx, Activity parentActivity) {
+    public ClassSelectCardAdapter(@NonNull List<ClassSelectCard> classes, Context ctx) {
         context = ctx;
         classSelectList = classes;
-        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -83,10 +81,6 @@ public class ClassSelectCardAdapter extends RecyclerView.Adapter<ClassSelectCard
                     }
                 }
             });
-
-
-
-
         }
     }
 
