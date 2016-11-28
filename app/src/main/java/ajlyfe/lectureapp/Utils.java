@@ -42,6 +42,13 @@ public class Utils {
     public static final String PREF_IS_TEACHER = "isTeacher";
     public static final String PREF_CLASS_LIST = "classList";
 
+    // Escape characters for security purposes
+    public static final Character[] ESCAPE_CHARACTERS = {
+            '\"',
+            '\'',
+            '&',
+    };
+
     // Storage Permissions variables
     private static final int PERMISSIONS_REQUEST_CODE = 1;
     private static String[] PERMISSIONS = {
@@ -107,22 +114,4 @@ public class Utils {
     public static void verifyStoragePermissions(Activity activity) {
         ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_CODE);
     }
-
-    /*
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSIONS_REQUEST_CODE: {
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Granted
-                } else {
-                    //Denied
-                }
-                break;
-            }
-        }
-    }*/
 }

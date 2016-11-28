@@ -1,9 +1,15 @@
 package ajlyfe.lectureapp.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -147,15 +153,19 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText username = (EditText) findViewById(R.id.username);
         final EditText password = (EditText) findViewById(R.id.password);
-        final ViewGroup passwordCrouton = (ViewGroup) findViewById(R.id.passwordCrouton);
-        final ViewGroup usernameCrouton = (ViewGroup) findViewById(R.id.usernameCrouton);
 
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (password.getText().toString().equalsIgnoreCase("")) {
-                    Crouton.makeText(LoginActivity.this, "Invalid password", Style.ALERT, passwordCrouton).show();
+                    TextInputLayout passwordTIL = (TextInputLayout) findViewById(R.id.passwordHolder);
+                    passwordTIL.setErrorEnabled(true);
+                    passwordTIL.setError("This field cannot be empty");
+                } else if (username.getText().toString().equalsIgnoreCase("")){
+                    TextInputLayout usernameTIL = (TextInputLayout) findViewById(R.id.usernameHolder);
+                    usernameTIL.setErrorEnabled(true);
+                    usernameTIL.setError("This field cannot be empty");
                 }
 
                 if (username.getText().toString().equalsIgnoreCase("student")) {
@@ -164,16 +174,16 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                     startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
                     finish();
-                }
-                else if (username.getText().toString().equalsIgnoreCase("teacher")) {
+                } else if (username.getText().toString().equalsIgnoreCase("teacher")) {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, true);
                     editor.commit();
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();
-                }
-                else {
-                    Crouton.makeText(LoginActivity.this, "Invalid username", Style.ALERT, usernameCrouton).show();
+                } else {
+                    TextInputLayout usernameTIL = (TextInputLayout) findViewById(R.id.usernameHolder);
+                    usernameTIL.setErrorEnabled(true);
+                    usernameTIL.setError("Invalid username");
                 }
             }
         });
@@ -185,5 +195,30 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegistrationScreen.class));
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            //Granted
+        } else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+            View dialogView = View.inflate(getApplicationContext(), R.layout.permissions_denied_dialog, null);
+            dialog.setTitle("Attention!")
+                    .setView(dialogView)
+                    .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialoginterface, int idk) {
+                            finishAffinity();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Utils.verifyStoragePermissions(LoginActivity.this);
+                        }
+                    })
+                    .show();
+        }
     }
 }

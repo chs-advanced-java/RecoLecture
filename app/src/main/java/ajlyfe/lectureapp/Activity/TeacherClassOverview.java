@@ -97,7 +97,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final String className =  classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
 
-                if (!className.equals("") || !classDescription.equals("")) { // Proceed
+                if (!className.equals("") && !classDescription.equals("")) { // Proceed
                     classes.add(new TeacherClassCard(className, classDescription));
                     adapter.setClassList(classes);
                     Utils.setClassList(classes, TeacherClassOverview.this);
