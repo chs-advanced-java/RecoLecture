@@ -66,7 +66,7 @@ public class FragmentFile extends Fragment {
             return adapter.getArrayList();
         }
         catch(NullPointerException exc) {
-            return new ArrayList<LectureSelectCard>();
+            return new ArrayList<>();
         }
     }
 

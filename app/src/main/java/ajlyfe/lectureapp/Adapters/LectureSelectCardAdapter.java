@@ -85,6 +85,20 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
                     }
                 }
             });
+
+            box.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!lecture.getChecked()){
+                        box.setChecked(true);
+                        lecture.setChecked(true);
+                    }
+                    else{
+                        box.setChecked(false);
+                        lecture.setChecked(false);
+                    }
+                }
+            });
         }
 
     }

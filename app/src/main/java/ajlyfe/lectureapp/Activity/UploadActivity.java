@@ -106,7 +106,7 @@ public class UploadActivity extends AppIntro {
                             boolean checkedSomething = false;
 
                             for (int i = 0; i < lectureCheckboxes.size(); i++) {
-                                if (lectureCheckboxes.get(i).getChecked()) {
+                                if (lectureCheckboxes.get(i).getChecked() == true) {
                                     checkedSomething = true;
                                     lecturesChecked.add(lectureCheckboxes.get(i).getFileName());
                                 }

@@ -39,11 +39,9 @@ public class ClassSelectCardAdapter extends RecyclerView.Adapter<ClassSelectCard
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
-            return HEADER;
-        } else {
-            return NORMAL_ITEM;
-        }
+        
+        return NORMAL_ITEM;
+
     }
 
     @Override
@@ -58,32 +56,32 @@ public class ClassSelectCardAdapter extends RecyclerView.Adapter<ClassSelectCard
 
     @Override
     public void onBindViewHolder(final ClassSelectCardAdapter.ViewHolder viewHolder, int position) {
-        if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
-            position = viewHolder.getAdapterPosition();
 
-            final ClassSelectCard clss = classSelectList.get(position);
+        position = viewHolder.getAdapterPosition();
 
-            TextView title = viewHolder.classSelectTitle;
-            title.setText(clss.getClassName());
+        final ClassSelectCard clss = classSelectList.get(position);
 
-            final CheckBox box = viewHolder.check;
+        TextView title = viewHolder.classSelectTitle;
+        title.setText(clss.getClassName());
 
-            CardView classCard = viewHolder.card;
-            classCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(!checked){
-                        box.setChecked(true);
-                        checked = true;
-                    }
-                    else{
-                        box.setChecked(false);
-                        checked = false;
-                    }
+        final CheckBox box = viewHolder.check;
+
+        CardView classCard = viewHolder.card;
+        classCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checked){
+                    box.setChecked(true);
+                    checked = true;
                 }
-            });
-        }
+                else{
+                    box.setChecked(false);
+                    checked = false;
+                }
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

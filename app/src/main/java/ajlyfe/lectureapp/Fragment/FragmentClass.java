@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public class FragmentClass extends Fragment {
         ArrayList<TeacherClassCard> temp = Utils.getClassList(getActivity());
         ArrayList<ClassSelectCard> classes = new ArrayList<>();
         try{
-            for (int x = 0; x < temp.size(); x++){
+            for (int x = 1; x < temp.size(); x++){
                 classes.add(new ClassSelectCard(temp.get(x).getName()));
             }
         }
@@ -50,10 +51,15 @@ public class FragmentClass extends Fragment {
 
         }
 
-        RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewStudentSelect);
-        adapter = new ClassSelectCardAdapter(classes, view.getContext());
-        recyclerViewStudents.setAdapter(adapter);
-        recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewClassSelect);
+        try {
+            adapter = new ClassSelectCardAdapter(classes, view.getContext());
+            recyclerViewStudents.setAdapter(adapter);
+            recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        }
+        catch (NullPointerException exc) {
+            Toast.makeText(getContext(), "Error, User has no classes.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public ArrayList<ClassSelectCard> getAdapterArrayList(){
