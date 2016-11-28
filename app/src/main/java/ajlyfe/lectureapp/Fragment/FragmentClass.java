@@ -50,7 +50,7 @@ public class FragmentClass extends Fragment {
 
         }
 
-        RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewStudentSelect);
+        RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewClassSelect);
         adapter = new ClassSelectCardAdapter(classes, view.getContext());
         recyclerViewStudents.setAdapter(adapter);
         recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
