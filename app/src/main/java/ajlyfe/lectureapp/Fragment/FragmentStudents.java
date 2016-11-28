@@ -38,7 +38,7 @@ public class FragmentStudents extends Fragment {
         return view;
     }
 
-    public void method() {
+    public void method() {/*
         selectAll = (Button) view.findViewById(R.id.selectAllButton);
 
         ArrayList<StudentSelectCard> studentList = new ArrayList<>();
@@ -55,6 +55,6 @@ public class FragmentStudents extends Fragment {
             public void onClick(View v) {
 
             }
-        });
+        });*/
     }
 }

@@ -137,10 +137,7 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
         editor.putBoolean(Utils.PREF_DUMMY_CLASSES, dummyClassesEnabled);
 
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
-        String json = preferences.getString(Utils.PREF_CLASS_LIST, null);
-        ArrayList<TeacherClassCard> mClasses = gson.fromJson(json, type);
+        ArrayList<TeacherClassCard> mClasses = Utils.getClassList(SettingsActivity.this);
 
         assert mClasses != null;
         if (mClasses.size() > 0) {
@@ -156,8 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
             mClasses.add(new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
             mClasses.add(new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
 
-            json = gson.toJson(mClasses);
-            editor.putString(Utils.PREF_CLASS_LIST, json);
+            Utils.setClassList(mClasses, SettingsActivity.this);
         } else {
             ArrayList<TeacherClassCard> keepMe = new ArrayList<>();
 
@@ -169,8 +165,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             mClasses = keepMe;
 
-            json = gson.toJson(mClasses);
-            editor.putString(Utils.PREF_CLASS_LIST, json);
+            Utils.setClassList(mClasses, SettingsActivity.this);
         }
 
         editor.apply();
