@@ -117,10 +117,7 @@ public class LoginActivity extends AppCompatActivity {
             mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
             mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
 
-            Gson gson = new Gson();
-            String json = gson.toJson(mClasses);
-            editor.putString(Utils.PREF_CLASS_LIST, json);
-            editor.apply();
+            Utils.setClassList(mClasses, this);
 
             startLogin();
         }

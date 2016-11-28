@@ -91,7 +91,7 @@ public class UploadActivity extends AppIntro {
             Button next;
 
             switch (slideNumber) {
-                case 1:
+                case 1:/*
 
                     final Activity activity1 = newFragment.getActivity();
                     next = (Button) activity1.findViewById(R.id.uploadFileButton);
@@ -123,10 +123,10 @@ public class UploadActivity extends AppIntro {
                             }
                         }
                     });
-                    break;
+                    break;*/
 
 
-                case 2:
+                case 2:/*
                     final Activity activity2 = newFragment.getActivity();
                     next = (Button) activity2.findViewById(R.id.uploadClassButton);
 
@@ -168,7 +168,7 @@ public class UploadActivity extends AppIntro {
                             pager.setCurrentItem(3);
                         }
                     });
-                    break;
+                    break;*/
 
                 case 4:
                     final Activity activity4 = newFragment.getActivity();
