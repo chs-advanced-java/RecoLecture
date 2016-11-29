@@ -20,9 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
@@ -33,7 +30,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     private Context context;
     private Activity parentActivity;
     private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
@@ -43,7 +39,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         classList = classes;
         this.parentActivity = parentActivity;
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
-        editor = preferences.edit();
     }
 
     /** Since the header is at position 0 in the RecyclerView, we must accommodate for it.

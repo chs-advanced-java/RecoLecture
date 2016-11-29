@@ -2,18 +2,14 @@ package ajlyfe.lectureapp.Activity;
 
 import android.content.Intent;
 import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import ajlyfe.lectureapp.Fragment.RecordFragment;
-import ajlyfe.lectureapp.Fragment.SaveFragment;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 

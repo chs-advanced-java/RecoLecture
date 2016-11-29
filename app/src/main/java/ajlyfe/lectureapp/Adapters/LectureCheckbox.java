@@ -1,7 +1,5 @@
 package ajlyfe.lectureapp.Adapters;
 
-import java.util.ArrayList;
-
 public class LectureCheckbox {
 
     private String lectureTitle;

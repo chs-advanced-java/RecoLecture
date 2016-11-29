@@ -16,9 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;

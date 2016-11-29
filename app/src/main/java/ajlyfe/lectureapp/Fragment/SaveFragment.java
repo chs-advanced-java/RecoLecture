@@ -5,21 +5,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 
 import ajlyfe.lectureapp.R;
 
@@ -27,7 +20,6 @@ public class SaveFragment extends Fragment {
 
     private View view;
     private EditText editText;
-    private TextInputLayout textInputLayout;
     private Button saveButton;
 
     public SaveFragment() {

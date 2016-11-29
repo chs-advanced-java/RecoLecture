@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -23,8 +21,6 @@ import java.util.Set;
 
 import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.ClassCardAdapter;
-import ajlyfe.lectureapp.Adapters.LectureCard;
-import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;

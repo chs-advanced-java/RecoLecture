@@ -11,7 +11,6 @@ import android.util.Log;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.view.MotionEvent;
 import android.widget.MediaController;
-import android.widget.TextView;
 
 import java.io.File;
 

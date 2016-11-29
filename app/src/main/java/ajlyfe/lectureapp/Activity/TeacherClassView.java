@@ -12,18 +12,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ajlyfe.lectureapp.Fragment.FragmentClass;
-import ajlyfe.lectureapp.Fragment.FragmentFile;
-import ajlyfe.lectureapp.Fragment.FragmentStudents;
 import ajlyfe.lectureapp.Fragment.FragmentTabFiles;
 import ajlyfe.lectureapp.Fragment.FragmentTabStudents;
 import ajlyfe.lectureapp.R;

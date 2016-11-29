@@ -7,15 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import ajlyfe.lectureapp.Adapters.LectureCard;
-import ajlyfe.lectureapp.Adapters.LectureCardAdapter;
 import ajlyfe.lectureapp.Adapters.LectureCheckbox;
 import ajlyfe.lectureapp.Adapters.LectureCheckboxAdapter;
 import ajlyfe.lectureapp.R;
@@ -24,8 +18,6 @@ import ajlyfe.lectureapp.Utils;
 public class FragmentUpload extends Fragment {
 
     private View view;
-    private CheckBox checkBox;
-    private Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +36,7 @@ public class FragmentUpload extends Fragment {
         ArrayList<LectureCheckbox> lecturesChecked = parseTemporaryArray(getArguments().getStringArrayList("lecturesCheckedOff"));
 
         RecyclerView recyclerViewLectures = (RecyclerView) view.findViewById(R.id.checkboxRecycler);
-        LectureCheckboxAdapter adapter = new LectureCheckboxAdapter(lecturesChecked, view.getContext());
+        LectureCheckboxAdapter adapter = new LectureCheckboxAdapter(lecturesChecked);
         recyclerViewLectures.setAdapter(adapter);
         recyclerViewLectures.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
