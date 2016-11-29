@@ -1,9 +1,11 @@
 package ajlyfe.lectureapp.Activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -101,7 +103,12 @@ public class LoginActivity extends AppCompatActivity {
                 }, 5000);
             }
         } else {
-            Utils.verifyStoragePermissions(this);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                        shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
+                    Utils.verifyStoragePermissions(this);
+                }
+            }
             SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
             editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
             editor.apply();

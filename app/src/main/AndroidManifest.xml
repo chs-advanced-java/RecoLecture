@@ -51,7 +51,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.LoginActivity"
-            android:label="Log In"
+            android:label="RecoLecture"
             android:windowSoftInputMode="adjustUnspecified"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
