@@ -1,8 +1,5 @@
 package ajlyfe.lectureapp.Adapters;
 
-import android.view.View;
-import android.widget.CheckBox;
-
 import java.util.ArrayList;
 
 public class LectureSelectCard {
