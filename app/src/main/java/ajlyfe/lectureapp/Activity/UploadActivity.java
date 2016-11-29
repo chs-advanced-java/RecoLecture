@@ -1,6 +1,7 @@
 package ajlyfe.lectureapp.Activity;
 
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
+import ajlyfe.lectureapp.Adapters.ClassSelectCardAdapter;
 import ajlyfe.lectureapp.Adapters.LectureSelectCard;
 import ajlyfe.lectureapp.Fragment.*;
 import ajlyfe.lectureapp.R;
@@ -32,6 +33,7 @@ public class UploadActivity extends AppIntro {
     private Fragment fragmentUpload;
     FragmentFile file;
     FragmentClass classes;
+    ClassSelectCardAdapter classAdapter;
 
 
     @Override
@@ -46,7 +48,7 @@ public class UploadActivity extends AppIntro {
         file = new FragmentFile();
         classes = new FragmentClass();
         Fragment fragmentFile = file;
-        Fragment fragmentClass = new FragmentClass();
+        Fragment fragmentClass = classes;
         Fragment fragmentStudents = new FragmentStudents();
         fragmentUpload = new FragmentUpload();
         Fragment fragmentResult = new FragmentResult();
@@ -91,7 +93,7 @@ public class UploadActivity extends AppIntro {
             Button next;
 
             switch (slideNumber) {
-                case 1:/*
+                case 1:
 
                     final Activity activity1 = newFragment.getActivity();
                     next = (Button) activity1.findViewById(R.id.uploadFileButton);
@@ -123,13 +125,12 @@ public class UploadActivity extends AppIntro {
                             }
                         }
                     });
-                    break;*/
+                    break;
 
 
-                case 2:/*
+                case 2:
                     final Activity activity2 = newFragment.getActivity();
                     next = (Button) activity2.findViewById(R.id.uploadClassButton);
-
                     final ArrayList<ClassSelectCard> classCheckboxes = classes.getAdapterArrayList();
                     final ArrayList<String> classesChecked = new ArrayList<>();
 
@@ -145,12 +146,8 @@ public class UploadActivity extends AppIntro {
                                 }
                             }
 
-                            Bundle args = new Bundle();
-                            args.putStringArrayList("classesCheckedOff", classesChecked);
-                            fragmentUpload.setArguments(args);
-
                             if (checkedSomething) {
-                                pager.setCurrentItem(1);
+                                pager.setCurrentItem(2);
                             } else {
                                 Toast.makeText(activity2, "Please select a class.", Toast.LENGTH_SHORT).show();
                             }
@@ -168,7 +165,7 @@ public class UploadActivity extends AppIntro {
                             pager.setCurrentItem(3);
                         }
                     });
-                    break;*/
+                    break;
 
                 case 4:
                     final Activity activity4 = newFragment.getActivity();

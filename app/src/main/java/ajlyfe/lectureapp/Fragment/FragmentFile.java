@@ -8,15 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import ajlyfe.lectureapp.Adapters.LectureCheckbox;
-import ajlyfe.lectureapp.Adapters.LectureCheckboxAdapter;
 import ajlyfe.lectureapp.Adapters.LectureSelectCard;
 import ajlyfe.lectureapp.Adapters.LectureSelectCardAdapter;
 import ajlyfe.lectureapp.R;
@@ -46,7 +42,7 @@ public class FragmentFile extends Fragment {
 
         ArrayList<LectureSelectCard> fileList = new ArrayList<>();
         try {
-            for (int y = 0; y < files.length; y++) {
+            for (int y = 0; y < numbFiles; y++) {
                 fileList.add(new LectureSelectCard(files[y].getName()));
             }
         }

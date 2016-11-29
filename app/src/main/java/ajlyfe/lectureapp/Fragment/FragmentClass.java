@@ -1,24 +1,20 @@
 package ajlyfe.lectureapp.Fragment;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.ClassSelectCardAdapter;
-import ajlyfe.lectureapp.Adapters.StudentSelectCard;
-import ajlyfe.lectureapp.Adapters.StudentSelectCardAdapter;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -26,6 +22,7 @@ import ajlyfe.lectureapp.Utils;
 public class FragmentClass extends Fragment {
     private View view;
     private ClassSelectCardAdapter adapter;
+    public ArrayList<ClassSelectCard> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,14 +30,14 @@ public class FragmentClass extends Fragment {
         // Inflate the layout for this fragment
         view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_class, container, false);
 
-        method();
+        method(getActivity());
 
         return view;
     }
-    public void method() {
+    public void method(Activity activity) {
 
         /**pull classes here, use for loop to convert names to classList**/
-        ArrayList<TeacherClassCard> temp = Utils.getClassList(getActivity());
+        ArrayList<TeacherClassCard> temp = Utils.getClassList(activity);
         ArrayList<ClassSelectCard> classes = new ArrayList<>();
         try{
             for (int x = 1; x < temp.size(); x++){
@@ -54,6 +51,7 @@ public class FragmentClass extends Fragment {
         RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewClassSelect);
         try {
             adapter = new ClassSelectCardAdapter(classes, view.getContext());
+            list = adapter.getArrayList();
             recyclerViewStudents.setAdapter(adapter);
             recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
         }
@@ -64,10 +62,10 @@ public class FragmentClass extends Fragment {
 
     public ArrayList<ClassSelectCard> getAdapterArrayList(){
         try {
-            return adapter.getArrayList();
+            return list;
         }
         catch(NullPointerException exc) {
-            return new ArrayList<ClassSelectCard>();
+            return new ArrayList<>();
         }
     }
 }

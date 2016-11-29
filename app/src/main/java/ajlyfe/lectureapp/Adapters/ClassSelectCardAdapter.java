@@ -70,13 +70,27 @@ public class ClassSelectCardAdapter extends RecyclerView.Adapter<ClassSelectCard
         classCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!checked){
+                if(!clss.getChecked()){
                     box.setChecked(true);
-                    checked = true;
+                    clss.setChecked(true);
                 }
                 else{
                     box.setChecked(false);
-                    checked = false;
+                    clss.setChecked(false);
+                }
+            }
+        });
+
+        box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!clss.getChecked()){
+                    box.setChecked(true);
+                    clss.setChecked(true);
+                }
+                else{
+                    box.setChecked(false);
+                    clss.setChecked(false);
                 }
             }
         });
