@@ -103,12 +103,4 @@
         android:text="No account yet? Create one"
         android:textSize="16dip"/>
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/welcomeDescription"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/testButton" />
-
 </RelativeLayout>

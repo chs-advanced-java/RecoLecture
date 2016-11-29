@@ -51,7 +51,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.LoginActivity"
-            android:label="RecoLecture"
+            android:label="Log In"
+            android:windowSoftInputMode="adjustUnspecified"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,6 +63,7 @@
         <activity
             android:name=".Activity.RegistrationScreen"
             android:label="Register"
+            android:windowSoftInputMode="adjustUnspecified"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.RecordActivity"
             android:label="Record"

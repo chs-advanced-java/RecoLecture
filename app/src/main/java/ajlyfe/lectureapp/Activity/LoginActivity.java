@@ -81,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void checkLoginIn() {
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
-        editor = preferences.edit();
 
         if (preferences.getBoolean("loggedIn", false)) {
             if (preferences.getBoolean("isTeacher", false)) {
@@ -92,8 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     }
                 }, 5000);
-            }
-            else {
+            } else {
                 startActivity(new Intent(LoginActivity.this, StudentActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -106,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             Utils.verifyStoragePermissions(this);
             SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
             editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+            editor.apply();
 
             ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
             mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
@@ -192,7 +191,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
             //Granted
         } else {
             AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
