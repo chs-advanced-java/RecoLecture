@@ -58,4 +58,7 @@ public class CodeGenerator {
         classCodes = codes;
     }
 
+
+    public void blank(){}
 }
+
