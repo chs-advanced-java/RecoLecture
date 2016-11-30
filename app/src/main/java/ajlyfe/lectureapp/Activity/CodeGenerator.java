@@ -57,8 +57,5 @@ public class CodeGenerator {
     public void setClassCodes(ArrayList<String> codes){
         classCodes = codes;
     }
-
-
-    public void blank(){}
 }
 
