@@ -86,7 +86,6 @@ public class UploadActivity extends AppIntro {
 
             switch (slideNumber) {
                 case 1:
-
                     final Activity activity1 = newFragment.getActivity();
                     next = (Button) activity1.findViewById(R.id.uploadFileButton);
 
@@ -100,7 +99,7 @@ public class UploadActivity extends AppIntro {
                             boolean checkedSomething = false;
 
                             for (int i = 0; i < lectureCheckboxes.size(); i++) {
-                                if (lectureCheckboxes.get(i).getChecked() == true) {
+                                if (lectureCheckboxes.get(i).getChecked()) {
                                     checkedSomething = true;
                                     lecturesChecked.add(lectureCheckboxes.get(i).getFileName());
                                 }
