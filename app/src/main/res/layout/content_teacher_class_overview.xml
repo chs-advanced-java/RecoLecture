@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:theme="@style/AppTheme.Accented">
 
-                        <EditText android:id="@+id/className"
+                        <EditText android:id="@+id/newClassNameET"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:theme="@style/AppTheme.Accented"
@@ -77,7 +77,7 @@
                         android:layout_below="@id/inputLayoutClassName"
                         android:theme="@style/AppTheme.Accented">
 
-                        <EditText android:id="@+id/classDescription"
+                        <EditText android:id="@+id/newClassDescriptionET"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textCapWords"

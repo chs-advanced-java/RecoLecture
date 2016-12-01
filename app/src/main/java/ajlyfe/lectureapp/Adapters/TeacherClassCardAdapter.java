@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ajlyfe.lectureapp.Activity.TeacherClassOverview;
 import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -136,18 +138,20 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     }
 
     private View.OnClickListener getOnCardClick(final TeacherClassCardAdapter.ViewHolder viewHolder, final TeacherClassCard mClass) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (viewHolder.classTitle.getText().equals(parentActivity.getString(R.string.no_classes_title))) {
+        if (viewHolder.classTitle.getText().equals(parentActivity.getString(R.string.no_classes_title))) {
+            boolean[] boolArr = { false };
 
-                } else {
+            return TeacherClassOverview.onFABClick(parentActivity, boolArr, (FloatingActionButton) parentActivity.findViewById(R.id.fabTeacher));
+        } else {
+            return new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     Intent intent = new Intent(context, TeacherClassView.class);
                     intent.putExtra("CLASS_CLICKED", mClass.getName());
                     context.startActivity(intent);
                 }
-            }
-        };
+            };
+        }
     }
 
     private Drawable getOverflowIcon() {

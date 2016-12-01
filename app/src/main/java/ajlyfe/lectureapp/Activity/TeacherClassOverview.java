@@ -2,6 +2,7 @@ package ajlyfe.lectureapp.Activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,21 +56,10 @@ public class TeacherClassOverview extends AppCompatActivity {
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
         editor = preferences.edit();
 
+        boolean[] creatingClassArr = { creatingClass };
         fab = (FloatingActionButton) findViewById(R.id.fabTeacher);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                findViewById(R.id.createClassLayout).setVisibility(View.VISIBLE);
-                RelativeLayout layout = (RelativeLayout) findViewById(R.id.classOverviewLayout);
-
-                creatingClass = true;
-                animateButton(fab, findViewById(R.id.revealLayout));
-
-                layout.setEnabled(false);
-                layout.setClickable(false);
-                layout.setVisibility(View.GONE);
-            }
-        });
+        fab.setOnClickListener(onFABClick(TeacherClassOverview.this, creatingClassArr, fab));
+        creatingClass = creatingClassArr[0];
 
         classes = initializeClassList();
 
@@ -79,18 +69,24 @@ public class TeacherClassOverview extends AppCompatActivity {
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
         OverScrollDecoratorHelper.setUpOverScroll(recyclerViewMainTeacher, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
-        final EditText classNameET =  (EditText) findViewById(R.id.className);
-        final EditText classDescriptionET = (EditText) findViewById(R.id.classDescription);
-
         findViewById(R.id.teacherCreateClassButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final EditText classNameET =  (EditText) findViewById(R.id.newClassNameET);
+                final EditText classDescriptionET = (EditText) findViewById(R.id.newClassDescriptionET);
                 final String className =  classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
 
                 if (!className.equals("") && !classDescription.equals("")) { // Proceed
                     classes.add(new TeacherClassCard(className, classDescription));
-                    removeCreateClassCard();
+
+                    for (int i = 0; i < classes.size(); i++) {
+                        if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
+                            classes.remove(i);
+                            Utils.setClassList(classes, TeacherClassOverview.this);
+                        }
+                    }
+
                     adapter.setClassList(classes);
                     Utils.setClassList(classes, TeacherClassOverview.this);
 
@@ -138,6 +134,24 @@ public class TeacherClassOverview extends AppCompatActivity {
         });
     }
 
+    public static View.OnClickListener onFABClick(final Activity activity, final boolean[] creatingClass,
+                                                  final FloatingActionButton fab) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.findViewById(R.id.createClassLayout).setVisibility(View.VISIBLE);
+                RelativeLayout layout = (RelativeLayout) activity.findViewById(R.id.classOverviewLayout);
+
+                creatingClass[0] = true;
+                animateButton(fab, activity.findViewById(R.id.revealLayout));
+
+                layout.setEnabled(false);
+                layout.setClickable(false);
+                layout.setVisibility(View.GONE);
+            }
+        };
+    }
+
     private ArrayList<TeacherClassCard> initializeClassList() {
         ArrayList<TeacherClassCard> classList = Utils.getClassList(this);
 
@@ -148,16 +162,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         return classList;
     }
 
-    private void removeCreateClassCard() {
-        for (int i = 0; i < classes.size(); i++) {
-            if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
-                classes.remove(i);
-                Utils.setClassList(classes, TeacherClassOverview.this);
-            }
-        }
-    }
-
-    private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
+    private static void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
         mFloatingButton.animate()
                 .translationXBy(0)
                 .translationY(0)
@@ -173,7 +178,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                 });
     }
 
-    private void animateReveal(int dx, int dy, final ImageButton mFloatingButton, final View revealLayout) {
+    private static void animateReveal(int dx, int dy, final ImageButton mFloatingButton, final View revealLayout) {
         float finalRadius = hypo(revealLayout.getWidth(), revealLayout.getHeight());
 
         SupportAnimator animator =
