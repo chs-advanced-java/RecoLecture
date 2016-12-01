@@ -26,6 +26,9 @@
     <string name="teacher_home_recordTitle">Record</string>
     <string name="teacher_home_recordDescription">Record a new lecture.</string>
 
+    <string name="no_classes_title">No Classes!</string>
+    <string name="no_classes_description">Click here to create a class</string>
+
     <string name="teacher_class_overviewTitle">Class Overview</string>
     <string name="teacher_class_overviewDescription">Select the class you would like to manage.</string>
 

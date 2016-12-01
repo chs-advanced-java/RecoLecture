@@ -89,63 +89,65 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
             ImageView classColor = viewHolder.classCardColor;
             classColor.setBackgroundColor(Utils.generateColor());
 
-            CardView classCard = viewHolder.card;
-            classCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, TeacherClassView.class);
-                    intent.putExtra("CLASS_CLICKED", mClass.getName());
-                    context.startActivity(intent);
-                }
-            });
+            final CardView classCard = viewHolder.card;
+            classCard.setOnClickListener(getOnCardClick(viewHolder, mClass));
 
             Toolbar mToolbar = viewHolder.toolbar;
-            mToolbar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            mToolbar.setOnClickListener(getOnCardClick(viewHolder, mClass));
+
+            if (!viewHolder.classTitle.getText().equals(parentActivity.getString(R.string.no_classes_title))) {
+                mToolbar.inflateMenu(R.menu.teacher_class_card_menu);
+                mToolbar.setOverflowIcon(getOverflowIcon());
+                final int finalPosition = position;
+                mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                        dialog.setTitle("Warning!")
+                                .setMessage("You are about to permanently delete a class. Are you sure you " +
+                                        "want to do this? This action can NOT be undone.")
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialoginterface, int i) {
+                                        dialoginterface.cancel();
+                                    }
+                                })
+                                .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialoginterface, int idk) {
+                                        removeAt(finalPosition);
+
+                                        Utils.setClassList(classList, parentActivity);
+
+                                        Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
+                                                "Deleted '" + mClass.getName() + "' successfully",
+                                                Snackbar.LENGTH_LONG)
+                                                .setAction("Dandy!", new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) { /*ihateusers*/ }
+                                                })
+                                                .setActionTextColor(Color.parseColor("#FFFFC107"))
+                                                .show();
+                                    }
+                                }).show();
+                        return true;
+                    }
+                });
+            }
+        }
+    }
+
+    private View.OnClickListener getOnCardClick(final TeacherClassCardAdapter.ViewHolder viewHolder, final TeacherClassCard mClass) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewHolder.classTitle.getText().equals(parentActivity.getString(R.string.no_classes_title))) {
+
+                } else {
                     Intent intent = new Intent(context, TeacherClassView.class);
                     intent.putExtra("CLASS_CLICKED", mClass.getName());
                     context.startActivity(intent);
                 }
-            });
-
-            // Add overflow_light menu
-            mToolbar.inflateMenu(R.menu.teacher_class_card_menu);
-            mToolbar.setOverflowIcon(getOverflowIcon());
-            final int finalPosition = position;
-            mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                    dialog.setTitle("Warning!")
-                            .setMessage("You are about to permanently delete a class. Are you sure you " +
-                                    "want to do this? This action can NOT be undone.")
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    dialoginterface.cancel();
-                                }
-                            })
-                            .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int idk) {
-                                    removeAt(finalPosition);
-
-                                    Utils.setClassList(classList, parentActivity);
-
-                                    Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                            "Deleted '" + mClass.getName() + "' successfully",
-                                            Snackbar.LENGTH_LONG)
-                                            .setAction("Dandy!", new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) { /*ihateusers*/ }
-                                            })
-                                            .setActionTextColor(Color.parseColor("#FFFFC107"))
-                                            .show();
-                                }
-                            }).show();
-                    return true;
-                }
-            });
-        }
+            }
+        };
     }
 
     private Drawable getOverflowIcon() {

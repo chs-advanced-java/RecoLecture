@@ -90,6 +90,7 @@ public class TeacherClassOverview extends AppCompatActivity {
 
                 if (!className.equals("") && !classDescription.equals("")) { // Proceed
                     classes.add(new TeacherClassCard(className, classDescription));
+                    removeCreateClassCard();
                     adapter.setClassList(classes);
                     Utils.setClassList(classes, TeacherClassOverview.this);
 
@@ -138,7 +139,22 @@ public class TeacherClassOverview extends AppCompatActivity {
     }
 
     private ArrayList<TeacherClassCard> initializeClassList() {
-        return Utils.getClassList(this);
+        ArrayList<TeacherClassCard> classList = Utils.getClassList(this);
+
+        if (classList.size() == 1) { // User has no classes
+            classList.add(new TeacherClassCard(getString(R.string.no_classes_title), getString(R.string.no_classes_description)));
+        }
+
+        return classList;
+    }
+
+    private void removeCreateClassCard() {
+        for (int i = 0; i < classes.size(); i++) {
+            if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
+                classes.remove(i);
+                Utils.setClassList(classes, TeacherClassOverview.this);
+            }
+        }
     }
 
     private void animateButton(final ImageButton mFloatingButton, final View revealLayout) {
