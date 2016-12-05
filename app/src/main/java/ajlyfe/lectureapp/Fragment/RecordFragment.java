@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import ajlyfe.lectureapp.Activity.RecordActivity;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class RecordFragment extends Fragment {
 
@@ -34,9 +35,7 @@ public class RecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme_Dark_NoActionBar);
-        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
-        view = localInflater.inflate(R.layout.fragment_record, container, false);
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.fragment_record, container, false);
 
         doThings();
 

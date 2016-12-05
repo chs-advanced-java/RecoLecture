@@ -54,7 +54,6 @@ public class FragmentFile extends Fragment {
         adapter = new LectureSelectCardAdapter(fileList, view.getContext());
         recyclerViewFiles.setAdapter(adapter);
         recyclerViewFiles.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
     }
 
     public ArrayList<LectureSelectCard> getAdapterArrayList(){

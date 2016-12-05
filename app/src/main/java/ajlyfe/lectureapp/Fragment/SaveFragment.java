@@ -1,6 +1,7 @@
 package ajlyfe.lectureapp.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.TextInputLayout;
@@ -14,7 +15,9 @@ import android.widget.EditText;
 
 import java.io.File;
 
+import ajlyfe.lectureapp.Activity.TeacherMainActivity;
 import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class SaveFragment extends Fragment {
 
@@ -30,9 +33,7 @@ public class SaveFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme_Dark_NoActionBar);
-        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
-        view = localInflater.inflate(R.layout.fragment_save, container, false);
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.fragment_save, container, false);
 
         doThings();
 
@@ -47,6 +48,7 @@ public class SaveFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 renameFile(editText.getText().toString());
+                startActivity(new Intent(getActivity(), TeacherMainActivity.class));
             }
         });
     }
