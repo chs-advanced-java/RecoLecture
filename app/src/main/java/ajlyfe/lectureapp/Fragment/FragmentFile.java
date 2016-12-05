@@ -1,7 +1,9 @@
 package ajlyfe.lectureapp.Fragment;
 
+import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import ajlyfe.lectureapp.Adapters.LectureCheckbox;
 import ajlyfe.lectureapp.Adapters.LectureSelectCard;
@@ -33,17 +37,17 @@ public class FragmentFile extends Fragment {
     }
     public void doThings() {
         File parentDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/");
-        File[] files = parentDir.listFiles();
-        int numbFiles = 0;
-
-        for(int x = 0; x < files.length; x++){
-            numbFiles++;
-        }
+        File[] filesArray = parentDir.listFiles();
 
         ArrayList<LectureSelectCard> fileList = new ArrayList<>();
+
+        if (fileList.size() == 0) { // Catch null pointer
+            fileList.add(0, new LectureSelectCard("NULL"));
+        }
+
         try {
-            for (int y = 0; y < numbFiles; y++) {
-                fileList.add(new LectureSelectCard(files[y].getName()));
+            for (File thisFile : filesArray) {
+                fileList.add(new LectureSelectCard(thisFile.getName()));
             }
         }
         catch (IndexOutOfBoundsException exc) {
@@ -60,7 +64,7 @@ public class FragmentFile extends Fragment {
         try {
             return adapter.getArrayList();
         }
-        catch(NullPointerException exc) {
+        catch (NullPointerException exc) {
             return new ArrayList<>();
         }
     }
