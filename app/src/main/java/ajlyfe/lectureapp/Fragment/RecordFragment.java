@@ -138,4 +138,8 @@ public class RecordFragment extends Fragment {
             }
         });
     }
+
+    private void doNothing(){
+
+    }
 }
