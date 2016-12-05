@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -47,8 +48,16 @@ public class SaveFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                renameFile(editText.getText().toString());
-                startActivity(new Intent(getActivity(), TeacherMainActivity.class));
+                String text = editText.getText().toString();
+                if (text.length() >= 1) {
+                    renameFile(text);
+                    startActivity(new Intent(getActivity(), TeacherMainActivity.class));
+                }
+                else {
+                    TextInputLayout usernameTIL = (TextInputLayout) view.findViewById(R.id.recordingNameHolder);
+                    usernameTIL.setErrorEnabled(true);
+                    usernameTIL.setError("This field cannot be empty");
+                }
             }
         });
     }
