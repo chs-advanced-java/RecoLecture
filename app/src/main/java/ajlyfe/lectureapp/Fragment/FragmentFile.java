@@ -49,9 +49,8 @@ public class FragmentFile extends Fragment {
             for (File thisFile : filesArray) {
                 fileList.add(new LectureSelectCard(thisFile.getName()));
             }
-        }
-        catch (IndexOutOfBoundsException exc) {
-
+        } catch (IndexOutOfBoundsException exc) {
+            exc.printStackTrace();
         }
 
         RecyclerView recyclerViewFiles = (RecyclerView) view.findViewById(R.id.recyclerViewFileSelect);

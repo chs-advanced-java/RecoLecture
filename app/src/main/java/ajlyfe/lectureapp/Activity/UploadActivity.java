@@ -123,7 +123,6 @@ public class UploadActivity extends AppIntro {
                     final Activity activity2 = newFragment.getActivity();
                     next = (Button) activity2.findViewById(R.id.uploadClassButton);
                     final ArrayList<ClassSelectCard> classCheckboxes = classes.getAdapterArrayList();
-                    final ArrayList<String> classesChecked = new ArrayList<>();
 
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -133,7 +132,6 @@ public class UploadActivity extends AppIntro {
                             for (int i = 0; i < classCheckboxes.size(); i++) {
                                 if (classCheckboxes.get(i).getChecked()) {
                                     checkedSomething = true;
-                                    classesChecked.add(classCheckboxes.get(i).getClassName());
                                 }
                             }
 

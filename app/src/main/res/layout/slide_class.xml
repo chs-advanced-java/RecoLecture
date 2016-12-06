@@ -30,20 +30,28 @@
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true" />
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerViewClassSelect"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/description"
+        android:layout_above="@+id/uploadClassButton"
+        android:layout_alignParentStart="true"/>
+
+    <Space android:id="@+id/space_margin_thingy"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"/>
+
     <Button android:id="@+id/uploadClassButton"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_Upload"
-        android:layout_marginBottom="64dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_marginTop="16dp"
+        android:layout_above="@id/space_margin_thingy" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerViewClassSelect"
-        android:layout_below="@+id/description"
-        android:layout_marginTop="23dp"
-        android:layout_alignParentStart="true"/>
+
 
 </RelativeLayout>

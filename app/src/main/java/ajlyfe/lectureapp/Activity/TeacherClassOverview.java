@@ -3,9 +3,12 @@ package ajlyfe.lectureapp.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -16,13 +19,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
 
@@ -78,44 +88,57 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final String classDescription = classDescriptionET.getText().toString();
 
                 if (!className.equals("") && !classDescription.equals("")) { // Proceed
-                    classes.add(new TeacherClassCard(className, classDescription));
 
-                    for (int i = 0; i < classes.size(); i++) {
-                        if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
-                            classes.remove(i);
-                            Utils.setClassList(classes, TeacherClassOverview.this);
-                        }
+                    MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
+                    builder.title("Attention!")
+                            .customView(R.layout.create_class_dialog, true)
+                            .positiveText("OK!")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    classes.add(new TeacherClassCard(className, classDescription));
+
+                                    for (int i = 0; i < classes.size(); i++) {
+                                        if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
+                                            classes.remove(i);
+                                            Utils.setClassList(classes, TeacherClassOverview.this);
+                                        }
+                                    }
+
+                                    adapter.setClassList(classes);
+                                    Utils.setClassList(classes, TeacherClassOverview.this);
+
+                                    onBackPressed();
+                                }
+                            })
+                            .negativeText("CANCEL")
+                            .canceledOnTouchOutside(false);
+
+                    MaterialDialog dialog = builder.build();
+
+                    View dialogView = dialog.getCustomView();
+
+                    if (dialogView != null) {
+                        RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
+                        actionMessage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent i = new Intent(Intent.ACTION_SEND);
+                                i.setType("message/rfc822");
+                                i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture");
+                                i.putExtra(Intent.EXTRA_TEXT, "Use the code 3zb8c27n to join my class \""
+                                        + className + ".\"");
+                                try {
+                                    startActivity(Intent.createChooser(i, "Send mail..."));
+                                } catch (android.content.ActivityNotFoundException ex) {
+                                    Toast.makeText(TeacherClassOverview.this, "There are no email clients installed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
 
-                    adapter.setClassList(classes);
-                    Utils.setClassList(classes, TeacherClassOverview.this);
+                    dialog.show();
 
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(TeacherClassOverview.this);
-                    View dialogView = View.inflate(getApplicationContext(), R.layout.create_class_dialog, null);
-                    RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
-                    actionMessage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent i = new Intent(Intent.ACTION_SEND);
-                            i.setType("message/rfc822");
-                            i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture");
-                            i.putExtra(Intent.EXTRA_TEXT, "Use the code 3zb8c27n to join my class \""
-                                    + className + ".\"");
-                            try {
-                                startActivity(Intent.createChooser(i, "Send mail..."));
-                            } catch (android.content.ActivityNotFoundException ex) {
-                                Snackbar.make(view, "There are no email clients installed", Snackbar.LENGTH_SHORT);
-                            }
-                        }
-                    });
-                    dialog.setTitle("Attention!")
-                            .setView(dialogView)
-                            .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int idk) {
-                                    onBackPressed();
-
-                                }
-                            }).show();
                 }
                 else { // One of the fields is empty
                     if (className.equals("")) {

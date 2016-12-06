@@ -80,7 +80,7 @@
                         <EditText android:id="@+id/newClassDescriptionET"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textCapWords"
+                            android:inputType="textCapSentences"
                             android:hint="Class Description"
                             android:theme="@style/AppTheme.Accented"/>
 
