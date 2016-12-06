@@ -48,15 +48,27 @@ public class SaveFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String text = editText.getText().toString();
-                if (text.length() >= 1) {
-                    renameFile(text);
-                    startActivity(new Intent(getActivity(), TeacherMainActivity.class));
+                boolean space = false;
+                for (int x = 0; x <= text.length() - 1; x++){
+                    if (text.charAt(x) == ' ') {
+                        space = true;
+                    }
                 }
-                else {
+                if (text.length() < 1) {
                     TextInputLayout usernameTIL = (TextInputLayout) view.findViewById(R.id.recordingNameHolder);
                     usernameTIL.setErrorEnabled(true);
                     usernameTIL.setError("This field cannot be empty");
+                }
+                else if (space) {
+                    TextInputLayout usernameTIL = (TextInputLayout) view.findViewById(R.id.recordingNameHolder);
+                    usernameTIL.setErrorEnabled(true);
+                    usernameTIL.setError("File name cannot contain spaces");
+                }
+                else {
+                    renameFile(text);
+                    startActivity(new Intent(getActivity(), TeacherMainActivity.class));
                 }
             }
         });
