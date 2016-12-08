@@ -38,7 +38,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final EditText enterClassCode =  (EditText) findViewById(R.id.editText3);
-                String classCodeStudent = (String) enterClassCode.getText().toString();
+                String classCodeStudent = enterClassCode.getText().toString();
                 if (classCodeStudent.equals("3zb8c27n")) {
                     Set<String> tempClassList;
                     tempClassList = preferences.getStringSet("KeyStudent", null);

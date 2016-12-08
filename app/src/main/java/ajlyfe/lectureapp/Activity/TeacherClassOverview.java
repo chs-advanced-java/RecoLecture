@@ -103,12 +103,12 @@ public class TeacherClassOverview extends AppCompatActivity {
                                     for (int i = 0; i < classes.size(); i++) {
                                         if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
                                             classes.remove(i);
-                                            Utils.setClassList(classes, TeacherClassOverview.this);
+                                            Utils.setTeacherClassList(classes, TeacherClassOverview.this);
                                         }
                                     }
 
                                     adapter.setClassList(classes);
-                                    Utils.setClassList(classes, TeacherClassOverview.this);
+                                    Utils.setTeacherClassList(classes, TeacherClassOverview.this);
 
                                     onBackPressed();
                                 }
@@ -181,7 +181,7 @@ public class TeacherClassOverview extends AppCompatActivity {
     }
 
     private ArrayList<TeacherClassCard> initializeClassList() {
-        ArrayList<TeacherClassCard> classList = Utils.getClassList(this);
+        ArrayList<TeacherClassCard> classList = Utils.getTeacherClassList(this);
 
         if (classList.size() == 1) { // User has no classes
             classList.add(new TeacherClassCard(getString(R.string.no_classes_title), getString(R.string.no_classes_description)));

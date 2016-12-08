@@ -117,7 +117,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                     public void onClick(DialogInterface dialoginterface, int idk) {
                                         removeAt(finalPosition);
 
-                                        Utils.setClassList(classList, parentActivity);
+                                        Utils.setTeacherClassList(classList, parentActivity);
 
                                         Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
                                                 "Deleted '" + mClass.getName() + "' successfully",

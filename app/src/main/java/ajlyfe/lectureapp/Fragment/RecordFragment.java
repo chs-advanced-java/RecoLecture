@@ -52,12 +52,14 @@ public class RecordFragment extends Fragment {
         play.setEnabled(false);
         save.setEnabled(false);
 
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + PLACEHOLDER + ".3gp";
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + PLACEHOLDER + ".mp3";
 
         myAudioRecorder = new MediaRecorder();
         myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+        myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        myAudioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        myAudioRecorder.setAudioEncodingBitRate(16);
+        myAudioRecorder.setAudioSamplingRate(44100);
         myAudioRecorder.setOutputFile(outputFile);
 
         record.setOnClickListener(new View.OnClickListener() {
@@ -136,9 +138,5 @@ public class RecordFragment extends Fragment {
                         .commit();
             }
         });
-    }
-
-    private void doNothing(){
-
     }
 }

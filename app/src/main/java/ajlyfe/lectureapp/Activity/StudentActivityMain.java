@@ -51,33 +51,12 @@ public class StudentActivityMain extends AppCompatActivity {
         });
 
         RecyclerView recyclerViewStudentMain = (RecyclerView) findViewById(R.id.recyclerViewMainStudent);
-        ClassCardAdapter adapter = new ClassCardAdapter(getClasses(), this, this);
+        ClassCardAdapter adapter = new ClassCardAdapter(Utils.getStudentClassList(this), this, this);
         recyclerViewStudentMain.setAdapter(adapter);
         recyclerViewStudentMain.setLayoutManager(new LinearLayoutManager(this));
         OverScrollDecoratorHelper.setUpOverScroll(recyclerViewStudentMain, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
     }
 
-    public ArrayList<ClassCard> getClasses() {
-        Set<String> tempClassList;
-        tempClassList = preferences.getStringSet("KeyStudent", null);
-        if (tempClassList == null) {
-            Set<String> errorSet = new HashSet<>();
-            errorSet.add("Spanish 1");
-            errorSet.add("Spanish 2");
-            errorSet.add("Spanish 3");
-            tempClassList = errorSet;
-            editor.putStringSet("KeyStudent", tempClassList);
-            editor.commit();
-        }
-        int listSize = tempClassList.size();
-        String[] tempClassArray = tempClassList.toArray(new String[tempClassList.size()]);
-        final ArrayList<ClassCard> classes = ClassCard.createList(listSize);
-        for(int y = 0; y < listSize; y++) {
-            classes.get(y).setClassName(tempClassArray[y]);
-        }
-
-        return classes;
-    }
     private void fadeCircle() {
         final ImageView colorBlock = (ImageView) findViewById(R.id.colorBlock);
         colorBlock.setVisibility(View.VISIBLE);

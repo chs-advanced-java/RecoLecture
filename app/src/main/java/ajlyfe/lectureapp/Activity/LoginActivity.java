@@ -28,6 +28,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -121,20 +122,6 @@ public class LoginActivity extends AppCompatActivity {
                 Utils.verifyStoragePermissions(this);
             }
 
-            SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
-            editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
-            editor.apply();
-
-            ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
-            mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
-            mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
-            mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
-            mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
-            mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
-            mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
-
-            Utils.setClassList(mClasses, this);
-
             startLogin();
         }
     }
@@ -181,13 +168,37 @@ public class LoginActivity extends AppCompatActivity {
                 if (username.getText().toString().equalsIgnoreCase("student")) {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, false);
-                    editor.commit();
+                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+                    editor.apply();
+
+                    ArrayList<ClassCard> mClasses = new ArrayList<>();
+                    mClasses.add(0, new ClassCard(NULL_CLASS, "Header (NULL)"));
+                    mClasses.add(1, new ClassCard("Spanish I", AUTO_DESCRIPTION));
+                    mClasses.add(2, new ClassCard("Spanish II", AUTO_DESCRIPTION));
+                    mClasses.add(3, new ClassCard("Spanish III", AUTO_DESCRIPTION));
+                    mClasses.add(4, new ClassCard("Spanish IV", AUTO_DESCRIPTION));
+                    mClasses.add(5, new ClassCard("Spanish V", AUTO_DESCRIPTION));
+
+                    Utils.setStudentClassList(mClasses, LoginActivity.this);
+
                     startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
                     finish();
                 } else if (username.getText().toString().equalsIgnoreCase("teacher")) {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, true);
-                    editor.commit();
+                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+                    editor.apply();
+
+                    ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
+                    mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+                    mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
+                    mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
+                    mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
+                    mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
+                    mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
+
+                    Utils.setTeacherClassList(mClasses, LoginActivity.this);
+
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();
                 } else {

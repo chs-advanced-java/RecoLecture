@@ -36,7 +36,7 @@ public class FragmentClass extends Fragment {
     public void method(Activity activity) {
 
         /**pull classes here, use for loop to convert names to classList**/
-        ArrayList<TeacherClassCard> temp = Utils.getClassList(activity);
+        ArrayList<TeacherClassCard> temp = Utils.getTeacherClassList(activity);
         ArrayList<ClassSelectCard> classes = new ArrayList<>();
         try{
             for (int x = 1; x < temp.size(); x++){

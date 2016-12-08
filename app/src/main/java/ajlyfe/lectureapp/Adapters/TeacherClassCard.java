@@ -1,7 +1,5 @@
 package ajlyfe.lectureapp.Adapters;
 
-import java.util.ArrayList;
-
 import ajlyfe.lectureapp.Activity.TeacherClassOverview;
 
 public class TeacherClassCard {
@@ -33,17 +31,5 @@ public class TeacherClassCard {
 
     public boolean isDummy() {
         return description.equals(TeacherClassOverview.AUTO_DESCRIPTION);
-    }
-
-    public static ArrayList<TeacherClassCard> createList(int numClasses) {
-        ArrayList<TeacherClassCard> classList = new ArrayList<>();
-
-        //TODO: Pull from the database here::::
-        for (int i = 1; i <= 3; i++) {
-            TeacherClassCard tempCard = new TeacherClassCard("Spanish " + i, "Dummy description from a auto-generated class for testing purposes");
-            classList.add(tempCard);
-        }
-
-        return classList;
     }
 }

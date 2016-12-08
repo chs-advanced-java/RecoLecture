@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.zip.Inflater;
 
+import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -62,7 +63,7 @@ public class Utils {
         return activity.getSharedPreferences(prefsFile, MODE_PRIVATE);
     }
 
-    public static void setClassList(ArrayList<TeacherClassCard> mClasses, Activity activity) {
+    public static void setTeacherClassList(ArrayList<TeacherClassCard> mClasses, Activity activity) {
         SharedPreferences.Editor editor = getPrefs(SHARED_PREFERENCES, activity).edit();
         Gson gson = new Gson();
         String json = gson.toJson(mClasses);
@@ -70,9 +71,25 @@ public class Utils {
         editor.apply();
     }
 
-    public static ArrayList<TeacherClassCard> getClassList(Activity activity) {
+    public static ArrayList<TeacherClassCard> getTeacherClassList(Activity activity) {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
+        String json = getPrefs(SHARED_PREFERENCES, activity).getString(Utils.PREF_CLASS_LIST, null);
+
+        return gson.fromJson(json, type);
+    }
+
+    public static void setStudentClassList(ArrayList<ClassCard> mClasses, Activity activity) {
+        SharedPreferences.Editor editor = getPrefs(SHARED_PREFERENCES, activity).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mClasses);
+        editor.putString(Utils.PREF_CLASS_LIST, json);
+        editor.apply();
+    }
+
+    public static ArrayList<ClassCard> getStudentClassList(Activity activity) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<ClassCard>>(){}.getType();
         String json = getPrefs(SHARED_PREFERENCES, activity).getString(Utils.PREF_CLASS_LIST, null);
 
         return gson.fromJson(json, type);

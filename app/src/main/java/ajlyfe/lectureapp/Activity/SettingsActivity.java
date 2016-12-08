@@ -123,7 +123,7 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
         editor.putBoolean(Utils.PREF_DUMMY_CLASSES, dummyClassesEnabled);
 
-        ArrayList<TeacherClassCard> mClasses = Utils.getClassList(SettingsActivity.this);
+        ArrayList<TeacherClassCard> mClasses = Utils.getTeacherClassList(SettingsActivity.this);
 
         assert mClasses != null;
         if (mClasses.size() > 0) {
@@ -139,7 +139,7 @@ public class SettingsActivity extends AppCompatActivity {
             mClasses.add(new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
             mClasses.add(new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
 
-            Utils.setClassList(mClasses, SettingsActivity.this);
+            Utils.setTeacherClassList(mClasses, SettingsActivity.this);
         } else {
             ArrayList<TeacherClassCard> keepMe = new ArrayList<>();
 
@@ -151,7 +151,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             mClasses = keepMe;
 
-            Utils.setClassList(mClasses, SettingsActivity.this);
+            Utils.setTeacherClassList(mClasses, SettingsActivity.this);
         }
 
         editor.apply();

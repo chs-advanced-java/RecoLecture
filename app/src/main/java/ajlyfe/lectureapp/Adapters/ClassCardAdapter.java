@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajlyfe.lectureapp.Activity.StudentClassPage;
@@ -26,14 +27,14 @@ import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
 public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.ViewHolder> {
-    private List<ClassCard> classList;
+    private ArrayList<ClassCard> classList;
     private Context context;
     private Activity parentActivity;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public ClassCardAdapter(@NonNull List<ClassCard> classes, Context ctx, Activity parentActivity) {
+    public ClassCardAdapter(@NonNull ArrayList<ClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;

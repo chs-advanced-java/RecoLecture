@@ -1,22 +1,20 @@
 package ajlyfe.lectureapp.Adapters;
 
-import java.util.ArrayList;
-
 public class ClassCard {
     private String className;
-    private String teacherName;
+    private String classDescription;
 
-    public ClassCard(String cName, String tName) {
-        className = cName;
-        teacherName = tName;
+    public ClassCard(String className, String classDescription) {
+        this.className = className;
+        this.classDescription = classDescription;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public String getclassDescription() {
+        return classDescription;
     }
 
     public ClassCard setClassName(String cName) {
@@ -24,19 +22,8 @@ public class ClassCard {
         return this;
     }
 
-    public ClassCard setTeacherName(String tName) {
-        this.teacherName = tName;
+    public ClassCard setClassDescription(String classDescription) {
+        this.classDescription = classDescription;
         return this;
-    }
-
-    public static ArrayList<ClassCard> createList(int numClasses) {
-        ArrayList<ClassCard> classList = new ArrayList<>();
-
-        //TODO: Pull from the database here::::
-        for (int i = 1; i <= numClasses; i++) {
-            classList.add(new ClassCard("Spanish " + i, "Plumeri"));
-        }
-
-        return classList;
     }
 }
