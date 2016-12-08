@@ -88,6 +88,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final String classDescription = classDescriptionET.getText().toString();
 
                 if (!className.equals("") && !classDescription.equals("")) { // Proceed
+                    CodeGenerator gen = new CodeGenerator();
+                    String code = gen.generate();
 
                     MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
                     builder.title("Attention!")
@@ -117,6 +119,9 @@ public class TeacherClassOverview extends AppCompatActivity {
                     MaterialDialog dialog = builder.build();
 
                     View dialogView = dialog.getCustomView();
+
+                    TextView text = (TextView) dialogView.findViewById(R.id.message);
+                    text.setText("Your class code is: " + code + ".\nDistribute this to your students.");
 
                     if (dialogView != null) {
                         RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
