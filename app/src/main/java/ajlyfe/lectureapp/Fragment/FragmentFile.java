@@ -1,9 +1,7 @@
 package ajlyfe.lectureapp.Fragment;
 
-import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +11,6 @@ import android.view.ViewGroup;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import ajlyfe.lectureapp.Adapters.LectureCheckbox;
 import ajlyfe.lectureapp.Adapters.LectureSelectCard;

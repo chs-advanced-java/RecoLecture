@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
-import java.util.ArrayList;
-
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
