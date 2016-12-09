@@ -1,6 +1,7 @@
 package ajlyfe.lectureapp.Activity;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.IdRes;
 
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.io.File;
 
 import ajlyfe.lectureapp.Fragment.RecordFragment;
 import ajlyfe.lectureapp.R;
@@ -41,6 +44,8 @@ public class RecordActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + RecordFragment.PLACEHOLDER + ".3gp");
+        file.delete();
         switch (item.getItemId()) {
             case R.id.action_settings:
                 startActivity(new Intent(RecordActivity.this, SettingsActivity.class));
