@@ -116,8 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                     ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
 
                 // PERMISSIONS GRANTED, CONTINUE
-                File recoLecureDir = new File(Utils.getLecturePath());
-                recoLecureDir.mkdirs();
+                File recoLectureDir = new File(Utils.getLecturePath());
+                recoLectureDir.mkdirs();
 
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, Manifest.permission.READ_PHONE_STATE)) {
