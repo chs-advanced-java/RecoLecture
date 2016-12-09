@@ -28,16 +28,4 @@ public class LectureSelectCard {
         this.fileName = fName;
         return this;
     }
-
-
-    public static ArrayList<LectureSelectCard> createList(int numClasses) {
-        ArrayList<LectureSelectCard> classList = new ArrayList<>();
-
-        //TODO: Pull from the database here::::
-        for (int i = 1; i <= numClasses; i++) {
-            classList.add(new LectureSelectCard("File Name"));
-        }
-
-        return classList;
-    }
 }

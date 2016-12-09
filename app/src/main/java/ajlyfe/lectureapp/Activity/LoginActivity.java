@@ -117,7 +117,18 @@ public class LoginActivity extends AppCompatActivity {
 
                 // PERMISSIONS GRANTED, CONTINUE
                 File recoLectureDir = new File(Utils.getLecturePath());
-                recoLectureDir.mkdirs();
+                File dummy1 = new File(Utils.getLecturePath() + "/Spanish I");
+                File dummy2 = new File(Utils.getLecturePath() + "/Spanish II");
+                File dummy3 = new File(Utils.getLecturePath() + "/Spanish III");
+                File dummy4 = new File(Utils.getLecturePath() + "/Spanish IV");
+                File dummy5 = new File(Utils.getLecturePath() + "/Spanish V");
+
+                recoLectureDir.mkdir();
+                dummy1.mkdir();
+                dummy2.mkdir();
+                dummy3.mkdir();
+                dummy4.mkdir();
+                dummy5.mkdir();
 
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, Manifest.permission.READ_PHONE_STATE)) {
