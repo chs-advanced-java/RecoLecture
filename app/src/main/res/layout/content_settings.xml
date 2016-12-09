@@ -11,277 +11,202 @@
     tools:context="ajlyfe.lectureapp.Activity.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
-    <TextView android:id="@+id/settingsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/header_margin_top"
-        android:text="Settings"
-        android:fontFamily="sans-serif-thin"
-        android:textSize="28sp"
-        android:layout_centerHorizontal="true"
-        />
-
-    <TextView android:id="@+id/settingsDescription"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change various settings."
-        android:layout_below="@+id/settingsTitle"
-        android:layout_centerHorizontal="true"
-        />
-
-    <RelativeLayout android:id="@+id/changeUsername"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_below="@id/settingsDescription"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_alignParentTop="true"
-            android:background="?dividerColor"/>
-
-        <ImageView android:id="@+id/changeUsernameIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:tint="@color/accent"
-            android:src="@drawable/ic_account_box_black_24dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change username"
-            android:layout_toEndOf="@+id/changeUsernameIcon"
-            android:layout_centerVertical="true"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_alignParentBottom="true"
-            android:background="?dividerColor"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout android:id="@+id/changePassword"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_below="@id/changeUsername"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true">
-
-        <ImageView android:id="@+id/changePasswordIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:tint="@color/accent"
-            android:src="@drawable/ic_lock_black_24dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change password"
-            android:layout_toEndOf="@+id/changePasswordIcon"
-            android:layout_centerVertical="true"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_alignParentBottom="true"
-            android:background="?dividerColor"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout android:id="@+id/darkTheme"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_below="@id/changePassword"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dark theme"
-            android:layout_marginStart="16dp"
-            android:layout_centerVertical="true"/>
-
-        <Switch android:id="@+id/darkThemeSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_alignParentBottom="true"
-            android:background="?dividerColor"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout android:id="@+id/dummyClasses"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_below="@id/darkTheme"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enable dummy classes (developer)"
-            android:layout_marginStart="16dp"
-            android:layout_centerVertical="true"/>
-
-        <Switch android:id="@+id/dummyClassesSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_alignParentBottom="true"
-            android:background="?dividerColor"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout android:id="@+id/signOut"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_below="@id/dummyClasses"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign out"
-            android:layout_marginStart="16dp"
-            android:layout_centerVertical="true"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_alignParentBottom="true"
-            android:background="?dividerColor"/>
-
-    </RelativeLayout>
-
-
-    <!--
-
-
     <ScrollView
-        android:layout_below="@+id/MyAccountDescription"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TableRow android:layout_width="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText android:id="@+id/firstNameHolder"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-                        android:hint="First Name"/>
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText android:id="@+id/lastNameHolder"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-                        android:hint="Last Name"/>
-
-                </android.support.design.widget.TextInputLayout>
-            </TableRow>
-
-            <Button
+            <TextView android:id="@+id/settingsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change Name"
-                android:layout_marginBottom="32dp"
+                android:layout_marginTop="@dimen/header_margin_top"
+                android:text="Settings"
+                android:fontFamily="sans-serif-thin"
+                android:textSize="28sp"
+                android:layout_gravity="center"
                 />
 
-            <EditText android:id="@+id/oldPasswordHolder"
-                android:textSize="17sp"
+            <TextView android:id="@+id/settingsDescription"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change various settings."
+                android:layout_gravity="center"
+                />
+
+            <RelativeLayout android:id="@+id/changeUsername"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Old Password"
-                />
+                android:layout_height="64dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
 
-            <TableRow android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText android:id="@+id/newPasswordHolder"
-                    android:textSize="17sp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="New Password"
-                    />
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_alignParentTop="true"
+                    android:background="?dividerColor"/>
 
-                <EditText android:id="@+id/confirmPasswordHolder"
-                    android:textSize="17sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="Confirm Password"
-                    />
-            </TableRow>
+                <ImageView android:id="@+id/changeUsernameIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:tint="@color/accent"
+                    android:src="@drawable/ic_account_box_black_24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"/>
 
-            <Button
-                android:text="Change Password"
-                android:layout_width="wrap_content" />
-
-            <TableRow android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Confirm Password: "
-                    android:textSize="20sp"
-                    android:textColor="@color/textColorPrimary"
-                    />
-            </TableRow>
+                    android:text="Change username"
+                    android:layout_toEndOf="@+id/changeUsernameIcon"
+                    android:layout_centerVertical="true"/>
 
-            <Button
-                android:layout_marginTop="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/signOut"
-                android:text="Sign Out"
-                />
-        </TableLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_alignParentBottom="true"
+                    android:background="?dividerColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/changePassword"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+                <ImageView android:id="@+id/changePasswordIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:tint="@color/accent"
+                    android:src="@drawable/ic_lock_black_24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change password"
+                    android:layout_toEndOf="@+id/changePasswordIcon"
+                    android:layout_centerVertical="true"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_alignParentBottom="true"
+                    android:background="?dividerColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/darkTheme"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dark theme"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"/>
+
+                <Switch android:id="@+id/darkThemeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_alignParentBottom="true"
+                    android:background="?dividerColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/dummyClasses"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enable dummy classes (developer)"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"/>
+
+                <Switch android:id="@+id/dummyClassesSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_alignParentBottom="true"
+                    android:background="?dividerColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/createLecture"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create dummy lecture (developer)"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_alignParentBottom="true"
+                    android:background="?dividerColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/signOut"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign out"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_alignParentBottom="true"
+                    android:background="?dividerColor"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </ScrollView>
-
-    -->
 
 </RelativeLayout>

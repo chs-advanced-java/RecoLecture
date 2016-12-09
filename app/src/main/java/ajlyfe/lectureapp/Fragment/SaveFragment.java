@@ -73,8 +73,8 @@ public class SaveFragment extends Fragment {
     }
 
     public void renameFile(String newName) {
-        File oldFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + RecordFragment.PLACEHOLDER + ".mp3");
-        File newFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + newName + ".mp3");
+        File oldFile = new File(Utils.getLecturePath() + RecordFragment.PLACEHOLDER + ".mp3");
+        File newFile = new File(Utils.getLecturePath() + newName + ".mp3");
 
         /*
         File parentDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/");

@@ -51,7 +51,7 @@ public class RecordFragment extends Fragment {
         play.setEnabled(false);
         save.setEnabled(false);
 
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" + PLACEHOLDER + ".mp3";
+        outputFile = Utils.getLecturePath() + PLACEHOLDER + ".mp3";
 
         myAudioRecorder = new MediaRecorder();
         myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);

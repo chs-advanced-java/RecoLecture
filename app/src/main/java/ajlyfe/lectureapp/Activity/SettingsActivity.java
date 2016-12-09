@@ -11,8 +11,14 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
+import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -43,6 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
         RelativeLayout username = (RelativeLayout) findViewById(R.id.changeUsername);
         RelativeLayout password = (RelativeLayout) findViewById(R.id.changePassword);
         RelativeLayout signOut = (RelativeLayout) findViewById(R.id.signOut);
+        RelativeLayout createLecture = (RelativeLayout) findViewById(R.id.createLecture);
         final RelativeLayout darkTheme = (RelativeLayout) findViewById(R.id.darkTheme);
         final Switch darkThemeSwitch = (Switch) findViewById(R.id.darkThemeSwitch);
         darkThemeSwitch.setChecked(useDarkTheme);
@@ -78,6 +85,13 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        createLecture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createFakeLecture();
+            }
+        });
+
         darkTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +120,8 @@ public class SettingsActivity extends AppCompatActivity {
                 toggleDummyClasses(isChecked);
             }
         });
+
+
     }
 
     private void toggleTheme(boolean darkTheme) {
@@ -155,6 +171,54 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         editor.apply();
+    }
+
+    private void createFakeLecture() {
+        InputStream in = getResources().openRawResource(R.raw.victory);
+        FileOutputStream out = null;
+        byte[] buff = new byte[1024];
+        int read;
+
+        try {
+            out = new FileOutputStream(Utils.getLecturePath() + Utils.UNIQUE_STRING + getLectureNumber() + ".mp3", true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while ((read = in.read(buff)) > 0) {
+                out.write(buff, 0, read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private int getLectureNumber() {
+        int numberOfLectures = 0;
+
+        File parentDir = new File(Utils.getLecturePath());
+        File[] files = parentDir.listFiles();
+
+        if (files == null) {
+            return 0;
+        }
+
+        for (File thisFile : files) {
+            if (thisFile.toString().contains(Utils.UNIQUE_STRING)) {
+                numberOfLectures++;
+            }
+        }
+
+        return numberOfLectures;
     }
 
     @Override

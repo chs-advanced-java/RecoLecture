@@ -2,6 +2,7 @@ package ajlyfe.lectureapp.Adapters;
 
 import android.content.Context;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import ajlyfe.lectureapp.R;
@@ -9,10 +10,12 @@ import ajlyfe.lectureapp.R;
 public class LectureCard {
     private String lectureName;
     private String teacherName;
+    private File lectureFile;
 
-    public LectureCard(String lName, String tName) {
-        lectureName = lName;
-        teacherName = tName;
+    public LectureCard(String lectureName, String teacherName, File lectureFile) {
+        this.lectureName = lectureName;
+        this.teacherName = teacherName;
+        this.lectureFile = lectureFile;
     }
 
     public String getLectureName() {
@@ -21,6 +24,10 @@ public class LectureCard {
 
     public String getTeacherName() {
         return teacherName;
+    }
+
+    public File getLectureFile() {
+        return lectureFile;
     }
 
     public LectureCard setLectureName(String lName) {
@@ -33,12 +40,8 @@ public class LectureCard {
         return this;
     }
 
-    public static ArrayList<LectureCard> createLectureList(Context context) {
-        ArrayList<LectureCard> lectureList = new ArrayList<>();
-
-        //TODO: Pull from the database here::::
-        lectureList.add(0, new LectureCard(context.getString(R.string.lecture_sample_name_1), "Plumeri"));
-
-        return lectureList;
+    public LectureCard setLectureFile(File lectureFile) {
+        this.lectureFile = lectureFile;
+        return this;
     }
 }

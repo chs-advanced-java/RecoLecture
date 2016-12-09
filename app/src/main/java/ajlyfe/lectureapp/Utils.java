@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
@@ -42,6 +43,8 @@ public class Utils {
     public static final String PREF_LOGGED_IN = "loggedIn";
     public static final String PREF_IS_TEACHER = "isTeacher";
     public static final String PREF_CLASS_LIST = "classList";
+
+    public static final String UNIQUE_STRING = "Developer_Lecture_";
 
     // Escape characters for security purposes
     public static final Character[] ESCAPE_CHARACTERS = {
@@ -127,6 +130,10 @@ public class Utils {
                 rand.nextInt(156) + 100,    //R
                 rand.nextInt(156) + 100,    //G
                 rand.nextInt(156) + 100);   //B
+    }
+
+    public static String getLecturePath() {
+        return Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/" ;
     }
 
     public static void verifyStoragePermissions(Activity activity) {

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import ajlyfe.lectureapp.Adapters.LectureCard;
@@ -40,7 +41,7 @@ public class StudentClassPage extends AppCompatActivity {
         // Find and define the RecyclerView in activity's layout
         RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
         // Initialize the ArrayList
-        ArrayList<LectureCard> lectures = LectureCard.createLectureList(this);
+        ArrayList<LectureCard> lectures = getLectures();
         // Create an adapter passing in the ArrayList from above
         LectureCardAdapter adapter = new LectureCardAdapter(lectures, this);
         // Attach the adapter to the RecyclerView
@@ -50,6 +51,24 @@ public class StudentClassPage extends AppCompatActivity {
         // Set overscroll effect
         OverScrollDecoratorHelper.setUpOverScroll(recyclerViewLectures, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
         // That's it!
+    }
+
+    public ArrayList<LectureCard> getLectures() {
+        ArrayList<LectureCard> bzofghia = new ArrayList<>();
+
+        File parentDir = new File(Utils.getLecturePath());
+        File[] files = parentDir.listFiles();
+
+        if (files == null) {
+            bzofghia.add(new LectureCard("No Lectures", "Sorry", null));
+            return bzofghia;
+        }
+
+        for (File thisFile : files) {
+            bzofghia.add(new LectureCard(thisFile.toString().substring(Utils.getLecturePath().length(), (thisFile.toString().length() - 4)), "Plumes", thisFile));
+        }
+
+        return bzofghia;
     }
 
     @Override
