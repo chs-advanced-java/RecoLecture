@@ -34,10 +34,6 @@
             android:label="Account"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.TeacherCreateClass"
-            android:label="@string/title_activity_teacher_create_class"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Activity.StudentActivityMain"
             android:label="RecoLecture"
             android:theme="@style/AppTheme.NoActionBar" />
