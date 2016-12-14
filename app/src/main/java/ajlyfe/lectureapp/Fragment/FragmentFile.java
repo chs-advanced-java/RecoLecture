@@ -43,7 +43,9 @@ public class FragmentFile extends Fragment {
 
         try {
             for (File thisFile : filesArray) {
-                fileList.add(new LectureSelectCard(thisFile.getName()));
+                if (thisFile.toString().contains(".mp3")) {
+                    fileList.add(new LectureSelectCard(thisFile.getName()));
+                }
             }
         } catch (IndexOutOfBoundsException exc) {
             exc.printStackTrace();

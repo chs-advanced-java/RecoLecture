@@ -3,6 +3,8 @@ package ajlyfe.lectureapp.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -11,6 +13,9 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
@@ -147,7 +153,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         if (dummyClassesEnabled) {
-            //mClasses.clear();
             mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
             mClasses.add(new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
             mClasses.add(new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
@@ -162,6 +167,21 @@ public class SettingsActivity extends AppCompatActivity {
             for (int i = 0; i < mClasses.size(); i++) {
                 if (!mClasses.get(i).isDummy()) {
                     keepMe.add(mClasses.get(i));
+                }
+            }
+
+            File parentDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/");
+            File[] filesArray = parentDir.listFiles();
+
+            if (filesArray != null) {
+                try {
+                    for (File thisFile : filesArray) {
+                        if (thisFile.toString().contains("Spanish")) {
+                            thisFile.delete();
+                        }
+                    }
+                } catch (IndexOutOfBoundsException exc) {
+                    exc.printStackTrace();
                 }
             }
 

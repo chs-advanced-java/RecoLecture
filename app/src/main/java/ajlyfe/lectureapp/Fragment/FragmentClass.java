@@ -1,7 +1,10 @@
 package ajlyfe.lectureapp.Fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
+import java.io.File;
 import java.util.ArrayList;
 
+import ajlyfe.lectureapp.Activity.TeacherMainActivity;
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.ClassSelectCardAdapter;
+import ajlyfe.lectureapp.Adapters.LectureSelectCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -33,18 +42,34 @@ public class FragmentClass extends Fragment {
 
         return view;
     }
-    public void method(Activity activity) {
-
-        /**pull classes here, use for loop to convert names to classList**/
-        ArrayList<TeacherClassCard> temp = Utils.getTeacherClassList(activity);
+    public void method(final Activity activity) {
         ArrayList<ClassSelectCard> classes = new ArrayList<>();
-        try{
-            for (int x = 1; x < temp.size(); x++){
-                classes.add(new ClassSelectCard(temp.get(x).getName()));
-            }
-        }
-        catch (IndexOutOfBoundsException exc){
 
+        File parentDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/");
+        File[] filesArray = parentDir.listFiles();
+
+        if (filesArray != null) {
+            try {
+                for (File thisFile : filesArray) {
+                    if (!thisFile.toString().contains(".mp3")) {
+                        classes.add(new ClassSelectCard(thisFile.getName()));
+                    }
+                }
+            } catch (IndexOutOfBoundsException exc) {
+                exc.printStackTrace();
+            }
+        } else {
+            new MaterialDialog.Builder(activity)
+                    .title("Attention!")
+                    .content("You have not created any classes yet")
+                    .positiveText("Ok")
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            startActivity(new Intent(activity.getApplicationContext(), TeacherMainActivity.class));
+                        }
+                    })
+                    .show();
         }
 
         RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewClassSelect);
