@@ -17,9 +17,9 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by Gesin 11/15/16
  */
-class WriteToDatabase {
+public class WriteToDatabase {
 
-    String sendPostRequest(String requestURL,
+    public String sendPostRequest(String requestURL,
                            HashMap<String, String> postDataParams) {
 
         URL url;

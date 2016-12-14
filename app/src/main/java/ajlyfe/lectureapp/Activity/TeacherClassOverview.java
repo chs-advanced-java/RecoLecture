@@ -3,8 +3,9 @@ package ajlyfe.lectureapp.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
@@ -28,6 +29,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ajlyfe.lectureapp.*;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
@@ -44,8 +46,7 @@ public class TeacherClassOverview extends AppCompatActivity {
     public static final String NULL_CLASS = "Header Name (NULL)";
     public static final String AUTO_DESCRIPTION = "Dummy description for an auto-generated\nclass for testing purposes";
 
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
+    private static final String CLASSES_URL = "http://www.chs.mcvsd.org/sandbox/insert-classdb.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +56,6 @@ public class TeacherClassOverview extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
-        editor = preferences.edit();
 
         boolean[] creatingClassArr = { creatingClass };
         fab = (FloatingActionButton) findViewById(R.id.fabTeacher);
@@ -80,9 +78,11 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final String className =  classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
 
-                if (!className.equals("") && !classDescription.equals("")) { // Proceed
+                if (!className.equals("") && !classDescription.equals("") && (classDescription.length() <= 80)) { // Proceed
                     CodeGenerator gen = new CodeGenerator();
-                    String code = gen.generate();
+                    final String code = gen.generate();
+
+                    pushClass(className, classDescription, code, "lgesin@ctemc.org");
 
                     MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
                     builder.title("Attention!")
@@ -149,6 +149,12 @@ public class TeacherClassOverview extends AppCompatActivity {
                         TextInputLayout classDescriptionTIL = (TextInputLayout) findViewById(R.id.inputLayoutClassDescription);
                         classDescriptionTIL.setErrorEnabled(true);
                         classDescriptionTIL.setError("This field cannot be empty");
+                    }
+
+                    if (classDescription.length() > 80) {
+                        TextInputLayout classDescriptionTIL = (TextInputLayout) findViewById(R.id.inputLayoutClassDescription);
+                        classDescriptionTIL.setErrorEnabled(true);
+                        classDescriptionTIL.setError("Must be less than 80 characters");
                     }
                 }
             }
@@ -274,5 +280,44 @@ public class TeacherClassOverview extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void pushClass(String className, String classDescription, String classCode, String teacher)
+    {
+        class PushClass extends AsyncTask<String, Void, String>
+        {
+            private ProgressDialog loading;
+            private WriteToDatabase ruc = new WriteToDatabase();
+
+            @Override
+            protected void onPreExecute()
+            {
+                super.onPreExecute();
+                loading = ProgressDialog.show(TeacherClassOverview.this, "Please Wait", null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s)
+            {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(String... params)
+            {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("className",params[0]);
+                data.put("classDescription",params[1]);
+                data.put("classCode",params[2]);
+                data.put("teacher",params[3]);
+
+                return ruc.sendPostRequest(CLASSES_URL, data);
+            }
+        }
+
+        PushClass pc = new PushClass();
+        pc.execute(className, classDescription, classCode, teacher);
     }
 }
