@@ -2,6 +2,12 @@ package ajlyfe.lectureapp.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.*;
@@ -52,6 +58,14 @@ public class SettingsFragment extends PreferenceFragment {
         dummyClasses = (SwitchPreference) findPreference(getString(R.string.preference_dummy_classes));
         createLecture = (Preference) findPreference(getString(R.string.preference_create_lecture));
         signOut = (Preference) findPreference(getString(R.string.preference_sign_out));
+
+        Drawable changeUsernameIcon = getResources().getDrawable(R.drawable.ic_account_box_black_24dp);
+        changeUsernameIcon.setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP));
+        changeUsername.setIcon(changeUsernameIcon);
+
+        Drawable changePasswordIcon = getResources().getDrawable(R.drawable.ic_lock_black_24dp);
+        changePasswordIcon.setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP));
+        changePassword.setIcon(changePasswordIcon);
 
         setClickListeners();
     }

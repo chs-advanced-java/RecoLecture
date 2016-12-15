@@ -68,10 +68,10 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
         if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
             position = viewHolder.getAdapterPosition();
 
-            final ClassCard clss = classList.get(position);
+            final ClassCard thisClassCard = classList.get(position);
 
             TextView title = viewHolder.classTitle;
-            title.setText(clss.getClassName());
+            title.setText(thisClassCard.getClassName());
 
             ImageView classColor = viewHolder.classCardColor;
             classColor.setBackgroundColor(Utils.generateColor());
@@ -81,7 +81,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, StudentClassPage.class);
-                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    intent.putExtra("CLASS_CLICKED", thisClassCard.getClassName());
                     context.startActivity(intent);
                 }
             });
@@ -91,12 +91,11 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, StudentClassPage.class);
-                    intent.putExtra("CLASS_CLICKED", clss.getClassName());
+                    intent.putExtra("CLASS_CLICKED", thisClassCard.getClassName());
                     context.startActivity(intent);
                 }
             });
 
-            // Add overflow menu
             // Catch reinflation of menu items
             try {
                 mToolbar.getMenu().getItem(0);
@@ -121,7 +120,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                                     public void onClick(DialogInterface dialoginterface, int idk) {
                                         removeAt(finalPosition);
                                         Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                                "Unenrolled from '" + clss.getClassName() + "'",
+                                                "Unenrolled from '" + thisClassCard.getClassName() + "'",
                                                 Snackbar.LENGTH_LONG)
                                                 .setAction("Dandy!", new View.OnClickListener() {
                                                     @Override
