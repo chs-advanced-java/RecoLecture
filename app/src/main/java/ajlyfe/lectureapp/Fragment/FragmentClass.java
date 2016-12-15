@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import ajlyfe.lectureapp.Activity.TeacherMainActivity;
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.ClassSelectCardAdapter;
-import ajlyfe.lectureapp.Adapters.LectureSelectCard;
-import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
