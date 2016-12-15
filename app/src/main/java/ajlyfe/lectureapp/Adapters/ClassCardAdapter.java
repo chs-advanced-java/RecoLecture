@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,38 +97,44 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
             });
 
             // Add overflow menu
-            mToolbar.inflateMenu(R.menu.student_class_card_menu);
-            mToolbar.setOverflowIcon(getOverflowIcon());
-            final int finalPosition = position;
-            mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                    dialog.setTitle("Warning!")
-                            .setMessage("You are about to unenroll from a class. Are you sure you " +
-                                    "want to do this? This action cannot be undone.")
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    dialoginterface.cancel();
-                                }
-                            })
-                            .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int idk) {
-                                    removeAt(finalPosition);
-                                    Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                            "Unenrolled from '" + clss.getClassName() + "'",
-                                            Snackbar.LENGTH_LONG)
-                                            .setAction("Dandy!", new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) { /*ihateusers*/ }
-                                            })
-                                            .setActionTextColor(Color.parseColor("#FFFFC107"))
-                                            .show();
-                                }
-                            }).show();
-                    return true;
-                }
-            });
+            // Catch reinflation of menu items
+            try {
+                mToolbar.getMenu().getItem(0);
+            } catch (IndexOutOfBoundsException e) {
+                Log.e("TOOLBAR", "inflating menu for class " + title.getText());
+                mToolbar.inflateMenu(R.menu.student_class_card_menu);
+                mToolbar.setOverflowIcon(getOverflowIcon());
+                final int finalPosition = position;
+                mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                        dialog.setTitle("Warning!")
+                                .setMessage("You are about to unenroll from a class. Are you sure you " +
+                                        "want to do this? This action cannot be undone.")
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialoginterface, int i) {
+                                        dialoginterface.cancel();
+                                    }
+                                })
+                                .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialoginterface, int idk) {
+                                        removeAt(finalPosition);
+                                        Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
+                                                "Unenrolled from '" + clss.getClassName() + "'",
+                                                Snackbar.LENGTH_LONG)
+                                                .setAction("Dandy!", new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) { /*ihateusers*/ }
+                                                })
+                                                .setActionTextColor(Color.parseColor("#FFFFC107"))
+                                                .show();
+                                    }
+                                }).show();
+                        return true;
+                    }
+                });
+            }
         }
     }
 
