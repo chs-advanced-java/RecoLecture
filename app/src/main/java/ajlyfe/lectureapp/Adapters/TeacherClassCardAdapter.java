@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
@@ -31,7 +30,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     private ArrayList<TeacherClassCard> classList;
     private Context context;
     private Activity parentActivity;
-    private SharedPreferences preferences;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
@@ -40,7 +38,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;
-        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
     }
 
     /** Since the header is at position 0 in the RecyclerView, we must accommodate for it.
@@ -100,6 +97,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
             if (!viewHolder.classTitle.getText().equals(parentActivity.getString(R.string.no_classes_title))) {
                 mToolbar.inflateMenu(R.menu.teacher_class_card_menu);
                 mToolbar.setOverflowIcon(getOverflowIcon());
+
                 final int finalPosition = position;
                 mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                     @Override

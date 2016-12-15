@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.*;
-import android.support.v7.preference.PreferenceFragmentCompat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +14,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import ajlyfe.lectureapp.Activity.LoginActivity;
-import ajlyfe.lectureapp.Activity.SettingsActivity;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
