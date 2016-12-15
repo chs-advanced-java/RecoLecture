@@ -1,7 +1,6 @@
 package ajlyfe.lectureapp.Activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +20,6 @@ import ajlyfe.lectureapp.Utils;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class StudentActivityMain extends AppCompatActivity {
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +30,6 @@ public class StudentActivityMain extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         fadeCircle();
-
-        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
-        editor = preferences.edit();
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabStudent);
         fab.setOnClickListener(new View.OnClickListener() {

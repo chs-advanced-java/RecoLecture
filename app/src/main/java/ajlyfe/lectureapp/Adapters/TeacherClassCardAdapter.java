@@ -32,7 +32,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
     private ArrayList<TeacherClassCard> classList;
     private Context context;
     private Activity parentActivity;
-    private SharedPreferences preferences;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
@@ -41,7 +40,6 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;
-        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
     }
 
     /** Since the header is at position 0 in the RecyclerView, we must accommodate for it.

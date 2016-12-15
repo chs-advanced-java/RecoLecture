@@ -82,8 +82,6 @@ public class TeacherClassOverview extends AppCompatActivity {
                     CodeGenerator gen = new CodeGenerator();
                     final String code = gen.generate();
 
-                    pushClass(className, classDescription, code, "lgesin@ctemc.org");
-
                     MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
                     builder.title("Attention!")
                             .customView(R.layout.create_class_dialog, true)
@@ -102,6 +100,8 @@ public class TeacherClassOverview extends AppCompatActivity {
 
                                     adapter.setClassList(classes);
                                     Utils.setTeacherClassList(classes, TeacherClassOverview.this);
+
+                                    pushClass(className, classDescription, code, "lgesin@ctemc.org");
 
                                     onBackPressed();
                                 }

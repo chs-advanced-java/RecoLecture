@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import ajlyfe.lectureapp.Activity.TeacherMainActivity;
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.ClassSelectCardAdapter;
-import ajlyfe.lectureapp.Adapters.LectureSelectCard;
-import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
@@ -42,31 +40,23 @@ public class FragmentClass extends Fragment {
 
         return view;
     }
-
     public void method(final Activity activity) {
-
-        // Pull classes here, use for loop to convert names to classList
-        ArrayList<TeacherClassCard> temp = Utils.getTeacherClassList(activity);
         ArrayList<ClassSelectCard> classes = new ArrayList<>();
 
-        try {
-            for (int x = 1; x < temp.size(); x++) {
-                classes.add(new ClassSelectCard(temp.get(x).getName()));
+        File parentDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/");
+        File[] filesArray = parentDir.listFiles();
+
+        if (filesArray != null) {
+            try {
+                for (File thisFile : filesArray) {
+                    if (!thisFile.toString().contains(".mp3")) {
+                        classes.add(new ClassSelectCard(thisFile.getName()));
+                    }
+                }
+            } catch (IndexOutOfBoundsException exc) {
+                exc.printStackTrace();
             }
-        }
-        catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
-
-        RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewClassSelect);
-
-        try {
-            adapter = new ClassSelectCardAdapter(classes, view.getContext());
-            list = adapter.getArrayList();
-            recyclerViewStudents.setAdapter(adapter);
-            recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        }
-        catch (NullPointerException exc) {
+        } else {
             new MaterialDialog.Builder(activity)
                     .title("Attention!")
                     .content("You have not created any classes yet")
@@ -78,6 +68,17 @@ public class FragmentClass extends Fragment {
                         }
                     })
                     .show();
+        }
+
+        RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewClassSelect);
+        try {
+            adapter = new ClassSelectCardAdapter(classes, view.getContext());
+            list = adapter.getArrayList();
+            recyclerViewStudents.setAdapter(adapter);
+            recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        }
+        catch (NullPointerException exc) {
+            Toast.makeText(getContext(), "Error, User has no classes.", Toast.LENGTH_SHORT).show();
         }
     }
 
