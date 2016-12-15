@@ -38,11 +38,11 @@ import static java.security.AccessController.getContext;
 public class Utils {
 
     public static final String SHARED_PREFERENCES = "shared_preferences";
-    public static final String PREF_DARK_THEME = "useDarkTheme";
-    public static final String PREF_DUMMY_CLASSES = "useDummyClasses";
-    public static final String PREF_LOGGED_IN = "loggedIn";
-    public static final String PREF_IS_TEACHER = "isTeacher";
-    public static final String PREF_CLASS_LIST = "classList";
+    public static final String PREF_DARK_THEME = "use_dark_theme";
+    public static final String PREF_DUMMY_CLASSES = "use_dummy_classes";
+    public static final String PREF_LOGGED_IN = "logged_in";
+    public static final String PREF_IS_TEACHER = "is_teacher";
+    public static final String PREF_CLASS_LIST = "class_list";
 
     public static final String UNIQUE_STRING = "Developer_Lecture_";
 

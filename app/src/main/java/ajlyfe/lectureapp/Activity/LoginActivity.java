@@ -92,8 +92,8 @@ public class LoginActivity extends AppCompatActivity {
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
         editor = preferences.edit();
 
-        if (preferences.getBoolean("loggedIn", false)) {
-            if (preferences.getBoolean("isTeacher", false)) {
+        if (preferences.getBoolean(Utils.PREF_LOGGED_IN, false)) {
+            if (preferences.getBoolean(Utils.PREF_IS_TEACHER, false)) {
                 startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 new Handler().postDelayed(new Runnable() {
                     @Override

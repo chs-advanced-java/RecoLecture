@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Account">
+
+        <EditTextPreference android:title="Change username"
+            android:key="@string/preference_change_username"
+            android:icon="@drawable/ic_account_box_black_24dp"
+            android:summary="Change your existing username"
+            android:dialogTitle="New Username"
+            android:dialogMessage="Change your existing username"
+            android:dialogLayout="@layout/pref_dialog_edittext_fix"/>
+
+        <EditTextPreference android:title="Change password"
+            android:key="@string/preference_change_password"
+            android:icon="@drawable/ic_lock_black_24dp"
+            android:summary="Change your existing username"
+            android:dialogTitle="New Username"
+            android:dialogMessage="Change your existing username"
+            android:dialogLayout="@layout/pref_dialog_edittext_fix"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Appearance">
+
+        <SwitchPreference android:title="Dark theme"
+            android:key="@string/preference_dark_theme"
+            android:summary="Enable dark theme (Experimental)"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Developer">
+
+        <SwitchPreference android:title="Dummy classes"
+            android:key="@string/preference_dummy_classes"
+            android:summary="Dummy classes will create five spanish classes for testing purposes only (Developer)"
+            android:defaultValue="true"
+            />
+
+        <Preference android:title="Create dummy lecture"
+            android:key="@string/preference_create_lecture"
+            android:summary="Create a 0B mp3 lecture"
+            />
+
+        <Preference android:title="Sign out"
+            android:key="@string/preference_sign_out"
+            />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

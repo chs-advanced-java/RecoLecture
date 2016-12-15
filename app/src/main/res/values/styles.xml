@@ -7,6 +7,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="cardTitleTextPrimary">@color/textColorPrimary</item>
         <item name="dividerColor">@color/dividerColor</item>
+        <item name="preferenceTheme">
+            @style/PreferenceThemeOverlay.v14.Material
+        </item>
     </style>
 
     <!-- Base dark theme -->
@@ -16,6 +19,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="cardTitleTextPrimary">@color/textColorPrimaryLight</item>
         <item name="dividerColor">@color/dividerColorLight</item>
+        <item name="preferenceTheme">
+            @style/PreferenceThemeOverlay.v14.Material
+        </item>
     </style>
 
     <!-- Create ripples!!

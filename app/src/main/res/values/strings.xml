@@ -12,6 +12,14 @@
     <string name="lecture_placeholder4">chapter1.4_lecture.mp3</string>
     <string name="lecture_placeholder5">chapter1.5_lecture.mp3</string>
 
+    <string name="preference_change_username">current_username</string>
+    <string name="preference_change_password">current_password</string>
+    <string name="preference_dark_theme">use_dark_theme</string>
+    <string name="preference_dummy_classes">use_dummy_classes</string>
+    <string name="preference_create_lecture">create_lecture</string>
+    <string name="preference_sign_out">sign_out</string>
+
+
     <!--STRINGS FOR STUDENT_ACTIVITY_MAIN-->
     <string name="student_home_tile">Home</string>
     <string name="student_home_description">Select the class you would like to\ndownload or view lectures from.</string>

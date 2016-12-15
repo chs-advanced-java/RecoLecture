@@ -20,4 +20,7 @@
     <dimen name="version_text_size">10sp</dimen>
 
     <dimen name="divider_height">1dp</dimen>
+
+    <dimen name="alert_def_padding">18dp</dimen>
+
 </resources>
