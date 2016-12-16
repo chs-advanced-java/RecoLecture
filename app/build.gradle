@@ -49,4 +49,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:preference-v7:24.2.1'
     compile 'com.android.support:preference-v14:24.2.1'
+    compile project(path: ':volley')
+    compile project(path: ':volley')
 }

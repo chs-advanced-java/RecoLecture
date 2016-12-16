@@ -1,6 +1,7 @@
 package ajlyfe.lectureapp.Activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
@@ -39,8 +50,13 @@ import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/get-accountLoginData.php?username=";
+    private final String JSON_ARRAY = "result";
+
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+
+    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,48 +193,7 @@ public class LoginActivity extends AppCompatActivity {
                     usernameTIL.setErrorEnabled(true);
                     usernameTIL.setError("This field cannot be empty");
                 }
-
-                if (username.getText().toString().equalsIgnoreCase("student")) {
-                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
-                    editor.putBoolean(Utils.PREF_IS_TEACHER, false);
-                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
-                    editor.apply();
-
-                    ArrayList<ClassCard> mClasses = new ArrayList<>();
-                    mClasses.add(0, new ClassCard(NULL_CLASS, "Header (NULL)"));
-                    mClasses.add(1, new ClassCard("Spanish I", AUTO_DESCRIPTION));
-                    mClasses.add(2, new ClassCard("Spanish II", AUTO_DESCRIPTION));
-                    mClasses.add(3, new ClassCard("Spanish III", AUTO_DESCRIPTION));
-                    mClasses.add(4, new ClassCard("Spanish IV", AUTO_DESCRIPTION));
-                    mClasses.add(5, new ClassCard("Spanish V", AUTO_DESCRIPTION));
-
-                    Utils.setStudentClassList(mClasses, LoginActivity.this);
-
-                    startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
-                    finish();
-                } else if (username.getText().toString().equalsIgnoreCase("teacher")) {
-                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
-                    editor.putBoolean(Utils.PREF_IS_TEACHER, true);
-                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
-                    editor.apply();
-
-                    ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
-                    mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
-                    mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
-                    mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
-                    mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
-                    mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
-                    mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
-
-                    Utils.setTeacherClassList(mClasses, LoginActivity.this);
-
-                    startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
-                    finish();
-                } else {
-                    TextInputLayout usernameTIL = (TextInputLayout) findViewById(R.id.usernameHolder);
-                    usernameTIL.setErrorEnabled(true);
-                    usernameTIL.setError("Invalid username");
-                }
+                getData(username.getText().toString(), password.getText().toString());
             }
         });
 
@@ -254,6 +229,103 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+        }
+    }
+
+    private void getData(final String user, final String password) {
+        if(user.equals(""))
+        {
+            Toast.makeText(this, "Please enter a username.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(password.equals(""))
+        {
+            Toast.makeText(this, "Please enter a password.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+
+        String url = DATA_URL+user;
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                loading.dismiss();
+                showJSON(response, user, password);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void showJSON(String response, String user, String password)
+    {
+        String userData;
+        String passwordData;
+        int isTeacherData;
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
+            JSONObject data = result.getJSONObject(0);
+
+            userData = data.getString("username");
+            passwordData = data.getString("password");
+            isTeacherData = data.getInt("teacher");
+
+            if(userData.equals(user) && passwordData.equals(password))
+            {
+                if(isTeacherData == 1)
+                {
+                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
+                    editor.putBoolean(Utils.PREF_IS_TEACHER, true);
+                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+                    editor.apply();
+
+                    ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
+                    mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+                    mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
+                    mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
+                    mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
+                    mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
+                    mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
+
+                    Utils.setTeacherClassList(mClasses, LoginActivity.this);
+
+                    startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
+                    finish();
+                }
+                else
+                {
+                    editor.putBoolean(Utils.PREF_LOGGED_IN, true);
+                    editor.putBoolean(Utils.PREF_IS_TEACHER, false);
+                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+                    editor.apply();
+
+                    ArrayList<ClassCard> mClasses = new ArrayList<>();
+                    mClasses.add(0, new ClassCard(NULL_CLASS, "Header (NULL)"));
+                    mClasses.add(1, new ClassCard("Spanish I", AUTO_DESCRIPTION));
+                    mClasses.add(2, new ClassCard("Spanish II", AUTO_DESCRIPTION));
+                    mClasses.add(3, new ClassCard("Spanish III", AUTO_DESCRIPTION));
+                    mClasses.add(4, new ClassCard("Spanish IV", AUTO_DESCRIPTION));
+                    mClasses.add(5, new ClassCard("Spanish V", AUTO_DESCRIPTION));
+
+                    Utils.setStudentClassList(mClasses, LoginActivity.this);
+
+                    startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
+                    finish();
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
