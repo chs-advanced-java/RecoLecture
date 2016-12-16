@@ -63,7 +63,6 @@ public class TeacherClassOverview extends AppCompatActivity {
         creatingClass = creatingClassArr[0];
 
         classes = initializeClassList();
-
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
         final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
         recyclerViewMainTeacher.setAdapter(adapter);
