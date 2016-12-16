@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by Gesin 11/15/16
+ * s/o to connor for killing everything
  */
 public class WriteToDatabase {
 
