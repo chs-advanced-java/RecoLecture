@@ -27,6 +27,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Utils {
 
+    ///////
     public static final String SHARED_PREFERENCES = "shared_preferences";
     public static final String PREF_DARK_THEME = "use_dark_theme";
     public static final String PREF_DUMMY_CLASSES = "use_dummy_classes";
