@@ -37,7 +37,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="@dimen/logo_size"
-        android:src="@drawable/logo"
+        app:srcCompat="@drawable/logo"
         android:layout_margin="16dp"/>
 
     <RelativeLayout android:id="@+id/form"
@@ -97,10 +97,19 @@
     <TextView android:id="@+id/signupPrompt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/form"
+        android:layout_above="@+id/contactPrompt"
+        android:text="No account yet? Create one."
+        android:textSize="16sp"/>
+
+    <TextView android:id="@+id/contactPrompt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:text="No account yet? Create one"
-        android:textSize="16dip"/>
+        android:text="Problems signing in? Contact us."
+        android:textSize="16sp"/>
 
 </RelativeLayout>

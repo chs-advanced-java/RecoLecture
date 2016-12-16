@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
 
 public class RegistrationScreen extends AppCompatActivity {
 
