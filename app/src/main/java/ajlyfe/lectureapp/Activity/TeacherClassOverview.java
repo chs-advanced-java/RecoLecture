@@ -137,8 +137,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent i = new Intent(Intent.ACTION_SEND);
                                 i.setType("message/rfc822");
-                                i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture");
-                                i.putExtra(Intent.EXTRA_TEXT, "Use the code 3zb8c27n to join my class \""
+                                i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture!");
+                                i.putExtra(Intent.EXTRA_TEXT, "Use the code " + code + " to join my class \""
                                         + className + ".\"");
                                 try {
                                     startActivity(Intent.createChooser(i, "Send mail..."));
