@@ -27,11 +27,21 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import ajlyfe.lectureapp.*;
+import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCardAdapter;
 import io.codetail.animation.SupportAnimator;
@@ -47,6 +57,10 @@ public class TeacherClassOverview extends AppCompatActivity {
     public static final String AUTO_DESCRIPTION = "Dummy description for an auto-generated\nclass for testing purposes";
 
     private static final String CLASSES_URL = "http://www.chs.mcvsd.org/sandbox/insert-classdb.php";
+    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/get-accountLoginData.php?username=";
+    public final String JSON_ARRAY = "result";
+
+    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +115,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                                     adapter.setClassList(classes);
                                     Utils.setTeacherClassList(classes, TeacherClassOverview.this);
 
-                                    pushClass(className, classDescription, code, "lgesin@ctemc.org");
+                                    getData();
 
                                     onBackPressed();
                                 }
@@ -319,5 +333,53 @@ public class TeacherClassOverview extends AppCompatActivity {
 
         PushClass pc = new PushClass();
         pc.execute(className, classDescription, classCode, teacher);
+    }
+
+
+    private void getData() {
+        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+
+        String url = DATA_URL + Utils.getPrefs(Utils.SHARED_PREFERENCES, TeacherClassOverview.this).getString(Utils.PREF_USERNAME, null);
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                loading.dismiss();
+                final String[] data = showJSON(response);
+                pushClass(data[0], data[1], data[2], data[3]);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(TeacherClassOverview.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private String[] showJSON(String response) {
+        String[] mData = new String[4];
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
+            JSONObject data = result.getJSONObject(0);
+
+            String userData = data.getString("username");
+            String passwordData = data.getString("password");
+            String isTeacherData = String.valueOf(data.getInt("teacher"));
+            String email = data.getString("email");
+
+            mData[0] = userData;
+            mData[1] = passwordData;
+            mData[2] = isTeacherData;
+            mData[3] = email;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return mData;
     }
 }
