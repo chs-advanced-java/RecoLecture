@@ -51,7 +51,7 @@ import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 public class LoginActivity extends AppCompatActivity {
 
     public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/get-accountLoginData.php?username=";
-    private final String JSON_ARRAY = "result";
+    public final String JSON_ARRAY = "result";
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -197,6 +197,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        TextView contact = (TextView) findViewById(R.id.contactPrompt);
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ContactActivity.class));
+            }
+        });
+
         final TextView signup = (TextView) findViewById(R.id.signupPrompt);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,7 +253,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
 
-        String url = DATA_URL+user;
+        String url = DATA_URL + user;
 
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -287,6 +295,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, true);
                     editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+                    editor.putString(Utils.PREF_USERNAME, user);
                     editor.apply();
 
                     ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
@@ -307,6 +316,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, false);
                     editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+                    editor.putString(Utils.PREF_USERNAME, user);
                     editor.apply();
 
                     ArrayList<ClassCard> mClasses = new ArrayList<>();

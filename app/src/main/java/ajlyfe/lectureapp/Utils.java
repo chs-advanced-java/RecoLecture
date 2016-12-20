@@ -33,6 +33,7 @@ public class Utils {
     public static final String PREF_LOGGED_IN = "logged_in";
     public static final String PREF_IS_TEACHER = "is_teacher";
     public static final String PREF_CLASS_LIST = "class_list";
+    public static final String PREF_USERNAME = "username";
 
     public static final String UNIQUE_STRING = "Developer_Lecture_";
 

@@ -1,4 +1,4 @@
-package ajlyfe.lectureapp.Activity;
+package ajlyfe.lectureapp;
 
 import java.util.ArrayList;
 import java.util.Random;
