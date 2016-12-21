@@ -98,6 +98,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                     boolean generating = true;
                     while (generating) {
                         code = gen.generate();
+
+                        generating = false;
                     }
                     final String usedCode = code;
 
