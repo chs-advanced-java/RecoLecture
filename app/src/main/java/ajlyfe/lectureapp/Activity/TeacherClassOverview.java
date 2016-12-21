@@ -135,10 +135,10 @@ public class TeacherClassOverview extends AppCompatActivity {
 
                     View dialogView = dialog.getCustomView();
 
-                    TextView text = (TextView) dialogView.findViewById(R.id.message);
-                    text.setText("Your class code is: " + code + ".\nDistribute this to your students.");
-
                     if (dialogView != null) {
+                        TextView text = (TextView) dialogView.findViewById(R.id.message);
+                        text.setText("Your class code is: " + code + ".\nDistribute this to your students.");
+
                         RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
                         actionMessage.setOnClickListener(new View.OnClickListener() {
                             @Override
