@@ -91,10 +91,15 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final EditText classDescriptionET = (EditText) findViewById(R.id.newClassDescriptionET);
                 final String className =  classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
+                String code = "";
 
                 if (!className.equals("") && !classDescription.equals("") && (classDescription.length() <= 80)) { // Proceed
                     CodeGenerator gen = new CodeGenerator();
-                    final String code = gen.generate();
+                    boolean generating = true;
+                    while (generating) {
+                        code = gen.generate();
+                    }
+                    final String usedCode = code;
 
                     MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
                     builder.title("Attention!")
@@ -116,7 +121,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                                     Utils.setTeacherClassList(classes, TeacherClassOverview.this);
 
                                     String email = Utils.getPrefs(Utils.SHARED_PREFERENCES, TeacherClassOverview.this).getString(Utils.PREF_EMAIL, null);
-                                    pushClass(className, classDescription, code, email);
+                                    pushClass(className, classDescription, usedCode, email);
 
                                     onBackPressed();
                                 }
@@ -139,7 +144,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                                 Intent i = new Intent(Intent.ACTION_SEND);
                                 i.setType("message/rfc822");
                                 i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture!");
-                                i.putExtra(Intent.EXTRA_TEXT, "Use the code " + code + " to join my class \""
+                                i.putExtra(Intent.EXTRA_TEXT, "Use the code " + usedCode + " to join my class \""
                                         + className + ".\"");
                                 try {
                                     startActivity(Intent.createChooser(i, "Send mail..."));
