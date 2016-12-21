@@ -2,6 +2,7 @@ package ajlyfe.lectureapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,8 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -34,6 +44,8 @@ public class Utils {
     public static final String PREF_IS_TEACHER = "is_teacher";
     public static final String PREF_CLASS_LIST = "class_list";
     public static final String PREF_USERNAME = "username";
+    public static final String PREF_PASSWORD = "password";
+    public static final String PREF_EMAIL = "email";
 
     public static final String UNIQUE_STRING = "Developer_Lecture_";
 

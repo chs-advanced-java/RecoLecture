@@ -277,6 +277,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         String userData;
         String passwordData;
+        String emailData;
         int isTeacherData;
 
         try {
@@ -287,6 +288,7 @@ public class LoginActivity extends AppCompatActivity {
             userData = data.getString("username");
             passwordData = data.getString("password");
             isTeacherData = data.getInt("teacher");
+            emailData = data.getString("email");
 
             if(userData.equals(user) && passwordData.equals(password))
             {
@@ -295,7 +297,10 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, true);
                     editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
-                    editor.putString(Utils.PREF_USERNAME, user);
+                    editor.putString(Utils.PREF_USERNAME, userData);
+                    editor.putString(Utils.PREF_PASSWORD, passwordData);
+                    editor.putString(Utils.PREF_EMAIL, emailData);
+
                     editor.apply();
 
                     ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
@@ -316,7 +321,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, false);
                     editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
-                    editor.putString(Utils.PREF_USERNAME, user);
+                    editor.putString(Utils.PREF_USERNAME, userData);
+                    editor.putString(Utils.PREF_PASSWORD, passwordData);
+                    editor.putString(Utils.PREF_EMAIL, emailData);
                     editor.apply();
 
                     ArrayList<ClassCard> mClasses = new ArrayList<>();

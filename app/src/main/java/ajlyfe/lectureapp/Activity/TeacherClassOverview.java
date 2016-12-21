@@ -115,7 +115,8 @@ public class TeacherClassOverview extends AppCompatActivity {
                                     adapter.setClassList(classes);
                                     Utils.setTeacherClassList(classes, TeacherClassOverview.this);
 
-                                    getData();
+                                    String email = Utils.getPrefs(Utils.SHARED_PREFERENCES, TeacherClassOverview.this).getString(Utils.PREF_EMAIL, null);
+                                    pushClass(className, classDescription, code, email);
 
                                     onBackPressed();
                                 }
