@@ -40,6 +40,10 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         this.parentActivity = parentActivity;
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
         editor = preferences.edit();
+
+        if (lectureList.size() == 0) {
+            parentActivity.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
