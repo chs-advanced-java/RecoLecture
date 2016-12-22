@@ -1,5 +1,6 @@
 package ajlyfe.lectureapp.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,14 +13,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Set;
 
+import ajlyfe.lectureapp.Adapters.ClassCard;
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+
+import static ajlyfe.lectureapp.Activity.TeacherClassOverview.AUTO_DESCRIPTION;
+import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 
 public class StudentEnterClassCode extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+
+    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
+    public final String JSON_ARRAY = "result";
+
+    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +61,68 @@ public class StudentEnterClassCode extends AppCompatActivity {
             public void onClick(View view) {
                 final EditText enterClassCode =  (EditText) findViewById(R.id.editText3);
                 String classCodeStudent = enterClassCode.getText().toString();
-                if (classCodeStudent.equals("3zb8c27n")) {
-                    Set<String> tempClassList;
-                    tempClassList = preferences.getStringSet("KeyStudent", null);
-                    /**Reminder to change class name later!!!**/
-                    tempClassList.add("Spanish 4");
-                    editor.putStringSet("KeyStudent", tempClassList);
-                    editor.apply();
-
-                    startActivity(new Intent(StudentEnterClassCode.this, StudentActivityMain.class));
-                    startActivity(new Intent(StudentEnterClassCode.this, StudentClassPage.class));
-                    finish();
-
-                }
-                else {
-                    Toast.makeText(StudentEnterClassCode.this, "Your code does not appear to be valid. Please check it and try again.", Toast.LENGTH_SHORT).show();
-                }
+                getData(classCodeStudent);
             }
         });
+
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void getData(final String classCode) {
+        loading = ProgressDialog.show(this,"Please wait...","Fetching...",false,false);
+
+        String url = DATA_URL + classCode;
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                loading.dismiss();
+                showJSON(response, classCode);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(StudentEnterClassCode.this, "Invalid class code", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void showJSON(String response, String classCode) {
+        String classNameData;
+        String classDescriptionData;
+        String classCodeData;
+        String teacherData;
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
+            JSONObject data = result.getJSONObject(0);
+
+            classNameData = data.getString("className");
+            classDescriptionData = data.getString("classDescription");
+            classCodeData = data.getString("classCode");
+            teacherData = data.getString("teacher");
+
+            if (classCode.equals(classCodeData)) { // Class code is valid double-check
+                ArrayList<ClassCard> classCards = Utils.getStudentClassList(StudentEnterClassCode.this);
+                classCards.add(new ClassCard(classNameData, classDescriptionData));
+
+                Utils.setStudentClassList(classCards, StudentEnterClassCode.this);
+
+                startActivity(new Intent(StudentEnterClassCode.this, StudentActivityMain.class));
+                startActivity(new Intent(StudentEnterClassCode.this, StudentClassPage.class));
+
+                finish();
+            } else {
+                Toast.makeText(StudentEnterClassCode.this, "Invalid class code", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -57,10 +57,6 @@ public class TeacherClassOverview extends AppCompatActivity {
     public static final String AUTO_DESCRIPTION = "Dummy description for an auto-generated\nclass for testing purposes";
 
     private static final String CLASSES_URL = "http://www.chs.mcvsd.org/sandbox/insert-classdb.php";
-    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/get-accountLoginData.php?username=";
-    public final String JSON_ARRAY = "result";
-
-    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

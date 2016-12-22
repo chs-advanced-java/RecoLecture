@@ -13,7 +13,7 @@ public class ClassCard {
         return className;
     }
 
-    public String getclassDescription() {
+    public String getClassDescription() {
         return classDescription;
     }
 

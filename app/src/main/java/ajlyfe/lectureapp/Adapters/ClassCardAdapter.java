@@ -73,6 +73,9 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
             TextView title = viewHolder.classTitle;
             title.setText(thisClassCard.getClassName());
 
+            TextView description = viewHolder.classDescription;
+            description.setText(thisClassCard.getClassDescription());
+
             ImageView classColor = viewHolder.classCardColor;
             classColor.setBackgroundColor(Utils.generateColor());
 
@@ -161,7 +164,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView classTitle;
-        TextView classCount;
+        TextView classDescription;
         ImageView classCardColor;
         CardView card;
         Toolbar toolbar;
@@ -172,7 +175,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
             this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
             this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
-            this.classCount = (TextView) itemView.findViewById(R.id.classCardStudentCount);
+            this.classDescription = (TextView) itemView.findViewById(R.id.classCardStudentDescription);
             this.classCardColor = (ImageView) itemView.findViewById(R.id.classCardColor);
         }
     }

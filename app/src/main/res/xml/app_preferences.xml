@@ -32,11 +32,11 @@
 
     <PreferenceCategory android:title="Developer">
 
+        <!--
         <SwitchPreference android:title="Dummy classes"
             android:key="@string/preference_dummy_classes"
             android:summary="Dummy classes will create five spanish classes for testing purposes only (Developer)"
-            android:defaultValue="true"
-            />
+            />-->
 
         <Preference android:title="Create dummy lecture"
             android:key="@string/preference_create_lecture"

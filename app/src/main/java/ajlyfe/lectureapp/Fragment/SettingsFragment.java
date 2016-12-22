@@ -33,7 +33,7 @@ public class SettingsFragment extends PreferenceFragment {
     private EditTextPreference changeUsername;
     private EditTextPreference changePassword;
     private SwitchPreference darkTheme;
-    private SwitchPreference dummyClasses;
+    //private SwitchPreference dummyClasses;
     private Preference createLecture;
     private Preference signOut;
 
@@ -55,7 +55,7 @@ public class SettingsFragment extends PreferenceFragment {
         darkTheme = (SwitchPreference) findPreference(getString(R.string.preference_dark_theme));
 
         // Developer category
-        dummyClasses = (SwitchPreference) findPreference(getString(R.string.preference_dummy_classes));
+        //dummyClasses = (SwitchPreference) findPreference(getString(R.string.preference_dummy_classes));
         createLecture = (Preference) findPreference(getString(R.string.preference_create_lecture));
         signOut = (Preference) findPreference(getString(R.string.preference_sign_out));
 
@@ -79,13 +79,14 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        /*
         dummyClasses.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 toggleDummyClasses(dummyClasses.isChecked());
                 return false;
             }
-        });
+        });*/
 
         createLecture.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -180,7 +181,7 @@ public class SettingsFragment extends PreferenceFragment {
         int read;
 
         try {
-            out = new FileOutputStream(Utils.getLecturePath() + Utils.UNIQUE_STRING + getLectureNumber() + ".mp3", true);
+            out = new FileOutputStream(Utils.getLecturePath() + Utils.UNIQUE_STRING + getLectureNumber() + ".1a2b3c" + ".mp3", true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

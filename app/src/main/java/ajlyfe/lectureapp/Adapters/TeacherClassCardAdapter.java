@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
@@ -84,7 +83,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
             TextView title = viewHolder.classTitle;
             title.setText(mClass.getName());
 
-            TextView classCount = viewHolder.classCount;
+            TextView classCount = viewHolder.classDescription;
             classCount.setText(mClass.getDescription());
 
             ImageView classColor = viewHolder.classCardColor;
@@ -183,7 +182,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView classTitle;
-        TextView classCount;
+        TextView classDescription;
         ImageView classCardColor;
         CardView card;
         Toolbar toolbar;
@@ -194,7 +193,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
             this.toolbar = (Toolbar) itemView.findViewById(R.id.classCardToolbar);
             this.card = (CardView) itemView.findViewById(R.id.classCard);
             this.classTitle = (TextView) itemView.findViewById(R.id.className);
-            this.classCount = (TextView) itemView.findViewById(R.id.classCardStudentCount);
+            this.classDescription = (TextView) itemView.findViewById(R.id.classCardStudentDescription);
             this.classCardColor = (ImageView) itemView.findViewById(R.id.classCardColor);
         }
     }

@@ -273,8 +273,7 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void showJSON(String response, String user, String password)
-    {
+    private void showJSON(String response, String user, String password) {
         String userData;
         String passwordData;
         String emailData;
@@ -290,10 +289,8 @@ public class LoginActivity extends AppCompatActivity {
             isTeacherData = data.getInt("teacher");
             emailData = data.getString("email");
 
-            if(userData.equals(user) && passwordData.equals(password))
-            {
-                if(isTeacherData == 1)
-                {
+            if(userData.equals(user) && passwordData.equals(password)) {
+                if(isTeacherData == 1) {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, true);
                     editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
@@ -305,22 +302,22 @@ public class LoginActivity extends AppCompatActivity {
 
                     ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
                     mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+                    /*
                     mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
                     mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
                     mClasses.add(3, new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
                     mClasses.add(4, new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
                     mClasses.add(5, new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
+                    */
 
                     Utils.setTeacherClassList(mClasses, LoginActivity.this);
 
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();
-                }
-                else
-                {
+                } else {
                     editor.putBoolean(Utils.PREF_LOGGED_IN, true);
                     editor.putBoolean(Utils.PREF_IS_TEACHER, false);
-                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, true);
+                    editor.putBoolean(Utils.PREF_DUMMY_CLASSES, false);
                     editor.putString(Utils.PREF_USERNAME, userData);
                     editor.putString(Utils.PREF_PASSWORD, passwordData);
                     editor.putString(Utils.PREF_EMAIL, emailData);
@@ -328,11 +325,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     ArrayList<ClassCard> mClasses = new ArrayList<>();
                     mClasses.add(0, new ClassCard(NULL_CLASS, "Header (NULL)"));
+                    /*
                     mClasses.add(1, new ClassCard("Spanish I", AUTO_DESCRIPTION));
                     mClasses.add(2, new ClassCard("Spanish II", AUTO_DESCRIPTION));
                     mClasses.add(3, new ClassCard("Spanish III", AUTO_DESCRIPTION));
                     mClasses.add(4, new ClassCard("Spanish IV", AUTO_DESCRIPTION));
                     mClasses.add(5, new ClassCard("Spanish V", AUTO_DESCRIPTION));
+                    */
 
                     Utils.setStudentClassList(mClasses, LoginActivity.this);
 

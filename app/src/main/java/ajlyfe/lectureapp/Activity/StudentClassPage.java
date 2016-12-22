@@ -65,7 +65,22 @@ public class StudentClassPage extends AppCompatActivity {
         }
 
         for (File thisFile : files) {
-            bzofghia.add(new LectureCard(thisFile.toString().substring(Utils.getLecturePath().length(), (thisFile.toString().length() - 4)), "Plumes", thisFile));
+            char[] fileChars = thisFile.toString().toCharArray();
+            String[] segments = {"", "", ""};
+            int currentSegment = 0;
+
+            for (char thisFileChar : fileChars) {
+                if (thisFileChar != '.') {
+                    segments[currentSegment] += thisFileChar;
+                } else {
+                    currentSegment++;
+                }
+            }
+
+            segments[0] = segments[0].substring(Utils.getLecturePath().length(),
+                    (thisFile.toString().length() - (segments[1].length() + segments[2].length() + 2)));
+
+            bzofghia.add(new LectureCard(segments[0], "Temporary Teacher Name", thisFile));
         }
 
         return bzofghia;
