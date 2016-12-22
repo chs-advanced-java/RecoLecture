@@ -34,4 +34,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView android:id="@+id/noLectures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="20sp"
+        android:text="No lectures to see here!"
+        android:fontFamily="sans-serif-thin"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/lectureTitle"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

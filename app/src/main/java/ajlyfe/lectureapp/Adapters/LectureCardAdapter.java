@@ -104,6 +104,10 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         lectureList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, lectureList.size());
+
+        if (lectureList.size() == 0) {
+            parentActivity.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+        }
     }
 
     public void playLecture(String fileName) {
