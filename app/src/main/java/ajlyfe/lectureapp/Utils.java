@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.ActivityCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,6 +32,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ajlyfe.lectureapp.Activity.LoginActivity;
 import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 
@@ -77,7 +80,7 @@ public class Utils {
         editor.apply();
     }
 
-    public static ArrayList<TeacherClassCard> getTeacherClassList(Activity activity) {
+    public static ArrayList<TeacherClassCard> getTeacherClassList(final Activity activity) {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
         String json = getPrefs(SHARED_PREFERENCES, activity).getString(Utils.PREF_CLASS_LIST, null);
