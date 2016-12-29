@@ -45,7 +45,6 @@ import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
-import static ajlyfe.lectureapp.Activity.TeacherClassOverview.AUTO_DESCRIPTION;
 import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 
 public class LoginActivity extends AppCompatActivity {

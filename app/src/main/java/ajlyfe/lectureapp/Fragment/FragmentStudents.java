@@ -1,21 +1,12 @@
 package ajlyfe.lectureapp.Fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import ajlyfe.lectureapp.Adapters.LectureSelectCardAdapter;
-import ajlyfe.lectureapp.Adapters.StudentSelectCard;
 import ajlyfe.lectureapp.Adapters.StudentSelectCardAdapter;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;

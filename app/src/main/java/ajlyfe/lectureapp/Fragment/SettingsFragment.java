@@ -2,15 +2,15 @@ package ajlyfe.lectureapp.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.*;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 
 import java.io.File;
 import java.io.FileNotFoundException;

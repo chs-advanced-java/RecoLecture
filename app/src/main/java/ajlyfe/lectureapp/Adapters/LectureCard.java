@@ -1,11 +1,6 @@
 package ajlyfe.lectureapp.Adapters;
 
-import android.content.Context;
-
 import java.io.File;
-import java.util.ArrayList;
-
-import ajlyfe.lectureapp.R;
 
 public class LectureCard {
     private String lectureName;

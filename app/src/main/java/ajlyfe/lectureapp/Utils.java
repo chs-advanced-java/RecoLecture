@@ -2,37 +2,24 @@ package ajlyfe.lectureapp;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Environment;
-import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.ActivityCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Random;
 
-import ajlyfe.lectureapp.Activity.LoginActivity;
 import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 

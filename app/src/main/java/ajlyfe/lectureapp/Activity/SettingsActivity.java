@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
 import ajlyfe.lectureapp.Fragment.SettingsFragment;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;

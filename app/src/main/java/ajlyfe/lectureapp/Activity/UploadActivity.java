@@ -1,17 +1,11 @@
 package ajlyfe.lectureapp.Activity;
 
-import ajlyfe.lectureapp.Adapters.ClassSelectCard;
-import ajlyfe.lectureapp.Adapters.LectureSelectCard;
-import ajlyfe.lectureapp.Fragment.*;
-import ajlyfe.lectureapp.R;
-import ajlyfe.lectureapp.Utils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +15,16 @@ import android.widget.Toast;
 import com.github.paolorotolo.appintro.AppIntro;
 
 import java.util.ArrayList;
+
+import ajlyfe.lectureapp.Adapters.ClassSelectCard;
+import ajlyfe.lectureapp.Adapters.LectureSelectCard;
+import ajlyfe.lectureapp.Fragment.FragmentClass;
+import ajlyfe.lectureapp.Fragment.FragmentFile;
+import ajlyfe.lectureapp.Fragment.FragmentResult;
+import ajlyfe.lectureapp.Fragment.FragmentStudents;
+import ajlyfe.lectureapp.Fragment.FragmentUpload;
+import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
 
 public class UploadActivity extends AppIntro {
 

@@ -8,12 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
-import com.instabug.library.Instabug;
-import com.instabug.library.InstabugColorTheme;
-import com.instabug.library.invocation.InstabugInvocationEvent;
-
 import ajlyfe.lectureapp.R;
-import io.doorbell.android.Doorbell;
 
 public class ContactActivity extends AppCompatActivity {
 

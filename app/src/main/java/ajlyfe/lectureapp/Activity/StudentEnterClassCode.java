@@ -24,15 +24,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import ajlyfe.lectureapp.Adapters.ClassCard;
-import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
-
-import static ajlyfe.lectureapp.Activity.TeacherClassOverview.AUTO_DESCRIPTION;
-import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 
 public class StudentEnterClassCode extends AppCompatActivity {
     private SharedPreferences preferences;

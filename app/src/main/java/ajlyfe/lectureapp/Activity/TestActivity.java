@@ -1,18 +1,18 @@
 package ajlyfe.lectureapp.Activity;
 
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import ajlyfe.lectureapp.R;
 import android.media.MediaPlayer;
-import android.os.Handler;
-import android.util.Log;
-
 import android.media.MediaPlayer.OnPreparedListener;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.MediaController;
 
 import java.io.File;
+
+import ajlyfe.lectureapp.R;
 
 public class TestActivity extends AppCompatActivity implements OnPreparedListener, MediaController.MediaPlayerControl{
     private static final String TAG = "AudioPlayer";

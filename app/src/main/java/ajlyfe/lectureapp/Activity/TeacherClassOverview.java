@@ -6,44 +6,37 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ajlyfe.lectureapp.*;
-import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCardAdapter;
+import ajlyfe.lectureapp.CodeGenerator;
+import ajlyfe.lectureapp.R;
+import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
@@ -67,7 +60,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        boolean[] creatingClassArr = { creatingClass };
+        boolean[] creatingClassArr = {creatingClass};
         fab = (FloatingActionButton) findViewById(R.id.fabTeacher);
         fab.setOnClickListener(onFABClick(TeacherClassOverview.this, creatingClassArr, fab));
         creatingClass = creatingClassArr[0];
@@ -83,9 +76,9 @@ public class TeacherClassOverview extends AppCompatActivity {
         findViewById(R.id.teacherCreateClassButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText classNameET =  (EditText) findViewById(R.id.newClassNameET);
+                final EditText classNameET = (EditText) findViewById(R.id.newClassNameET);
                 final EditText classDescriptionET = (EditText) findViewById(R.id.newClassDescriptionET);
-                final String className =  classNameET.getText().toString();
+                final String className = classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
                 String code = "";
 
@@ -155,8 +148,7 @@ public class TeacherClassOverview extends AppCompatActivity {
 
                     dialog.show();
 
-                }
-                else { // One of the fields is empty
+                } else { // One of the fields is empty
                     if (className.equals("")) {
                         TextInputLayout classNameTIL = (TextInputLayout) findViewById(R.id.inputLayoutClassName);
                         classNameTIL.setErrorEnabled(true);
@@ -237,13 +229,16 @@ public class TeacherClassOverview extends AppCompatActivity {
             }
 
             @Override
-            public void onAnimationEnd() {}
+            public void onAnimationEnd() {
+            }
 
             @Override
-            public void onAnimationCancel() {}
+            public void onAnimationCancel() {
+            }
 
             @Override
-            public void onAnimationRepeat() {}
+            public void onAnimationRepeat() {
+            }
         });
 
         animator.setInterpolator(new DecelerateInterpolator());
@@ -300,36 +295,31 @@ public class TeacherClassOverview extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void pushClass(String className, String classDescription, String classCode, String teacher)
-    {
-        class PushClass extends AsyncTask<String, Void, String>
-        {
+    private void pushClass(String className, String classDescription, String classCode, String teacher) {
+        class PushClass extends AsyncTask<String, Void, String> {
             private ProgressDialog loading;
             private WriteToDatabase ruc = new WriteToDatabase();
 
             @Override
-            protected void onPreExecute()
-            {
+            protected void onPreExecute() {
                 super.onPreExecute();
                 loading = ProgressDialog.show(TeacherClassOverview.this, "Please Wait", null, true, true);
             }
 
             @Override
-            protected void onPostExecute(String s)
-            {
+            protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
             }
 
             @Override
-            protected String doInBackground(String... params)
-            {
+            protected String doInBackground(String... params) {
                 HashMap<String, String> data = new HashMap<>();
-                data.put("className",params[0]);
-                data.put("classDescription",params[1]);
-                data.put("classCode",params[2]);
-                data.put("teacher",params[3]);
+                data.put("className", params[0]);
+                data.put("classDescription", params[1]);
+                data.put("classCode", params[2]);
+                data.put("teacher", params[3]);
 
                 return ruc.sendPostRequest(CLASSES_URL, data);
             }
