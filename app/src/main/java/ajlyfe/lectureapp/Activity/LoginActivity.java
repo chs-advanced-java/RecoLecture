@@ -45,6 +45,7 @@ import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
+import static ajlyfe.lectureapp.Activity.TeacherClassOverview.AUTO_DESCRIPTION;
 import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 
 public class LoginActivity extends AppCompatActivity {
@@ -99,45 +100,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    private void updateClassList() {
-        final ArrayList<TeacherClassCard> classes = Utils.getTeacherClassList(this);
-
-        String url = "http://www.chs.mcvsd.org/sandbox/getAllClasses.php?teacher=" + Utils.getPrefs(Utils.SHARED_PREFERENCES, this).getString(Utils.PREF_EMAIL, null);
-
-        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject result = new JSONObject(response);
-                    JSONArray users = result.optJSONArray("result");
-
-                    for (int i = 0; i < users.length(); i++) {
-                        JSONObject post = users.optJSONObject(i);
-                        classes.add(new TeacherClassCard(post.optString("className"), post.optString("classDescription")));
-                        Utils.setTeacherClassList(classes, LoginActivity.this);
-                    }
-                } catch (org.json.JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-
     public void checkLoginIn() {
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
         editor = preferences.edit();
 
         if (preferences.getBoolean(Utils.PREF_LOGGED_IN, false)) {
-            updateClassList();
-
             if (preferences.getBoolean(Utils.PREF_IS_TEACHER, false)) {
                 startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 new Handler().postDelayed(new Runnable() {
@@ -294,12 +261,13 @@ public class LoginActivity extends AppCompatActivity {
                 loading.dismiss();
                 showJSON(response, user, password);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                         Toast.makeText(LoginActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);

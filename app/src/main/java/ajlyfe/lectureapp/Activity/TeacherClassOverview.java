@@ -132,7 +132,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                         actionMessage.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent i = new Intent(Intent.ACTION_SEND);
+1                                Intent i = new Intent(Intent.ACTION_SEND);
                                 i.setType("message/rfc822");
                                 i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture!");
                                 i.putExtra(Intent.EXTRA_TEXT, "Use the code " + usedCode + " to join my class \""
@@ -249,6 +249,7 @@ public class TeacherClassOverview extends AppCompatActivity {
     static float hypo(int a, int b) {
         return (float) Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     }
+
 
     @Override
     public void onBackPressed() {
