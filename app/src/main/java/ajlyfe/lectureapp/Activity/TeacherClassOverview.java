@@ -6,22 +6,23 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +32,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ajlyfe.lectureapp.*;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.Adapters.TeacherClassCardAdapter;
-import ajlyfe.lectureapp.CodeGenerator;
-import ajlyfe.lectureapp.R;
-import ajlyfe.lectureapp.Utils;
-import ajlyfe.lectureapp.WriteToDatabase;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
@@ -80,17 +78,15 @@ public class TeacherClassOverview extends AppCompatActivity {
                 final EditText classDescriptionET = (EditText) findViewById(R.id.newClassDescriptionET);
                 final String className = classNameET.getText().toString();
                 final String classDescription = classDescriptionET.getText().toString();
-                String code = "";
 
                 if (!className.equals("") && !classDescription.equals("") && (classDescription.length() <= 80)) { // Proceed
-                    CodeGenerator gen = new CodeGenerator();
-                    boolean generating = true;
-                    while (generating) {
-                        code = gen.generate();
 
-                        generating = false;
-                    }
+                    CodeGenerator cg = new CodeGenerator();
+                    String code = cg.generate();
+                    code = "test";
                     final String usedCode = code;
+                    String email = Utils.getPrefs(Utils.SHARED_PREFERENCES, TeacherClassOverview.this).getString(Utils.PREF_EMAIL, null);
+                    pushClass(className, classDescription, code, email);
 
                     MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
                     builder.title("Attention!")
@@ -111,14 +107,9 @@ public class TeacherClassOverview extends AppCompatActivity {
                                     adapter.setClassList(classes);
                                     Utils.setTeacherClassList(classes, TeacherClassOverview.this);
 
-                                    String email = Utils.getPrefs(Utils.SHARED_PREFERENCES, TeacherClassOverview.this).getString(Utils.PREF_EMAIL, null);
-                                    pushClass(className, classDescription, usedCode, email);
-
                                     onBackPressed();
                                 }
-                            })
-                            .negativeText("CANCEL")
-                            .canceledOnTouchOutside(false);
+                            });
 
                     MaterialDialog dialog = builder.build();
 
