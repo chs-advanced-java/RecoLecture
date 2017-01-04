@@ -15,7 +15,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".Activity.UploadActivity"
             android:label="Upload" />
@@ -72,7 +71,12 @@
         <activity
             android:name=".Activity.ContactActivity"
             android:label="@string/title_activity_contact"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.BSOD"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_bsod"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

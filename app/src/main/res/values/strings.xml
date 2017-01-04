@@ -81,4 +81,8 @@
     <!-- VERSION NUMBER -->
     <string name="version">v0.1 alpha</string>
     <string name="title_activity_contact">ContactActivity</string>
+
+    <string name="title_activity_bsod">BSOD</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

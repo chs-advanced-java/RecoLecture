@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import ajlyfe.lectureapp.Fragment.SettingsFragment;
 import ajlyfe.lectureapp.R;
@@ -32,6 +35,14 @@ public class SettingsActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction().add(R.id.pref_container, new SettingsFragment()).commit();
         }
+
+        TextView version = (TextView) findViewById(R.id.settings_version);
+        version.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, BSOD.class));
+            }
+        });
     }
 
     @Override

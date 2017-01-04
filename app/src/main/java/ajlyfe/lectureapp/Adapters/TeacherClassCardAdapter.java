@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -107,32 +108,45 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                     mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                            dialog.setTitle("Warning!")
-                                    .setMessage("You are about to permanently delete a class. Are you sure you " +
-                                            "want to do this? This action can NOT be undone.")
-                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialoginterface, int i) {
-                                            dialoginterface.cancel();
-                                        }
-                                    })
-                                    .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialoginterface, int idk) {
-                                            removeAt(finalPosition);
+                            if (item.getItemId() == R.id.action_delete) {
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                                dialog.setTitle("Warning!")
+                                        .setMessage("You are about to permanently delete a class. Are you sure you " +
+                                                "want to do this? This action can NOT be undone.")
+                                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialoginterface, int i) {
+                                                dialoginterface.cancel();
+                                            }
+                                        })
+                                        .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialoginterface, int idk) {
+                                                removeAt(finalPosition);
 
-                                            Utils.setTeacherClassList(classList, parentActivity);
+                                                Utils.setTeacherClassList(classList, parentActivity);
 
-                                            Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                                    "Deleted '" + mClass.getName() + "' successfully",
-                                                    Snackbar.LENGTH_LONG)
-                                                    .setAction("Dandy!", new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) { /*ihateusers*/ }
-                                                    })
-                                                    .setActionTextColor(Color.parseColor("#FFFFC107"))
-                                                    .show();
-                                        }
-                                    }).show();
+                                                Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
+                                                        "Deleted '" + mClass.getName() + "' successfully",
+                                                        Snackbar.LENGTH_LONG)
+                                                        .setAction("Dandy!", new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) { /*ihateusers*/ }
+                                                        })
+                                                        .setActionTextColor(Color.parseColor("#FFFFC107"))
+                                                        .show();
+                                            }
+                                        }).show();
+                            } else if (item.getItemId() == R.id.action_invite) {
+                                Intent i = new Intent(Intent.ACTION_SEND);
+                                i.setType("message/rfc822");
+                                i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture!");
+                                i.putExtra(Intent.EXTRA_TEXT, "Use the code " + mClass.getCode() + " to join my class \""
+                                        + mClass.getName() + ".\"");
+                                try {
+                                    parentActivity.startActivity(Intent.createChooser(i, "Send mail..."));
+                                } catch (android.content.ActivityNotFoundException ex) {
+                                    Toast.makeText(parentActivity, "There are no email clients installed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                             return true;
                         }
                     });
