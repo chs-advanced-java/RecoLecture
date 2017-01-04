@@ -2,9 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Activity.TeacherMainActivity">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_delete"
         android:orderInCategory="100"
         android:title="Delete"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_invite"
+        android:orderInCategory="100"
+        android:title="Invite Students"
         app:showAsAction="never" />
 </menu>

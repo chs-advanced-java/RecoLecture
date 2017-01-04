@@ -23,7 +23,7 @@
 
     <include layout="@layout/content_settings" />
 
-    <TextView
+    <TextView android:id="@+id/settings_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/version"

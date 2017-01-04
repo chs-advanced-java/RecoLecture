@@ -130,16 +130,16 @@ public class SettingsFragment extends PreferenceFragment {
 
         assert mClasses != null;
         if (mClasses.size() > 0) {
-            mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+            mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)", null));
         }
 
         if (dummyClassesEnabled) {
-            mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
-            mClasses.add(new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
-            mClasses.add(new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
-            mClasses.add(new TeacherClassCard("Spanish III", AUTO_DESCRIPTION));
-            mClasses.add(new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION));
-            mClasses.add(new TeacherClassCard("Spanish V", AUTO_DESCRIPTION));
+            mClasses.set(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)", null));
+            mClasses.add(new TeacherClassCard("Spanish I", AUTO_DESCRIPTION, null));
+            mClasses.add(new TeacherClassCard("Spanish II", AUTO_DESCRIPTION, null));
+            mClasses.add(new TeacherClassCard("Spanish III", AUTO_DESCRIPTION, null));
+            mClasses.add(new TeacherClassCard("Spanish IV", AUTO_DESCRIPTION, null));
+            mClasses.add(new TeacherClassCard("Spanish V", AUTO_DESCRIPTION, null));
 
             Utils.setTeacherClassList(mClasses, getActivity());
         } else {

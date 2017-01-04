@@ -28,4 +28,6 @@
     <color name="d">#ff3366</color>
     <color name="e">#914d99</color>
     <color name="f">#00301C</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

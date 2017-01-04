@@ -103,7 +103,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
 
             if (classCode.equals(classCodeData)) { // Class code is valid double-check
                 ArrayList<ClassCard> classCards = Utils.getStudentClassList(StudentEnterClassCode.this);
-                classCards.add(new ClassCard(classNameData, classDescriptionData));
+                classCards.add(new ClassCard(classNameData, classDescriptionData, classCodeData));
 
                 Utils.setStudentClassList(classCards, StudentEnterClassCode.this);
 

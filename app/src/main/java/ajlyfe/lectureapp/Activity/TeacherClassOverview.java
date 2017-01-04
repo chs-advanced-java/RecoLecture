@@ -95,7 +95,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    classes.add(new TeacherClassCard(className, classDescription));
+                                    classes.add(new TeacherClassCard(className, classDescription, usedCode));
 
                                     for (int i = 0; i < classes.size(); i++) {
                                         if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
@@ -184,7 +184,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         ArrayList<TeacherClassCard> classList = Utils.getTeacherClassList(this);
 
         if (classList.size() == 1) { // User has no classes
-            classList.add(new TeacherClassCard(getString(R.string.no_classes_title), getString(R.string.no_classes_description)));
+            classList.add(new TeacherClassCard(getString(R.string.no_classes_title), getString(R.string.no_classes_description), null));
         }
 
         return classList;

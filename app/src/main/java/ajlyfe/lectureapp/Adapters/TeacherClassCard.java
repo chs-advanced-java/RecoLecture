@@ -1,23 +1,27 @@
 package ajlyfe.lectureapp.Adapters;
 
+import android.support.annotation.Nullable;
+
 import ajlyfe.lectureapp.Activity.TeacherClassOverview;
 
 public class TeacherClassCard {
     private String name;
     private String description;
+    private String code;
 
-    public TeacherClassCard(String name, String description) {
+    /** Class code can be null if it is a dummy class, otherwise we have a problem.**/
+    public TeacherClassCard(String name, String description, @Nullable String code) {
         this.name = name;
         this.description = description;
+        this.code = code;
     }
 
     public String getName() {
         return name;
     }
 
-    public TeacherClassCard setName(String cName) {
-        this.name = cName;
-        return this;
+    public String getCode() {
+        return code;
     }
 
     public String getDescription() {
@@ -26,6 +30,11 @@ public class TeacherClassCard {
 
     public TeacherClassCard setClassDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public TeacherClassCard setName(String cName) {
+        this.name = cName;
         return this;
     }
 

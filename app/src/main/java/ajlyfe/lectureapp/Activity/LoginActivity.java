@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     for (int i = 0; i < users.length(); i++) {
                         JSONObject post = users.optJSONObject(i);
-                        classes.add(new TeacherClassCard(post.optString("className"), post.optString("classDescription")));
+                        classes.add(new TeacherClassCard(post.optString("className"), post.optString("classDescription"), post.optString("classCode")));
                         Utils.setTeacherClassList(classes, LoginActivity.this);
                     }
                 } catch (org.json.JSONException e) {
@@ -161,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                     ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
 
                 // PERMISSIONS GRANTED, CONTINUE
+                /*
                 File recoLectureDir = new File(Utils.getLecturePath());
                 File dummy1 = new File(Utils.getLecturePath() + "/Spanish I");
                 File dummy2 = new File(Utils.getLecturePath() + "/Spanish II");
@@ -173,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                 dummy2.mkdir();
                 dummy3.mkdir();
                 dummy4.mkdir();
-                dummy5.mkdir();
+                dummy5.mkdir();*/
 
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, Manifest.permission.READ_PHONE_STATE)) {
@@ -333,7 +334,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.apply();
 
                     ArrayList<TeacherClassCard> mClasses = new ArrayList<>();
-                    mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)"));
+                    mClasses.add(0, new TeacherClassCard(NULL_CLASS, "Header (NULL)", null));
                     /*
                     mClasses.add(1, new TeacherClassCard("Spanish I", AUTO_DESCRIPTION));
                     mClasses.add(2, new TeacherClassCard("Spanish II", AUTO_DESCRIPTION));
@@ -356,7 +357,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.apply();
 
                     ArrayList<ClassCard> mClasses = new ArrayList<>();
-                    mClasses.add(0, new ClassCard(NULL_CLASS, "Header (NULL)"));
+                    mClasses.add(0, new ClassCard(NULL_CLASS, "Header (NULL)", null));
                     /*
                     mClasses.add(1, new ClassCard("Spanish I", AUTO_DESCRIPTION));
                     mClasses.add(2, new ClassCard("Spanish II", AUTO_DESCRIPTION));

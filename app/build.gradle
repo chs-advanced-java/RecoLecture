@@ -22,6 +22,7 @@ android {
 
 
 
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile('com.mikepenz:materialdrawer:5.6.0@aar') {
@@ -35,6 +36,7 @@ dependencies {
         exclude group: 'com.google.android', module: 'support-v4'
     }
 
+    compile project(':volley')
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.github.paolorotolo:appintro:4.0.0'
     compile 'com.android.support:support-v4:24.2.1'
@@ -44,12 +46,11 @@ dependencies {
     compile 'com.github.Yellow5A5:ActSwitchAnimTool:1.0.1'
     compile 'pl.bclogic:pulsator4droid:1.0.3'
     compile 'me.everything:overscroll-decor-android:1.0.3'
-    testCompile 'junit:junit:4.12'
     compile 'com.felipecsl.asymmetricgridview:library:2.0.1'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:preference-v7:24.2.1'
     compile 'com.android.support:preference-v14:24.2.1'
-    compile project(':volley')
-    compile 'com.instabug.library:instabug:3+'
+    compile 'com.instabug.library:instabug:3.+'
     compile 'io.doorbell:android-sdk:0.2.6@aar'
+    testCompile 'junit:junit:4.12'
 }
