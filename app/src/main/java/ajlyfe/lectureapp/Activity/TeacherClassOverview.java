@@ -48,6 +48,7 @@ public class TeacherClassOverview extends AppCompatActivity {
     public static final String AUTO_DESCRIPTION = "Dummy description for an auto-generated\nclass for testing purposes";
 
     private static final String CLASSES_URL = "http://www.chs.mcvsd.org/sandbox/insert-classdb.php";
+    private TeacherClassCardAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         classes = initializeClassList();
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) findViewById(R.id.recyclerViewMainTeacher);
-        final TeacherClassCardAdapter adapter = new TeacherClassCardAdapter(classes, this, this);
+        adapter = new TeacherClassCardAdapter(classes, this, this);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(this));
         OverScrollDecoratorHelper.setUpOverScroll(recyclerViewMainTeacher, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
@@ -83,61 +84,8 @@ public class TeacherClassOverview extends AppCompatActivity {
 
                     CodeGenerator cg = new CodeGenerator();
                     String code = cg.generate();
-                    code = "test";
-                    final String usedCode = code;
                     String email = Utils.getPrefs(Utils.SHARED_PREFERENCES, TeacherClassOverview.this).getString(Utils.PREF_EMAIL, null);
                     pushClass(className, classDescription, code, email);
-
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
-                    builder.title("Attention!")
-                            .customView(R.layout.create_class_dialog, true)
-                            .positiveText("OK!")
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    classes.add(new TeacherClassCard(className, classDescription, usedCode));
-
-                                    for (int i = 0; i < classes.size(); i++) {
-                                        if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
-                                            classes.remove(i);
-                                            Utils.setTeacherClassList(classes, TeacherClassOverview.this);
-                                        }
-                                    }
-
-                                    adapter.setClassList(classes);
-                                    Utils.setTeacherClassList(classes, TeacherClassOverview.this);
-
-                                    onBackPressed();
-                                }
-                            });
-
-                    MaterialDialog dialog = builder.build();
-
-                    View dialogView = dialog.getCustomView();
-
-                    if (dialogView != null) {
-                        TextView text = (TextView) dialogView.findViewById(R.id.message);
-                        text.setText("Your class code is: " + code + ".\nDistribute this to your students.");
-
-                        RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
-                        actionMessage.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-1                                Intent i = new Intent(Intent.ACTION_SEND);
-                                i.setType("message/rfc822");
-                                i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture!");
-                                i.putExtra(Intent.EXTRA_TEXT, "Use the code " + usedCode + " to join my class \""
-                                        + className + ".\"");
-                                try {
-                                    startActivity(Intent.createChooser(i, "Send mail..."));
-                                } catch (android.content.ActivityNotFoundException ex) {
-                                    Toast.makeText(TeacherClassOverview.this, "There are no email clients installed", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-
-                    dialog.show();
 
                 } else { // One of the fields is empty
                     if (className.equals("")) {
@@ -184,7 +132,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         ArrayList<TeacherClassCard> classList = Utils.getTeacherClassList(this);
 
         if (classList.size() == 1) { // User has no classes
-            classList.add(new TeacherClassCard(getString(R.string.no_classes_title), getString(R.string.no_classes_description), null));
+            classList.add(new TeacherClassCard(getString(R.string.no_classes_title), getString(R.string.no_classes_description), ""));
         }
 
         return classList;
@@ -241,7 +189,6 @@ public class TeacherClassOverview extends AppCompatActivity {
         return (float) Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     }
 
-
     @Override
     public void onBackPressed() {
         if (creatingClass) {
@@ -287,10 +234,11 @@ public class TeacherClassOverview extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void pushClass(String className, String classDescription, String classCode, String teacher) {
+    private void pushClass(final String className, final String classDescription, final String classCode, String teacher) {
         class PushClass extends AsyncTask<String, Void, String> {
             private ProgressDialog loading;
             private WriteToDatabase ruc = new WriteToDatabase();
+            private String cn;
 
             @Override
             protected void onPreExecute() {
@@ -303,6 +251,58 @@ public class TeacherClassOverview extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                if (!s.equals("There was an error creating your class. Please try again.")) {
+                    MaterialDialog.Builder builder = new MaterialDialog.Builder(TeacherClassOverview.this);
+                    builder.title("Attention!")
+                            .customView(R.layout.create_class_dialog, true)
+                            .positiveText("OK!")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    classes.add(new TeacherClassCard(className, classDescription, classCode));
+
+                                    for (int i = 0; i < classes.size(); i++) {
+                                        if (classes.get(i).getName().equals(getString(R.string.no_classes_title))) {
+                                            classes.remove(i);
+                                            Utils.setTeacherClassList(classes, TeacherClassOverview.this);
+                                        }
+                                    }
+
+                                    adapter.setClassList(classes);
+                                    Utils.setTeacherClassList(classes, TeacherClassOverview.this);
+
+                                    onBackPressed();
+                                }
+                            });
+
+                    MaterialDialog dialog = builder.build();
+
+                    View dialogView = dialog.getCustomView();
+
+                    if (dialogView != null) {
+                        TextView text = (TextView) dialogView.findViewById(R.id.message);
+                        text.setText("Your class code is: " + classCode + ".\nDistribute this to your students.");
+
+                        RelativeLayout actionMessage = (RelativeLayout) dialogView.findViewById(R.id.actionMessage);
+                        actionMessage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent i = new Intent(Intent.ACTION_SEND);
+                                i.setType("message/rfc822");
+                                i.putExtra(Intent.EXTRA_SUBJECT, "Join my new class on RecoLecture!");
+                                i.putExtra(Intent.EXTRA_TEXT, "Use the code " + classCode + " to join my class \""
+                                        + className + ".\"");
+                                try {
+                                    startActivity(Intent.createChooser(i, "Send mail..."));
+                                } catch (android.content.ActivityNotFoundException ex) {
+                                    Toast.makeText(TeacherClassOverview.this, "There are no email clients installed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+
+                    dialog.show();
+                }
             }
 
             @Override
