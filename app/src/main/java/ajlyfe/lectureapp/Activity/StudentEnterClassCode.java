@@ -63,7 +63,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
                 String classCodeStudent = enterClassCode.getText().toString();
                 getData(classCodeStudent);
                 if (go) {
-                    addClass(classCodeStudent, Utils.PREF_EMAIL);
+                    addClass(classCodeStudent, Utils.getPrefs(Utils.SHARED_PREFERENCES, StudentEnterClassCode.this).getString(Utils.PREF_EMAIL, null));
                 }
             }
         });
