@@ -85,5 +85,4 @@ public class StudentActivityMain extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

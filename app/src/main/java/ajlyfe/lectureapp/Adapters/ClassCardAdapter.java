@@ -1,11 +1,13 @@
 package ajlyfe.lectureapp.Adapters;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -19,12 +21,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import ajlyfe.lectureapp.Activity.StudentActivityMain;
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
 
 public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.ViewHolder> {
     private ArrayList<ClassCard> classList;
@@ -33,6 +39,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
+    private static final String LEAVE_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/set-unjoinclassstudentdb.php";
 
     public ClassCardAdapter(@NonNull ArrayList<ClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
@@ -122,15 +129,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                                 .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialoginterface, int idk) {
                                         removeAt(finalPosition);
-                                        Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
-                                                "Unenrolled from '" + thisClassCard.getClassName() + "'",
-                                                Snackbar.LENGTH_LONG)
-                                                .setAction("Dandy!", new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) { /*ihateusers*/ }
-                                                })
-                                                .setActionTextColor(Color.parseColor("#FFFFC107"))
-                                                .show();
+                                        //removeClass();
                                     }
                                 }).show();
                         return true;
@@ -179,4 +178,36 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
             this.classCardColor = (ImageView) itemView.findViewById(R.id.classCardColor);
         }
     }
+/**
+    public void removeClass(String classCode, String email) {
+        class RemoveClass extends AsyncTask<String, Void, String> {
+            private ProgressDialog loading;
+            private WriteToDatabase ruc = new WriteToDatabase();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(parentActivity, "Please Wait", null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(parentActivity, s, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("classCode", params[0]);
+                data.put("email", params[1]);
+
+                return ruc.sendPostRequest(LEAVE_CLASS_URL, data);
+            }
+        }
+        RemoveClass rc = new RemoveClass();
+        rc.execute(classCode, email);
+    }
+    **/
 }

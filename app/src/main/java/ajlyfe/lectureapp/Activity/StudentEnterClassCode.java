@@ -3,6 +3,7 @@ package ajlyfe.lectureapp.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,17 +25,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
 
 public class StudentEnterClassCode extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
+    private static final String JOIN_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/set-joinclassstudentdb.php";
     public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
     public final String JSON_ARRAY = "result";
+    boolean go = true;
 
     private ProgressDialog loading;
 
@@ -57,6 +62,9 @@ public class StudentEnterClassCode extends AppCompatActivity {
                 final EditText enterClassCode =  (EditText) findViewById(R.id.editText3);
                 String classCodeStudent = enterClassCode.getText().toString();
                 getData(classCodeStudent);
+                if (go) {
+                    addClass(classCodeStudent, Utils.getPrefs(Utils.SHARED_PREFERENCES, StudentEnterClassCode.this).getString(Utils.PREF_EMAIL, null));
+                }
             }
         });
 
@@ -78,6 +86,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(StudentEnterClassCode.this, "Invalid class code", Toast.LENGTH_SHORT).show();
+                go = false;
             }
         });
 
@@ -140,4 +149,34 @@ public class StudentEnterClassCode extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void addClass(String classCode, String email) {
+        class AddClass extends AsyncTask<String, Void, String> {
+            private ProgressDialog loading;
+            private WriteToDatabase ruc = new WriteToDatabase();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(StudentEnterClassCode.this, "Please Wait", null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("classCode", params[0]);
+                data.put("email", params[1]);
+
+                return ruc.sendPostRequest(JOIN_CLASS_URL, data);
+            }
+        }
+        AddClass ac = new AddClass();
+        ac.execute(classCode, email);
+    }
 }
