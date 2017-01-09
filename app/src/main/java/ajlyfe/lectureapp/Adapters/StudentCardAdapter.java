@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,15 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
         name.setText(student.getName());
 
         TextView date = viewHolder.dateJoined;
-        date.setText(student.getDateJoined());
+        date.setText("Joined class: " + student.getDateJoined());
+
+        ImageView stalk = viewHolder.stalkStudent;
+        stalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(parentActivity, "email: " + student.getEmail(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         final ImageView kill = viewHolder.killStudent;
         kill.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +86,14 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView studentName;
         TextView dateJoined;
+        ImageView stalkStudent;
         ImageView killStudent;
 
         ViewHolder(View itemView) {
             super(itemView);
             this.studentName = (TextView) itemView.findViewById(R.id.studentName);
             this.dateJoined = (TextView) itemView.findViewById(R.id.dateJoined);
+            this.stalkStudent = (ImageView) itemView.findViewById(R.id.stalkStudent);
             this.killStudent = (ImageView) itemView.findViewById(R.id.killStudent);
         }
     }
