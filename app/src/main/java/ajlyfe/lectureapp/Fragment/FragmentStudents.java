@@ -2,11 +2,17 @@ package ajlyfe.lectureapp.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 
+import java.util.ArrayList;
+
+import ajlyfe.lectureapp.Adapters.StudentSelectCard;
 import ajlyfe.lectureapp.Adapters.StudentSelectCardAdapter;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -29,7 +35,7 @@ public class FragmentStudents extends Fragment {
         return view;
     }
 
-    public void method() {/*
+    public void method() {/**
         selectAll = (Button) view.findViewById(R.id.selectAllButton);
 
         ArrayList<StudentSelectCard> studentList = new ArrayList<>();
@@ -46,6 +52,6 @@ public class FragmentStudents extends Fragment {
             public void onClick(View v) {
 
             }
-        });*/
+        });**/
     }
 }

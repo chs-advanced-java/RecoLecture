@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,36 +11,24 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import ajlyfe.lectureapp.Adapters.StudentCard;
-import ajlyfe.lectureapp.Adapters.StudentCardAdapter;
 import ajlyfe.lectureapp.Fragment.FragmentTabFiles;
 import ajlyfe.lectureapp.Fragment.FragmentTabStudents;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 import ajlyfe.lectureapp.WriteToDatabase;
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class TeacherClassView extends AppCompatActivity {
 
