@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +46,9 @@ public class TeacherClassOverview extends AppCompatActivity {
     public static final String NULL_CLASS = "Header Name (NULL)";
     public static final String AUTO_DESCRIPTION = "Dummy description for an auto-generated\nclass for testing purposes";
 
-    private static final String CLASSES_URL = "http://www.chs.mcvsd.org/sandbox/insert-classdb.php";
+    private static final String PUSH_CLASSES_URL = "http://www.chs.mcvsd.org/sandbox/insert-classdb.php";
+    private static final String CREATE_CLASSES_URL = "http://www.chs.mcvsd.org/sandbox/set-createclassteacherdb.php";
+
     private TeacherClassCardAdapter adapter;
 
     @Override
@@ -85,7 +86,7 @@ public class TeacherClassOverview extends AppCompatActivity {
                     CodeGenerator cg = new CodeGenerator();
                     String code = cg.generate();
                     String email = Utils.getPrefs(Utils.SHARED_PREFERENCES, TeacherClassOverview.this).getString(Utils.PREF_EMAIL, null);
-                    pushClass(className, classDescription, code, email);
+                    createClass(className, classDescription, email, code);
 
                 } else { // One of the fields is empty
                     if (className.equals("")) {
@@ -234,7 +235,7 @@ public class TeacherClassOverview extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void pushClass(final String className, final String classDescription, final String classCode, String teacher) {
+    private void pushClass(final String className, final String classDescription, final String classCode, final String teacher) {
         class PushClass extends AsyncTask<String, Void, String> {
             private ProgressDialog loading;
             private WriteToDatabase ruc = new WriteToDatabase();
@@ -313,11 +314,48 @@ public class TeacherClassOverview extends AppCompatActivity {
                 data.put("classCode", params[2]);
                 data.put("teacher", params[3]);
 
-                return ruc.sendPostRequest(CLASSES_URL, data);
+                return ruc.sendPostRequest(PUSH_CLASSES_URL, data);
             }
         }
 
         PushClass pc = new PushClass();
         pc.execute(className, classDescription, classCode, teacher);
+    }
+
+    private void createClass(final String className, final String classDescription, final String email, final String classCode) {
+            class PushClass extends AsyncTask<String, Void, String> {
+                private ProgressDialog loading;
+                private WriteToDatabase ruc = new WriteToDatabase();
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    loading = ProgressDialog.show(TeacherClassOverview.this, "Please Wait", null, true, true);
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    super.onPostExecute(s);
+                    loading.dismiss();
+                    if (!s.equals("Class joined.")) {
+                        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        pushClass(className, classDescription, classCode, email);
+                    }
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    HashMap<String, String> data = new HashMap<>();
+                    data.put("email", params[0]);
+                    data.put("classCode", params[1]);
+
+                    return ruc.sendPostRequest(CREATE_CLASSES_URL, data);
+                }
+            }
+
+            PushClass pc = new PushClass();
+            pc.execute(email, classCode);
     }
 }
