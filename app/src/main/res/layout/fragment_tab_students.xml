@@ -20,7 +20,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-
         />
 
     <TextView
@@ -34,72 +33,12 @@
         android:layout_centerHorizontal="true"
         />
 
-    <TextView
-        android:text="Phil Jones"
+    <android.support.v7.widget.RecyclerView android:id="@+id/manageStudentsRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/manageStudentsDescription"
-        android:layout_marginTop="29dp"
-        android:id="@+id/textView"
-        android:layout_toStartOf="@+id/manageStudentsDescription"
-        android:textColor="?attr/colorAccent" />
-
-    <TextView
-        android:text="Mike Haynes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="24dp"
-        android:id="@+id/textView9"
-        android:textColor="@color/accent" />
-
-    <TextView
-        android:text="Tim Wells"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView9"
-        android:layout_alignStart="@+id/textView9"
-        android:layout_marginTop="25dp"
-        android:id="@+id/textView10"
-        android:textColor="@color/accent" />
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView10"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="12dp">
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/manageStudentsDescription">
 
     </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:text="Allen Ramsay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView11"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/textView10"
-        android:layout_alignStart="@+id/textView10"
-        android:textColor="@color/accent" />
-
-    <TextView
-        android:text="David Jobek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:textColor="@color/accent" />
-
-    <TextView
-        android:text="Jane Holland"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView11"
-        android:layout_alignStart="@+id/textView11"
-        android:layout_marginTop="27dp"
-        android:id="@+id/textView15"
-        android:textColor="@color/accent" />
 </RelativeLayout>

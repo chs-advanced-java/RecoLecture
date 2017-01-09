@@ -166,6 +166,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                 public void onClick(View view) {
                     Intent intent = new Intent(context, TeacherClassView.class);
                     intent.putExtra("CLASS_CLICKED", mClass.getName());
+                    intent.putExtra("CLASS_CODE", mClass.getCode());
                     context.startActivity(intent);
                 }
             };

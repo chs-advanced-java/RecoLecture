@@ -11,9 +11,19 @@ import ajlyfe.lectureapp.Utils;
 
 public class FragmentTabFiles extends Fragment {
 
+    private View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.fragment_tab_files, container, false);
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.fragment_tab_files, container, false);
+
+        method();
+
+        return view;
+    }
+
+    public void method() {
+
     }
 }

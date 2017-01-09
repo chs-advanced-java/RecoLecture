@@ -136,8 +136,6 @@ public class LoginActivity extends AppCompatActivity {
         editor = preferences.edit();
 
         if (preferences.getBoolean(Utils.PREF_LOGGED_IN, false)) {
-            updateClassList();
-
             if (preferences.getBoolean(Utils.PREF_IS_TEACHER, false)) {
                 startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 new Handler().postDelayed(new Runnable() {
@@ -344,6 +342,8 @@ public class LoginActivity extends AppCompatActivity {
                     */
 
                     Utils.setTeacherClassList(mClasses, LoginActivity.this);
+
+                    updateClassList();
 
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();

@@ -1,7 +1,10 @@
 package ajlyfe.lectureapp.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,17 +12,36 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import ajlyfe.lectureapp.Adapters.StudentCard;
+import ajlyfe.lectureapp.Adapters.StudentCardAdapter;
 import ajlyfe.lectureapp.Fragment.FragmentTabFiles;
 import ajlyfe.lectureapp.Fragment.FragmentTabStudents;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class TeacherClassView extends AppCompatActivity {
 
@@ -35,22 +57,25 @@ public class TeacherClassView extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
+        String code = null;
         if (extras != null) {
             String className = extras.getString("CLASS_CLICKED");
+            code = extras.getString("CLASS_CODE");
             actionBar.setTitle(className);
         }
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.classViewViewPager);
-        setupViewPager(viewPager);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.classViewTab);
-        tabLayout.setupWithViewPager(viewPager);
+        getStudents(code);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager, Bundle bundle) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentTabStudents(), "STUDENTS");
+
+        Fragment fragmentTabStudents = new FragmentTabStudents();
+        fragmentTabStudents.setArguments(bundle);
+
+        adapter.addFragment(fragmentTabStudents, "STUDENTS");
         adapter.addFragment(new FragmentTabFiles(), "FILES");
+
         viewPager.setAdapter(adapter);
     }
 
@@ -101,5 +126,59 @@ public class TeacherClassView extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getStudents(final String classCode) {
+        class PushClass extends AsyncTask<String, Void, String> {
+            private ProgressDialog loading;
+            private WriteToDatabase ruc = new WriteToDatabase();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(TeacherClassView.this, "Please Wait", null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+
+                ArrayList<StudentCard> studentList = new ArrayList<>();
+
+                try {
+                    JSONObject result = new JSONObject(s);
+                    JSONArray students = result.optJSONArray("result");
+
+                    for (int i = 0; i < students.length(); i++) {
+                        JSONObject post = students.optJSONObject(i);
+                        studentList.add(new StudentCard(post.optString("fName") + " " + post.optString("lName"), "4/20/17", post.optString("email")));
+                    }
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("CLASS_LIST", studentList);
+
+                    ViewPager viewPager = (ViewPager) findViewById(R.id.classViewViewPager);
+                    setupViewPager(viewPager, bundle);
+
+                    TabLayout tabLayout = (TabLayout) findViewById(R.id.classViewTab);
+                    tabLayout.setupWithViewPager(viewPager);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("classCode", params[0]);
+
+                return ruc.sendPostRequest("http://www.chs.mcvsd.org/sandbox/getClassStudents.php", data);
+            }
+        }
+
+        PushClass pc = new PushClass();
+        pc.execute(classCode);
     }
 }
