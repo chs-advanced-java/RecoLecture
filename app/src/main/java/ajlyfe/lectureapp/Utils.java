@@ -59,6 +59,10 @@ public class Utils {
         return activity.getSharedPreferences(prefsFile, MODE_PRIVATE);
     }
 
+    public static SharedPreferences getPrefs(String prefsFile, Context context) {
+        return context.getSharedPreferences(prefsFile, MODE_PRIVATE);
+    }
+
     public static void setTeacherClassList(ArrayList<TeacherClassCard> mClasses, Activity activity) {
         SharedPreferences.Editor editor = getPrefs(SHARED_PREFERENCES, activity).edit();
         Gson gson = new Gson();

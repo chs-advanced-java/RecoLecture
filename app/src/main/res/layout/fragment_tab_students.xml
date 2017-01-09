@@ -33,6 +33,19 @@
         android:layout_centerHorizontal="true"
         />
 
+    <TextView android:id="@+id/noStudents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="20sp"
+        android:text="Oops! Looks like there are no students enrolled in your class."
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/manageStudentsDescription"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"/>
+
     <android.support.v7.widget.RecyclerView android:id="@+id/manageStudentsRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
