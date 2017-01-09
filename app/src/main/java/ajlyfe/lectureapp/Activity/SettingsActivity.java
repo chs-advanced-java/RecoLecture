@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import ajlyfe.lectureapp.Fragment.SettingsFragment;
@@ -40,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingsActivity.this, BSOD.class));
+                startActivity(new Intent(SettingsActivity.this, bsod.class));
             }
         });
     }

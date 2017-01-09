@@ -239,7 +239,6 @@ public class TeacherClassOverview extends AppCompatActivity {
         class PushClass extends AsyncTask<String, Void, String> {
             private ProgressDialog loading;
             private WriteToDatabase ruc = new WriteToDatabase();
-            private String cn;
 
             @Override
             protected void onPreExecute() {

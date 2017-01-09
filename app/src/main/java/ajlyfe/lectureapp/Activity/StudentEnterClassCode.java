@@ -2,7 +2,6 @@ package ajlyfe.lectureapp.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,8 +32,6 @@ import ajlyfe.lectureapp.Utils;
 import ajlyfe.lectureapp.WriteToDatabase;
 
 public class StudentEnterClassCode extends AppCompatActivity {
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     private static final String JOIN_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/set-joinclassstudentdb.php";
     public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
@@ -51,9 +48,6 @@ public class StudentEnterClassCode extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
-        editor = preferences.edit();
 
         Button joinClassButton = (Button) findViewById(R.id.JoinClassButton);
         joinClassButton.setOnClickListener(new View.OnClickListener(){
