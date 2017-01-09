@@ -36,7 +36,7 @@
     <TextView android:id="@+id/noStudents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="?cardTitleTextPrimary"
         android:textSize="20sp"
         android:text="Oops! Looks like there are no students enrolled in your class."
         android:fontFamily="sans-serif-thin"

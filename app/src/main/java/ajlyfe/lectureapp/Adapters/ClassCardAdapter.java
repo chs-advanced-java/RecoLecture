@@ -45,6 +45,10 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
         context = ctx;
         classList = classes;
         this.parentActivity = parentActivity;
+
+        if (classList.size() == 1) {
+            parentActivity.findViewById(R.id.noClasses).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -150,10 +154,14 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
         }
     }
 
-    public void removeAt(int position) {
+    private void removeAt(int position) {
         classList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, classList.size());
+
+        if (classList.size() == 1) {
+            parentActivity.findViewById(R.id.noClasses).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
