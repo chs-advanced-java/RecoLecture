@@ -29,10 +29,13 @@ public class FragmentResult extends Fragment {
 
     private View view;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_result, container, false);
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_result, container, false);
+
+        return view;
     }
 }
