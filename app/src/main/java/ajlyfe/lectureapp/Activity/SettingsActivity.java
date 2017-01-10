@@ -16,6 +16,7 @@
 
 package ajlyfe.lectureapp.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,12 +26,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+
 import ajlyfe.lectureapp.Fragment.SettingsFragment;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
+    private ProgressDialog loading;
+
+    public static final String UPDATE_USER_URL_PT1 = "http://www.chs.mcvsd.org/sandbox/update-username-accountdb.php?username=";
+    public static final String UPDATE_USER_URL_PT2 = "&newUsername=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
