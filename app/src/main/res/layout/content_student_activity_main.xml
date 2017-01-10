@@ -26,6 +26,18 @@
 
         </android.support.v7.widget.RecyclerView>
 
+        <TextView android:id="@+id/noClasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?cardTitleTextPrimary"
+            android:textSize="20sp"
+            android:text="Oops! You aren't enrolled in any classes"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:layout_marginTop="121dp"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
     <!-- DO NOT TOUCH THIS -->

@@ -1,8 +1,23 @@
+/*
+ * Copyright (c) 2017 RecoLecture.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ajlyfe.lectureapp.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,8 +48,6 @@ import ajlyfe.lectureapp.Utils;
 import ajlyfe.lectureapp.WriteToDatabase;
 
 public class StudentEnterClassCode extends AppCompatActivity {
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     private static final String JOIN_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/set-joinclassstudentdb.php";
     public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
@@ -51,9 +64,6 @@ public class StudentEnterClassCode extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, this);
-        editor = preferences.edit();
 
         Button joinClassButton = (Button) findViewById(R.id.JoinClassButton);
         joinClassButton.setOnClickListener(new View.OnClickListener(){
