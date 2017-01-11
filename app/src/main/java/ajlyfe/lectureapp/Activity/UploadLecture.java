@@ -71,11 +71,6 @@ public class UploadLecture extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_lecture);
-        ivAttachment = (ImageView) findViewById(R.id.ivAttachment);
-        bUpload = (Button) findViewById(R.id.b_upload);
-        tvFileName = (TextView) findViewById(R.id.tv_file_name);
-        ivAttachment.setOnClickListener(this);
-        bUpload.setOnClickListener(this);
     }
 
     @Override
@@ -111,7 +106,7 @@ public class UploadLecture extends AppCompatActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK){
             if (requestCode == PICK_FILE_REQUEST){
-                if (data == null){
+                if (data == null) {
                     return;
                 }
 
@@ -122,15 +117,13 @@ public class UploadLecture extends AppCompatActivity implements View.OnClickList
                 if (selectedFilePath != null && !selectedFilePath.equals("")){
                     tvFileName.setText(selectedFilePath);
                 } else {
-                    Toast.makeText(this, "Cannot upload file to server" ,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Cannot upload file to server", Toast.LENGTH_SHORT).show();
                 }
             }
         }
     }
 
-    //android upload file to server
-    public int uploadFile(final String selectedFilePath){
-
+    public int uploadFile(final String selectedFilePath) {
         int serverResponseCode = 0;
 
         HttpURLConnection connection;
@@ -140,7 +133,7 @@ public class UploadLecture extends AppCompatActivity implements View.OnClickList
         String boundary = "*****";
 
 
-        int bytesRead,bytesAvailable,bufferSize;
+        int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
         int maxBufferSize = 1024 * 1024;
         File selectedFile = new File(selectedFilePath);
@@ -188,7 +181,7 @@ public class UploadLecture extends AppCompatActivity implements View.OnClickList
 
                 bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 
-                while (bytesRead > 0){
+                while (bytesRead > 0) {
                     dataOutputStream.write(buffer, 0, bufferSize);
                     bytesAvailable = fileInputStream.available();
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
