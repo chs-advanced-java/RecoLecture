@@ -65,6 +65,9 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
         if (classList.size() == 1) {
             parentActivity.findViewById(R.id.noClasses).setVisibility(View.VISIBLE);
         }
+        else {
+            parentActivity.findViewById(R.id.noClasses).setVisibility(View.GONE);
+        }
     }
 
     @Override
