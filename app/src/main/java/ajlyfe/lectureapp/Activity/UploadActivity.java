@@ -20,9 +20,12 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +34,10 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -42,9 +49,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.LectureSelectCard;
+import ajlyfe.lectureapp.Adapters.StudentSelectCard;
+import ajlyfe.lectureapp.Adapters.StudentSelectCardAdapter;
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.Fragment.FragmentClass;
 import ajlyfe.lectureapp.Fragment.FragmentFile;
 import ajlyfe.lectureapp.Fragment.FragmentResult;
@@ -52,11 +63,17 @@ import ajlyfe.lectureapp.Fragment.FragmentStudents;
 import ajlyfe.lectureapp.Fragment.FragmentUpload;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
 
 public class UploadActivity extends AppIntro {
 
     private Fragment fragmentUpload;
     private Fragment fragmentResult;
+    private Fragment fragmentClass;
+    private Fragment fragmentStudents;
+
+    private ArrayList<String> classCodes = new ArrayList<>();
+
     FragmentFile file;
     FragmentClass classes;
 
@@ -71,8 +88,8 @@ public class UploadActivity extends AppIntro {
         file = new FragmentFile();
         classes = new FragmentClass();
         Fragment fragmentFile = file;
-        Fragment fragmentClass = classes;
-        Fragment fragmentStudents = new FragmentStudents();
+        fragmentClass = classes;
+        fragmentStudents = new FragmentStudents();
         fragmentUpload = new FragmentUpload();
         fragmentResult = new FragmentResult();
 
@@ -156,7 +173,6 @@ public class UploadActivity extends AppIntro {
                     });
                     break;
 
-
                 case 2:
                     final Activity activity2 = newFragment.getActivity();
                     next = (Button) activity2.findViewById(R.id.uploadClassButton);
@@ -170,8 +186,13 @@ public class UploadActivity extends AppIntro {
                             for (int i = 0; i < classCheckboxes.size(); i++) {
                                 if (classCheckboxes.get(i).getChecked()) {
                                     checkedSomething = true;
+                                    classCodes.add(getClassCode(classCheckboxes.get(i).getClassName()));
                                 }
                             }
+
+                            Bundle args = new Bundle();
+                            args.putStringArrayList("classCodes", classCodes);
+                            //fragmentStudents.setArguments(args);
 
                             if (checkedSomething) {
                                 pager.setCurrentItem(2);
@@ -185,6 +206,62 @@ public class UploadActivity extends AppIntro {
                 case 3:
                     final Activity activity3 = newFragment.getActivity();
                     next = (Button) activity3.findViewById(R.id.uploadStudentButton);
+                    final Button selectAll = (Button) activity3.findViewById(R.id.selectAllButton);
+                    final View newView = newFragment.getView();
+
+                    String classCode = classCodes.get(0);
+
+                    class PushClass extends AsyncTask<String, Void, String> {
+                        private WriteToDatabase ruc = new WriteToDatabase();
+
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                        }
+
+                        @Override
+                        protected void onPostExecute(String s) {
+                            super.onPostExecute(s);
+
+                            ArrayList<StudentSelectCard> studentList = new ArrayList<>();
+
+                            try {
+                                JSONObject result = new JSONObject(s);
+                                JSONArray students = result.optJSONArray("result");
+                                CheckBox check = (CheckBox) newView.findViewById(R.id.studentCheckBox);
+
+                                for (int i = 0; i < students.length(); i++) {
+                                    JSONObject post = students.optJSONObject(i);
+                                    studentList.add(new StudentSelectCard(post.optString("fName") + " " + post.optString("lName"), check));
+                                }
+
+                                RecyclerView recyclerViewStudents = (RecyclerView) newView.findViewById(R.id.recyclerViewStudentSelect);
+                                final StudentSelectCardAdapter adapter = new StudentSelectCardAdapter(studentList, newView.getContext());
+                                recyclerViewStudents.setAdapter(adapter);
+                                recyclerViewStudents.setLayoutManager(new LinearLayoutManager(newView.getContext()));
+
+                                selectAll.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        //TODO: This later because I can't see straight anymore rip 1/12/17
+                                    }
+                                });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        protected String doInBackground(String... params) {
+                            HashMap<String, String> data = new HashMap<>();
+                            data.put("classCode", params[0]);
+
+                            return ruc.sendPostRequest("http://www.chs.mcvsd.org/sandbox/getClassStudents.php", data);
+                        }
+                    }
+
+                    PushClass pc = new PushClass();
+                    pc.execute(classCode);
 
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -229,6 +306,20 @@ public class UploadActivity extends AppIntro {
                     break;
             }
         }
+    }
+
+    private String getClassCode(String className) {
+        String code = null;
+
+        ArrayList<TeacherClassCard> classes = Utils.getTeacherClassList(UploadActivity.this);
+
+        for (TeacherClassCard mClass : classes) {
+            if (mClass.getName().equals(className)) {
+                code = mClass.getCode();
+            }
+        }
+
+        return code;
     }
 
     private int uploadFile(final String path, final ProgressDialog dialog, final Activity activity) {

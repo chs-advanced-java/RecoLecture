@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajlyfe.lectureapp.R;
@@ -35,40 +36,21 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
     private Context context;
     private boolean checked;
 
-    private static final int HEADER = 2048;
-    private static final int NORMAL_ITEM = 4096;
-
     public StudentSelectCardAdapter(@NonNull List<StudentSelectCard> students, Context ctx) {
         context = ctx;
         studentSelectList = students;
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (position == 0) {
-            return HEADER;
-        } else {
-            return NORMAL_ITEM;
-        }
-    }
-
-    @Override
     public StudentSelectCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-
-        if (viewType == HEADER) {
-            view = inflater.inflate(R.layout.student_main_header, parent, false);
-        } else {
-            view = inflater.inflate(R.layout.student_select_card, parent, false);
-        }
+        View view = inflater.inflate(R.layout.student_select_card, parent, false);
 
         return new StudentSelectCardAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final StudentSelectCardAdapter.ViewHolder viewHolder, int position) {
-        if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
             position = viewHolder.getAdapterPosition();
 
             final StudentSelectCard clss = studentSelectList.get(position);
@@ -92,7 +74,10 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
                     }
                 }
             });
-        }
+    }
+
+    public List<StudentSelectCard> getList() {
+        return studentSelectList;
     }
 
     @Override

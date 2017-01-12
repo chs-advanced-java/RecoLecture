@@ -16,22 +16,38 @@
 
 package ajlyfe.lectureapp.Fragment;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import ajlyfe.lectureapp.Activity.TeacherClassView;
+import ajlyfe.lectureapp.Adapters.StudentCard;
 import ajlyfe.lectureapp.Adapters.StudentSelectCard;
 import ajlyfe.lectureapp.Adapters.StudentSelectCardAdapter;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
 
 public class FragmentStudents extends Fragment {
 
@@ -46,12 +62,70 @@ public class FragmentStudents extends Fragment {
 
         view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_students, container, false);
 
-        method();
+        Bundle bundle = this.getArguments();
+
+        if (bundle != null) {
+            //getStudents(bundle.getStringArrayList("classCodes"));
+        }
 
         return view;
     }
 
-    public void method() {/**
+    private void getStudents(final ArrayList<String> classCodes) {
+        String classCode = classCodes.get(0);
+
+        class PushClass extends AsyncTask<String, Void, String> {
+            private ProgressDialog loading;
+            private WriteToDatabase ruc = new WriteToDatabase();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(view.getContext(), "Please Wait", null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+
+                ArrayList<StudentSelectCard> studentList = new ArrayList<>();
+
+                try {
+                    JSONObject result = new JSONObject(s);
+                    JSONArray students = result.optJSONArray("result");
+                    CheckBox check = (CheckBox) view.findViewById(R.id.studentCheckBox);
+
+                    for (int i = 0; i < students.length(); i++) {
+                        JSONObject post = students.optJSONObject(i);
+                        studentList.add(new StudentSelectCard(post.optString("fName") + " " + post.optString("lName"), check));
+                    }
+
+                    RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewStudentSelect);
+                    adapter = new StudentSelectCardAdapter(studentList, view.getContext());
+                    recyclerViewStudents.setAdapter(adapter);
+                    recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("classCode", params[0]);
+
+                return ruc.sendPostRequest("http://www.chs.mcvsd.org/sandbox/getClassStudents.php", data);
+            }
+        }
+
+        PushClass pc = new PushClass();
+        pc.execute(classCode);
+    }
+
+    /*
+    public void method() {
         selectAll = (Button) view.findViewById(R.id.selectAllButton);
 
         ArrayList<StudentSelectCard> studentList = new ArrayList<>();
@@ -68,6 +142,6 @@ public class FragmentStudents extends Fragment {
             public void onClick(View v) {
 
             }
-        });**/
-    }
+        });
+    }*/
 }
