@@ -22,17 +22,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
 public class FragmentResult extends Fragment {
 
     private View view;
+    private ArrayList<String> paths;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_result, container, false);
+        view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_result, container, false);
+
+        doShit();
+
+        return view;
+    }
+
+    private void doShit() {
+        paths = getArguments().getStringArrayList("paths");
+    }
+
+    public ArrayList<String> getPaths() {
+        return paths;
     }
 }

@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import ajlyfe.lectureapp.Activity.TeacherMainActivity;
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.ClassSelectCardAdapter;
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
@@ -57,20 +58,15 @@ public class FragmentClass extends Fragment {
         return view;
     }
     public void method(final Activity activity) {
-        ArrayList<ClassSelectCard> classes = new ArrayList<>();
+        ArrayList<TeacherClassCard> classes = Utils.getTeacherClassList(activity);
+        ArrayList<ClassSelectCard> useMe = new ArrayList<>();
 
-        File parentDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture/");
-        File[] filesArray = parentDir.listFiles();
-
-        if (filesArray != null) {
-            try {
-                for (File thisFile : filesArray) {
-                    if (!thisFile.toString().contains(".mp3")) {
-                        classes.add(new ClassSelectCard(thisFile.getName()));
-                    }
+        if (classes != null) {
+            for (int i = 0; i < classes.size(); i++) {
+                // CATCH HEADER ITEM
+                if (i != 0) {
+                    useMe.add(new ClassSelectCard(classes.get(i).getName()));
                 }
-            } catch (IndexOutOfBoundsException exc) {
-                exc.printStackTrace();
             }
         } else {
             new MaterialDialog.Builder(activity)
@@ -87,8 +83,9 @@ public class FragmentClass extends Fragment {
         }
 
         RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewClassSelect);
+
         try {
-            adapter = new ClassSelectCardAdapter(classes, view.getContext());
+            adapter = new ClassSelectCardAdapter(useMe, view.getContext());
             list = adapter.getArrayList();
             recyclerViewStudents.setAdapter(adapter);
             recyclerViewStudents.setLayoutManager(new LinearLayoutManager(view.getContext()));

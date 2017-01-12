@@ -7,17 +7,16 @@
             android:key="@string/preference_change_username"
             android:icon="@drawable/ic_account_box_black_24dp"
             android:summary="Change your existing username"
-            android:dialogTitle="New Username"
-            android:dialogMessage="Change your existing username"
-            android:dialogLayout="@layout/pref_dialog_edittext_fix"/>
+            android:dialogTitle="Change Username"
+            android:dialogMessage="Change your existing username" />
 
         <EditTextPreference android:title="Change password"
             android:key="@string/preference_change_password"
             android:icon="@drawable/ic_lock_black_24dp"
-            android:summary="Change your existing username"
-            android:dialogTitle="New Username"
-            android:dialogMessage="Change your existing username"
-            android:dialogLayout="@layout/pref_dialog_edittext_fix"/>
+            android:summary="Change your existing password"
+            android:dialogTitle="New password"
+            android:dialogMessage="Change your existing password"
+            />
 
     </PreferenceCategory>
 

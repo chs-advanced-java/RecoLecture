@@ -16,6 +16,7 @@
 
 package ajlyfe.lectureapp.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
@@ -27,6 +28,13 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,7 +52,7 @@ import static ajlyfe.lectureapp.Activity.TeacherClassOverview.AUTO_DESCRIPTION;
 import static ajlyfe.lectureapp.Activity.TeacherClassOverview.NULL_CLASS;
 import static android.content.Context.MODE_PRIVATE;
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     private EditTextPreference changeUsername;
     private EditTextPreference changePassword;
@@ -53,9 +61,20 @@ public class SettingsFragment extends PreferenceFragment {
     private Preference createLecture;
     private Preference signOut;
 
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+
+    private ProgressDialog loading;
+
+    public static final String UPDATE_USER_URL_PT1 = "http://www.chs.mcvsd.org/sandbox/update-username-accountdb.php?username=";
+            public static final String UPDATE_USER_URL_PT2 = "&newUsername=";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, getActivity());
+        editor = preferences.edit();
 
         // Set preference file
         getPreferenceManager().setSharedPreferencesName(Utils.SHARED_PREFERENCES);
@@ -112,7 +131,8 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        signOut.setOnPreferenceClickListener(
+                new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 getActivity().getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit().clear().apply();
@@ -125,8 +145,47 @@ public class SettingsFragment extends PreferenceFragment {
                 return false;
             }
         });
+
+        changeUsername.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener()
+                {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue)
+                    {
+                        String newUsername = newValue.toString();
+                        System.out.println(newUsername);
+                        updateUserDatabase(preferences.getString(Utils.PREF_USERNAME, getString(R.string.preference_change_username)), newUsername);
+                        editor.putString(Utils.PREF_USERNAME, newUsername);
+                        editor.apply();
+                        System.out.println(preferences.getString(Utils.PREF_USERNAME, getString(R.string.preference_change_username)));
+                        return false;
+                    }
+                }
+
+        );
     }
 
+    private void updateUserDatabase(final String oldUser, final String newUser) {
+        loading = ProgressDialog.show(getActivity(),"Please wait...","Fetching...",false,false);
+
+        String url = UPDATE_USER_URL_PT1 + oldUser + UPDATE_USER_URL_PT2 + newUser;
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                loading.dismiss();
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), error.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
     private void toggleTheme(boolean darkTheme) {
         SharedPreferences.Editor editor = getActivity().getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
         editor.putBoolean(Utils.PREF_DARK_THEME, darkTheme);
@@ -236,5 +295,11 @@ public class SettingsFragment extends PreferenceFragment {
         }
 
         return numberOfLectures;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
+    {
+
     }
 }
