@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    private void updateClassList() {
+    private void updateTeacherClassList() {
         final ArrayList<TeacherClassCard> classes = Utils.getTeacherClassList(this);
 
         String url = "http://www.chs.mcvsd.org/sandbox/getAllClasses.php?teacher=" + Utils.getPrefs(Utils.SHARED_PREFERENCES, this).getString(Utils.PREF_EMAIL, null);
@@ -132,6 +132,41 @@ public class LoginActivity extends AppCompatActivity {
                         classes.add(new TeacherClassCard(post.optString("className"), post.optString("classDescription"), post.optString("classCode")));
                         Utils.setTeacherClassList(classes, LoginActivity.this);
                     }
+                } catch (org.json.JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void updateStudentClassList() {
+        final ArrayList<ClassCard> classes = Utils.getStudentClassList(this);
+
+        String url = "http://www.chs.mcvsd.org/sandbox/getAllStudentClasses.php?email=" + Utils.getPrefs(Utils.SHARED_PREFERENCES, this).getString(Utils.PREF_EMAIL, null);
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject result = new JSONObject(response);
+                    JSONArray users = result.optJSONArray("result");
+
+                    for (int i = 0; i < users.length(); i++) {
+                        JSONObject post = users.optJSONObject(i);
+                        classes.add(new ClassCard(post.optString("className"), post.optString("classDescription"), post.optString("classCode")));
+                    }
+                    Utils.setStudentClassList(classes, LoginActivity.this);
+
+                    startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
+                    finish();
                 } catch (org.json.JSONException e) {
                     e.printStackTrace();
                 }
@@ -359,7 +394,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Utils.setTeacherClassList(mClasses, LoginActivity.this);
 
-                    updateClassList();
+                    updateTeacherClassList();
 
                     startActivity(new Intent(LoginActivity.this, TeacherMainActivity.class));
                     finish();
@@ -384,8 +419,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Utils.setStudentClassList(mClasses, LoginActivity.this);
 
-                    startActivity(new Intent(LoginActivity.this, StudentActivityMain.class));
-                    finish();
+                    updateStudentClassList();
                 }
             }
 
