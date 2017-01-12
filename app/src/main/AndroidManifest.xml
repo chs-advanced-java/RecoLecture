@@ -73,7 +73,7 @@
             android:label="@string/title_activity_contact"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.BSOD"
+            android:name=".Activity.bsod"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_bsod"
             android:theme="@style/FullscreenTheme" />

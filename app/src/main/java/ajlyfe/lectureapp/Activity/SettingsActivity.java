@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingsActivity.this, BSOD.class));
+                startActivity(new Intent(SettingsActivity.this, bsod.class));
             }
         });
     }
