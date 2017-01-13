@@ -115,8 +115,7 @@ public class RegistrationScreen extends AppCompatActivity {
                     }
                 }
 
-                if (continuable)
-                {
+                if (continuable) {
                     registerUser();
                     //startActivity(new Intent(RegistrationScreen.this, LoginActivity.class));
                 }
@@ -124,8 +123,7 @@ public class RegistrationScreen extends AppCompatActivity {
         });
     }
 
-    private void registerUser()
-    {
+    private void registerUser() {
         String email = emailET.getText().toString().trim();
         String fname = firstNameET.getText().toString().trim();
         String lname = lastNameET.getText().toString().trim();
@@ -137,8 +135,7 @@ public class RegistrationScreen extends AppCompatActivity {
 
         String isTeacherString = "0";
 
-        if(isTeacher)
-        {
+        if (isTeacher) {
             isTeacherString = "1";
         }
 

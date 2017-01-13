@@ -190,10 +190,6 @@ public class UploadActivity extends AppIntro {
                                 }
                             }
 
-                            Bundle args = new Bundle();
-                            args.putStringArrayList("classCodes", classCodes);
-                            //fragmentStudents.setArguments(args);
-
                             if (checkedSomething) {
                                 pager.setCurrentItem(2);
                             } else {
