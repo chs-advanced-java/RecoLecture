@@ -35,6 +35,7 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
     private List<StudentSelectCard> studentSelectList;
     private Context context;
     private boolean checked;
+    private StudentSelectCardAdapter.ViewHolder viewHolder;
 
     public StudentSelectCardAdapter(@NonNull List<StudentSelectCard> students, Context ctx) {
         context = ctx;
@@ -46,7 +47,8 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.student_select_card, parent, false);
 
-        return new StudentSelectCardAdapter.ViewHolder(view);
+        viewHolder = new StudentSelectCardAdapter.ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
@@ -59,16 +61,17 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
             title.setText(clss.getClassName());
 
             final CheckBox box = viewHolder.check;
+            clss.setCheckBox(box);
 
             CardView classCard = viewHolder.card;
             classCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!checked){
+                    if(!checked) {
                         box.setChecked(true);
                         checked = true;
                     }
-                    else{
+                    else {
                         box.setChecked(false);
                         checked = false;
                     }
@@ -100,10 +103,10 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
     }
 
     public void toggleAllChecked() {
-        boolean allChecked = true;
+        boolean allChecked = false;
         for(int x = 0; x < studentSelectList.size(); x++){
             if (studentSelectList.get(x).getChecked()){
-                allChecked = false;
+                allChecked = true;
             }
         }
 

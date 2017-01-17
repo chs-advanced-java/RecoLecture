@@ -207,6 +207,8 @@ public class UploadActivity extends AppIntro {
 
                     String classCode = classCodes.get(0);
 
+                    final Activity act = fragmentStudents.getActivity();
+
                     class PushClass extends AsyncTask<String, Void, String> {
                         private WriteToDatabase ruc = new WriteToDatabase();
 
@@ -224,7 +226,7 @@ public class UploadActivity extends AppIntro {
                             try {
                                 JSONObject result = new JSONObject(s);
                                 JSONArray students = result.optJSONArray("result");
-                                CheckBox check = (CheckBox) newView.findViewById(R.id.studentCheckBox);
+                                CheckBox check = (CheckBox) act.findViewById(R.id.studentCheckBox);
 
                                 for (int i = 0; i < students.length(); i++) {
                                     JSONObject post = students.optJSONObject(i);
@@ -240,6 +242,7 @@ public class UploadActivity extends AppIntro {
                                     @Override
                                     public void onClick(View v) {
                                         //TODO: This later because I can't see straight anymore rip 1/12/17
+                                        adapter.toggleAllChecked();
                                     }
                                 });
                             } catch (JSONException e) {
