@@ -137,6 +137,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             public boolean onPreferenceClick(Preference preference) {
                 getActivity().getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit().clear().apply();
 
+                File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/RecoLecture");
+                if (dir.isDirectory()) {
+                    String[] children = dir.list();
+                    for (String aChildren : children) {
+                        new File(dir, aChildren).delete();
+                    }
+                }
 
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -161,7 +168,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                         return false;
                     }
                 }
-
         );
     }
 

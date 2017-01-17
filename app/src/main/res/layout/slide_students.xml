@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -40,22 +39,20 @@
         android:layout_below="@+id/textViewStudentSelection"
         android:layout_centerHorizontal="true" />
 
-
-    <Button
+    <Button android:id="@+id/selectAllButton"
         android:text="Select All"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/studentsDescription"
         android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/selectAllButton" />
+        android:layout_centerHorizontal="true" />
 
-    <android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewStudentSelect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recyclerViewStudentSelect"
-        android:layout_above="@+id/uploadStudentButton"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="21dp"></android.support.v7.widget.RecyclerView>
+        android:layout_above="@id/uploadStudentButton"
+        android:layout_below="@+id/selectAllButton"
+        android:layout_marginTop="16dp"/>
 
 </RelativeLayout>

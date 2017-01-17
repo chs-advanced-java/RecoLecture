@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajlyfe.lectureapp.R;
@@ -34,9 +35,7 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
     private List<StudentSelectCard> studentSelectList;
     private Context context;
     private boolean checked;
-
-    private static final int HEADER = 2048;
-    private static final int NORMAL_ITEM = 4096;
+    private StudentSelectCardAdapter.ViewHolder viewHolder;
 
     public StudentSelectCardAdapter(@NonNull List<StudentSelectCard> students, Context ctx) {
         context = ctx;
@@ -44,31 +43,16 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (position == 0) {
-            return HEADER;
-        } else {
-            return NORMAL_ITEM;
-        }
-    }
-
-    @Override
     public StudentSelectCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
+        View view = inflater.inflate(R.layout.student_select_card, parent, false);
 
-        if (viewType == HEADER) {
-            view = inflater.inflate(R.layout.student_main_header, parent, false);
-        } else {
-            view = inflater.inflate(R.layout.student_select_card, parent, false);
-        }
-
-        return new StudentSelectCardAdapter.ViewHolder(view);
+        viewHolder = new StudentSelectCardAdapter.ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final StudentSelectCardAdapter.ViewHolder viewHolder, int position) {
-        if (getItemViewType(viewHolder.getAdapterPosition()) != HEADER) {
             position = viewHolder.getAdapterPosition();
 
             final StudentSelectCard clss = studentSelectList.get(position);
@@ -77,22 +61,26 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
             title.setText(clss.getClassName());
 
             final CheckBox box = viewHolder.check;
+            clss.setCheckBox(box);
 
             CardView classCard = viewHolder.card;
             classCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!checked){
+                    if(!checked) {
                         box.setChecked(true);
                         checked = true;
                     }
-                    else{
+                    else {
                         box.setChecked(false);
                         checked = false;
                     }
                 }
             });
-        }
+    }
+
+    public List<StudentSelectCard> getList() {
+        return studentSelectList;
     }
 
     @Override
@@ -115,10 +103,10 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
     }
 
     public void toggleAllChecked() {
-        boolean allChecked = true;
+        boolean allChecked = false;
         for(int x = 0; x < studentSelectList.size(); x++){
             if (studentSelectList.get(x).getChecked()){
-                allChecked = false;
+                allChecked = true;
             }
         }
 

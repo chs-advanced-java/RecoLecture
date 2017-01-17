@@ -44,6 +44,10 @@ public class StudentSelectCard {
         checkBox.setChecked(c);
     }
 
+    public void setCheckBox(CheckBox c){
+        checkBox = c;
+    }
+
     public boolean getChecked(){
         return checked;
     }
