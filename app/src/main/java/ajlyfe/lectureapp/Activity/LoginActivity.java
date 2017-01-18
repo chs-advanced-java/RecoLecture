@@ -422,9 +422,12 @@ public class LoginActivity extends AppCompatActivity {
                     updateStudentClassList();
                 }
             }
+            else{
+                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_LONG).show();
+            }
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Toast.makeText(LoginActivity.this, "Username does not exist", Toast.LENGTH_LONG).show();
         }
     }
 }
