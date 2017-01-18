@@ -31,6 +31,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,7 +49,7 @@ import ajlyfe.lectureapp.WriteToDatabase;
 
 public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.ViewHolder> {
 
-    private static final String DELETE_STUDENTS = "http://www.chs.mcvsd.org/sandbox/delete-students.php";
+    private static final String DELETE_STUDENTS = "http://www.chs.mcvsd.org/sandbox/delete-students.php?classCode=";
     public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
 
 
@@ -142,37 +148,23 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
     }
     private void deleteStudent(String email, String classCode)
     {
-        class DeleteStudent extends AsyncTask<String, Void, String>
-        {
-            private ProgressDialog loading;
-            private WriteToDatabase ruc = new WriteToDatabase();
+        final ProgressDialog loading = ProgressDialog.show(parentActivity,"Please wait...","Fetching...",false,false);
 
-            @Override
-            protected void onPreExecute()
-            {
-                super.onPreExecute();
-                loading = ProgressDialog.show(parentActivity, "Please Wait", null, true, true);
-            }
+        String url = DELETE_STUDENTS + classCode + "&email=" + email;
 
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
-            protected void onPostExecute(String s)
-            {
-                super.onPostExecute(s);
+            public void onResponse(String response) {
                 loading.dismiss();
-                Toast.makeText(parentActivity,s,Toast.LENGTH_LONG).show();
-
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            protected String doInBackground(String... params)
-            {
-                HashMap<String, String> data = new HashMap<>();
-
-                return ruc.sendPostRequest(DELETE_STUDENTS + "?email=" + params[0] + "&classCode=" + params[1], data);
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(parentActivity,error.getMessage(),Toast.LENGTH_LONG).show();
             }
-        }
+        });
 
-        DeleteStudent ru = new DeleteStudent();
-        ru.execute(email, classCode);
+        RequestQueue requestQueue = Volley.newRequestQueue(parentActivity);
+        requestQueue.add(stringRequest);
     }
 }

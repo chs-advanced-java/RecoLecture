@@ -49,6 +49,7 @@ import ajlyfe.lectureapp.WriteToDatabase;
 
 public class
 TeacherClassView extends AppCompatActivity {
+    String code = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,6 @@ TeacherClassView extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
-        String code = null;
         if (extras != null) {
             String className = extras.getString("CLASS_CLICKED");
             code = extras.getString("CLASS_CODE");
@@ -162,6 +162,7 @@ TeacherClassView extends AppCompatActivity {
 
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("CLASS_LIST", studentList);
+                    bundle.putString("CLASS_CODE", code);
 
                     ViewPager viewPager = (ViewPager) findViewById(R.id.classViewViewPager);
                     setupViewPager(viewPager, bundle);
