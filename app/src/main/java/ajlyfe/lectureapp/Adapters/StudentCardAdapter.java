@@ -167,15 +167,8 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
             protected String doInBackground(String... params)
             {
                 HashMap<String, String> data = new HashMap<>();
-                data.put("email",params[0]);
-                data.put("fname",params[1]);
-                data.put("lname",params[2]);
-                data.put("username",params[3]);
-                data.put("password",params[4]);
-                data.put("confPassword",params[5]);
-                data.put("isTeacher",params[6]);
 
-                return ruc.sendPostRequest(DELETE_STUDENTS, data);
+                return ruc.sendPostRequest(DELETE_STUDENTS + "?email=" + params[0] + "&classCode=" + params[1], data);
             }
         }
 
