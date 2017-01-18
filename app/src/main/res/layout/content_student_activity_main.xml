@@ -35,7 +35,7 @@
             android:fontFamily="sans-serif-thin"
             android:gravity="center"
             android:layout_marginTop="121dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>

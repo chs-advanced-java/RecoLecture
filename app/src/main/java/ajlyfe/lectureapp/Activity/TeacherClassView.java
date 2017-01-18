@@ -46,7 +46,8 @@ import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 import ajlyfe.lectureapp.WriteToDatabase;
 
-public class TeacherClassView extends AppCompatActivity {
+public class
+TeacherClassView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

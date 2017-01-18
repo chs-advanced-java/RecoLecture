@@ -45,6 +45,10 @@ import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
 public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCardAdapter.ViewHolder> {
+    private static final String DELETE_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/delete-class-teacher.php";
+    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
+    public final String JSON_ARRAY = "result";
+
     private ArrayList<TeacherClassCard> classList;
     private Context context;
     private Activity parentActivity;
@@ -137,6 +141,8 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                         .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialoginterface, int idk) {
                                                 removeAt(finalPosition);
+
+
 
                                                 Utils.setTeacherClassList(classList, parentActivity);
 

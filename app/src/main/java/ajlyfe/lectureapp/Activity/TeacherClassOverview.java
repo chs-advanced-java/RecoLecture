@@ -294,7 +294,6 @@ public class TeacherClassOverview extends AppCompatActivity {
                     MaterialDialog dialog = builder.build();
 
                     View dialogView = dialog.getCustomView();
-
                     if (dialogView != null) {
                         TextView text = (TextView) dialogView.findViewById(R.id.message);
                         text.setText("Your class code is: " + classCode + ".\nDistribute this to your students.");

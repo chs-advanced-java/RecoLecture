@@ -17,7 +17,10 @@
 package ajlyfe.lectureapp.Adapters;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -29,11 +32,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import ajlyfe.lectureapp.Activity.LoginActivity;
+import ajlyfe.lectureapp.Activity.RegistrationScreen;
+import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import ajlyfe.lectureapp.WriteToDatabase;
 
 public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.ViewHolder> {
+
+    private static final String DELETE_STUDENTS = "http://www.chs.mcvsd.org/sandbox/delete-students.php";
+    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
+
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -41,12 +53,17 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
     private ArrayList<? extends StudentCard> studentList;
 
     private View parentView;
-
-    public StudentCardAdapter(@NonNull ArrayList<? extends StudentCard> studentList, View parentView) {
+    private Activity parentActivity;
+    private String classCode;
+    public StudentCardAdapter(@NonNull ArrayList<? extends StudentCard> studentList, View parentView, Activity parentActivity, String classCode) {
         this.studentList = studentList;
         this.parentView = parentView;
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentView.getContext());
         editor = preferences.edit();
+        this.parentActivity = parentActivity;
+        this.classCode = classCode;
+
+
 
         if (studentList.size() == 0) {
             parentView.findViewById(R.id.noStudents).setVisibility(View.VISIBLE);
@@ -84,6 +101,8 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
         kill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                deleteStudent(student.getEmail(), classCode);
                 Snackbar comeGetYourSnacks = Snackbar.make(parentView.findViewById(R.id.manageStudentsRecyclerView),
                         "Successfully removed " + student.getName() + " from class!",
                         Snackbar.LENGTH_LONG);
@@ -120,5 +139,47 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
             this.stalkStudent = (ImageView) itemView.findViewById(R.id.stalkStudent);
             this.killStudent = (ImageView) itemView.findViewById(R.id.killStudent);
         }
+    }
+    private void deleteStudent(String email, String classCode)
+    {
+        class DeleteStudent extends AsyncTask<String, Void, String>
+        {
+            private ProgressDialog loading;
+            private WriteToDatabase ruc = new WriteToDatabase();
+
+            @Override
+            protected void onPreExecute()
+            {
+                super.onPreExecute();
+                loading = ProgressDialog.show(parentActivity, "Please Wait", null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s)
+            {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(parentActivity,s,Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            protected String doInBackground(String... params)
+            {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("email",params[0]);
+                data.put("fname",params[1]);
+                data.put("lname",params[2]);
+                data.put("username",params[3]);
+                data.put("password",params[4]);
+                data.put("confPassword",params[5]);
+                data.put("isTeacher",params[6]);
+
+                return ruc.sendPostRequest(DELETE_STUDENTS, data);
+            }
+        }
+
+        DeleteStudent ru = new DeleteStudent();
+        ru.execute(email, classCode);
     }
 }

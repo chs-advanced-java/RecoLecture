@@ -62,22 +62,27 @@ public class FragmentTabStudents extends Fragment {
     private Bundle bundle;
     public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getAllStudents.php?classCode=";
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.fragment_tab_students, container, false);
 
         Bundle bundle = this.getArguments();
+
+
         ArrayList<? extends StudentCard> studentList = null;
+        String classCode = null;
 
         if (bundle != null) {
             studentList = bundle.getParcelableArrayList("CLASS_LIST");
+            classCode = bundle.getString("CLASS_CODE");
         } else {
 
         }
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) view.findViewById(R.id.manageStudentsRecyclerView);
-        final StudentCardAdapter adapter = new StudentCardAdapter(studentList, view);
+        final StudentCardAdapter adapter = new StudentCardAdapter(studentList, view, getActivity(), classCode);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(getContext()));
         OverScrollDecoratorHelper.setUpOverScroll(recyclerViewMainTeacher, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
