@@ -19,11 +19,30 @@ package ajlyfe.lectureapp.Adapters;
 public class LectureSelectCard {
     private String fileName;
     private boolean checked;
+    private String id;
+    private boolean broken;
 
-    public LectureSelectCard(String fName) {
+    public LectureSelectCard(String fName, boolean broken, String id) {
         fileName = fName;
         checked = false;
+        this.broken = broken;
+        this.id = id;
+    }
 
+    public String getID() {
+        return id;
+    }
+
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    public boolean isBroken() {
+        return broken;
+    }
+
+    public void setBroken(boolean broken) {
+        this.broken = broken;
     }
   
     public String getFileName() {

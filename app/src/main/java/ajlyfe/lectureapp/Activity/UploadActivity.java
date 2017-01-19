@@ -44,7 +44,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -53,6 +52,7 @@ import java.util.HashMap;
 
 import ajlyfe.lectureapp.Adapters.ClassSelectCard;
 import ajlyfe.lectureapp.Adapters.LectureSelectCard;
+import ajlyfe.lectureapp.Adapters.LectureSelectCardAdapter;
 import ajlyfe.lectureapp.Adapters.StudentSelectCard;
 import ajlyfe.lectureapp.Adapters.StudentSelectCardAdapter;
 import ajlyfe.lectureapp.Adapters.TeacherClassCard;
@@ -125,6 +125,8 @@ public class UploadActivity extends AppIntro {
         startActivity(new Intent(this, TeacherMainActivity.class));
     }
 
+
+
     @Override
     public void onSlideChanged(@Nullable final Fragment oldFragment, @Nullable final Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
@@ -139,23 +141,21 @@ public class UploadActivity extends AppIntro {
                     final Activity activity1 = newFragment.getActivity();
                     next = (Button) activity1.findViewById(R.id.uploadFileButton);
 
-                    final ArrayList<LectureSelectCard> lectureCheckboxes = file.getAdapterArrayList();
                     final ArrayList<String> lecturesChecked = new ArrayList<>();
+                    final boolean[] checkedSomething = {false};
 
+                    LectureSelectCardAdapter.setLectureCheckedListener(new LectureSelectCardAdapter.OnLectureChecked() {
+                        @Override
+                        public void onChecked(LectureSelectCard lecture) {
+                            checkedSomething[0] = true;
+                            lecturesChecked.add(lecture.getFileName());
+                            paths.add(Utils.getLecturePath() + lecture.getID() + ".mp3");
+                        }
+                    });
 
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            boolean checkedSomething = false;
-
-                            for (int i = 0; i < lectureCheckboxes.size(); i++) {
-                                if (lectureCheckboxes.get(i).getChecked()) {
-                                    checkedSomething = true;
-                                    lecturesChecked.add(lectureCheckboxes.get(i).getFileName());
-                                    paths.add(Utils.getLecturePath() + lectureCheckboxes.get(i).getFileName());
-                                }
-                            }
-
                             Bundle args = new Bundle();
                             args.putStringArrayList("lecturesCheckedOff", lecturesChecked);
                             fragmentUpload.setArguments(args);
@@ -164,7 +164,7 @@ public class UploadActivity extends AppIntro {
                             args2.putStringArrayList("paths", paths);
                             fragmentResult.setArguments(args2);
 
-                            if (checkedSomething) {
+                            if (checkedSomething[0]) {
                                 pager.setCurrentItem(1);
                             } else {
                                 Toast.makeText(activity1, "Please select a lecture", Toast.LENGTH_SHORT).show();
@@ -398,11 +398,7 @@ public class UploadActivity extends AppIntro {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(activity, "File Upload completed.\n" +
-                                    "\n" +
-                                    " You can see the uploaded file here: \n" +
-                                    "\n" +
-                                    "\" + \"http://www.chs.mcvsd.org/sandbox/lectures/\""+ fileName, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Uploaded "+ fileName + " successfully", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -16,28 +16,41 @@
 
 package ajlyfe.lectureapp.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
+import java.io.File;
 import java.util.ArrayList;
 
 import ajlyfe.lectureapp.R;
 
 public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelectCardAdapter.ViewHolder> {
     private ArrayList<LectureSelectCard> lectureSelectList;
+    private Activity parentActivity;
+    private static OnLectureChecked mListener;
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
 
-    public LectureSelectCardAdapter(@NonNull ArrayList<LectureSelectCard> lectures, Context ctx) {
+    public LectureSelectCardAdapter(@NonNull ArrayList<LectureSelectCard> lectures, Activity parentActivity) {
         lectureSelectList = lectures;
+        this.parentActivity = parentActivity;
     }
 
     @Override
@@ -75,40 +88,97 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
 
             final CheckBox box = viewHolder.check;
 
-            CardView classCard = viewHolder.card;
-            classCard.setOnClickListener(new View.OnClickListener() {
+            CardView lectureCard = viewHolder.card;
+            lectureCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!lecture.getChecked()){
+                    if (mListener != null){
+                        mListener.onChecked(lecture);
+                    }
+
+                    if (!lecture.getChecked()) {
                         box.setChecked(true);
                         lecture.setChecked(true);
-                    }
-                    else{
+                    } else {
                         box.setChecked(false);
                         lecture.setChecked(false);
                     }
+                }
+            });
+            final long[] then = {0};
+            lectureCard.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        then[0] = System.currentTimeMillis();
+                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        if ((System.currentTimeMillis() - then[0]) > 10000) {
+                            new MaterialDialog.Builder(parentActivity)
+                                    .title("Attention!")
+                                    .content("You are about to delete all broken lectures.")
+                                    .positiveText("Ok")
+                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            boolean deleted = false;
+                                            for (int i = 0; i < lectureSelectList.size(); i++) {
+                                                if (lectureSelectList.get(i).isBroken()) {
+                                                    new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                                            "/RecoLecture/" + lectureSelectList.get(i).getID() + ".mp3").delete();
+                                                    deleted = true;
+                                                    Log.e("lecturecard", "Deleted lecture with ID: '" + lectureSelectList.get(i).getID()
+                                                     + "' via super long click");
+                                                }
+                                            }
+
+                                            if (deleted)
+                                                Toast.makeText(parentActivity, "Deleted lecture(s)", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .show();
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             });
 
             box.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!lecture.getChecked()){
+                    if (!lecture.getChecked()) {
                         box.setChecked(true);
                         lecture.setChecked(true);
-                    }
-                    else{
+                    } else {
                         box.setChecked(false);
                         lecture.setChecked(false);
                     }
                 }
             });
-        }
 
+            if (lecture.isBroken()) hide(lectureCard);
+        }
     }
+
     @Override
     public int getItemCount() {
         return lectureSelectList.size();
+    }
+
+    private void hide(CardView card) {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) card.getLayoutParams();
+        card.setVisibility(View.GONE);
+        layoutParams.height = 0;
+        layoutParams.width = 0;
+        card.setLayoutParams(layoutParams);
+    }
+
+    public interface OnLectureChecked {
+        void onChecked(LectureSelectCard lecture);
+    }
+
+    public static void setLectureCheckedListener(OnLectureChecked eventListener) {
+        mListener = eventListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
