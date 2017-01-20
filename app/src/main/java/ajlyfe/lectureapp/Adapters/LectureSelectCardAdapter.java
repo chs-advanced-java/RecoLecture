@@ -146,6 +146,9 @@ public class LectureSelectCardAdapter extends RecyclerView.Adapter<LectureSelect
             box.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (mListener != null){
+                        mListener.onChecked(lecture);
+                    }
                     if (!lecture.getChecked()) {
                         box.setChecked(true);
                         lecture.setChecked(true);
