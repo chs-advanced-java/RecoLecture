@@ -38,8 +38,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
-import ajlyfe.lectureapp.Activity.LoginActivity;
-import ajlyfe.lectureapp.Activity.RegistrationScreen;
 import ajlyfe.lectureapp.Activity.TeacherMainActivity;
 import ajlyfe.lectureapp.CodeGenerator;
 import ajlyfe.lectureapp.R;

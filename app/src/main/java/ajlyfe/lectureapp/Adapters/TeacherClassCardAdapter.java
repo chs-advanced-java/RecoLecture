@@ -45,9 +45,6 @@ import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
 public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCardAdapter.ViewHolder> {
-    private static final String DELETE_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/delete-class-teacher.php";
-    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
-    public final String JSON_ARRAY = "result";
 
     private ArrayList<TeacherClassCard> classList;
     private Context context;

@@ -16,8 +16,6 @@
 
 package ajlyfe.lectureapp.Adapters;
 
-import android.widget.CheckBox;
-
 public class StudentSelectCard {
     private String studentName;
     private boolean checked;

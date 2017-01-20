@@ -19,7 +19,6 @@ package ajlyfe.lectureapp.Fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +31,6 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import ajlyfe.lectureapp.Activity.TeacherMainActivity;

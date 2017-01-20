@@ -17,32 +17,22 @@
 package ajlyfe.lectureapp.Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ajlyfe.lectureapp.Activity.TeacherClassView;
-import ajlyfe.lectureapp.Adapters.StudentCard;
 import ajlyfe.lectureapp.Adapters.StudentSelectCard;
 import ajlyfe.lectureapp.Adapters.StudentSelectCardAdapter;
 import ajlyfe.lectureapp.R;
@@ -51,9 +41,7 @@ import ajlyfe.lectureapp.WriteToDatabase;
 
 public class FragmentStudents extends Fragment {
 
-    private boolean selectAllSelection;
     private View view;
-    private Button selectAll;
     private StudentSelectCardAdapter adapter;
 
     @Override

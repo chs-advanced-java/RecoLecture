@@ -107,7 +107,6 @@ public class StudentEnterClassCode extends AppCompatActivity {
         String classNameData;
         String classDescriptionData;
         String classCodeData;
-        String teacherData;
 
         try {
             JSONObject jsonObject = new JSONObject(response);
@@ -117,7 +116,6 @@ public class StudentEnterClassCode extends AppCompatActivity {
             classNameData = data.getString("className");
             classDescriptionData = data.getString("classDescription");
             classCodeData = data.getString("classCode");
-            teacherData = data.getString("teacher");
 
             if (classCode.equals(classCodeData)) { // Class code is valid double-check
                 ArrayList<ClassCard> classCards = Utils.getStudentClassList(StudentEnterClassCode.this);
