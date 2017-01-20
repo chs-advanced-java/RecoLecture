@@ -39,9 +39,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ajlyfe.lectureapp.Activity.LoginActivity;
 import ajlyfe.lectureapp.Activity.StudentActivityMain;
 import ajlyfe.lectureapp.Activity.StudentClassPage;
 import ajlyfe.lectureapp.R;
@@ -55,7 +62,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
 
     private static final int HEADER = 2048;
     private static final int NORMAL_ITEM = 4096;
-    private static final String LEAVE_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/set-unjoinclassstudentdb.php";
+    private static final String DELETE_STUDENT_URL = "http://www.chs.mcvsd.org/sandbox/delete-students.php?classCode=";
 
     public ClassCardAdapter(@NonNull ArrayList<ClassCard> classes, Context ctx, Activity parentActivity) {
         context = ctx;
@@ -151,6 +158,25 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                                 })
                                 .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialoginterface, int idk) {
+                                        final ProgressDialog loading = ProgressDialog.show(parentActivity,"Please wait...","Fetching...",false,false);
+
+                                        String url = DELETE_STUDENT_URL + thisClassCard.getClassCode() + "&email=" + Utils.getPrefs(Utils.SHARED_PREFERENCES, context).getString(Utils.PREF_EMAIL, null).toString();
+
+                                        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                loading.dismiss();
+                                                Toast.makeText(parentActivity, "Unenrolled from class. \nSign out to complete request.", Toast.LENGTH_LONG).show();
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Toast.makeText(parentActivity,error.getMessage(),Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+
+                                        RequestQueue requestQueue = Volley.newRequestQueue(parentActivity);
+                                        requestQueue.add(stringRequest);
                                         removeAt(finalPosition);
                                         //removeClass();
                                     }
