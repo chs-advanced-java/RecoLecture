@@ -71,7 +71,6 @@ public class StudentEnterClassCode extends AppCompatActivity {
             public void onClick(View view) {
                 final EditText enterClassCode =  (EditText) findViewById(R.id.editText3);
                 String classCodeStudent = enterClassCode.getText().toString();
-                getData(classCodeStudent);
                 if (go) {
                     addClass(classCodeStudent, Utils.getPrefs(Utils.SHARED_PREFERENCES, StudentEnterClassCode.this).getString(Utils.PREF_EMAIL, null));
                 }
@@ -159,7 +158,7 @@ public class StudentEnterClassCode extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addClass(String classCode, String email) {
+    public void addClass(final String classCode, String email) {
         class AddClass extends AsyncTask<String, Void, String> {
             private ProgressDialog loading;
             private WriteToDatabase ruc = new WriteToDatabase();
@@ -175,6 +174,9 @@ public class StudentEnterClassCode extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                if (!s.equals("You have already joined this class.")){
+                    getData(classCode);
+                }
             }
 
             @Override
