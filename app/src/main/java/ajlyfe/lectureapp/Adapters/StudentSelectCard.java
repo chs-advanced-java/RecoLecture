@@ -21,13 +21,10 @@ import android.widget.CheckBox;
 public class StudentSelectCard {
     private String studentName;
     private boolean checked;
-    private CheckBox checkBox;
 
-
-    public StudentSelectCard(String sName, CheckBox check) {
+    public StudentSelectCard(String sName) {
         studentName = sName;
         checked = false;
-        checkBox = check;
     }
 
     public String getClassName() {
@@ -41,11 +38,6 @@ public class StudentSelectCard {
 
     public void setChecked(boolean c){
         checked = c;
-        checkBox.setChecked(c);
-    }
-
-    public void setCheckBox(CheckBox c){
-        checkBox = c;
     }
 
     public boolean getChecked(){

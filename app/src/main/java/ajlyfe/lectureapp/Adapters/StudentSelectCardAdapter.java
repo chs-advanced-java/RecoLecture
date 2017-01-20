@@ -53,30 +53,30 @@ public class StudentSelectCardAdapter extends RecyclerView.Adapter<StudentSelect
 
     @Override
     public void onBindViewHolder(final StudentSelectCardAdapter.ViewHolder viewHolder, int position) {
-            position = viewHolder.getAdapterPosition();
+        position = viewHolder.getAdapterPosition();
 
-            final StudentSelectCard clss = studentSelectList.get(position);
+        final StudentSelectCard clss = studentSelectList.get(position);
 
-            TextView title = viewHolder.studentSelectTitle;
-            title.setText(clss.getClassName());
+        TextView title = viewHolder.studentSelectTitle;
+        title.setText(clss.getClassName());
 
-            final CheckBox box = viewHolder.check;
-            clss.setCheckBox(box);
+        final CheckBox box = viewHolder.check;
+        box.setChecked(clss.getChecked());
 
-            CardView classCard = viewHolder.card;
-            classCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(!checked) {
-                        box.setChecked(true);
-                        checked = true;
-                    }
-                    else {
-                        box.setChecked(false);
-                        checked = false;
-                    }
+        CardView classCard = viewHolder.card;
+        classCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checked) {
+                    box.setChecked(true);
+                    checked = true;
                 }
-            });
+                else {
+                    box.setChecked(false);
+                    checked = false;
+                }
+            }
+        });
     }
 
     public List<StudentSelectCard> getList() {

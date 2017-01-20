@@ -21,6 +21,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -38,12 +41,12 @@ public class FragmentResult extends Fragment {
         // Inflate the layout for this fragment
         view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.slide_result, container, false);
 
-        doShit();
+        doStuff();
 
         return view;
     }
 
-    private void doShit() {
+    private void doStuff() {
         paths = getArguments().getStringArrayList("paths");
     }
 

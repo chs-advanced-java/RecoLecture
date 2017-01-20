@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -69,8 +70,6 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
         this.parentActivity = parentActivity;
         this.classCode = classCode;
 
-
-
         if (studentList.size() == 0) {
             parentView.findViewById(R.id.noStudents).setVisibility(View.VISIBLE);
         }
@@ -107,7 +106,6 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
         kill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 deleteStudent(student.getEmail(), classCode);
                 Snackbar comeGetYourSnacks = Snackbar.make(parentView.findViewById(R.id.manageStudentsRecyclerView),
                         "Successfully removed " + student.getName() + " from class!",
@@ -117,6 +115,11 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
                 removeAt(position);
             }
         });
+
+        if (Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity).getBoolean(Utils.PREF_DARK_THEME, false)) {
+            stalk.setColorFilter(Color.parseColor("#FFFFFF"));
+            kill.setColorFilter(Color.parseColor("#FFFFFF"));
+        }
     }
 
     private void removeAt(int position) {
@@ -146,9 +149,9 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
             this.killStudent = (ImageView) itemView.findViewById(R.id.killStudent);
         }
     }
-    private void deleteStudent(String email, String classCode)
-    {
-        final ProgressDialog loading = ProgressDialog.show(parentActivity,"Please wait...","Fetching...",false,false);
+
+    private void deleteStudent(String email, String classCode) {
+        final ProgressDialog loading = ProgressDialog.show(parentActivity, "Please wait...", "Fetching...", false, false);
 
         String url = DELETE_STUDENTS + classCode + "&email=" + email;
 

@@ -94,11 +94,10 @@ public class FragmentStudents extends Fragment {
                 try {
                     JSONObject result = new JSONObject(s);
                     JSONArray students = result.optJSONArray("result");
-                    CheckBox check = (CheckBox) view.findViewById(R.id.studentCheckBox);
 
                     for (int i = 0; i < students.length(); i++) {
                         JSONObject post = students.optJSONObject(i);
-                        studentList.add(new StudentSelectCard(post.optString("fName") + " " + post.optString("lName"), check));
+                        studentList.add(new StudentSelectCard(post.optString("fName") + " " + post.optString("lName")));
                     }
 
                     RecyclerView recyclerViewStudents = (RecyclerView) view.findViewById(R.id.recyclerViewStudentSelect);

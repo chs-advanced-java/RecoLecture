@@ -29,8 +29,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
@@ -226,11 +229,10 @@ public class UploadActivity extends AppIntro {
                             try {
                                 JSONObject result = new JSONObject(s);
                                 JSONArray students = result.optJSONArray("result");
-                                CheckBox check = (CheckBox) act.findViewById(R.id.studentCheckBox);
 
                                 for (int i = 0; i < students.length(); i++) {
                                     JSONObject post = students.optJSONObject(i);
-                                    studentList.add(new StudentSelectCard(post.optString("fName") + " " + post.optString("lName"), check));
+                                    studentList.add(new StudentSelectCard(post.optString("fName") + " " + post.optString("lName")));
                                 }
 
                                 RecyclerView recyclerViewStudents = (RecyclerView) newView.findViewById(R.id.recyclerViewStudentSelect);
@@ -241,7 +243,6 @@ public class UploadActivity extends AppIntro {
                                 selectAll.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //TODO: This later because I can't see straight anymore rip 1/12/17
                                         adapter.toggleAllChecked();
                                     }
                                 });
@@ -281,14 +282,12 @@ public class UploadActivity extends AppIntro {
                             CheckBox checkBox = (CheckBox) activity4.findViewById(R.id.lectureCheckboxCheckbox);
 
                             if (checkBox.isChecked()) {
-                                final ProgressDialog dialog = ProgressDialog.show(UploadActivity.this, "", "Uploading File...", true);
-
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
                                         //creating new thread to handle Http Operations
                                         for (String path : fragmentResult.getArguments().getStringArrayList("paths")) {
-                                            uploadFile(path, dialog, activity4);
+                                            uploadFile(path, activity4);
                                         }
                                     }
                                 }).start();
@@ -302,6 +301,25 @@ public class UploadActivity extends AppIntro {
 
                 case 5:
                     final Activity activity5 = newFragment.getActivity();
+                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right);
+                    ImageView box = (ImageView) activity5.findViewById(R.id.checkCover);
+                    anim.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    box.startAnimation(anim);
                     break;
             }
         }
@@ -321,7 +339,7 @@ public class UploadActivity extends AppIntro {
         return code;
     }
 
-    private int uploadFile(final String path, final ProgressDialog dialog, final Activity activity) {
+    private int uploadFile(final String path, final Activity activity) {
         int serverResponseCode = 0;
 
         HttpURLConnection connection;
@@ -336,13 +354,7 @@ public class UploadActivity extends AppIntro {
         int maxBufferSize = 1024 * 1024;
         File selectedFile = new File(path);
 
-
-        String[] parts = path.split("/");
-        final String fileName = parts[parts.length - 1];
-
         if (!selectedFile.isFile()){
-            dialog.dismiss();
-
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -394,15 +406,6 @@ public class UploadActivity extends AppIntro {
 
                 Log.i(activity.getClass().getSimpleName(), "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
 
-                if (serverResponseCode == 200){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(activity, "Uploaded "+ fileName + " successfully", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
                 fileInputStream.close();
                 dataOutputStream.flush();
                 dataOutputStream.close();
@@ -423,7 +426,6 @@ public class UploadActivity extends AppIntro {
                 Toast.makeText(activity.getApplicationContext(), "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
             }
 
-            dialog.dismiss();
             return serverResponseCode;
         }
     }

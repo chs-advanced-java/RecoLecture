@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:layout_above="@+id/description"
         android:paddingBottom="16dp"
         android:paddingTop="16dp">
 
@@ -21,6 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="64dp"/>
+
+        <ImageView android:id="@+id/checkCover"
+            android:layout_width="10dp"
+            android:layout_height="120dp"
+            android:background="@color/accent"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="260dp"/>
 
     </RelativeLayout>
 
