@@ -87,10 +87,10 @@ public class Utils {
         editor.apply();
     }
 
-    public static ArrayList<TeacherClassCard> getTeacherClassList(final Activity activity) {
+    public static ArrayList<TeacherClassCard> getTeacherClassList(final Context context) {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<TeacherClassCard>>(){}.getType();
-        String json = getPrefs(SHARED_PREFERENCES, activity).getString(Utils.PREF_CLASS_LIST, null);
+        String json = getPrefs(SHARED_PREFERENCES, context).getString(Utils.PREF_CLASS_LIST, null);
 
         return gson.fromJson(json, type);
     }
