@@ -122,6 +122,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                 public void onClick(View v) {
                     Intent intent = new Intent(context, StudentClassPage.class);
                     intent.putExtra("CLASS_CLICKED", thisClassCard.getClassName());
+                    intent.putExtra("CLASS_CODE", thisClassCard.getClassCode());
                     context.startActivity(intent);
                 }
             });
@@ -132,6 +133,7 @@ public class ClassCardAdapter extends RecyclerView.Adapter<ClassCardAdapter.View
                 public void onClick(View v) {
                     Intent intent = new Intent(context, StudentClassPage.class);
                     intent.putExtra("CLASS_CLICKED", thisClassCard.getClassName());
+                    intent.putExtra("CLASS_CODE", thisClassCard.getClassCode());
                     context.startActivity(intent);
                 }
             });

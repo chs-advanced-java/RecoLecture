@@ -80,6 +80,7 @@ public class SaveFragment extends Fragment {
         final TextView selectedDate = (TextView) view.findViewById(R.id.selectedDate);
 
         final Calendar myCalendar = Calendar.getInstance();
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -104,8 +105,6 @@ public class SaveFragment extends Fragment {
                 expirationDate = sYear + "-" + sMonth + "-" + sDay;
 
                 selectedDate.setText(expirationDate);
-
-                Log.e("DATE: ", expirationDate);
             }
         };
 
