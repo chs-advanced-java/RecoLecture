@@ -57,7 +57,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private EditTextPreference changeUsername;
     private EditTextPreference changePassword;
     private SwitchPreference darkTheme;
-    //private SwitchPreference dummyClasses;
     private Preference createLecture;
     private Preference signOut;
 
