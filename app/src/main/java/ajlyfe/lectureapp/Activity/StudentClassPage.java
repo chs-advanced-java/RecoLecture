@@ -24,10 +24,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
 
+import ajlyfe.lectureapp.Adapters.ClassCard;
 import ajlyfe.lectureapp.Adapters.LectureCard;
 import ajlyfe.lectureapp.Adapters.LectureCardAdapter;
 import ajlyfe.lectureapp.R;
@@ -44,9 +56,12 @@ public class StudentClassPage extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String classCode = null;
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String className = extras.getString("CLASS_CLICKED");
+            classCode = extras.getString("CLASS_CODE");
             if(getSupportActionBar() != null) getSupportActionBar().setTitle(className);
         }
 
@@ -54,52 +69,59 @@ public class StudentClassPage extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // Find and define the RecyclerView in activity's layout
-        RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
-        // Initialize the ArrayList
-        ArrayList<LectureCard> lectures = getLectures();
-        // Create an adapter passing in the ArrayList from above
-        LectureCardAdapter adapter = new LectureCardAdapter(lectures, this);
-        // Attach the adapter to the RecyclerView
-        recyclerViewLectures.setAdapter(adapter);
-        // Set layout manager to position the items
-        recyclerViewLectures.setLayoutManager(new LinearLayoutManager(this));
-        // Set overscroll effect
-        OverScrollDecoratorHelper.setUpOverScroll(recyclerViewLectures, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
-        // That's it!
+        getData(classCode);
     }
 
-    public ArrayList<LectureCard> getLectures() {
-        ArrayList<LectureCard> bzofghia = new ArrayList<>();
+    private void getData(String classCode) {
+        String url = "http://www.chs.mcvsd.org/sandbox/getLectureList.php?classCode=" + classCode;
 
-        File parentDir = new File(Utils.getLecturePath());
-        File[] files = parentDir.listFiles();
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                showJSON(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
-        if (files == null) {
-            bzofghia.add(new LectureCard("No Lectures", "Sorry", null));
-            return bzofghia;
-        }
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
 
-        for (File thisFile : files) {
-            char[] fileChars = thisFile.toString().toCharArray();
-            String[] segments = {"", "", ""};
-            int currentSegment = 0;
+    private void showJSON(String response) {
+        String lectureName;
+        String id;
+        String teacherName;
+        String expirationDate;
+        String killLecture;
+        ArrayList<LectureCard> lectures = new ArrayList<>();
 
-            for (char thisFileChar : fileChars) {
-                if (thisFileChar != '.') {
-                    segments[currentSegment] += thisFileChar;
-                } else {
-                    currentSegment++;
-                }
+        try {
+
+            JSONObject result = new JSONObject(response);
+            JSONArray lectureList = result.optJSONArray("result");
+
+            for (int i = 0; i < lectureList.length(); i++) {
+                JSONObject post = lectureList.optJSONObject(i);
+                lectures.add(new LectureCard(post.optString("lectureName"), post.optString("teacherName"), null));
             }
 
-            segments[0] = segments[0].substring(Utils.getLecturePath().length(),
-                    (thisFile.toString().length() - (segments[1].length() + segments[2].length() + 2)));
+            RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
+            // Create an adapter passing in the ArrayList from above
+            LectureCardAdapter adapter = new LectureCardAdapter(lectures, this);
+            // Attach the adapter to the RecyclerView
+            recyclerViewLectures.setAdapter(adapter);
+            // Set layout manager to position the items
+            recyclerViewLectures.setLayoutManager(new LinearLayoutManager(this));
+            // Set overscroll effect
+            OverScrollDecoratorHelper.setUpOverScroll(recyclerViewLectures, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
-            bzofghia.add(new LectureCard(segments[0], "Temporary Teacher Name", thisFile));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-        return bzofghia;
     }
 
     @Override
