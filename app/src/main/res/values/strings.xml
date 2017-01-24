@@ -6,6 +6,12 @@
 
     <string name="confirm_upload">Are you sure you want to upload this file?</string>
 
+    <string-array name="class_array">
+        <item>First Dummy</item>
+        <item>Second Dummy</item>
+        <item>Third Dummy</item>
+    </string-array>
+
     <string name="lecture_placeholder">chapter1.1_lecture.mp3</string>
     <string name="lecture_placeholder2">chapter1.2_lecture.mp3</string>
     <string name="lecture_placeholder3">chapter1.3_lecture.mp3</string>

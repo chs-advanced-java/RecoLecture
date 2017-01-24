@@ -23,22 +23,28 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
 import ajlyfe.lectureapp.Activity.TeacherMainActivity;
+import ajlyfe.lectureapp.Adapters.TeacherClassCard;
 import ajlyfe.lectureapp.CodeGenerator;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
@@ -71,19 +77,41 @@ public class SaveFragment extends Fragment {
         editText = (EditText) view.findViewById(R.id.recordingName);
         saveButton = (Button) view.findViewById(R.id.saveButton);
         dateHolder = (RelativeLayout) view.findViewById(R.id.dateHolder);
+        final TextView selectedDate = (TextView) view.findViewById(R.id.selectedDate);
 
         final Calendar myCalendar = Calendar.getInstance();
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "yyyy-mm-dd";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                expirationDate = sdf.format(myCalendar.getTime());
+                String sYear, sMonth, sDay;
+
+                monthOfYear++; //Add one because it starts at 0
+
+                if (monthOfYear < 10) {
+                    sMonth = String.valueOf("0" + monthOfYear);
+                } else {
+                    sMonth = String.valueOf(monthOfYear);
+                }
+
+                if (dayOfMonth < 10) {
+                    sDay = String.valueOf("0" + dayOfMonth);
+                } else {
+                    sDay = String.valueOf(dayOfMonth);
+                }
+
+                sYear = String.valueOf(year);
+
+                expirationDate = sYear + "-" + sMonth + "-" + sDay;
+
+                selectedDate.setText(expirationDate);
             }
         };
+
+        final Spinner spinner = (Spinner) view.findViewById(R.id.classSpinner);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, getClassArray());
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerArrayAdapter);
 
         dateHolder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,18 +131,49 @@ public class SaveFragment extends Fragment {
                     TextInputLayout usernameTIL = (TextInputLayout) view.findViewById(R.id.recordingNameHolder);
                     usernameTIL.setErrorEnabled(true);
                     usernameTIL.setError("This field cannot be empty");
+                } else if (spinner.getSelectedItem().toString().equals("Select a class")) {
+                    Toast.makeText(view.getContext(), "Please select a class to continue", Toast.LENGTH_SHORT).show();
                 } else {
                     String id = CodeGenerator.generate();
                     renameFile(id);
 
                     if (expirationDate != null) {
-                        updateDB(lectureName, "xmplCode", "Kevin", id, expirationDate, "1");
+                        updateDB(lectureName, getClassCode(
+                                spinner.getSelectedItem().toString()),
+                                Utils.getPrefs(Utils.SHARED_PREFERENCES, getContext()).getString(Utils.PREF_EMAIL, null),
+                                id,
+                                expirationDate,
+                                "1");
                     } else {
                         Toast.makeText(getContext(), "Please pick an expiration date to continue", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+    }
+
+    public String getClassCode(String className) {
+        ArrayList<TeacherClassCard> classCards = Utils.getTeacherClassList(view.getContext());
+
+        for (TeacherClassCard clss : classCards) {
+            if (clss.getName().equals(className)) return clss.getCode();
+        }
+
+        return null;
+    }
+
+    public String[] getClassArray() {
+        ArrayList<TeacherClassCard> classCards = Utils.getTeacherClassList(view.getContext());
+
+        String[] returnMe = new String[classCards.size()];
+
+        returnMe[0] = "Select a class";
+        // Start at one to avoid the header
+        for (int i = 1; i < returnMe.length; i++) {
+            returnMe[i] = classCards.get(i).getName();
+        }
+
+        return returnMe;
     }
 
     public void updateDB(String lectureName, String classCode, String teacherName,
