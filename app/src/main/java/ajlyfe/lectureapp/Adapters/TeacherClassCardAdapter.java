@@ -17,6 +17,7 @@
 package ajlyfe.lectureapp.Adapters;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,14 +38,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 
+import ajlyfe.lectureapp.Activity.LoginActivity;
 import ajlyfe.lectureapp.Activity.TeacherClassOverview;
 import ajlyfe.lectureapp.Activity.TeacherClassView;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
 
 public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCardAdapter.ViewHolder> {
+    private static final String DELETE_CLASS_URL = "http://www.chs.mcvsd.org/sandbox/delete-class-teacher.php?classCode=";
+    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
+    public final String JSON_ARRAY = "result";
 
     private ArrayList<TeacherClassCard> classList;
     private Context context;
@@ -137,10 +148,28 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                         })
                                         .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialoginterface, int idk) {
+
+                                                String classCode = mClass.getCode();
+                                                final ProgressDialog loading = ProgressDialog.show(parentActivity, "Please wait...", "Fetching...", false, false);
+                                                String url = DELETE_CLASS_URL + classCode;
+                                                StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+                                                    @Override
+                                                    public void onResponse(String response) {
+                                                        loading.dismiss();
+                                                        Toast.makeText(parentActivity, response, Toast.LENGTH_LONG);
+                                                    }
+                                                }, new Response.ErrorListener() {
+                                                    @Override
+                                                    public void onErrorResponse(VolleyError error) {
+                                                        Toast.makeText(parentActivity,error.getMessage(),Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+
+                                                RequestQueue requestQueue = Volley.newRequestQueue(parentActivity);
+                                                requestQueue.add(stringRequest);
+
+
                                                 removeAt(finalPosition);
-
-
-
                                                 Utils.setTeacherClassList(classList, parentActivity);
 
                                                 Snackbar.make(parentActivity.findViewById(R.id.classOverviewLayout),
