@@ -69,6 +69,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String UPDATE_USER_URL_PT1 = "http://www.chs.mcvsd.org/sandbox/update-username-accountdb.php?username=";
             public static final String UPDATE_USER_URL_PT2 = "&newUsername=";
 
+    public static final String UPDATE_PASS_URL_PT1 = "http://www.chs.mcvsd.org/sandbox/update-password-accountdb.php?username=";
+        public static final String UPDATE_PASS_URL_PT2 = "&newPass=";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,6 +172,22 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                     }
                 }
         );
+
+        changePassword.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        String newPassword = newValue.toString();
+                        System.out.println(preferences.getString(Utils.PREF_USERNAME, getString(R.string.preference_change_username)));
+                        updatePasswordDatabase(preferences.getString(Utils.PREF_USERNAME, getString(R.string.preference_change_username)), newPassword);
+                        editor.putString(Utils.PREF_PASSWORD, newPassword);
+                        editor.apply();
+                        System.out.println(preferences.getString(Utils.PREF_PASSWORD, getString(R.string.preference_change_password)));
+                        return false;
+                    }
+                }
+
+        );
     }
 
     private void updateUserDatabase(final String oldUser, final String newUser) {
@@ -192,6 +211,29 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
     }
+
+    private void updatePasswordDatabase(final String user, final String newPass) {
+        loading = ProgressDialog.show(getActivity(),"Please wait...","Fetching...",false,false);
+
+        String url = UPDATE_PASS_URL_PT1 + user + UPDATE_PASS_URL_PT2 + newPass;
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                loading.dismiss();
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), error.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+
     private void toggleTheme(boolean darkTheme) {
         SharedPreferences.Editor editor = getActivity().getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
         editor.putBoolean(Utils.PREF_DARK_THEME, darkTheme);
