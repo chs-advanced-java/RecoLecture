@@ -44,6 +44,7 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    private View parentView;
 
     // Store objects to store data
     private ArrayList<? extends LectureCard> lectureList;
@@ -52,14 +53,20 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     private Activity parentActivity;
 
     // Pass in the predefined Array into the constructor
-    public LectureCardAdapter(@NonNull ArrayList<? extends LectureCard> lectures, Activity parentActivity) {
+    public LectureCardAdapter(@NonNull ArrayList<? extends LectureCard> lectures, Activity parentActivity, View parentView) {
         this.lectureList = lectures;
         this.parentActivity = parentActivity;
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
         editor = preferences.edit();
+        this.parentView = parentView;
 
         if (lectureList.size() == 0) {
-            parentActivity.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+            if (parentView == null){
+                parentActivity.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+            }
+            else {
+                parentView.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -127,7 +134,12 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         notifyItemRangeChanged(position, lectureList.size());
 
         if (lectureList.size() == 0) {
-            parentActivity.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+            if (parentActivity == null){
+                parentView.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+            }
+            else {
+                parentActivity.findViewById(R.id.noLectures).setVisibility(View.VISIBLE);
+            }
         }
     }
 

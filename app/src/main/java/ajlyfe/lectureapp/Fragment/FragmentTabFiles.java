@@ -54,7 +54,7 @@ public class FragmentTabFiles extends Fragment {
         }
 
         RecyclerView recyclerViewMainTeacher = (RecyclerView) view.findViewById(R.id.manageFilesRecyclerView);
-        final LectureCardAdapter adapter = new LectureCardAdapter(lecturesList, getActivity());
+        final LectureCardAdapter adapter = new LectureCardAdapter(lecturesList, getActivity(), view);
         recyclerViewMainTeacher.setAdapter(adapter);
         recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(getContext()));
         OverScrollDecoratorHelper.setUpOverScroll(recyclerViewMainTeacher, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
