@@ -51,11 +51,8 @@ import ajlyfe.lectureapp.WriteToDatabase;
 public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.ViewHolder> {
 
     private static final String DELETE_STUDENTS = "http://www.chs.mcvsd.org/sandbox/delete-students.php?classCode=";
-    public final String DATA_URL = "http://www.chs.mcvsd.org/sandbox/getClassData.php?classCode=";
 
 
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     private ArrayList<? extends StudentCard> studentList;
 
@@ -65,8 +62,6 @@ public class StudentCardAdapter extends RecyclerView.Adapter<StudentCardAdapter.
     public StudentCardAdapter(@NonNull ArrayList<? extends StudentCard> studentList, View parentView, Activity parentActivity, String classCode) {
         this.studentList = studentList;
         this.parentView = parentView;
-        preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentView.getContext());
-        editor = preferences.edit();
         this.parentActivity = parentActivity;
         this.classCode = classCode;
 

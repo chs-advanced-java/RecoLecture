@@ -21,33 +21,32 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView android:id="@+id/noLectures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?cardTitleTextPrimary"
+        android:textSize="20sp"
+        android:text="Oops! Looks like there are no files uploaded to your class."
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/manageFilesDescription"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/teacher_manageFilesDescription"
-        android:id="@+id/textView6"
+        android:id="@+id/manageFilesDescription"
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="Welcome to Spanish"
+    <android.support.v7.widget.RecyclerView android:id="@+id/manageFilesRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/textView17"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/accent" />
+        android:layout_below="@+id/manageFilesDescription"
+        android:layout_marginTop="16dp">
+    </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:text="Chapter 1 vocabulary part 1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:id="@+id/textView18"
-        android:layout_below="@+id/textView17"
-        android:layout_alignStart="@+id/textView17"
-        android:textColor="@color/accent" />
 </RelativeLayout>
