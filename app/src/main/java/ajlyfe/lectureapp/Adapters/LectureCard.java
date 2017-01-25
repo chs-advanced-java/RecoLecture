@@ -16,9 +16,12 @@
 
 package ajlyfe.lectureapp.Adapters;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.File;
 
-public class LectureCard {
+public class LectureCard implements Parcelable{
     private String lectureName;
     private String teacherName;
     private File lectureFile;
@@ -55,4 +58,32 @@ public class LectureCard {
         this.lectureFile = lectureFile;
         return this;
     }
+
+    private LectureCard(Parcel in) {
+        lectureName = in.readString();
+        teacherName = in.readString();
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        // Again this order must match the Question(Parcel) constructor
+        out.writeString(lectureName);
+        out.writeString(teacherName);
+        // Again continue doing this for the rest of your member data
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // Just cut and paste this for now
+    public static final Parcelable.Creator<LectureCard> CREATOR = new Parcelable.Creator<LectureCard>() {
+        public LectureCard createFromParcel(Parcel in) {
+            return new LectureCard(in);
+        }
+
+        public LectureCard[] newArray(int size) {
+            return new LectureCard[size];
+        }
+    };
 }

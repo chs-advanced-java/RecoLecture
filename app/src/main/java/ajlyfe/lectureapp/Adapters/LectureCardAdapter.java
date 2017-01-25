@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajlyfe.lectureapp.R;
@@ -45,14 +46,14 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
     private SharedPreferences.Editor editor;
 
     // Store objects to store data
-    private List<LectureCard> lectureList;
+    private ArrayList<? extends LectureCard> lectureList;
 
     // Store parent activity
     private Activity parentActivity;
 
     // Pass in the predefined Array into the constructor
-    public LectureCardAdapter(@NonNull List<LectureCard> lectures, Activity parentActivity) {
-        lectureList = lectures;
+    public LectureCardAdapter(@NonNull ArrayList<? extends LectureCard> lectures, Activity parentActivity) {
+        this.lectureList = lectures;
         this.parentActivity = parentActivity;
         preferences = Utils.getPrefs(Utils.SHARED_PREFERENCES, parentActivity);
         editor = preferences.edit();

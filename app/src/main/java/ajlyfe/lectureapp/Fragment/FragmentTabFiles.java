@@ -17,13 +17,21 @@
 package ajlyfe.lectureapp.Fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import ajlyfe.lectureapp.Adapters.LectureCard;
+import ajlyfe.lectureapp.Adapters.LectureCardAdapter;
 import ajlyfe.lectureapp.R;
 import ajlyfe.lectureapp.Utils;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class FragmentTabFiles extends Fragment {
 
@@ -34,12 +42,28 @@ public class FragmentTabFiles extends Fragment {
                              Bundle savedInstanceState) {
         view = Utils.setCustomAdapterTheme(getActivity(), inflater, R.layout.fragment_tab_files, container, false);
 
-        method();
+        Bundle bundle = this.getArguments();
+
+
+        ArrayList<? extends LectureCard> lecturesList = null;
+
+        if (bundle != null) {
+            lecturesList = bundle.getParcelableArrayList("LECTURE_LIST");
+        } else {
+
+        }
+
+        RecyclerView recyclerViewMainTeacher = (RecyclerView) view.findViewById(R.id.manageFilesRecyclerView);
+        final LectureCardAdapter adapter = new LectureCardAdapter(lecturesList, getActivity());
+        recyclerViewMainTeacher.setAdapter(adapter);
+        recyclerViewMainTeacher.setLayoutManager(new LinearLayoutManager(getContext()));
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerViewMainTeacher, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
         return view;
     }
 
-    public void method() {
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 }
