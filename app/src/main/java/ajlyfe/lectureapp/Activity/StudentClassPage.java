@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -111,7 +112,7 @@ public class StudentClassPage extends AppCompatActivity {
 
             RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);
             // Create an adapter passing in the ArrayList from above
-            LectureCardAdapter adapter = new LectureCardAdapter(lectures, this);
+            LectureCardAdapter adapter = new LectureCardAdapter(lectures, this, null);
             // Attach the adapter to the RecyclerView
             recyclerViewLectures.setAdapter(adapter);
             // Set layout manager to position the items
