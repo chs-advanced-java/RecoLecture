@@ -108,10 +108,10 @@ public class SaveFragment extends Fragment {
             }
         };
 
-        final Spinner spinner = (Spinner) view.findViewById(R.id.classSpinner);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, getClassArray());
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerArrayAdapter);
+       // final Spinner spinner = (Spinner) view.findViewById(R.id.classSpinner);
+        //ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, getClassArray());
+        //spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner.setAdapter(spinnerArrayAdapter);
 
         dateHolder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,15 +131,15 @@ public class SaveFragment extends Fragment {
                     TextInputLayout usernameTIL = (TextInputLayout) view.findViewById(R.id.recordingNameHolder);
                     usernameTIL.setErrorEnabled(true);
                     usernameTIL.setError("This field cannot be empty");
-                } else if (spinner.getSelectedItem().toString().equals("Select a class")) {
-                    Toast.makeText(view.getContext(), "Please select a class to continue", Toast.LENGTH_SHORT).show();
+                //} else if (spinner.getSelectedItem().toString().equals("Select a class")) {
+                    //Toast.makeText(view.getContext(), "Please select a class to continue", Toast.LENGTH_SHORT).show();
                 } else {
                     String id = CodeGenerator.generate();
                     renameFile(id);
 
                     if (expirationDate != null) {
-                        updateDB(lectureName, getClassCode(
-                                spinner.getSelectedItem().toString()),
+                        updateDB(lectureName,
+                                "",
                                 Utils.getPrefs(Utils.SHARED_PREFERENCES, getContext()).getString(Utils.PREF_EMAIL, null),
                                 id,
                                 expirationDate,
