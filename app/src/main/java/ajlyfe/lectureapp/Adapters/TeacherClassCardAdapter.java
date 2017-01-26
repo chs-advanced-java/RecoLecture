@@ -149,7 +149,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                         .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialoginterface, int idk) {
 
-                                                /**String classCode = mClass.getCode();
+                                                String classCode = mClass.getCode();
                                                 final ProgressDialog loading = ProgressDialog.show(parentActivity, "Please wait...", "Fetching...", false, false);
                                                 String url = DELETE_CLASS_URL + classCode;
                                                 StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
@@ -166,7 +166,7 @@ public class TeacherClassCardAdapter extends RecyclerView.Adapter<TeacherClassCa
                                                 });
 
                                                 RequestQueue requestQueue = Volley.newRequestQueue(parentActivity);
-                                                requestQueue.add(stringRequest);**/
+                                                requestQueue.add(stringRequest);
 
 
                                                 removeAt(finalPosition);
