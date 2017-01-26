@@ -57,6 +57,7 @@ public class SaveFragment extends Fragment {
     private Button saveButton;
     private RelativeLayout dateHolder;
     private String expirationDate = null;
+    String id = null;
 
     public SaveFragment() {
         /* Required empty public constructor */
@@ -80,6 +81,7 @@ public class SaveFragment extends Fragment {
         final TextView selectedDate = (TextView) view.findViewById(R.id.selectedDate);
 
         final Calendar myCalendar = Calendar.getInstance();
+        id = CodeGenerator.generate();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -134,7 +136,6 @@ public class SaveFragment extends Fragment {
                 //} else if (spinner.getSelectedItem().toString().equals("Select a class")) {
                     //Toast.makeText(view.getContext(), "Please select a class to continue", Toast.LENGTH_SHORT).show();
                 } else {
-                    String id = CodeGenerator.generate();
                     renameFile(id);
 
                     if (expirationDate != null) {
