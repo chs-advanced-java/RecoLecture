@@ -71,6 +71,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String UPDATE_PASS_URL_PT1 = "http://www.chs.mcvsd.org/sandbox/update-password-accountdb.php?username=";
         public static final String UPDATE_PASS_URL_PT2 = "&newPass=";
 
+    public static final boolean PASSWORD = true;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +169,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                         editor.putString(Utils.PREF_USERNAME, newUsername);
                         editor.apply();
                         System.out.println(preferences.getString(Utils.PREF_USERNAME, getString(R.string.preference_change_username)));
+                        Toast.makeText(getActivity(), "Username changed to " + newUsername + "!", Toast.LENGTH_LONG).show();
                         return false;
                     }
                 }
@@ -182,6 +185,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                         editor.putString(Utils.PREF_PASSWORD, newPassword);
                         editor.apply();
                         System.out.println(preferences.getString(Utils.PREF_PASSWORD, getString(R.string.preference_change_password)));
+                        Toast.makeText(getActivity(), "Your password has been changed!", Toast.LENGTH_LONG).show();
                         return false;
                     }
                 }
