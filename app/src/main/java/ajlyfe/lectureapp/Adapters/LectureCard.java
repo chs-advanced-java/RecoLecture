@@ -25,11 +25,21 @@ public class LectureCard implements Parcelable{
     private String lectureName;
     private String teacherName;
     private File lectureFile;
+    private String lectureID;
 
-    public LectureCard(String lectureName, String teacherName, File lectureFile) {
+    public LectureCard(String lectureName, String teacherName, File lectureFile, String lectureID) {
         this.lectureName = lectureName;
         this.teacherName = teacherName;
         this.lectureFile = lectureFile;
+        this.lectureID = lectureID;
+    }
+
+    public String getLectureID() {
+        return lectureID;
+    }
+
+    public void setLectureID(String lectureID) {
+        this.lectureID = lectureID;
     }
 
     public String getLectureName() {
@@ -62,13 +72,14 @@ public class LectureCard implements Parcelable{
     private LectureCard(Parcel in) {
         lectureName = in.readString();
         teacherName = in.readString();
+        lectureID = in.readString();
     }
 
     public void writeToParcel(Parcel out, int flags) {
-        // Again this order must match the Question(Parcel) constructor
+        // This order must match the Question(Parcel) constructor
         out.writeString(lectureName);
         out.writeString(teacherName);
-        // Again continue doing this for the rest of your member data
+        out.writeString(lectureID);
     }
 
     @Override
@@ -76,7 +87,6 @@ public class LectureCard implements Parcelable{
         return 0;
     }
 
-    // Just cut and paste this for now
     public static final Parcelable.Creator<LectureCard> CREATOR = new Parcelable.Creator<LectureCard>() {
         public LectureCard createFromParcel(Parcel in) {
             return new LectureCard(in);

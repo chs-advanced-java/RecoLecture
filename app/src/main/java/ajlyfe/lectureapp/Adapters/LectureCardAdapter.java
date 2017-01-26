@@ -21,17 +21,29 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,22 +110,11 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: RETRIEVE FROM THE SERVER
 
-                Snackbar comeGetYourSnacks = Snackbar.make(parentActivity.findViewById(R.id.recyclerViewLecturesHolder),
-                        "Lecture '" + lecture.getLectureName() + "' downloaded!",
-                        Snackbar.LENGTH_LONG);
+                String DownloadUrl = "http://www.chs.mcvsd.org/sandbox/lectures/";
+                String fileName = lecture.getLectureID() + ".mp3";
 
-                comeGetYourSnacks.setActionTextColor(parentActivity.getResources().getColor(R.color.colorAccent));
-
-                comeGetYourSnacks.setAction("OPEN", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        playLecture(lecture.getLectureName());
-                    }
-                });
-
-                comeGetYourSnacks.show();
+                new DownloadFileFromURL(lecture).execute(DownloadUrl + fileName);
             }
         });
 
@@ -127,6 +128,80 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
             }
         });
     }
+
+    class DownloadFileFromURL extends AsyncTask<String, String, String> {
+
+        LectureCard lectureCard;
+
+        public DownloadFileFromURL(LectureCard lectureCard) {
+            this.lectureCard = lectureCard;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... f_url) {
+            int count;
+            try {
+                URL url = new URL(f_url[0]);
+                URLConnection conection = url.openConnection();
+                conection.connect();
+
+                // download the file
+                InputStream input = new BufferedInputStream(url.openStream(),
+                        8192);
+
+                // Output stream
+                OutputStream output = new FileOutputStream(Utils.getLecturePath() + lectureCard.getLectureID() + ".mp3");
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // writing data to file
+                    output.write(data, 0, count);
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(final String file_url) {
+            Snackbar comeGetYourSnacks = Snackbar.make(parentActivity.findViewById(R.id.recyclerViewLecturesHolder),
+                "Lecture '" + lectureCard.getLectureName() + "' downloaded!",
+                Snackbar.LENGTH_LONG);
+
+            comeGetYourSnacks.setActionTextColor(parentActivity.getResources().getColor(R.color.colorAccent));
+
+            comeGetYourSnacks.setAction("OPEN", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    playLecture(Utils.getLecturePath() + lectureCard.getLectureID() + ".mp3");
+                }
+            });
+
+            comeGetYourSnacks.show();
+        }
+
+    }
+
 
     public void removeAt(int position) {
         lectureList.remove(position);
@@ -147,10 +222,17 @@ public class LectureCardAdapter extends RecyclerView.Adapter<LectureCardAdapter.
         //parentActivity.startActivity(new Intent(parentActivity, PlayLecture.class));
         View playLectureView = View.inflate(parentActivity, R.layout.play_lecture, null);
 
-        final MediaPlayer mPlayer = MediaPlayer.create(parentActivity, R.raw.never);
+        final MediaPlayer mPlayer = MediaPlayer.create(parentActivity, Uri.parse(fileName));
         final FloatingActionButton playPause = (FloatingActionButton) playLectureView.findViewById(R.id.playPause);
 
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                playPause.setImageResource(R.drawable.ic_play);
+            }
+        });
 
         playPause.setOnClickListener(new View.OnClickListener() {
             @Override

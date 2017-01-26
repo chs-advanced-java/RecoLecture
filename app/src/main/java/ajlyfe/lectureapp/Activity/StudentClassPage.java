@@ -107,7 +107,7 @@ public class StudentClassPage extends AppCompatActivity {
 
             for (int i = 0; i < lectureList.length(); i++) {
                 JSONObject post = lectureList.optJSONObject(i);
-                lectures.add(new LectureCard(post.optString("lectureName"), post.optString("teacherName"), null));
+                lectures.add(new LectureCard(post.optString("lectureName"), post.optString("teacherName"), null, post.optString("id")));
             }
 
             RecyclerView recyclerViewLectures = (RecyclerView) findViewById(R.id.recyclerViewLectures);

@@ -163,7 +163,7 @@ TeacherClassView extends AppCompatActivity {
 
                     for (int i = 0; i < students.length(); i++) {
                         JSONObject post = students.optJSONObject(i);
-                        lectureList.add(new LectureCard(post.optString("lectureName"), post.optString("teacherName"), null));
+                        lectureList.add(new LectureCard(post.optString("lectureName"), post.optString("teacherName"), null, post.getString("id")));
                     }
 
                     bundle.putParcelableArrayList("LECTURE_LIST", lectureList);

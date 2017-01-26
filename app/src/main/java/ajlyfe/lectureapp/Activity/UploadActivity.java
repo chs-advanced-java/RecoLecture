@@ -35,6 +35,11 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.paolorotolo.appintro.AppIntro;
 
 import org.json.JSONArray;
@@ -79,6 +84,8 @@ public class UploadActivity extends AppIntro {
     FragmentFile file;
     FragmentClass classes;
 
+    String lectureID = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Utils.setCustomTheme(this);
@@ -107,7 +114,7 @@ public class UploadActivity extends AppIntro {
         setProgressButtonEnabled(true);     // Reveal the done button and next arrow
         setImageNextButton(null);           // Purge next button
         nextButton.setClickable(false);     // Banish next button
-                                            // Done button still stays and works
+        // Done button still stays and works
 
         setColorDoneText(this.getResources().getColor(R.color.colorAccent));
         setSeparatorColor(Color.TRANSPARENT);
@@ -151,6 +158,7 @@ public class UploadActivity extends AppIntro {
                         public void onChecked(LectureSelectCard lecture) {
                             checkedSomething[0] = true;
                             lecturesChecked.add(lecture.getFileName());
+                            lectureID = lecture.getID();
                             paths.add(Utils.getLecturePath() + lecture.getID() + ".mp3");
                         }
                     });
@@ -207,7 +215,7 @@ public class UploadActivity extends AppIntro {
                     final Button selectAll = (Button) activity3.findViewById(R.id.selectAllButton);
                     final View newView = newFragment.getView();
 
-                    String classCode = classCodes.get(0);
+                    final String classCode = classCodes.get(0);
 
                     final Activity act = fragmentStudents.getActivity();
 
@@ -300,6 +308,8 @@ public class UploadActivity extends AppIntro {
 
                 case 5:
                     final Activity activity5 = newFragment.getActivity();
+                    updateUploadStatus(lectureID);
+                    setLectureClass(lectureID, classCodes.get(0));
                     Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_right);
                     ImageView box = (ImageView) activity5.findViewById(R.id.checkCover);
                     anim.setAnimationListener(new Animation.AnimationListener() {
@@ -427,6 +437,44 @@ public class UploadActivity extends AppIntro {
 
             return serverResponseCode;
         }
+    }
+
+    private void updateUploadStatus(final String lecID) {
+        String url = "http://www.chs.mcvsd.org/sandbox/updateUploaded.php?id=" + lecID;
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void setLectureClass(final String lecID, final String classCode) {
+        String url = "http://www.chs.mcvsd.org/sandbox/setLectureClass.php?id=" + lecID + "&classCode=" + classCode;
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
     }
 
     @Override
